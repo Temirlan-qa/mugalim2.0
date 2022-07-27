@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
+import 'package:mugalim/presentation/main/done.dart';
 class BookDescriptionScreen extends StatelessWidget {
   const BookDescriptionScreen({Key? key}) : super(key: key);
 
@@ -156,7 +157,7 @@ class BookDescriptionScreen extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const BookDescriptionScreen()),
+                                  MaterialPageRoute(builder: (context) => const ChoosenPage()),
                                 );
                               }
                           ),
