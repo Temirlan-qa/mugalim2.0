@@ -20,8 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      debugShowCheckedModeBanner: false,
-      home: const ChoosenPage(),
+      home: const JenreScreen(),
     );
   }
 }

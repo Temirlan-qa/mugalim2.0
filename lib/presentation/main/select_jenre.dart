@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/main/done.dart';
 
 import '../../core/const/const_color.dart';
 
@@ -262,9 +263,12 @@ class _JenreScreenState extends State<JenreScreen> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
-                  onPressed:() {
-
-                  },
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChoosenPage()),
+                      );
+                    }
                 ),
               ],
             ),
