@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 
 import 'core/routes/routes.dart';
@@ -9,6 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      home: const JenreScreen(),
+      debugShowCheckedModeBanner: false,
+      home: const ChoosenPage(),
     );
   }
 }
