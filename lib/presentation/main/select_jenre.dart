@@ -11,10 +11,15 @@ class JenreScreen extends StatefulWidget {
 }
 
 class _JenreScreenState extends State<JenreScreen> {
+  bool select1 = false;
+  bool select2 = false;
+  bool select3 = false;
+  bool select4 = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorStyles.surfacePrimaryColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: Align(
@@ -47,9 +52,7 @@ class _JenreScreenState extends State<JenreScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(
-                  height: 125,
-                ),
+                SizedBox(height: 125,),
 
 
                 Row(
@@ -57,51 +60,89 @@ class _JenreScreenState extends State<JenreScreen> {
                   children: [
                     InkWell(
                       onTap: (){
-
+                        setState(() {
+                            select1 = !select1;
+                          });
+                        print('Бизнес == $select1');
                       },
                       child: Container(
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.all(Radius.circular(12))
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          border: Border.all(
+                            color: select1 ?Color(0xFF3D3DD8) : Colors.grey,
+                            width: 3.0,
+                            style: BorderStyle.solid,
+                          ),
                         ),
                         height: 120,
                         width: 167,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            'Бизнес',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'CeraPro',
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white
-                            ),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                'Бизнес',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'CeraPro',
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white
+                                ),
+                              ),
+                            Spacer(),
+                            select1
+
+                                ?Image.asset('assets/icons/Check.png')
+                                :Container(height: 24,width: 24,color: Colors.grey,),
+                          ],
+                        ),
                         ),
                       ),
-                    ),
                     SizedBox(width: 8,),
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        setState(() {
+                            select2 = !select2;
+                          });
+
+                        print('Классика == $select2');
+                      },
                       child: Container(
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                             color: Colors.grey,
-                            borderRadius: BorderRadius.all(Radius.circular(12))
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          border: Border.all(
+                            color: select2 ?Color(0xFF3D3DD8) : Colors.grey,
+                            width: 3.0,
+                            style: BorderStyle.solid,
+                          ),
                         ),
                         height: 120,
                         width: 167,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            'Классика',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'CeraPro',
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white
-                            ),
-                          ),
+                        child:Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                    'Классика',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'CeraPro',
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                            Spacer(),
+                            select2
+
+                                ?Image.asset('assets/icons/Check.png')
+                                :Container(height: 24,width: 24,color: Colors.grey,),
+                          ],
                         ),
+                              // Icon(Icons.check),
                       ),
                     ),
                   ],
@@ -111,52 +152,93 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        setState(() {
+                            select3 = !select3;
+                          });
+
+                        print('Развитие == $select3');
+                      },
                       child: Container(
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                             color: Colors.grey,
-                            borderRadius: BorderRadius.all(Radius.circular(12))
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          border: Border.all(
+                            color: select3 ?Color(0xFF3D3DD8) : Colors.grey,
+                            width: 3.0,
+                            style: BorderStyle.solid,
+                          ),
                         ),
                         height: 120,
                         width: 167,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            'Развитие',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'CeraPro',
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white
-                            ),
+                        child:  Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Развитие',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'CeraPro',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
+                                ),
+                              ),
+                              Spacer(),
+                              select3
+
+                                  ?Image.asset('assets/icons/Check.png')
+                                  :Container(height: 24,width: 24,color: Colors.grey,),
+                            ],
                           ),
                         ),
                       ),
-                    ),
+
                     SizedBox(width: 8,),
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        setState(() {
+                            select4 = !select4;
+                          });
+                        print('Фантастика == $select4');
+                      },
                       child: Container(
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                             color: Colors.grey,
-                            borderRadius: BorderRadius.all(Radius.circular(12))
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          border: Border.all(
+                            color: select4 ?Color(0xFF3D3DD8) : Colors.grey,
+                            width: 3.0,
+                            style: BorderStyle.solid,
+                          ),
                         ),
                         height: 120,
                         width: 167,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            'Фантастика',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'CeraPro',
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white
-                            ),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                'Фантастика',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'CeraPro',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
+                                ),
+                              ),
+                            Spacer(),
+                            select4
+
+                                ?Image.asset('assets/icons/Check.png')
+                                :Container(height: 24,width: 24,color: Colors.grey,),
+                          ],
+                        ),
                         ),
                       ),
-                    ),
+
                   ],
                 ),
                 SizedBox(height: 160,),
@@ -175,6 +257,9 @@ class _JenreScreenState extends State<JenreScreen> {
                     elevation: 0,
                     minimumSize: Size(
                         343, 48
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
                   onPressed:() {
