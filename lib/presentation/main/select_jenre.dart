@@ -30,6 +30,7 @@ class _JenreScreenState extends State<JenreScreen> {
             alignment: Alignment.topCenter,
             child: Column(
               children: [
+                SizedBox(height: 16,),
                 Text(
                   'Выберите жанр ',
                   style: TextStyle(

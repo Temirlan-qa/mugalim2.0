@@ -32,7 +32,6 @@ class _BookScreenState extends State<BookScreen> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(46,16,47,0),
                         child: SizedBox(
-                          // width: MediaQuery.of(context).size.width - 64,
                           child: Column(
                             children: [
                               Text('Выберите книгу',
@@ -158,7 +157,8 @@ class _BookScreenState extends State<BookScreen> {
                                         borderRadius: BorderRadius.circular(100),
                                         border: Border.all(color: list.contains(index) ? Color(0xff3D3DD8) : Colors.black,width: list.contains(index) ? 5 : 1),
                                       ),
-                                    )
+                                    ),
+
                                   ],
                                 ),
                               ),
@@ -166,7 +166,8 @@ class _BookScreenState extends State<BookScreen> {
                           ),
                         );
                       }
-                    )
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height/7,),
                   ],
                 ),
               ),

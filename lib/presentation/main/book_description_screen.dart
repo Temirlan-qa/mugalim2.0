@@ -143,7 +143,7 @@ class BookDescriptionScreen extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 16,
+              bottom: 32,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0),
