@@ -285,6 +285,7 @@ class _JenreScreenState extends State<JenreScreen> {
                       );
                     }
                 ),
+                SizedBox(height: 16,)
               ],
             ),
           ),
