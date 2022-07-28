@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List list = ['Сентября', 'Октября', 'Ноября','Декабря'];
+    List list = ['Бизнес', 'Классика', 'Развитие','Фантастика'];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

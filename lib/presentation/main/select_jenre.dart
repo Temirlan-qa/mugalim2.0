@@ -18,6 +18,7 @@ class JenreScreen extends StatefulWidget {
 class _JenreScreenState extends State<JenreScreen> {
 
   List list = ['Сентября', 'Октября', 'Ноября','Декабря'];
+  List select_list = ['Бизнес', 'Классика', 'Развитие','Фантастика'];
   List array = [];
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.list.contains('Сентября') ? true : false,
+                      visible: widget.list.contains('Бизнес') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
@@ -108,7 +109,7 @@ class _JenreScreenState extends State<JenreScreen> {
                     ),
                     SizedBox(width: 8,),
                     Visibility(
-                      visible: widget.list.contains('Октября') ? true : false,
+                      visible: widget.list.contains('Классика') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
@@ -161,7 +162,7 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.list.contains('Ноября') ? true : false,
+                      visible: widget.list.contains('Развитие') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
@@ -209,7 +210,7 @@ class _JenreScreenState extends State<JenreScreen> {
 
                     SizedBox(width: 8,),
                     Visibility(
-                      visible: widget.list.contains('Декабря') ? true : false,
+                      visible: widget.list.contains('Фантастика') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
@@ -284,7 +285,7 @@ class _JenreScreenState extends State<JenreScreen> {
                             ? 1
                             : array.contains(2) ? 2 : 3;
                         // int size = widget.list.length;
-                        String select_index = list[index];
+                        String select_index = select_list[index];
                         print(select_index);
                         Navigator.push(
                           context,
