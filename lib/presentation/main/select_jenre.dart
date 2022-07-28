@@ -9,7 +9,7 @@ import '../../core/const/const_color.dart';
 class JenreScreen extends StatefulWidget {
   JenreScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
   int index_month;
-  List<int> list_jenre;
+  List list_jenre;
 
   @override
   State<JenreScreen> createState() => _JenreScreenState();
@@ -21,7 +21,8 @@ class _JenreScreenState extends State<JenreScreen> {
   bool select3 = false;
   bool select4 = false;
   var list = ['Сентября', 'Октября', 'Ноября','Декабря'];
-  List<int> list_jenre_save = [];
+  int? list_jenre_save ;
+  bool select = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,17 +65,15 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.list_jenre.contains(1)  ? false: true,
+                      visible: widget.list_jenre.any((item) => item == 1)  ? true: false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
-                              select1 = !select1;
-                              select2 = false;
-                              select3 = false;
-                              select4 = false;
-                              list_jenre_save.add(1);
-                            });
-                          print('Бизнес == $select1');
+                            select1 = !select1;
+                            select2 = false;
+                            select3 = false;
+                            select4 = false;
+                          });
                         },
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
@@ -114,18 +113,15 @@ class _JenreScreenState extends State<JenreScreen> {
                     ),
                     SizedBox(width: 8,),
                     Visibility(
-                      visible: widget.list_jenre.contains(2) ? false: true,
+                      visible: widget.list_jenre.any((item) => item == 2)? true: false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
                             select1 = false;
                             select3 = false;
                             select4 = false;
-                            list_jenre_save.add(2);
                             select2 = !select2;
                           });
-
-                          print('Классика == $select2');
                         },
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
@@ -171,18 +167,15 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.list_jenre.contains(3) ? false: true,
+                      visible: widget.list_jenre.any((item) => item == 3) ? true: false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
                              select1 = false;
                              select2 = false;
                              select4 = false;
-                             list_jenre_save.add(3);
                              select3 = !select3;
                           });
-
-                          print('Развитие == $select3');
                         },
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
@@ -223,17 +216,15 @@ class _JenreScreenState extends State<JenreScreen> {
 
                     SizedBox(width: 8,),
                     Visibility(
-                      visible: widget.list_jenre.contains(4) ? false: true,
+                      visible: widget.list_jenre.any((item) => item == 4)? true: false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
                              select1 = false;
                              select2 = false;
                              select3 = false;
-                             list_jenre_save.add(4);
                              select4 = !select4;
                           });
-                          print('Фантастика == $select4');
                         },
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
@@ -263,15 +254,13 @@ class _JenreScreenState extends State<JenreScreen> {
                                 ),
                               Spacer(),
                               select4
-
                                   ?Image.asset('assets/icons/Check.png')
                                   :Container(height: 24,width: 24,color: Colors.grey,),
                             ],
                           ),
                           ),
-                        ),
+                      ),
                     ),
-
                   ],
                 ),
                 Spacer(),
@@ -298,11 +287,30 @@ class _JenreScreenState extends State<JenreScreen> {
                     ),
                   ),
                     onPressed: () {
-                    print(widget.list_jenre);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: list_jenre_save )),
-                      );
+                      print(widget.list_jenre);
+                      if(select1 == true){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 0,)),
+                        );
+                      }else if(select2 == true){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 1,)),
+                        );
+                      }else if(select3 == true){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 2,)),
+                        );
+                      }else if(select4 == true){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 3,)),
+                        );
+                      }else{
+                        print('error');
+                      }
                     }
                 ),
                 SizedBox(height: 16,)

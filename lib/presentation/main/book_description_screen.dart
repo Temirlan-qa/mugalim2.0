@@ -7,7 +7,7 @@ import 'package:mugalim/presentation/main/select_jenre.dart';
 class BookDescriptionScreen extends StatefulWidget {
   BookDescriptionScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
   int index_month;
-  List<int> list_jenre;
+  List list_jenre;
 
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();

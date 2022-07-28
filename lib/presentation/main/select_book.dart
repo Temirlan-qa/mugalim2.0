@@ -8,9 +8,10 @@ import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'done.dart';
 
 class BookScreen extends StatefulWidget {
-  BookScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
+  BookScreen({Key? key, required this.index_month,required this.list_jenre,required this.list_jenre_save}) : super(key: key);
   int index_month;
-  List<int> list_jenre;
+  List list_jenre;
+  int list_jenre_save;
   @override
   State<BookScreen> createState() => _BookScreenState();
 }
@@ -215,8 +216,9 @@ class _BookScreenState extends State<BookScreen> {
                       MaterialPageRoute(
                           builder: (context) => JenreScreen(
                             index_month: widget.index_month.toInt()+1,
-                            list_jenre: widget.list_jenre,
-                          ),
+                              list_jenre: widget.list_jenre.removeAt(widget.list_jenre_save),
+                            // list_jenre: widget.list_jenre.removeAt(widget.list_jenre_save.toInt()-1),
+                        ),
                       ),
                     );
                   }
@@ -263,10 +265,6 @@ class _BookScreenState extends State<BookScreen> {
               ),
             ),
           ),
-          // Positioned(
-          //   bottom: 0,
-          //     child: Container(height: 30,color: ColorStyles.neutralsPageBackgroundColor,width: MediaQuery.of(context).size.width,),
-          // ),
         ],
       ),
     );
