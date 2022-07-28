@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      home: const JenreScreen(),
+      home: JenreScreen(index_month: 0,),
     );
   }
 }

@@ -5,9 +5,11 @@ import 'package:mugalim/core/widgets/button_widget.dart';
 import 'package:mugalim/presentation/main/book_description_screen.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 
-class BookScreen extends StatefulWidget {
-  const BookScreen({Key? key}) : super(key: key);
+import 'done.dart';
 
+class BookScreen extends StatefulWidget {
+  BookScreen({Key? key, required this.index_month}) : super(key: key);
+  int index_month;
   @override
   State<BookScreen> createState() => _BookScreenState();
 }
@@ -196,11 +198,20 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                 ),
                 onPressed:() {
-                  if(!list.isEmpty) {
+                  if(widget.index_month.toInt() >= 3){
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const JenreScreen()),
+                          builder: (context) => ChoosenPage()
+                      ),
+                    );
+                  }
+                  if(!list.isEmpty && widget.index_month.toInt() < 3) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => JenreScreen(index_month: widget.index_month.toInt()+1)
+                      ),
                     );
                   }
                 },
@@ -235,7 +246,7 @@ class _BookScreenState extends State<BookScreen> {
                 onPressed:() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const JenreScreen()),
+                    MaterialPageRoute(builder: (context) => JenreScreen(index_month: widget.index_month.toInt())),
                   );
                 },
               ),

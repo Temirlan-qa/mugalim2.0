@@ -72,7 +72,7 @@ class ChoosenPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const JenreScreen()),
+                  MaterialPageRoute(builder: (context) => JenreScreen(index_month: 0,)),
                 );
               }
           ),

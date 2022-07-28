@@ -171,7 +171,7 @@ class BookDescriptionScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const JenreScreen())
+                            builder: (context) => JenreScreen(index_month: 0,))
                       );
                     }
                 ),

@@ -7,7 +7,8 @@ import 'package:mugalim/presentation/main/select_book.dart';
 import '../../core/const/const_color.dart';
 
 class JenreScreen extends StatefulWidget {
-  const JenreScreen({Key? key}) : super(key: key);
+  JenreScreen({Key? key, required this.index_month}) : super(key: key);
+  int index_month;
 
   @override
   State<JenreScreen> createState() => _JenreScreenState();
@@ -18,7 +19,7 @@ class _JenreScreenState extends State<JenreScreen> {
   bool select2 = false;
   bool select3 = false;
   bool select4 = false;
-
+  var list = ['Сентября', 'Октября', 'Ноября','Декабря'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,7 @@ class _JenreScreenState extends State<JenreScreen> {
                 ),
                 SizedBox(height: 8,),
                 Text(
-                  'Книга Сентября:',
+                  'Книга ${list[widget.index_month.toInt()]} :',
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'CeraPro',
@@ -281,7 +282,7 @@ class _JenreScreenState extends State<JenreScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const BookScreen()),
+                        MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,)),
                       );
                     }
                 ),
