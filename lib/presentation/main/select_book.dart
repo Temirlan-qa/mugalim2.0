@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/widgets/button_widget.dart';
+import 'package:mugalim/presentation/main/book_description_screen.dart';
 
 class BookScreen extends StatefulWidget {
   const BookScreen({Key? key}) : super(key: key);
@@ -215,7 +215,10 @@ class _BookScreenState extends State<BookScreen> {
                 ),
               ),
               onPressed:() {
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BookDescriptionScreen()),
+                );
               },
             ),
           ),
