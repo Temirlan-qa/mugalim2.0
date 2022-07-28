@@ -167,7 +167,7 @@ class _BookScreenState extends State<BookScreen> {
                         );
                       }
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height/7,),
+                    SizedBox(height: 200,),
                   ],
                 ),
               ),
@@ -238,7 +238,7 @@ class _BookScreenState extends State<BookScreen> {
                   backgroundColor: ColorStyles.neutralsPageBackgroundColor,
                   elevation: 3,
                   minimumSize: Size(
-                      343, 48
+                      MediaQuery.of(context).size.width-32, 48
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
@@ -253,6 +253,10 @@ class _BookScreenState extends State<BookScreen> {
               ),
             ),
           ),
+          // Positioned(
+          //   bottom: 0,
+          //     child: Container(height: 30,color: ColorStyles.neutralsPageBackgroundColor,width: MediaQuery.of(context).size.width,),
+          // ),
         ],
       ),
     );
