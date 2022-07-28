@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/main/select_jenre.dart';
 
 class ChoosenPage extends StatelessWidget {
   const ChoosenPage({Key? key}) : super(key: key);
@@ -48,26 +49,53 @@ class ChoosenPage extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 219),
-          Container(
-              height: 48,
-              width: 343,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: const Color(0xff3D3DD8),
-              ),
-            child: const Center(
-                child: Text(
-                  'На главную',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      fontFamily: 'font/Cera Pro Black.ttf',
-                  ),
+          TextButton(
+              child: Text(
+                "На главную",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'CeraPro',
+                  fontWeight: FontWeight.w500,
                 ),
-            ),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: Color(0xFF3D3DD8),
+                elevation: 0,
+                minimumSize: Size(
+                    343, 48
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const JenreScreen()),
+                );
+              }
           ),
+          // Container(
+          //     height: 48,
+          //     width: 343,
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(12),
+          //         color: const Color(0xff3D3DD8),
+          //     ),
+          //   child: const Center(
+          //       child: Text(
+          //         'На главную',
+          //         style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 16,
+          //             fontWeight: FontWeight.w500,
+          //             fontStyle: FontStyle.normal,
+          //             fontFamily: 'font/Cera Pro Black.ttf',
+          //         ),
+          //       ),
+          //   ),
+          // ),
           const SizedBox(height: 20),
           const Text('Изменить', style: TextStyle(color: Color(0xff3D3DD8), fontStyle: FontStyle.normal, fontWeight: FontWeight.w500),)
 

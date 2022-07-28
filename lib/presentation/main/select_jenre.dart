@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/main/book_description_screen.dart';
 import 'package:mugalim/presentation/main/done.dart';
 
 import '../../core/const/const_color.dart';
@@ -54,8 +55,6 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 SizedBox(height: 125,),
-
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -63,6 +62,9 @@ class _JenreScreenState extends State<JenreScreen> {
                       onTap: (){
                         setState(() {
                             select1 = !select1;
+                            select2 = false;
+                            select3 = false;
+                            select4 = false;
                           });
                         print('Бизнес == $select1');
                       },
@@ -105,8 +107,12 @@ class _JenreScreenState extends State<JenreScreen> {
                     InkWell(
                       onTap: (){
                         setState(() {
-                            select2 = !select2;
-                          });
+                          select1 = false;
+                          select3 = false;
+                          select4 = false;
+
+                          select2 = !select2;
+                        });
 
                         print('Классика == $select2');
                       },
@@ -155,8 +161,11 @@ class _JenreScreenState extends State<JenreScreen> {
                     InkWell(
                       onTap: (){
                         setState(() {
-                            select3 = !select3;
-                          });
+                           select1 = false;
+                           select2 = false;
+                           select4 = false;
+                           select3 = !select3;
+                        });
 
                         print('Развитие == $select3');
                       },
@@ -200,8 +209,11 @@ class _JenreScreenState extends State<JenreScreen> {
                     InkWell(
                       onTap: (){
                         setState(() {
-                            select4 = !select4;
-                          });
+                           select1 = false;
+                           select2 = false;
+                           select3 = false;
+                           select4 = !select4;
+                        });
                         print('Фантастика == $select4');
                       },
                       child: Container(
@@ -266,7 +278,7 @@ class _JenreScreenState extends State<JenreScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChoosenPage()),
+                        MaterialPageRoute(builder: (context) => const BookDescriptionScreen()),
                       );
                     }
                 ),
