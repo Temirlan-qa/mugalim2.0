@@ -260,14 +260,16 @@ class _JenreScreenState extends State<JenreScreen> {
                   child: Text(
                     "Далее",
                     style: TextStyle(
+                      color: select1 || select2||select3|| select4? Colors.white:Colors.black,
                       fontSize: 16,
                       fontFamily: 'CeraPro',
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   style: TextButton.styleFrom(
-                    primary: Colors.black,
-                    backgroundColor: Color(0xFFE0E0E0),
+                    // primary: Colors.black,
+                    backgroundColor: select1 || select2||select3|| select4? Color(0xFF3D3DD8):Color(0xFFE0E0E0),
+                    //backgroundColor: Color(0xFFE0E0E0),
                     elevation: 0,
                     minimumSize: Size(
                         343, 48
