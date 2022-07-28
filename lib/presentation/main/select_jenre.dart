@@ -255,7 +255,7 @@ class _JenreScreenState extends State<JenreScreen> {
 
                   ],
                 ),
-                SizedBox(height: 160,),
+                Spacer(),
                 TextButton(
                   child: Text(
                     "Далее",
