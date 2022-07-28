@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List list = ['Сентября', 'Октября', 'Ноября','Декабря'];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      home: JenreScreen(index_month: 0,list_jenre: [1,2,3,4]),
+      home: JenreScreen(index_month: 0,list: list,),
     );
   }
 }

@@ -5,9 +5,10 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 class BookDescriptionScreen extends StatefulWidget {
-  BookDescriptionScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
+  BookDescriptionScreen({Key? key, required this.index_month,required this.list,required this.select_index}) : super(key: key);
   int index_month;
-  List list_jenre;
+  List list;
+  String select_index;
 
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
@@ -152,7 +153,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               bottom: 32,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0),
+                    horizontal: 16.0,vertical: 16),
                 child: TextButton(
                   child: Text(
                     "Выбрать книгу",
@@ -174,12 +175,28 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                     ),
                   ),
                   onPressed:() {
+                    if(widget.index_month.toInt() >= 3){
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => JenreScreen(index_month: widget.index_month,list_jenre: widget.list_jenre))
+                            builder: (context) => ChoosenPage()
+                        ),
                       );
                     }
+                    if(!widget.list.isEmpty && widget.index_month.toInt() < 3) {
+                      widget.list.remove(widget.select_index);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => JenreScreen(
+                            index_month: widget.index_month.toInt()+1,
+                            list: widget.list,
+                          ),
+                        ),
+                      );
+                    }
+                    }
+
                 ),
               ),
             ),

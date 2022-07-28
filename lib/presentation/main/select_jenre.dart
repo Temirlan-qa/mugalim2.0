@@ -7,22 +7,18 @@ import 'package:mugalim/presentation/main/select_book.dart';
 import '../../core/const/const_color.dart';
 
 class JenreScreen extends StatefulWidget {
-  JenreScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
+  JenreScreen({Key? key, required this.index_month,required this.list}) : super(key: key);
   int index_month;
-  List list_jenre;
+  List list;
 
   @override
   State<JenreScreen> createState() => _JenreScreenState();
 }
 
 class _JenreScreenState extends State<JenreScreen> {
-  bool select1 = false;
-  bool select2 = false;
-  bool select3 = false;
-  bool select4 = false;
-  var list = ['Сентября', 'Октября', 'Ноября','Декабря'];
-  int? list_jenre_save ;
-  bool select = false;
+
+  List list = ['Сентября', 'Октября', 'Ноября','Декабря'];
+  List array = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,14 +61,17 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.list_jenre.any((item) => item == 1)  ? true: false,
+                      visible: widget.list.contains('Сентября') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
-                            select1 = !select1;
-                            select2 = false;
-                            select3 = false;
-                            select4 = false;
+                            if(!array.contains(0)){
+                              array.clear();
+                              array.add(0);
+                            }
+                            else if(array.contains(0)){
+                              array.clear();
+                            }
                           });
                         },
                         child: Container(
@@ -80,11 +79,7 @@ class _JenreScreenState extends State<JenreScreen> {
                           decoration: BoxDecoration(
                             color: Colors.grey,
                             borderRadius: BorderRadius.all(Radius.circular(12)),
-                            border: Border.all(
-                              color: select1 ?Color(0xFF3D3DD8) : Colors.grey,
-                              width: 3.0,
-                              style: BorderStyle.solid,
-                            ),
+                            border: Border.all(color: array.contains(0) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
                           ),
                           height: 120,
                           width: 167,
@@ -102,7 +97,7 @@ class _JenreScreenState extends State<JenreScreen> {
                                   ),
                                 ),
                               Spacer(),
-                              select1
+                              array.contains(0)
 
                                   ?Image.asset('assets/icons/Check.png')
                                   :Container(height: 24,width: 24,color: Colors.grey,),
@@ -113,14 +108,17 @@ class _JenreScreenState extends State<JenreScreen> {
                     ),
                     SizedBox(width: 8,),
                     Visibility(
-                      visible: widget.list_jenre.any((item) => item == 2)? true: false,
+                      visible: widget.list.contains('Октября') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
-                            select1 = false;
-                            select3 = false;
-                            select4 = false;
-                            select2 = !select2;
+                            if(!array.contains(1)){
+                              array.clear();
+                              array.add(1);
+                            }
+                            else if(array.contains(1)){
+                              array.clear();
+                            }
                           });
                         },
                         child: Container(
@@ -128,11 +126,7 @@ class _JenreScreenState extends State<JenreScreen> {
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.all(Radius.circular(12)),
-                            border: Border.all(
-                              color: select2 ?Color(0xFF3D3DD8) : Colors.grey,
-                              width: 3.0,
-                              style: BorderStyle.solid,
-                            ),
+                            border: Border.all(color: array.contains(1) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
                           ),
                           height: 120,
                           width: 167,
@@ -150,7 +144,7 @@ class _JenreScreenState extends State<JenreScreen> {
                                       ),
                                     ),
                               Spacer(),
-                              select2
+                              array.contains(1)
 
                                   ?Image.asset('assets/icons/Check.png')
                                   :Container(height: 24,width: 24,color: Colors.grey,),
@@ -167,14 +161,17 @@ class _JenreScreenState extends State<JenreScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.list_jenre.any((item) => item == 3) ? true: false,
+                      visible: widget.list.contains('Ноября') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
-                             select1 = false;
-                             select2 = false;
-                             select4 = false;
-                             select3 = !select3;
+                            if(!array.contains(2)){
+                              array.clear();
+                              array.add(2);
+                            }
+                            else if(array.contains(2)){
+                              array.clear();
+                            }
                           });
                         },
                         child: Container(
@@ -182,11 +179,7 @@ class _JenreScreenState extends State<JenreScreen> {
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.all(Radius.circular(12)),
-                            border: Border.all(
-                              color: select3 ?Color(0xFF3D3DD8) : Colors.grey,
-                              width: 3.0,
-                              style: BorderStyle.solid,
-                            ),
+                            border: Border.all(color: array.contains(2) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
                           ),
                           height: 120,
                           width: 167,
@@ -204,7 +197,7 @@ class _JenreScreenState extends State<JenreScreen> {
                                   ),
                                 ),
                                 Spacer(),
-                                select3
+                                array.contains(2)
 
                                     ?Image.asset('assets/icons/Check.png')
                                     :Container(height: 24,width: 24,color: Colors.grey,),
@@ -216,14 +209,17 @@ class _JenreScreenState extends State<JenreScreen> {
 
                     SizedBox(width: 8,),
                     Visibility(
-                      visible: widget.list_jenre.any((item) => item == 4)? true: false,
+                      visible: widget.list.contains('Декабря') ? true : false,
                       child: InkWell(
                         onTap: (){
                           setState(() {
-                             select1 = false;
-                             select2 = false;
-                             select3 = false;
-                             select4 = !select4;
+                            if(!array.contains(3)){
+                              array.clear();
+                              array.add(3);
+                            }
+                            else if(array.contains(3)){
+                              array.clear();
+                            }
                           });
                         },
                         child: Container(
@@ -231,11 +227,7 @@ class _JenreScreenState extends State<JenreScreen> {
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.all(Radius.circular(12)),
-                            border: Border.all(
-                              color: select4 ?Color(0xFF3D3DD8) : Colors.grey,
-                              width: 3.0,
-                              style: BorderStyle.solid,
-                            ),
+                            border: Border.all(color: array.contains(3) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
                           ),
                           height: 120,
                           width: 167,
@@ -253,7 +245,7 @@ class _JenreScreenState extends State<JenreScreen> {
                                   ),
                                 ),
                               Spacer(),
-                              select4
+                              array.contains(3)
                                   ?Image.asset('assets/icons/Check.png')
                                   :Container(height: 24,width: 24,color: Colors.grey,),
                             ],
@@ -268,7 +260,7 @@ class _JenreScreenState extends State<JenreScreen> {
                   child: Text(
                     "Далее",
                     style: TextStyle(
-                      color: select1 || select2||select3|| select4? Colors.white:Colors.black,
+                      color: !array.isEmpty ? Colors.white:Colors.black,
                       fontSize: 16,
                       fontFamily: 'CeraPro',
                       fontWeight: FontWeight.w500,
@@ -276,7 +268,7 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                   style: TextButton.styleFrom(
                     // primary: Colors.black,
-                    backgroundColor: select1 || select2||select3|| select4? Color(0xFF3D3DD8):Color(0xFFE0E0E0),
+                    backgroundColor: !array.isEmpty ? Color(0xFF3D3DD8):Color(0xFFE0E0E0),
                     //backgroundColor: Color(0xFFE0E0E0),
                     elevation: 0,
                     minimumSize: Size(
@@ -287,29 +279,20 @@ class _JenreScreenState extends State<JenreScreen> {
                     ),
                   ),
                     onPressed: () {
-                      print(widget.list_jenre);
-                      if(select1 == true){
+                      if(!list.isEmpty) {
+                        int index = array.contains(0) ? 0 : array.contains(1)
+                            ? 1
+                            : array.contains(2) ? 2 : 3;
+                        // int size = widget.list.length;
+                        String select_index = list[index];
+                        print(select_index);
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 0,)),
+                          MaterialPageRoute(builder: (context) => BookScreen(
+                            index_month: widget.index_month,
+                            select_index: select_index,
+                            list: widget.list,)),
                         );
-                      }else if(select2 == true){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 1,)),
-                        );
-                      }else if(select3 == true){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 2,)),
-                        );
-                      }else if(select4 == true){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  BookScreen(index_month: widget.index_month,list_jenre: widget.list_jenre, list_jenre_save: 3,)),
-                        );
-                      }else{
-                        print('error');
                       }
                     }
                 ),

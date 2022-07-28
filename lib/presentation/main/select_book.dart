@@ -8,10 +8,10 @@ import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'done.dart';
 
 class BookScreen extends StatefulWidget {
-  BookScreen({Key? key, required this.index_month,required this.list_jenre,required this.list_jenre_save}) : super(key: key);
+  BookScreen({Key? key, required this.index_month,required this.select_index,required this.list}) : super(key: key);
   int index_month;
-  List list_jenre;
-  int list_jenre_save;
+  String select_index;
+  List list;
   @override
   State<BookScreen> createState() => _BookScreenState();
 }
@@ -136,7 +136,7 @@ class _BookScreenState extends State<BookScreen> {
                                               onTap: (){
                                                 Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) => BookDescriptionScreen(index_month: widget.index_month,list_jenre: widget.list_jenre,)),
+                                                  MaterialPageRoute(builder: (context) => BookDescriptionScreen(index_month: widget.index_month,list: widget.list,select_index: widget.select_index,)),
                                                 );
                                               },
                                               child: Text('Подробнее',
@@ -201,26 +201,28 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                 ),
                 onPressed:() {
-                  print(widget.list_jenre);
-                  if(widget.index_month.toInt() >= 3){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChoosenPage()
-                      ),
-                    );
-                  }
-                  if(!list.isEmpty && widget.index_month.toInt() < 3) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => JenreScreen(
-                            index_month: widget.index_month.toInt()+1,
-                              list_jenre: widget.list_jenre.removeAt(widget.list_jenre_save),
-                            // list_jenre: widget.list_jenre.removeAt(widget.list_jenre_save.toInt()-1),
+                  if(!list.isEmpty) {
+                    if (widget.index_month.toInt() >= 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChoosenPage()
                         ),
-                      ),
-                    );
+                      );
+                    }
+                    if (!list.isEmpty && widget.index_month.toInt() < 3) {
+                      widget.list.remove(widget.select_index);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              JenreScreen(
+                                index_month: widget.index_month.toInt() + 1,
+                                list: widget.list,
+                              ),
+                        ),
+                      );
+                    }
                   }
                 },
               ),
@@ -252,15 +254,7 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                 ),
                 onPressed:() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => JenreScreen(
-                          index_month: widget.index_month.toInt(),
-                          list_jenre: widget.list_jenre
-                      ),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
               ),
             ),
