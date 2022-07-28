@@ -8,8 +8,9 @@ import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'done.dart';
 
 class BookScreen extends StatefulWidget {
-  BookScreen({Key? key, required this.index_month}) : super(key: key);
+  BookScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
   int index_month;
+  List<int> list_jenre;
   @override
   State<BookScreen> createState() => _BookScreenState();
 }
@@ -134,7 +135,7 @@ class _BookScreenState extends State<BookScreen> {
                                               onTap: (){
                                                 Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) => const BookDescriptionScreen()),
+                                                  MaterialPageRoute(builder: (context) => BookDescriptionScreen(index_month: widget.index_month,list_jenre: widget.list_jenre,)),
                                                 );
                                               },
                                               child: Text('Подробнее',
@@ -199,6 +200,7 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                 ),
                 onPressed:() {
+                  print(widget.list_jenre);
                   if(widget.index_month.toInt() >= 3){
                     Navigator.push(
                       context,
@@ -211,7 +213,10 @@ class _BookScreenState extends State<BookScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => JenreScreen(index_month: widget.index_month.toInt()+1)
+                          builder: (context) => JenreScreen(
+                            index_month: widget.index_month.toInt()+1,
+                            list_jenre: widget.list_jenre,
+                          ),
                       ),
                     );
                   }
@@ -247,7 +252,12 @@ class _BookScreenState extends State<BookScreen> {
                 onPressed:() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => JenreScreen(index_month: widget.index_month.toInt())),
+                    MaterialPageRoute(
+                      builder: (context) => JenreScreen(
+                          index_month: widget.index_month.toInt(),
+                          list_jenre: widget.list_jenre
+                      ),
+                    ),
                   );
                 },
               ),

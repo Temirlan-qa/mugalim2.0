@@ -4,9 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
-class BookDescriptionScreen extends StatelessWidget {
-  const BookDescriptionScreen({Key? key}) : super(key: key);
+class BookDescriptionScreen extends StatefulWidget {
+  BookDescriptionScreen({Key? key, required this.index_month,required this.list_jenre}) : super(key: key);
+  int index_month;
+  List<int> list_jenre;
 
+  @override
+  State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
+}
+
+class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +146,6 @@ class BookDescriptionScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
               ],
             ),
             Positioned(
@@ -171,7 +177,7 @@ class BookDescriptionScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => JenreScreen(index_month: 0,))
+                            builder: (context) => JenreScreen(index_month: widget.index_month,list_jenre: widget.list_jenre))
                       );
                     }
                 ),
