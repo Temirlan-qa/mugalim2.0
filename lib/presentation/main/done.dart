@@ -89,7 +89,7 @@ class ChoosenPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => JenreScreen(index_month: 0,list_jenre: [],)
+                          builder: (context) => JenreScreen(index_month: 0,list: ['Сентября', 'Октября', 'Ноября','Декабря'],)
                       ),
                     );
                   },
