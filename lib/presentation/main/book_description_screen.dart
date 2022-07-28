@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/presentation/main/done.dart';
+import 'package:mugalim/presentation/main/select_jenre.dart';
 class BookDescriptionScreen extends StatelessWidget {
   const BookDescriptionScreen({Key? key}) : super(key: key);
 
@@ -134,39 +135,47 @@ class BookDescriptionScreen extends StatelessWidget {
                             ),
                           ),
                           Spacer(),
-                          TextButton(
-                              child: Text(
-                                "Выбрать книгу",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: 'CeraPro',
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              style: TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor: Color(0xFF3D3DD8),
-                                elevation: 0,
-                                minimumSize: Size(
-                                    343, 48
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ChoosenPage()),
-                                );
-                              }
-                          ),
                         ],
                       ),
                     ),
                   ),
 
               ],
+            ),
+            Positioned(
+              bottom: 16,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0),
+                child: TextButton(
+                  child: Text(
+                    "Выбрать книгу",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'CeraPro',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                    primary: Color(0xFFE0E0E0),
+                    backgroundColor: Color(0xff3D3DD8),
+                    elevation: 3,
+                    minimumSize: Size(
+                        MediaQuery.of(context).size.width-32, 48
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  onPressed:() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const JenreScreen())
+                      );
+                    }
+                ),
+              ),
             ),
           ],
         ),

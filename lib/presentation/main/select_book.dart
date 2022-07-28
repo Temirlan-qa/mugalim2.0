@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/widgets/button_widget.dart';
 import 'package:mugalim/presentation/main/book_description_screen.dart';
+import 'package:mugalim/presentation/main/select_jenre.dart';
 
 class BookScreen extends StatefulWidget {
   const BookScreen({Key? key}) : super(key: key);
@@ -10,13 +11,9 @@ class BookScreen extends StatefulWidget {
   @override
   State<BookScreen> createState() => _BookScreenState();
 }
-enum SingingCharacter { lafayette }
 
 
 class _BookScreenState extends State<BookScreen> {
-  SingingCharacter? _character = SingingCharacter.lafayette;
-  bool _value = false;
-  Object val = -1;
   List list = [];
   @override
   Widget build(BuildContext context) {
@@ -69,9 +66,13 @@ class _BookScreenState extends State<BookScreen> {
                         return GestureDetector(
                           onTap: (){
                             setState(() {
-                              list.clear();
+
                               if(!list.contains(index)){
+                                list.clear();
                                 list.add(index);
+                              }
+                              else if(list.contains(index)){
+                                list.clear();
                               }
                             });
                           },
@@ -128,12 +129,20 @@ class _BookScreenState extends State<BookScreen> {
                                           SizedBox(height: 12,),
                                           Padding(
                                             padding: const EdgeInsets.only(left: 8),
-                                            child: Text('Подробнее',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xff3D3DD8),
-                                                fontFamily: 'CeraPro',
+                                            child: GestureDetector(
+                                              onTap: (){
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(builder: (context) => const BookDescriptionScreen()),
+                                                );
+                                              },
+                                              child: Text('Подробнее',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff3D3DD8),
+                                                  fontFamily: 'CeraPro',
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -163,63 +172,73 @@ class _BookScreenState extends State<BookScreen> {
           ),
           Positioned(
             bottom: 100,
-            left: 20,
-            child: TextButton(
-              child: Text(
-                "Выбрать книгу",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'CeraPro',
-                  fontWeight: FontWeight.w500,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0),
+              child: TextButton(
+                child: Text(
+                  "Выбрать книгу",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'CeraPro',
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
+                style: TextButton.styleFrom(
+                  primary: (list.isEmpty) ? Colors.black : Color(0xFFE0E0E0),
+                  backgroundColor: (list.isEmpty) ? Color(0xFFE0E0E0) : Color(0xff3D3DD8),
+                  elevation: 3,
+                  minimumSize: Size(
+                      MediaQuery.of(context).size.width-32, 48
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                onPressed:() {
+                  if(!list.isEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const JenreScreen()),
+                    );
+                  }
+                },
               ),
-              style: TextButton.styleFrom(
-                primary: Colors.black,
-                backgroundColor: (list.isEmpty) ? Color(0xFFE0E0E0) : Color(0xff3D3DD8),
-                elevation: 0,
-                minimumSize: Size(
-                    343, 48
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
-              onPressed:() {
-                setState(() {
-
-                });
-              },
             ),
           ),
           Positioned(
             bottom: 40,
-            left: 20,
-            child: TextButton(
-              child: Text(
-                "Обратно к жанрам",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'CeraPro',
-                  fontWeight: FontWeight.w500,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0),
+              child: TextButton(
+                child: Text(
+                  "Обратно к жанрам",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'CeraPro',
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
+                style: TextButton.styleFrom(
+                  primary: Color(0xff3D3DD8),
+                  backgroundColor: ColorStyles.neutralsPageBackgroundColor,
+                  elevation: 3,
+                  minimumSize: Size(
+                      343, 48
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                onPressed:() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const JenreScreen()),
+                  );
+                },
               ),
-              style: TextButton.styleFrom(
-                primary: Color(0xff3D3DD8),
-                backgroundColor: ColorStyles.neutralsPageBackgroundColor,
-                elevation: 0,
-                minimumSize: Size(
-                    343, 48
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
-              onPressed:() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BookDescriptionScreen()),
-                );
-              },
             ),
           ),
         ],
