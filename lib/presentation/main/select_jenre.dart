@@ -286,7 +286,10 @@ class _JenreScreenState extends State<JenreScreen> {
                               });
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                  vertical: 4
+                              ),
                               padding: const EdgeInsets.all(16.0),
                               decoration: BoxDecoration(
                                 color: Colors.grey,
