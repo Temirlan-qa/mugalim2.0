@@ -79,7 +79,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                             'Создавая инновации. Креативное мышление',
                             style: TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.w500
+                                fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 4),
@@ -88,7 +88,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: ColorStyles.neutralsTextTertiaryColor
+                                color: ColorStyles.neutralsTextTertiaryColor,
                             ),
                           ),
                           SizedBox(height: 8),
@@ -98,14 +98,18 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                                 '4.0',
                                 style: TextStyle(
                                     fontSize: 18,
-                                    fontWeight: FontWeight.w500
+                                    fontWeight: FontWeight.w500,
                                 ),
                               ),
                               SizedBox(width: 7,),
                               SvgPicture.asset('assets/icons/star_full.svg'),
+                              SizedBox(width: 8,),
                               SvgPicture.asset('assets/icons/star_full.svg'),
+                              SizedBox(width: 8,),
                               SvgPicture.asset('assets/icons/star_full.svg'),
+                              SizedBox(width: 8,),
                               SvgPicture.asset('assets/icons/star_full.svg'),
+                              SizedBox(width: 8,),
                               SvgPicture.asset('assets/icons/star_full.svg'),
                               // RatingBar(
                               //   initialRating: state.book.rating!,
@@ -131,7 +135,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                             "Описание",
                             style: TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.w500
+                                fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 6),
@@ -139,6 +143,10 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                             'The Catcher in the Rye is a novel by J. D. Salinger, partially published in serial form in 1945–1946 and as a novel in 1951. It was originally intended for adu lts but is often read by adolescents for its theme of angst, alienation and as a critique......',
                             style: TextStyle(
                               color: ColorStyles.neutralsTextTertiaryColor,
+                              fontSize: 16,
+                              height: 1.5,
+                              // Figma's line height: fontSize * height = 24
+                              // https://www.codegrepper.com/code-examples/whatever/line+height+figma+flutter
                               // color: ColorStyles.neutralsTextTertiaryColor
                             ),
                           ),
