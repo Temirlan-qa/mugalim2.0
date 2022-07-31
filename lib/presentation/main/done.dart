@@ -86,12 +86,12 @@ class ChoosenPage extends StatelessWidget {
                     ),
                   ),
                   onPressed:() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => JenreScreen(index_month: 0,list: ['Сентября', 'Октября', 'Ноября','Декабря'],)
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => JenreScreen(index_month: 0,list: ['Сентября', 'Октября', 'Ноября','Декабря'],)
+                    //   ),
+                    // );
                   },
                 ),
                 SizedBox(height: 20,),
