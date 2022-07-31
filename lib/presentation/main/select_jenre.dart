@@ -26,12 +26,12 @@ class _JenreScreenState extends State<JenreScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(
-            12
+          padding: EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 12,
           ),
           child: Column(
               children: [
-                SizedBox(height: 16,),
                 Text(
                   'Выберите жанр ',
                   style: TextStyle(
