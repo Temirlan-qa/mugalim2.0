@@ -58,558 +58,9 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 SizedBox(height: 125,),
-                // Expanded(
-                //   flex: 12,
-                //   child: GridView(
-                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,),
-                //     children: [
-                //       Visibility(
-                //             visible: widget.list.contains('Бизнес') ? true : false,
-                //             child: InkWell(
-                //               onTap: (){
-                //                 setState(() {
-                //                   if(!array.contains(0)){
-                //                     array.clear();
-                //                     array.add(0);
-                //                   }
-                //                   else if(array.contains(0)){
-                //                     array.clear();
-                //                   }
-                //                 });
-                //               },
-                //               child: Container(
-                //                 padding: const EdgeInsets.all(16.0),
-                //                 decoration: BoxDecoration(
-                //                   color: Colors.grey,
-                //                   borderRadius: BorderRadius.all(Radius.circular(12)),
-                //                   border: Border.all(color: array.contains(0) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
-                //                 ),
-                //                 height: 120,
-                //                 width: 167,
-                //                 child: Row(
-                //                   mainAxisAlignment: MainAxisAlignment.start,
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     Text(
-                //                       'Бизнес',
-                //                       style: TextStyle(
-                //                           fontSize: 16,
-                //                           fontFamily: 'CeraPro',
-                //                           fontWeight: FontWeight.w500,
-                //                           color: Colors.white
-                //                       ),
-                //                     ),
-                //                     Spacer(),
-                //                     array.contains(0)
-                //
-                //                         ?Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Color(0xFF3D3DD8),
-                //                       ),
-                //                       child: Icon(
-                //                         Icons.done,
-                //                         size: 16,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                         :Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                   ],
-                //                 ),
-                //               ),
-                //             ),
-                //           ),
-                //       Visibility(
-                //             visible: widget.list.contains('Классика') ? true : false,
-                //             child: InkWell(
-                //               onTap: (){
-                //                 setState(() {
-                //                   if(!array.contains(1)){
-                //                     array.clear();
-                //                     array.add(1);
-                //                   }
-                //                   else if(array.contains(1)){
-                //                     array.clear();
-                //                   }
-                //                 });
-                //               },
-                //               child: Container(
-                //                 padding: const EdgeInsets.all(16.0),
-                //                 decoration: BoxDecoration(
-                //                   color: Colors.grey,
-                //                   borderRadius: BorderRadius.all(Radius.circular(12)),
-                //                   border: Border.all(color: array.contains(1) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
-                //                 ),
-                //                 height: 120,
-                //                 width: 167,
-                //                 child:Row(
-                //                   mainAxisAlignment: MainAxisAlignment.start,
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     Text(
-                //                       'Классика',
-                //                       style: TextStyle(
-                //                           fontSize: 16,
-                //                           fontFamily: 'CeraPro',
-                //                           fontWeight: FontWeight.w500,
-                //                           color: Colors.white
-                //                       ),
-                //                     ),
-                //                     Spacer(),
-                //                     array.contains(1)
-                //
-                //                         ?Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Color(0xFF3D3DD8),
-                //                       ),
-                //                       child: Icon(
-                //                         Icons.done,
-                //                         size: 16,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                         :Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                   ],
-                //                 ),
-                //                 // Icon(Icons.check),
-                //               ),
-                //             ),
-                //           ),
-                //       Visibility(
-                //             visible: widget.list.contains('Развитие') ? true : false,
-                //             child: InkWell(
-                //               onTap: (){
-                //                 setState(() {
-                //                   if(!array.contains(2)){
-                //                     array.clear();
-                //                     array.add(2);
-                //                   }
-                //                   else if(array.contains(2)){
-                //                     array.clear();
-                //                   }
-                //                 });
-                //               },
-                //               child: Container(
-                //                 padding: const EdgeInsets.all(16.0),
-                //                 decoration: BoxDecoration(
-                //                   color: Colors.grey,
-                //                   borderRadius: BorderRadius.all(Radius.circular(12)),
-                //                   border: Border.all(
-                //                       color: array.contains(2)
-                //                           ? Color(0xff3D3DD8)
-                //                           : ColorStyles.neutralsPageBackgroundColor,
-                //                       width: 2
-                //                   ),
-                //                 ),
-                //                 height: 120,
-                //                 width: 167,
-                //                 child:  Row(
-                //                   mainAxisAlignment: MainAxisAlignment.start,
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     Text(
-                //                       'Развитие',
-                //                       style: TextStyle(
-                //                           fontSize: 16,
-                //                           fontFamily: 'CeraPro',
-                //                           fontWeight: FontWeight.w500,
-                //                           color: Colors.white
-                //                       ),
-                //                     ),
-                //                     Spacer(),
-                //                     array.contains(2)
-                //                         ?Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Color(0xFF3D3DD8),
-                //                       ),
-                //                       child: Icon(
-                //                         Icons.done,
-                //                         size: 16,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                         :Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                   ],
-                //                 ),
-                //               ),
-                //             ),
-                //           ),
-                //       Visibility(
-                //             visible: widget.list.contains('Фантастика') ? true : false,
-                //             child: InkWell(
-                //               onTap: (){
-                //                 setState(() {
-                //                   if(!array.contains(3)){
-                //                     array.clear();
-                //                     array.add(3);
-                //                   }
-                //                   else if(array.contains(3)){
-                //                     array.clear();
-                //                   }
-                //                 });
-                //               },
-                //               child: Container(
-                //                 padding: const EdgeInsets.all(16.0),
-                //                 decoration: BoxDecoration(
-                //                   color: Colors.grey,
-                //                   borderRadius: BorderRadius.all(Radius.circular(12)),
-                //                   border: Border.all(color: array.contains(3) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
-                //                 ),
-                //                 height: 120,
-                //                 width: 167,
-                //                 child: Row(
-                //                   mainAxisAlignment: MainAxisAlignment.start,
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     Text(
-                //                       'Фантастика',
-                //                       style: TextStyle(
-                //                           fontSize: 16,
-                //                           fontFamily: 'CeraPro',
-                //                           fontWeight: FontWeight.w500,
-                //                           color: Colors.white
-                //                       ),
-                //                     ),
-                //                     Spacer(),
-                //                     array.contains(3)
-                //                         ?Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Color(0xFF3D3DD8),
-                //                       ),
-                //                       child: Icon(
-                //                         Icons.done,
-                //                         size: 16,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                         :Container(
-                //                       height: 24,
-                //                       width: 24,
-                //                       decoration: BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: Colors.white,
-                //                       ),
-                //                     )
-                //                   ],
-                //                 ),
-                //               ),
-                //             ),
-                //           ),
-                //     ],
-                //   ),
-                //       // Row(
-                //       //   mainAxisAlignment: MainAxisAlignment.center,
-                //       //   children: [
-                //       //     Visibility(
-                //       //       visible: widget.list.contains('Бизнес') ? true : false,
-                //       //       child: InkWell(
-                //       //         onTap: (){
-                //       //           setState(() {
-                //       //             if(!array.contains(0)){
-                //       //               array.clear();
-                //       //               array.add(0);
-                //       //             }
-                //       //             else if(array.contains(0)){
-                //       //               array.clear();
-                //       //             }
-                //       //           });
-                //       //         },
-                //       //         child: Container(
-                //       //           padding: const EdgeInsets.all(16.0),
-                //       //           decoration: BoxDecoration(
-                //       //             color: Colors.grey,
-                //       //             borderRadius: BorderRadius.all(Radius.circular(12)),
-                //       //             border: Border.all(color: array.contains(0) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
-                //       //           ),
-                //       //           height: 120,
-                //       //           width: 167,
-                //       //           child: Row(
-                //       //             mainAxisAlignment: MainAxisAlignment.start,
-                //       //             crossAxisAlignment: CrossAxisAlignment.start,
-                //       //             children: [
-                //       //               Text(
-                //       //                   'Бизнес',
-                //       //                   style: TextStyle(
-                //       //                     fontSize: 16,
-                //       //                     fontFamily: 'CeraPro',
-                //       //                     fontWeight: FontWeight.w500,
-                //       //                     color: Colors.white
-                //       //                   ),
-                //       //                 ),
-                //       //               Spacer(),
-                //       //               array.contains(0)
-                //       //
-                //       //                   ?Container(
-                //       //                 height: 24,
-                //       //                 width: 24,
-                //       //                 decoration: BoxDecoration(
-                //       //                   shape: BoxShape.circle,
-                //       //                   color: Color(0xFF3D3DD8),
-                //       //                 ),
-                //       //                 child: Icon(
-                //       //                     Icons.done,
-                //       //                   size: 16,
-                //       //                   color: Colors.white,
-                //       //                 ),
-                //       //               )
-                //       //                   :Container(
-                //       //                 height: 24,
-                //       //                 width: 24,
-                //       //                 decoration: BoxDecoration(
-                //       //                   shape: BoxShape.circle,
-                //       //                   color: Colors.white,
-                //       //                 ),
-                //       //               )
-                //       //             ],
-                //       //           ),
-                //       //           ),
-                //       //         ),
-                //       //     ),
-                //       //     SizedBox(width: 8,),
-                //       //     Visibility(
-                //       //       visible: widget.list.contains('Классика') ? true : false,
-                //       //       child: InkWell(
-                //       //         onTap: (){
-                //       //           setState(() {
-                //       //             if(!array.contains(1)){
-                //       //               array.clear();
-                //       //               array.add(1);
-                //       //             }
-                //       //             else if(array.contains(1)){
-                //       //               array.clear();
-                //       //             }
-                //       //           });
-                //       //         },
-                //       //         child: Container(
-                //       //           padding: const EdgeInsets.all(16.0),
-                //       //           decoration: BoxDecoration(
-                //       //               color: Colors.grey,
-                //       //               borderRadius: BorderRadius.all(Radius.circular(12)),
-                //       //             border: Border.all(color: array.contains(1) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
-                //       //           ),
-                //       //           height: 120,
-                //       //           width: 167,
-                //       //           child:Row(
-                //       //             mainAxisAlignment: MainAxisAlignment.start,
-                //       //             crossAxisAlignment: CrossAxisAlignment.start,
-                //       //             children: [
-                //       //               Text(
-                //       //                       'Классика',
-                //       //                       style: TextStyle(
-                //       //                           fontSize: 16,
-                //       //                           fontFamily: 'CeraPro',
-                //       //                           fontWeight: FontWeight.w500,
-                //       //                           color: Colors.white
-                //       //                       ),
-                //       //                     ),
-                //       //               Spacer(),
-                //       //               array.contains(1)
-                //       //
-                //       //                   ?Container(
-                //       //                 height: 24,
-                //       //                 width: 24,
-                //       //                 decoration: BoxDecoration(
-                //       //                   shape: BoxShape.circle,
-                //       //                   color: Color(0xFF3D3DD8),
-                //       //                 ),
-                //       //                 child: Icon(
-                //       //                   Icons.done,
-                //       //                   size: 16,
-                //       //                   color: Colors.white,
-                //       //                 ),
-                //       //               )
-                //       //                   :Container(
-                //       //                 height: 24,
-                //       //                 width: 24,
-                //       //                 decoration: BoxDecoration(
-                //       //                   shape: BoxShape.circle,
-                //       //                   color: Colors.white,
-                //       //                 ),
-                //       //               )
-                //       //             ],
-                //       //           ),
-                //       //                 // Icon(Icons.check),
-                //       //         ),
-                //       //       ),
-                //       //     ),
-                //       //   ],
-                //       // ),
-                //       // SizedBox(height: 8,),
-                //       // Row(
-                //       //   mainAxisAlignment: MainAxisAlignment.center,
-                //       //   children: [
-                //       //     Visibility(
-                //       //       visible: widget.list.contains('Развитие') ? true : false,
-                //       //       child: InkWell(
-                //       //         onTap: (){
-                //       //           setState(() {
-                //       //             if(!array.contains(2)){
-                //       //               array.clear();
-                //       //               array.add(2);
-                //       //             }
-                //       //             else if(array.contains(2)){
-                //       //               array.clear();
-                //       //             }
-                //       //           });
-                //       //         },
-                //       //         child: Container(
-                //       //           padding: const EdgeInsets.all(16.0),
-                //       //           decoration: BoxDecoration(
-                //       //               color: Colors.grey,
-                //       //               borderRadius: BorderRadius.all(Radius.circular(12)),
-                //       //             border: Border.all(
-                //       //                 color: array.contains(2)
-                //       //                     ? Color(0xff3D3DD8)
-                //       //                     : ColorStyles.neutralsPageBackgroundColor,
-                //       //                 width: 2
-                //       //             ),
-                //       //           ),
-                //       //           height: 120,
-                //       //           width: 167,
-                //       //           child:  Row(
-                //       //             mainAxisAlignment: MainAxisAlignment.start,
-                //       //             crossAxisAlignment: CrossAxisAlignment.start,
-                //       //               children: [
-                //       //                 Text(
-                //       //                   'Развитие',
-                //       //                   style: TextStyle(
-                //       //                       fontSize: 16,
-                //       //                       fontFamily: 'CeraPro',
-                //       //                       fontWeight: FontWeight.w500,
-                //       //                       color: Colors.white
-                //       //                   ),
-                //       //                 ),
-                //       //                 Spacer(),
-                //       //                 array.contains(2)
-                //       //                     ?Container(
-                //       //                   height: 24,
-                //       //                   width: 24,
-                //       //                   decoration: BoxDecoration(
-                //       //                     shape: BoxShape.circle,
-                //       //                     color: Color(0xFF3D3DD8),
-                //       //                   ),
-                //       //                   child: Icon(
-                //       //                     Icons.done,
-                //       //                     size: 16,
-                //       //                     color: Colors.white,
-                //       //                   ),
-                //       //                 )
-                //       //                     :Container(
-                //       //                   height: 24,
-                //       //                   width: 24,
-                //       //                   decoration: BoxDecoration(
-                //       //                     shape: BoxShape.circle,
-                //       //                     color: Colors.white,
-                //       //                   ),
-                //       //                 )
-                //       //               ],
-                //       //             ),
-                //       //           ),
-                //       //         ),
-                //       //     ),
-                //       //
-                //       //     SizedBox(width: 8,),
-                //       //     Visibility(
-                //       //       visible: widget.list.contains('Фантастика') ? true : false,
-                //       //       child: InkWell(
-                //       //         onTap: (){
-                //       //           setState(() {
-                //       //             if(!array.contains(3)){
-                //       //               array.clear();
-                //       //               array.add(3);
-                //       //             }
-                //       //             else if(array.contains(3)){
-                //       //               array.clear();
-                //       //             }
-                //       //           });
-                //       //         },
-                //       //         child: Container(
-                //       //           padding: const EdgeInsets.all(16.0),
-                //       //           decoration: BoxDecoration(
-                //       //               color: Colors.grey,
-                //       //               borderRadius: BorderRadius.all(Radius.circular(12)),
-                //       //             border: Border.all(color: array.contains(3) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
-                //       //           ),
-                //       //           height: 120,
-                //       //           width: 167,
-                //       //           child: Row(
-                //       //             mainAxisAlignment: MainAxisAlignment.start,
-                //       //             crossAxisAlignment: CrossAxisAlignment.start,
-                //       //             children: [
-                //       //               Text(
-                //       //                   'Фантастика',
-                //       //                   style: TextStyle(
-                //       //                       fontSize: 16,
-                //       //                       fontFamily: 'CeraPro',
-                //       //                       fontWeight: FontWeight.w500,
-                //       //                       color: Colors.white
-                //       //                   ),
-                //       //                 ),
-                //       //               Spacer(),
-                //       //               array.contains(3)
-                //       //                   ?Container(
-                //       //                 height: 24,
-                //       //                 width: 24,
-                //       //                 decoration: BoxDecoration(
-                //       //                   shape: BoxShape.circle,
-                //       //                   color: Color(0xFF3D3DD8),
-                //       //                 ),
-                //       //                 child: Icon(
-                //       //                   Icons.done,
-                //       //                   size: 16,
-                //       //                   color: Colors.white,
-                //       //                 ),
-                //       //               )
-                //       //                   :Container(
-                //       //                 height: 24,
-                //       //                 width: 24,
-                //       //                 decoration: BoxDecoration(
-                //       //                   shape: BoxShape.circle,
-                //       //                   color: Colors.white,
-                //       //                 ),
-                //       //               )
-                //       //             ],
-                //       //           ),
-                //       //           ),
-                //       //       ),
-                //       //     ),
-                //       //   ],
-                //       // ),
-                // ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Wrap(
+                  runSpacing: 8,
+                  spacing: 8,
                   children: [
                     Visibility(
                       visible: widget.list.contains('Бизнес') ? true : false,
@@ -639,14 +90,14 @@ class _JenreScreenState extends State<JenreScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  'Бизнес',
-                                  style: TextStyle(
+                                'Бизнес',
+                                style: TextStyle(
                                     fontSize: 16,
                                     fontFamily: 'CeraPro',
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white
-                                  ),
                                 ),
+                              ),
                               Spacer(),
                               array.contains(0)
 
@@ -658,7 +109,7 @@ class _JenreScreenState extends State<JenreScreen> {
                                   color: Color(0xFF3D3DD8),
                                 ),
                                 child: Icon(
-                                    Icons.done,
+                                  Icons.done,
                                   size: 16,
                                   color: Colors.white,
                                 ),
@@ -673,10 +124,9 @@ class _JenreScreenState extends State<JenreScreen> {
                               )
                             ],
                           ),
-                          ),
                         ),
+                      ),
                     ),
-                    SizedBox(width: 8,),
                     Visibility(
                       visible: widget.list.contains('Классика') ? true : false,
                       child: InkWell(
@@ -694,8 +144,8 @@ class _JenreScreenState extends State<JenreScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
                             border: Border.all(color: array.contains(1) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
                           ),
                           height: 120,
@@ -705,14 +155,14 @@ class _JenreScreenState extends State<JenreScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                      'Классика',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'CeraPro',
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white
-                                      ),
-                                    ),
+                                'Классика',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'CeraPro',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
+                                ),
+                              ),
                               Spacer(),
                               array.contains(1)
 
@@ -739,16 +189,10 @@ class _JenreScreenState extends State<JenreScreen> {
                               )
                             ],
                           ),
-                                // Icon(Icons.check),
+                          // Icon(Icons.check),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 8,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
                     Visibility(
                       visible: widget.list.contains('Развитие') ? true : false,
                       child: InkWell(
@@ -766,8 +210,8 @@ class _JenreScreenState extends State<JenreScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
                             border: Border.all(
                                 color: array.contains(2)
                                     ? Color(0xff3D3DD8)
@@ -780,46 +224,44 @@ class _JenreScreenState extends State<JenreScreen> {
                           child:  Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Развитие',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'CeraPro',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white
-                                  ),
+                            children: [
+                              Text(
+                                'Развитие',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'CeraPro',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
                                 ),
-                                Spacer(),
-                                array.contains(2)
-                                    ?Container(
-                                  height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xFF3D3DD8),
-                                  ),
-                                  child: Icon(
-                                    Icons.done,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),
-                                )
-                                    :Container(
-                                  height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Spacer(),
+                              array.contains(2)
+                                  ?Container(
+                                height: 24,
+                                width: 24,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xFF3D3DD8),
+                                ),
+                                child: Icon(
+                                  Icons.done,
+                                  size: 16,
+                                  color: Colors.white,
+                                ),
+                              )
+                                  :Container(
+                                height: 24,
+                                width: 24,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
                           ),
                         ),
+                      ),
                     ),
-
-                    SizedBox(width: 8,),
                     Visibility(
                       visible: widget.list.contains('Фантастика') ? true : false,
                       child: InkWell(
@@ -837,8 +279,8 @@ class _JenreScreenState extends State<JenreScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
                             border: Border.all(color: array.contains(3) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
                           ),
                           height: 120,
@@ -848,14 +290,14 @@ class _JenreScreenState extends State<JenreScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  'Фантастика',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'CeraPro',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white
-                                  ),
+                                'Фантастика',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'CeraPro',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
                                 ),
+                              ),
                               Spacer(),
                               array.contains(3)
                                   ?Container(
@@ -881,11 +323,288 @@ class _JenreScreenState extends State<JenreScreen> {
                               )
                             ],
                           ),
-                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Visibility(
+                //       visible: widget.list.contains('Бизнес') ? true : false,
+                //       child: InkWell(
+                //         onTap: (){
+                //           setState(() {
+                //             if(!array.contains(0)){
+                //               array.clear();
+                //               array.add(0);
+                //             }
+                //             else if(array.contains(0)){
+                //               array.clear();
+                //             }
+                //           });
+                //         },
+                //         child: Container(
+                //           padding: const EdgeInsets.all(16.0),
+                //           decoration: BoxDecoration(
+                //             color: Colors.grey,
+                //             borderRadius: BorderRadius.all(Radius.circular(12)),
+                //             border: Border.all(color: array.contains(0) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
+                //           ),
+                //           height: 120,
+                //           width: 167,
+                //           child: Row(
+                //             mainAxisAlignment: MainAxisAlignment.start,
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //             children: [
+                //               Text(
+                //                   'Бизнес',
+                //                   style: TextStyle(
+                //                     fontSize: 16,
+                //                     fontFamily: 'CeraPro',
+                //                     fontWeight: FontWeight.w500,
+                //                     color: Colors.white
+                //                   ),
+                //                 ),
+                //               Spacer(),
+                //               array.contains(0)
+                //
+                //                   ?Container(
+                //                 height: 24,
+                //                 width: 24,
+                //                 decoration: BoxDecoration(
+                //                   shape: BoxShape.circle,
+                //                   color: Color(0xFF3D3DD8),
+                //                 ),
+                //                 child: Icon(
+                //                     Icons.done,
+                //                   size: 16,
+                //                   color: Colors.white,
+                //                 ),
+                //               )
+                //                   :Container(
+                //                 height: 24,
+                //                 width: 24,
+                //                 decoration: BoxDecoration(
+                //                   shape: BoxShape.circle,
+                //                   color: Colors.white,
+                //                 ),
+                //               )
+                //             ],
+                //           ),
+                //           ),
+                //         ),
+                //     ),
+                //     SizedBox(width: 8,),
+                //     Visibility(
+                //       visible: widget.list.contains('Классика') ? true : false,
+                //       child: InkWell(
+                //         onTap: (){
+                //           setState(() {
+                //             if(!array.contains(1)){
+                //               array.clear();
+                //               array.add(1);
+                //             }
+                //             else if(array.contains(1)){
+                //               array.clear();
+                //             }
+                //           });
+                //         },
+                //         child: Container(
+                //           padding: const EdgeInsets.all(16.0),
+                //           decoration: BoxDecoration(
+                //               color: Colors.grey,
+                //               borderRadius: BorderRadius.all(Radius.circular(12)),
+                //             border: Border.all(color: array.contains(1) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
+                //           ),
+                //           height: 120,
+                //           width: 167,
+                //           child:Row(
+                //             mainAxisAlignment: MainAxisAlignment.start,
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //             children: [
+                //               Text(
+                //                       'Классика',
+                //                       style: TextStyle(
+                //                           fontSize: 16,
+                //                           fontFamily: 'CeraPro',
+                //                           fontWeight: FontWeight.w500,
+                //                           color: Colors.white
+                //                       ),
+                //                     ),
+                //               Spacer(),
+                //               array.contains(1)
+                //
+                //                   ?Container(
+                //                 height: 24,
+                //                 width: 24,
+                //                 decoration: BoxDecoration(
+                //                   shape: BoxShape.circle,
+                //                   color: Color(0xFF3D3DD8),
+                //                 ),
+                //                 child: Icon(
+                //                   Icons.done,
+                //                   size: 16,
+                //                   color: Colors.white,
+                //                 ),
+                //               )
+                //                   :Container(
+                //                 height: 24,
+                //                 width: 24,
+                //                 decoration: BoxDecoration(
+                //                   shape: BoxShape.circle,
+                //                   color: Colors.white,
+                //                 ),
+                //               )
+                //             ],
+                //           ),
+                //                 // Icon(Icons.check),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(height: 8,),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Visibility(
+                //       visible: widget.list.contains('Развитие') ? true : false,
+                //       child: InkWell(
+                //         onTap: (){
+                //           setState(() {
+                //             if(!array.contains(2)){
+                //               array.clear();
+                //               array.add(2);
+                //             }
+                //             else if(array.contains(2)){
+                //               array.clear();
+                //             }
+                //           });
+                //         },
+                //         child: Container(
+                //           padding: const EdgeInsets.all(16.0),
+                //           decoration: BoxDecoration(
+                //               color: Colors.grey,
+                //               borderRadius: BorderRadius.all(Radius.circular(12)),
+                //             border: Border.all(
+                //                 color: array.contains(2)
+                //                     ? Color(0xff3D3DD8)
+                //                     : ColorStyles.neutralsPageBackgroundColor,
+                //                 width: 2
+                //             ),
+                //           ),
+                //           height: 120,
+                //           width: 167,
+                //           child:  Row(
+                //             mainAxisAlignment: MainAxisAlignment.start,
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //               children: [
+                //                 Text(
+                //                   'Развитие',
+                //                   style: TextStyle(
+                //                       fontSize: 16,
+                //                       fontFamily: 'CeraPro',
+                //                       fontWeight: FontWeight.w500,
+                //                       color: Colors.white
+                //                   ),
+                //                 ),
+                //                 Spacer(),
+                //                 array.contains(2)
+                //                     ?Container(
+                //                   height: 24,
+                //                   width: 24,
+                //                   decoration: BoxDecoration(
+                //                     shape: BoxShape.circle,
+                //                     color: Color(0xFF3D3DD8),
+                //                   ),
+                //                   child: Icon(
+                //                     Icons.done,
+                //                     size: 16,
+                //                     color: Colors.white,
+                //                   ),
+                //                 )
+                //                     :Container(
+                //                   height: 24,
+                //                   width: 24,
+                //                   decoration: BoxDecoration(
+                //                     shape: BoxShape.circle,
+                //                     color: Colors.white,
+                //                   ),
+                //                 )
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //     ),
+                //     SizedBox(width: 8,),
+                //     Visibility(
+                //       visible: widget.list.contains('Фантастика') ? true : false,
+                //       child: InkWell(
+                //         onTap: (){
+                //           setState(() {
+                //             if(!array.contains(3)){
+                //               array.clear();
+                //               array.add(3);
+                //             }
+                //             else if(array.contains(3)){
+                //               array.clear();
+                //             }
+                //           });
+                //         },
+                //         child: Container(
+                //           padding: const EdgeInsets.all(16.0),
+                //           decoration: BoxDecoration(
+                //               color: Colors.grey,
+                //               borderRadius: BorderRadius.all(Radius.circular(12)),
+                //             border: Border.all(color: array.contains(3) ? Color(0xff3D3DD8) : ColorStyles.neutralsPageBackgroundColor,width: 2),
+                //           ),
+                //           height: 120,
+                //           width: 167,
+                //           child: Row(
+                //             mainAxisAlignment: MainAxisAlignment.start,
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //             children: [
+                //               Text(
+                //                   'Фантастика',
+                //                   style: TextStyle(
+                //                       fontSize: 16,
+                //                       fontFamily: 'CeraPro',
+                //                       fontWeight: FontWeight.w500,
+                //                       color: Colors.white
+                //                   ),
+                //                 ),
+                //               Spacer(),
+                //               array.contains(3)
+                //                   ?Container(
+                //                 height: 24,
+                //                 width: 24,
+                //                 decoration: BoxDecoration(
+                //                   shape: BoxShape.circle,
+                //                   color: Color(0xFF3D3DD8),
+                //                 ),
+                //                 child: Icon(
+                //                   Icons.done,
+                //                   size: 16,
+                //                   color: Colors.white,
+                //                 ),
+                //               )
+                //                   :Container(
+                //                 height: 24,
+                //                 width: 24,
+                //                 decoration: BoxDecoration(
+                //                   shape: BoxShape.circle,
+                //                   color: Colors.white,
+                //                 ),
+                //               )
+                //             ],
+                //           ),
+                //           ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 Spacer(),
                 TextButton(
                   child: Text(
