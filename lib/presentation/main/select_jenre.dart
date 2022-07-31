@@ -27,7 +27,7 @@ class _JenreScreenState extends State<JenreScreen> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(
-            16
+            12
           ),
           child: Column(
               children: [
