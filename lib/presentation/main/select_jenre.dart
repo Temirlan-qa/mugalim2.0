@@ -66,7 +66,7 @@ class _JenreScreenState extends State<JenreScreen> {
                       // runAlignment: WrapAlignment.start,
                       // crossAxisAlignment: WrapCrossAlignment.start,
                       runSpacing: 8,
-                      spacing: 8,
+                      // spacing: 8,
                       children: [
                         Visibility(
                           visible: widget.list.contains('Бизнес') ? true : false,
@@ -133,6 +133,7 @@ class _JenreScreenState extends State<JenreScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(width: 8,),
                         Visibility(
                           visible: widget.list.contains('Классика') ? true : false,
                           child: InkWell(
@@ -268,6 +269,7 @@ class _JenreScreenState extends State<JenreScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(width: 8,),
                         Visibility(
                           visible: widget.list.contains('Фантастика') ? true : false,
                           child: InkWell(
