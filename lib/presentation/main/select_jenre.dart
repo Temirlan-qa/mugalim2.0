@@ -59,7 +59,6 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 SizedBox(height: 125,),
-
                 Align(
                   alignment: Alignment.topLeft,
                   child: Wrap(
