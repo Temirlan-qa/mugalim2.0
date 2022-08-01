@@ -7,12 +7,13 @@ import 'core/routes/routes.dart';
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List list = ['Бизнес', 'Классика', 'Развитие','Фантастика'];
+    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      home: JenreScreen(index_month: 0,list: list,),
+      home: JenreScreen(
+        index_month: 0,
+        list: list,
+      ),
     );
   }
 }
