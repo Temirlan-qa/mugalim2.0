@@ -106,7 +106,6 @@ class ColorStyles {
   static Color darkthemePageBackgroundColor = const Color(0xFF272831);
   static Color neutralsdarkthemePageBackgroundColor = const Color(0xFF292A32);
 
-
 // static Color blackColor = const Color(0xFF1A141F);
   //
   //
@@ -136,4 +135,3 @@ class ColorStyles {
 // static Color hue246TextColor = const Color(0xFF392494);
 
 }
-
