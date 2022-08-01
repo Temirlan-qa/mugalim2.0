@@ -7,7 +7,12 @@ class PhotoSliderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: 69,
+          top: 16,
+        ),
         child: SafeArea(
           child: Column(
             children: [
@@ -56,7 +61,32 @@ class PhotoSliderScreen extends StatelessWidget {
                   fontFamily: 'CeraPro',
                   fontWeight: FontWeight.w500,
                 ),
-              )
+              ),
+              Spacer(),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PhotoSliderScreen()),
+                  );
+                },
+                child: Text(
+                  'Әрі қарай >',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'CeraPro',
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(343, 48),
+                  primary: Color(0xFF3D3DD8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Radius
+                  ),
+                ),
+
+              ),
             ],
           ),
         ),
