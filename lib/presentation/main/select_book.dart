@@ -177,85 +177,87 @@ class _BookScreenState extends State<BookScreen> {
           ),
           Positioned(
             bottom: 100,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0),
-              child: TextButton(
-                child: Text(
-                  "Выбрать книгу",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'CeraPro',
-                    fontWeight: FontWeight.w500,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: TextButton(
+                  child: Text(
+                    "Выбрать книгу",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'CeraPro',
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                style: TextButton.styleFrom(
-                  primary: (list.isEmpty) ? Colors.black : Color(0xFFE0E0E0),
-                  backgroundColor: (list.isEmpty) ? Color(0xFFE0E0E0) : Color(0xff3D3DD8),
-                  elevation: 3,
-                  minimumSize: Size(
-                      MediaQuery.of(context).size.width-32, 48
+                  style: TextButton.styleFrom(
+                    primary: (list.isEmpty) ? Colors.black : Color(0xFFE0E0E0),
+                    backgroundColor: (list.isEmpty) ? Color(0xFFE0E0E0) : Color(0xff3D3DD8),
+                    elevation: 3,
+                    minimumSize: Size(
+                        343, 48
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-                onPressed:() {
-                  if(!list.isEmpty) {
-                    if (widget.index_month.toInt() >= 3) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChoosenPage()
-                        ),
-                      );
+                  onPressed:() {
+                    if(!list.isEmpty) {
+                      if (widget.index_month.toInt() >= 3) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChoosenPage()
+                          ),
+                        );
+                      }
+                      if (!list.isEmpty && widget.index_month.toInt() < 3) {
+                        widget.list.remove(widget.select_index);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                JenreScreen(
+                                  index_month: widget.index_month.toInt() + 1,
+                                  list: widget.list,
+                                ),
+                          ),
+                        );
+                      }
                     }
-                    if (!list.isEmpty && widget.index_month.toInt() < 3) {
-                      widget.list.remove(widget.select_index);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              JenreScreen(
-                                index_month: widget.index_month.toInt() + 1,
-                                list: widget.list,
-                              ),
-                        ),
-                      );
-                    }
-                  }
-                },
+                  },
+                ),
               ),
             ),
           ),
           Positioned(
             bottom: 40,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0),
-              child: TextButton(
-                child: Text(
-                  "Обратно к жанрам",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'CeraPro',
-                    fontWeight: FontWeight.w500,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: TextButton(
+                  child: Text(
+                    "Обратно к жанрам",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'CeraPro',
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
+                  style: TextButton.styleFrom(
+                    primary: Color(0xff3D3DD8),
+                    backgroundColor: ColorStyles.neutralsPageBackgroundColor,
+                    elevation: 3,
+                    minimumSize: Size(
+                        343, 48
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  onPressed:() {
+                    Navigator.pop(context);
+                  },
                 ),
-                style: TextButton.styleFrom(
-                  primary: Color(0xff3D3DD8),
-                  backgroundColor: ColorStyles.neutralsPageBackgroundColor,
-                  elevation: 3,
-                  minimumSize: Size(
-                      MediaQuery.of(context).size.width-32, 48
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-                onPressed:() {
-                  Navigator.pop(context);
-                },
               ),
             ),
           ),

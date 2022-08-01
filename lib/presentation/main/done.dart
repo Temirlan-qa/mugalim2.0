@@ -52,51 +52,76 @@ class ChoosenPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
-
-
             ]
           ),
         ),
         Positioned(
-          bottom: 100,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 16.0),
-            child: Column(
-              children: [
-                TextButton(
-                  child: Text(
-                    "На главную",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'CeraPro',
-                      fontWeight: FontWeight.w500,
+          bottom: 56,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+              child: Column(
+                children: [
+                  TextButton(
+                    child: Text(
+                      "На главную",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'CeraPro',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
+                    style: TextButton.styleFrom(
+                      primary: Color(0xFFE0E0E0),
+                      backgroundColor: Color(0xff3D3DD8),
+                      elevation: 3,
+                      minimumSize: Size(
+                          343, 48
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                    onPressed:() {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => JenreScreen(index_month: 0,list: ['Сентября', 'Октября', 'Ноября','Декабря'],)
+                      //   ),
+                      // );
+                    },
                   ),
-                  style: TextButton.styleFrom(
-                    primary: Color(0xFFE0E0E0),
-                    backgroundColor: Color(0xff3D3DD8),
-                    elevation: 3,
-                    minimumSize: Size(
-                        MediaQuery.of(context).size.width-32, 48
+                  SizedBox(height: 8,),
+                  TextButton(
+                    child: Text(
+                      "Изменить",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'CeraPro',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+                    style: TextButton.styleFrom(
+                      primary: Color(0xff3D3DD8),
+                      backgroundColor: ColorStyles.neutralsPageBackgroundColor,
+                      minimumSize: Size(
+                          343, 48
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
                     ),
+                    onPressed:() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => JenreScreen(index_month: 0,list: ['Бизнес', 'Классика', 'Развитие','Фантастика'],)
+                        ),
+                      );
+                    },
                   ),
-                  onPressed:() {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => JenreScreen(index_month: 0,list: ['Сентября', 'Октября', 'Ноября','Декабря'],)
-                    //   ),
-                    // );
-                  },
-                ),
-                SizedBox(height: 20,),
-                const Text('Изменить', style: TextStyle(color: Color(0xff3D3DD8), fontStyle: FontStyle.normal, fontWeight: FontWeight.w500),)
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -110,7 +110,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                               SizedBox(width: 8,),
                               SvgPicture.asset('assets/icons/star_full.svg'),
                               SizedBox(width: 8,),
-                              SvgPicture.asset('assets/icons/star_full.svg'),
+                              SvgPicture.asset('assets/icons/star_empty.svg'),
                               // RatingBar(
                               //   initialRating: state.book.rating!,
                               //   direction: Axis.horizontal,
@@ -158,53 +158,54 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               ],
             ),
             Positioned(
-              bottom: 32,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,vertical: 16),
-                child: TextButton(
-                  child: Text(
-                    "Выбрать книгу",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'CeraPro',
-                      fontWeight: FontWeight.w500,
+              bottom: 40,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: TextButton(
+                    child: Text(
+                      "Выбрать книгу",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'CeraPro',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: Color(0xFFE0E0E0),
-                    backgroundColor: Color(0xff3D3DD8),
-                    elevation: 3,
-                    minimumSize: Size(
-                        MediaQuery.of(context).size.width-32, 48
+                    style: TextButton.styleFrom(
+                      primary: Color(0xFFE0E0E0),
+                      backgroundColor: Color(0xff3D3DD8),
+                      elevation: 3,
+                      minimumSize: Size(
+                          343, 48
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  ),
-                  onPressed:() {
-                    if(widget.index_month.toInt() >= 3){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChoosenPage()
-                        ),
-                      );
-                    }
-                    if(!widget.list.isEmpty && widget.index_month.toInt() < 3) {
-                      widget.list.remove(widget.select_index);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => JenreScreen(
-                            index_month: widget.index_month.toInt()+1,
-                            list: widget.list,
+                    onPressed:() {
+                      if(widget.index_month.toInt() >= 3){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChoosenPage()
                           ),
-                        ),
-                      );
-                    }
-                    }
+                        );
+                      }
+                      if(!widget.list.isEmpty && widget.index_month.toInt() < 3) {
+                        widget.list.remove(widget.select_index);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JenreScreen(
+                              index_month: widget.index_month.toInt()+1,
+                              list: widget.list,
+                            ),
+                          ),
+                        );
+                      }
+                      }
 
+                  ),
                 ),
               ),
             ),
