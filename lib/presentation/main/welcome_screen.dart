@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/main/photo_slider_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -54,7 +55,12 @@ class WelcomeScreen extends StatelessWidget {
 
                 Spacer(),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PhotoSliderScreen()),
+                    );
+                  },
                   child: Text(
                     'Әрі қарай >',
                     style: TextStyle(
