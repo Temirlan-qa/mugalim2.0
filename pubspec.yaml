@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.1
   flutter_svg: ^1.1.1+1
-  flutter_native_splash: ^2.2.7
+  another_transformer_page_view: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -48,14 +48,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.2.7
 
 flutter_native_splash:
 
   color: "#FFFFFF"
   #background_image: "assets/images/splash.png"
-  image: assets/images/splash.png
-  android: true
-  ios: true
+  image: assets/images/home.png
+  fullscreen: true
   #web: false
 
 flutter:
