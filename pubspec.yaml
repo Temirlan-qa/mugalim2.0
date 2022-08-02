@@ -53,10 +53,10 @@ dev_dependencies:
 flutter_native_splash:
 
   color: "#FFFFFF"
-  #background_image: "assets/images/splash.png"
-  image: assets/images/home.png
+  #background_image: "assets/images/second.png"
+  image: assets/images/second.png
   fullscreen: true
-  #web: false
+  web: false
 
 flutter:
 
