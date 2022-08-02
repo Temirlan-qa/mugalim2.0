@@ -190,7 +190,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             });
                           } else if (currentPage == 2) {
                             setState(
-                                  () {
+                              () {
                                 indexController?.move(3);
                               },
                             );
@@ -235,17 +235,19 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                           minimumSize: Size(343, 48),
                           primary: Color(0xFF3D3DD8),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                            borderRadius:
+                                BorderRadius.circular(12), // <-- Radius
                           ),
                         ),
                       ),
                     ),
                     SafeArea(
-                        bottom: false,
-                        top: false,
-                        child: SizedBox(
-                          height: 32,
-                        )),
+                      bottom: false,
+                      top: false,
+                      child: SizedBox(
+                        height: 32,
+                      ),
+                    ),
                   ],
                 ),
               ),
