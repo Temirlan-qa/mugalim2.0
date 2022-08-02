@@ -274,9 +274,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
       width: currentPage == index ? 40 : 6,
       decoration: BoxDecoration(
         color: currentPage == index ? Color(0xFF1A1A1A) : Color(0xFF767676),
-        borderRadius: currentPage == index
-            ? BorderRadius.circular(6)
-            : BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(4),
       ),
     );
   }
