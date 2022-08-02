@@ -1,5 +1,6 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'package:mugalim/presentation/main/transformer.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -26,14 +27,14 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
     var screenHeight = MediaQuery.of(context).size.height;
     List<Map<String, dynamic>> splashData = [
       {
-        "text": 'Mugalim мобильді қосымшасына қош келдіңіз!',
+        "text": 'Mugalim мобильді\n қосымшасына қош келдіңіз!',
         'subtext': '',
         "image": "assets/images/MugalimLogo.png",
         "opacity": false,
       },
       {
         "text": 'Онлайн курстар',
-        'subtext': 'Болашақ мұғалімге арналған арнайы онлайн курстар',
+        'subtext': 'Болашақ мұғалімге арналған арнайы\n онлайн курстар',
         "image": "assets/images/page1.png",
         "opacity": true,
       },
@@ -94,11 +95,10 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                 transformer: CustomTransformer(),
                 itemCount: splashData.length,
                 itemBuilder: (context, index) {
-                  return SafeArea(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Align(
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Align(
                           alignment: Alignment.center,
                           child: Column(
                             children: [
@@ -115,12 +115,10 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                    ],
                   );
                 },
               ),
-              currentPage != 0 ? Offstage() : Offstage(),
               Positioned(
                 bottom: 0,
                 child: Column(
@@ -134,6 +132,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             splashData[currentPage]['text'],
                             style: TextStyle(
                                 fontSize: 20,
+                                height: 1.2,
                                 fontFamily: 'CeraPro',
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
@@ -153,6 +152,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             splashData[currentPage]['subtext'],
                             style: TextStyle(
                               fontSize: 16,
+                              height: 1.5,
                               fontFamily: 'CeraPro',
                               fontWeight: FontWeight.w500,
                               color: Color(0xFF767676),
@@ -163,7 +163,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(height: 48),
+                    SizedBox(height: 70),
                     SizedBox(
                       height: 12,
                       child: Row(
@@ -174,7 +174,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(height: 64),
+                    SizedBox(height: 20),
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 32,
                       height: 56,
@@ -193,6 +193,15 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                               () {
                                 indexController?.move(3);
                               },
+                            );
+                          }
+                          else{
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => JenreScreen(
+                                index_month: 0,
+                                list: ['Бизнес', 'Классика', 'Развитие', 'Фантастика'],
+                              )),
                             );
                           }
                         },
@@ -235,8 +244,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                           minimumSize: Size(343, 48),
                           primary: Color(0xFF3D3DD8),
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(12), // <-- Radius
+                            borderRadius: BorderRadius.circular(12), // <-- Radius
                           ),
                         ),
                       ),
