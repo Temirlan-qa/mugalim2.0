@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
+import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:mugalim/presentation/main/done_pin.dart';
 
 class PINCode extends StatefulWidget {
@@ -11,15 +11,13 @@ class PINCode extends StatefulWidget {
 
 class _PINCodeState extends State<PINCode> {
   TextEditingController controllerPin = TextEditingController();
-  FocusNode focusNode = FocusNode();
-
   @override
   void dispose() {
     // TODO: implement dispose
-    focusNode.dispose();
     controllerPin.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +41,14 @@ class _PINCodeState extends State<PINCode> {
                       letterSpacing: 0.2),
                 ),
               ),
-              SizedBox(width: 59),
+              const SizedBox(width: 59),
               Container(
                 height: 27,
                 width: 27,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(4)),
                 child: IconButton(
-                    color: Color(0xff3D3DD8),
+                    color: const Color(0xff3D3DD8),
                     onPressed: () {},
                     icon: Icon(Icons.cancel_outlined)),
               )
@@ -60,12 +58,12 @@ class _PINCodeState extends State<PINCode> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: 37),
+              const SizedBox(width: 37),
               IconButton(
                   color: Color(0xff3D3DD8),
                   onPressed: () {},
                   icon: Icon(Icons.keyboard_arrow_left)),
-              Text(
+              const Text(
                 'PIN-кодын қайта жазыңыз',
                 style: TextStyle(
                     color: Color(0xff1A1A1A),
@@ -75,11 +73,11 @@ class _PINCodeState extends State<PINCode> {
               )
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Container(
               width: 296,
               height: 40,
-              child: Text(
+              child: const Text(
                 'Жеке деректердің қауіпсіздігі үшін PIN-кодын қайта жазыңыз',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -89,38 +87,37 @@ class _PINCodeState extends State<PINCode> {
                     fontStyle: FontStyle.normal,
                     color: Color(0xff767676)),
               )),
-          SizedBox(height: 32),
-          PinCodeFields(
-
-            controller: controllerPin,
-            focusNode: focusNode,
-            length: 4,
-            fieldBorderStyle: FieldBorderStyle.Square,
-            responsive: false,
-            fieldHeight:56.0,
-            fieldWidth: 48.0,
-            borderColor: Color(0XFFE0E0E0),
-            borderRadius: BorderRadius.circular(4),
-            keyboardType: TextInputType.number,
-            autoHideKeyboard: false,
-            activeBackgroundColor: Color(0XFFE0E0E0),
-            fieldBackgroundColor: Color(0XFFE0E0E0),
-            activeBorderColor: Color(0XFFE0E0E0),
-            autofocus: false,
-            textStyle: TextStyle(
-              fontSize: 29.0,
-              fontWeight: FontWeight.w700,
-              fontStyle: FontStyle.normal,
-              color: Color(0xff3D3DD8),
-                fontFamily: 'font/Cera Pro Black.ttf'
-            ),
-
-            onComplete: (output) {
-              // Your logic with pin code
-              print(output);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => DoneCheckPin()));
-            },
-          ),
+          const SizedBox(height: 32),
+          Padding(
+            padding: const EdgeInsets.only(left: 67, right: 67),
+            child: PinCodeTextField(
+                controller: controllerPin,
+                pinBoxHeight: 58,
+                pinBoxWidth: 46,
+                maxLength: 4,
+                hasUnderline: true,
+                hasTextBorderColor:Color(0xff3D3DD8),
+                wrapAlignment: WrapAlignment.spaceEvenly,
+                pinBoxBorderWidth: 0.0001,
+                highlightPinBoxColor: Color(0xffE0E0E0),
+                highlightColor: Color(0xffE0E0E0),
+                highlight: true,
+                pinBoxOuterPadding: EdgeInsets.only(left: 8, right: 8),
+                defaultBorderColor: Color(0xffE0E0E0),
+                pinBoxColor: Color(0xffE0E0E0),
+                pinBoxRadius: 4,
+                keyboardType: TextInputType.number,
+                pinTextStyle: const TextStyle(
+                    fontSize: 29.0,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    color: Color(0xff3D3DD8),
+                    fontFamily: 'font/Cera Pro Black.ttf'),
+                onDone: (value) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DoneCheckPin()));
+                }),
+          )
         ],
       ),
     );
