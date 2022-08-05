@@ -73,14 +73,6 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
               ),
-              Text(
-                'Книга ${list[widget.index_month.toInt()]} :',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'CeraPro',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
               SizedBox(
                 height: 125,
               ),

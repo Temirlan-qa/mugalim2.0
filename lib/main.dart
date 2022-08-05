@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
-import 'package:mugalim/presentation/main/info_screen.dart';
+import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/routes/routes.dart';
 
 void main() {
@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -21,10 +20,6 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
       home: IntroScreen(),
-      // home: JenreScreen(
-      //   index_month: 0,
-      //   list: list,
-      // ),
     );
   }
 }

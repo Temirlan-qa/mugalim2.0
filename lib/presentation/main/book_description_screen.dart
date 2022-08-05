@@ -72,8 +72,9 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         Center(
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(16),
-                              child: Image.asset('assets/images/image 15.png',
-                                  width: 140, height: 220, fit: BoxFit.cover)),
+                              child: Image.asset('assets/images/book1.png',
+                                  width: 140, height: 220, fit: BoxFit.cover)
+                          ),
                         ),
                         SizedBox(height: 8),
                         Text(

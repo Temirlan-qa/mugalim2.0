@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 
-import '../../core/const/const_color.dart';
-import '../../core/const/text_style_const.dart';
-import '../main/select_jenre.dart';
-import 'package:firebase_core/firebase_core.dart';
+import '../../../core/const/const_color.dart';
+import '../../../core/const/text_style_const.dart';
+import '../../main/select_jenre.dart';
+
 class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key,required this.loginEditingControllerText,}) : super(key: key);
   final String loginEditingControllerText;
@@ -256,10 +256,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => JenreScreen(
-                                    index_month: 0,
-                                    list: list,
-                                  ),
+                                  builder: (context) => PinPage()
                               ),
                             );
                           }
