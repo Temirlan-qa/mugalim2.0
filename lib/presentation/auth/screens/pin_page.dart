@@ -12,7 +12,7 @@ class PinPage extends StatefulWidget {
 
 class _PinPageState extends State<PinPage> {
   TextEditingController controllerPin = TextEditingController();
-  List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
+  List list = ['Бизнес','Классика','Развитие','Фантастика'];
   @override
   void dispose() {
     // TODO: implement dispose
@@ -39,7 +39,9 @@ class _PinPageState extends State<PinPage> {
         actions: [
           IconButton(
               color: const Color(0xff3D3DD8),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(Icons.cancel_outlined)),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +18,15 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  int start = 60;
+  int start = 0;
   bool wait = true;
-  // late Timer timer;
+  late Timer timer;
   void startTimer() {
     start = 60;
     if(wait == true) wait = false;
     const onsec = Duration(seconds: 1);
-    Timer timer = Timer.periodic(onsec, (timer) {
-      if (start == 0) {
+    timer = Timer.periodic(onsec, (timer) {
+      if (start <= 0) {
         setState(() {
           wait = true;
           timer.cancel();
@@ -38,11 +39,6 @@ class _OTPScreenState extends State<OTPScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    // timer.cancel();
-    super.dispose();
-  }
 
   bool obscureText = true;
   List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
@@ -53,13 +49,26 @@ class _OTPScreenState extends State<OTPScreen> {
   bool wrongPassOrLog = false;
   bool emptyText = true;
   bool otp = false;
-
+  int count = 0;
+  String pinCode = "";
   @override
   Widget build(BuildContext context) {
-
+    var random = new Random();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+    String randomNum(){
+      count++;
+      String pinCode1 = "";
+      for(int i = 0; i < 4; i++){
+        int a = random.nextInt(9);
+        pinCode1 += a.toString();
+      }
+      return pinCode1;
+    }
+    if(count == 0) {
+      pinCode = randomNum();
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -87,6 +96,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     children: [
                       GestureDetector(
                         onTap: (){
+                          if(count > 0) timer.cancel();
                           Navigator.pop(context);
                         },
                         child: Row(
@@ -109,7 +119,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         height: 20,
                       ),
                       Text(
-                        'Телефон нөмірі',
+                        'Телефон нөмірі, pinCode = $pinCode',
                         style: TextStyle(
                           decoration: TextDecoration.none,
                           fontSize: 16,
@@ -171,6 +181,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       ),
                       SizedBox(height: 8,),
                       TextFormField(
+
                         controller: loginEditingController,
                         // obscureText: true,
                         onChanged: (value) {
@@ -189,7 +200,6 @@ class _OTPScreenState extends State<OTPScreen> {
                         obscureText: obscureText,
                         textAlignVertical: TextAlignVertical.bottom,
                         decoration: InputDecoration(
-                          hintText:  '',
                           hintStyle: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextTertiaryColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -252,7 +262,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           ),
                         ),
                         onPressed: () {
-                          if(loginEditingController.text != ''){
+                          if(loginEditingController.text == pinCode && loginEditingController.text != ''){
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -282,8 +292,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           ),
                         ),
                         onPressed: () {
-                          // if(wait == true) startTimer();
-                          print(start);
+
                         },
                       ) :
                       TextButton(
@@ -303,8 +312,11 @@ class _OTPScreenState extends State<OTPScreen> {
                           ),
                         ),
                         onPressed: () {
-                          // startTimer();
-                          print(start);
+                          startTimer();
+                          setState(() {
+                            pinCode = randomNum();
+                            print(pinCode);
+                          });
                         },
                       ),
                     ],
