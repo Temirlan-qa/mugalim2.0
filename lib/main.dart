@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mugalim/presentation/main/pin_page.dart';
-import 'package:mugalim/presentation/main/select_book.dart';
-import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/presentation/main/info_screen.dart';
 import 'core/routes/routes.dart';
 
 void main() {
@@ -22,8 +20,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      home: PinPage(
-      ),
+      home: IntroScreen(),
+      // home: JenreScreen(
+      //   index_month: 0,
+      //   list: list,
+      // ),
     );
   }
 }
