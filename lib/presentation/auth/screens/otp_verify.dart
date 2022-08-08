@@ -96,7 +96,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     children: [
                       GestureDetector(
                         onTap: (){
-                          if(count > 0) timer.cancel();
+                          if(count > 1) timer.cancel();
                           Navigator.pop(context);
                         },
                         child: Row(
@@ -262,6 +262,10 @@ class _OTPScreenState extends State<OTPScreen> {
                           ),
                         ),
                         onPressed: () {
+                          if(count > 1) timer.cancel();
+                          setState(() {
+                            start = 0;
+                          });
                           if(loginEditingController.text == pinCode && loginEditingController.text != ''){
                             Navigator.push(
                               context,
