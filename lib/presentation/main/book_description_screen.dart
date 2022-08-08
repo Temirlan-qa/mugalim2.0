@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 
@@ -197,12 +198,18 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ChoosenPage()),
+                                builder: (context) => ChoosenPage()
+                            ),
                           );
                         }
                         if (!widget.list.isEmpty &&
                             widget.index_month.toInt() < 3) {
                           widget.list.remove(widget.select_index);
+                          // Navigator.pushReplacementNamed(context, JenreRoute,
+                          //     arguments: {
+                          //       index_month: widget.index_month.toInt() + 1,
+                          //       list: widget.list,
+                          //     });
                           Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -1,9 +1,10 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
-import 'package:mugalim/presentation/welcome_screen/widgets/transformer.dart';
+
 import 'package:flutter/cupertino.dart';
+import 'package:mugalim/presentation/welcome_screen/widgets/transformer.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
   Duration? _duration;
 
   int currentPage = 0;
-
+  var onBoarding = Hive.box('onBoarding');
   @override
   void initState() {
     indexController = IndexController();
@@ -60,6 +61,25 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
           child: Stack(
             alignment: Alignment.center,
             children: [
+              Visibility(
+                visible: currentPage == 0 ? false : true,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                    child: Text(
+                      'Өткізу',
+                      style: TextStyle(
+                        color: Color(0xFF3D3DD8),
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'CeraPro',
+                        fontSize: 13,
+                      ),
+                    ),
+                    onPressed: () {
+                    },
+                  ),
+                ),
+              ),
               TransformerPageView(
                 duration: _duration!,
                 controller: indexController!,
@@ -172,9 +192,13 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             );
                           }
                           else{
+                            onBoarding.put('show', true);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => VerifyScreen()),
+                              MaterialPageRoute(builder: (context) => JenreScreen(
+                                index_month: 0,
+                                list: ['Бизнес', 'Классика', 'Развитие', 'Фантастика'],
+                              )),
                             );
                           }
                         },
@@ -230,33 +254,6 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Visibility(
-                visible: currentPage == 0 ? false : true,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    child: Text(
-                      'Өткізу',
-                      style: TextStyle(
-                        color: Color(0xFF3D3DD8),
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'CeraPro',
-                        fontSize: 13,
-
-                      ),
-                    ),
-                    onPressed: () {
-                      print('pressed');
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VerifyScreen(),
-                        ),
-                      );
-                    },
-                  ),
                 ),
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/core/widgets/button_widget.dart';
 import 'package:mugalim/presentation/main/book_description_screen.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
@@ -15,7 +16,7 @@ class BookScreen extends StatefulWidget {
       required this.list})
       : super(key: key);
   int index_month;
-  String select_index;
+  String  select_index;
   List list;
   @override
   State<BookScreen> createState() => _BookScreenState();
@@ -261,6 +262,12 @@ class _BookScreenState extends State<BookScreen> {
                       }
                       if (!list.isEmpty && widget.index_month.toInt() < 3) {
                         widget.list.remove(widget.select_index);
+
+                        // Navigator.pushReplacementNamed(context, JenreRoute,
+                        //     arguments: {
+                        //       widget.index_month[0]: widget.index_month[0] + 1,
+                        //       list: widget.list,
+                        //     });
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -302,6 +309,11 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
+                    // Navigator.pushReplacementNamed(context, JenreRoute,
+                    //     arguments: {
+                    //       widget.index_month: widget.index_month,
+                    //       list: widget.list,
+                    //     });
                   },
                 ),
               ),
