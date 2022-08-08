@@ -1,5 +1,6 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -15,7 +16,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
   Duration? _duration;
 
   int currentPage = 0;
-
+  var onBoarding = Hive.box('onBoarding');
   @override
   void initState() {
     indexController = IndexController();
@@ -197,6 +198,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             );
                           }
                           else{
+                            onBoarding.put('show', true);
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => JenreScreen(

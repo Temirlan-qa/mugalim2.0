@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 
@@ -12,9 +13,9 @@ class BookDescriptionScreen extends StatefulWidget {
       required this.list,
       required this.select_index})
       : super(key: key);
-  int index_month;
-  List list;
-  String select_index;
+  final index_month;
+  final list;
+  final select_index;
 
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
@@ -193,25 +194,33 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         ),
                       ),
                       onPressed: () {
-                        if (widget.index_month.toInt() >= 3) {
+                        if (widget.index_month >= 3) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ChoosenPage()),
+                                builder: (context) => ChoosenPage()
+                            ),
                           );
                         }
                         if (!widget.list.isEmpty &&
-                            widget.index_month.toInt() < 3) {
+                            widget.index_month < 3) {
                           widget.list.remove(widget.select_index);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => JenreScreen(
-                                index_month: widget.index_month.toInt() + 1,
+                          var index_month = widget.index_month;
+                          var list = widget.list;
+                          Navigator.pushReplacementNamed(context, JenreRoute,
+                              arguments: {
+                                index_month: widget.index_month + 1,
                                 list: widget.list,
-                              ),
-                            ),
-                          );
+                              });
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => JenreScreen(
+                          //       index_month: widget.index_month.toInt() + 1,
+                          //       list: widget.list,
+                          //     ),
+                          //   ),
+                          // );
                         }
                       }),
                 ),

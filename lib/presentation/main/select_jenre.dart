@@ -9,8 +9,8 @@ import '../../core/const/const_color.dart';
 class JenreScreen extends StatefulWidget {
   JenreScreen({Key? key, required this.index_month, required this.list,})
       : super(key: key);
-  int index_month;
-  List list;
+  final index_month;
+  final list;
 
 
   @override

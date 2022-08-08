@@ -18,17 +18,17 @@ class InnLabRouter {
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => JenreScreen(
-            index_month: routeSettings.arguments as int,
-            list: routeSettings.arguments as List,
+            index_month: routeSettings.arguments as dynamic,
+            list: routeSettings.arguments as dynamic,
           ),
         );
       case BookRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => BookScreen(
-            index_month: routeSettings.arguments as int,
-            list: routeSettings.arguments as List,
-            select_index: routeSettings.arguments as String,
+            index_month: routeSettings.arguments as dynamic,
+            select_index: routeSettings.arguments as dynamic,
+            list: routeSettings.arguments as dynamic,
           ),
         );
       default:
