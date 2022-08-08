@@ -14,9 +14,9 @@ class BookScreen extends StatefulWidget {
       required this.select_index,
       required this.list})
       : super(key: key);
-  int index_month;
-  String select_index;
-  List list;
+  final index_month;
+  final select_index;
+  final list;
   @override
   State<BookScreen> createState() => _BookScreenState();
 }

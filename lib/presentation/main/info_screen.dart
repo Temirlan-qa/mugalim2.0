@@ -1,8 +1,11 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'package:mugalim/presentation/main/transformer.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../core/routes/routes_const.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -195,14 +198,9 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                               },
                             );
                           }
-                          else{
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => JenreScreen(
-                                index_month: 0,
-                                list: ['Бизнес', 'Классика', 'Развитие', 'Фантастика'],
-                              )),
-                            );
+                          else {
+                            Hive.box('onBoarding').put('show',true);
+                            Navigator.of(context).pushNamedAndRemoveUntil(MainRoute, (Route<dynamic> route) => false);
                           }
                         },
                         child: AnimatedSwitcher(

@@ -1,15 +1,36 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
+import 'package:mugalim/main.dart';
+import 'package:mugalim/presentation/main/select_book.dart';
+import 'package:mugalim/presentation/main/select_jenre.dart';
 
 class InnLabRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     final parts = routeSettings.name!.split('?');
 
     switch (parts[0]) {
-      // case RegistrationRoute:
-      //   return CupertinoPageRoute(
-      //     settings: routeSettings,
-      //     builder: (_) => RegistrationScreen(bloc: routeSettings.arguments),
-      //   );
+      case MainRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => MyApp(),
+        );
+      case JenreRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => JenreScreen(
+            index_month: routeSettings.arguments as int,
+            list: routeSettings.arguments as List,
+          ),
+        );
+      case BookRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => BookScreen(
+            index_month: routeSettings.arguments as int,
+            list: routeSettings.arguments as List,
+            select_index: routeSettings.arguments as String,
+          ),
+        );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,
