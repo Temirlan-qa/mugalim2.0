@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/utils/hive/hive_init.dart';
-import 'package:mugalim/presentation/main/info_screen.dart';
 import 'core/routes/routes.dart';
 
 Future<void> main() async {

@@ -1,8 +1,9 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
-import 'package:mugalim/presentation/main/transformer.dart';
+
 import 'package:flutter/cupertino.dart';
+import 'package:mugalim/presentation/welcome_screen/widgets/transformer.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
