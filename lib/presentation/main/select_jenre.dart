@@ -9,8 +9,8 @@ import '../../core/const/const_color.dart';
 class JenreScreen extends StatefulWidget {
   JenreScreen({Key? key, required this.index_month, required this.list,})
       : super(key: key);
-  final index_month;
-  final list;
+  int index_month;
+  List list;
 
 
   @override
@@ -497,29 +497,29 @@ class _JenreScreenState extends State<JenreScreen> {
                       // int size = widget.list.length;
                       String select_index = select_list[index];
                       print(select_index);
-                      if (widget.index_month.toInt() >= 3) {
+                      if (widget.index_month.toInt() >= 4) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ChoosenPage()),
                         );
                       } else {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute (
-                        //     builder: (BuildContext context) => BookScreen(
-                        //       index_month: widget.index_month,
-                        //       select_index: select_index,
-                        //       list: widget.list,
-                        //     ),
-                        //   ),
-                        // );
-                        Navigator.pushReplacementNamed(context, BookRoute,
-                            arguments: {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute (
+                            builder: (BuildContext context) => BookScreen(
                               index_month: widget.index_month,
                               select_index: select_index,
                               list: widget.list,
-                            });
+                            ),
+                          ),
+                        );
+                        // Navigator.pushReplacementNamed(context, BookRoute,
+                        //     arguments: {
+                        //       index_month: widget.index_month,
+                        //       select_index: select_index,
+                        //       list: widget.list,
+                        //     });
                       }
                     }
                   }),

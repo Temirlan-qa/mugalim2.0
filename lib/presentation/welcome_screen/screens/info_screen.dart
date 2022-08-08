@@ -76,12 +76,6 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => IntroScreen(),
-                        ),
-                      );
                     },
                   ),
                 ),

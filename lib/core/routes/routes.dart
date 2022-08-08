@@ -14,23 +14,23 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => MyApp(),
         );
-      case JenreRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => JenreScreen(
-            index_month: routeSettings.arguments as dynamic,
-            list: routeSettings.arguments as dynamic,
-          ),
-        );
-      case BookRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => BookScreen(
-            index_month: routeSettings.arguments as dynamic,
-            select_index: routeSettings.arguments as dynamic,
-            list: routeSettings.arguments as dynamic,
-          ),
-        );
+      // case JenreRoute:
+      //   return CupertinoPageRoute(
+      //     settings: routeSettings,
+      //     builder: (_) => JenreScreen(
+      //       index_month: (routeSettings.arguments ),
+      //       list: (routeSettings.arguments ),
+      //     ),
+      //   );
+      // case BookRoute:
+      //   return CupertinoPageRoute(
+      //     settings: routeSettings,
+      //     builder: (_) => BookScreen(
+      //       index_month: (routeSettings.arguments as Map),
+      //       select_index: (routeSettings.arguments as Map),
+      //       list: (routeSettings.arguments as Map),
+      //     ),
+      //   );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,

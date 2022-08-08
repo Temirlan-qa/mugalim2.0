@@ -13,9 +13,9 @@ class BookDescriptionScreen extends StatefulWidget {
       required this.list,
       required this.select_index})
       : super(key: key);
-  final index_month;
-  final list;
-  final select_index;
+  int index_month;
+  List list;
+  String select_index;
 
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
@@ -194,7 +194,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         ),
                       ),
                       onPressed: () {
-                        if (widget.index_month >= 3) {
+                        if (widget.index_month.toInt() >= 3) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -203,24 +203,22 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                           );
                         }
                         if (!widget.list.isEmpty &&
-                            widget.index_month < 3) {
+                            widget.index_month.toInt() < 3) {
                           widget.list.remove(widget.select_index);
-                          var index_month = widget.index_month;
-                          var list = widget.list;
-                          Navigator.pushReplacementNamed(context, JenreRoute,
-                              arguments: {
-                                index_month: widget.index_month + 1,
-                                list: widget.list,
-                              });
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => JenreScreen(
+                          // Navigator.pushReplacementNamed(context, JenreRoute,
+                          //     arguments: {
                           //       index_month: widget.index_month.toInt() + 1,
                           //       list: widget.list,
-                          //     ),
-                          //   ),
-                          // );
+                          //     });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => JenreScreen(
+                                index_month: widget.index_month.toInt() + 1,
+                                list: widget.list,
+                              ),
+                            ),
+                          );
                         }
                       }),
                 ),

@@ -15,9 +15,9 @@ class BookScreen extends StatefulWidget {
       required this.select_index,
       required this.list})
       : super(key: key);
-  final index_month;
-  final select_index;
-  final list;
+  int index_month;
+  String  select_index;
+  List list;
   @override
   State<BookScreen> createState() => _BookScreenState();
 }
@@ -227,14 +227,6 @@ class _BookScreenState extends State<BookScreen> {
               ),
             ),
           ),
-          RaisedButton(
-              onPressed: (){
-                print('Index month - ${widget.index_month}');
-                print('Select index - ${widget.select_index}');
-                print('list - ${widget.list}');
-              },
-            child: Text('Data koru'),
-          ),
           Positioned(
             bottom: 100,
             child: Container(
@@ -271,20 +263,20 @@ class _BookScreenState extends State<BookScreen> {
                       if (!list.isEmpty && widget.index_month.toInt() < 3) {
                         widget.list.remove(widget.select_index);
 
-                        Navigator.pushReplacementNamed(context, JenreRoute,
-                            arguments: {
-                              widget.index_month: widget.index_month + 1,
-                              list: widget.list,
-                            });
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => JenreScreen(
-                        //       index_month: widget.index_month.toInt() + 1,
+                        // Navigator.pushReplacementNamed(context, JenreRoute,
+                        //     arguments: {
+                        //       widget.index_month[0]: widget.index_month[0] + 1,
                         //       list: widget.list,
-                        //     ),
-                        //   ),
-                        // );
+                        //     });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JenreScreen(
+                              index_month: widget.index_month.toInt() + 1,
+                              list: widget.list,
+                            ),
+                          ),
+                        );
                       }
                     }
                   },
@@ -316,7 +308,7 @@ class _BookScreenState extends State<BookScreen> {
                     ),
                   ),
                   onPressed: () {
-
+                    Navigator.pop(context);
                     // Navigator.pushReplacementNamed(context, JenreRoute,
                     //     arguments: {
                     //       widget.index_month: widget.index_month,
