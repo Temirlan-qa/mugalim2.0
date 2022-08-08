@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mugalim/presentation/auth/otp_verify.dart';
 
-import '../../core/const/const_color.dart';
-import '../../core/const/text_style_const.dart';
+import '../../../core/const/const_color.dart';
+import '../../../core/const/text_style_const.dart';
 import 'auth_gmail.dart';
+import 'otp_verify.dart';
 
 
 class VerifyScreen extends StatefulWidget {

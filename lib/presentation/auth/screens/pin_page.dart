@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/main/done.dart';
+import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 
 class PinPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class PinPage extends StatefulWidget {
 
 class _PinPageState extends State<PinPage> {
   TextEditingController controllerPin = TextEditingController();
-
+  List list = ['Бизнес','Классика','Развитие','Фантастика'];
   @override
   void dispose() {
     // TODO: implement dispose
@@ -38,7 +39,9 @@ class _PinPageState extends State<PinPage> {
         actions: [
           IconButton(
               color: const Color(0xff3D3DD8),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(Icons.cancel_outlined)),
         ],
       ),
@@ -95,7 +98,7 @@ class _PinPageState extends State<PinPage> {
                   fontFamily: 'font/Cera Pro Black.ttf'),
               onDone: (value) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ChoosenPage()));
+                    MaterialPageRoute(builder: (context) => JenreScreen(index_month: 0, list: list)));
               },
             ),
           ]),

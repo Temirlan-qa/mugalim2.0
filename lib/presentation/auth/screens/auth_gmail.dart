@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../core/const/const_color.dart';
-import '../../core/const/text_style_const.dart';
-import '../main/select_jenre.dart';
+import '../../../core/const/const_color.dart';
+import '../../../core/const/text_style_const.dart';
+import '../../main/select_jenre.dart';
 
 class AuthGmailScreen extends StatefulWidget {
   const AuthGmailScreen({Key? key}) : super(key: key);
@@ -243,7 +243,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                           ),
                         ),
                         onPressed: () {
-                          if (loginEditingController.text == 'example@mugalim.kz' && passwordEditingController.text == '123') {
+                          if (loginEditingController.text != '' && passwordEditingController.text != '') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
