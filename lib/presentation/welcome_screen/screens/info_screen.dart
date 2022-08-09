@@ -1,6 +1,7 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
@@ -180,6 +181,10 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                                 context,
                                 MaterialPageRoute(builder: (context) => VerifyScreen(),
                                 ));
+
+                              context,
+                              MaterialPageRoute(builder: (context) => VerifyScreen(),
+                            ));
                           }
                         },
                         child: AnimatedSwitcher(
@@ -254,8 +259,10 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                       onBoarding.put('show', true);
                       Navigator.push(
                           context,
+
                           MaterialPageRoute(builder: (context) => VerifyScreen(),),
                       );
+                          MaterialPageRoute(builder: (context) => VerifyScreen(),));
                     },
                   ),
                 ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
@@ -17,14 +18,13 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-  TextEditingController loginEditingController = TextEditingController();
-  TextEditingController passwordEditingController = TextEditingController();
+  Box accessToken = Hive.box('tokens');
+  TextEditingController EditingController = TextEditingController();
   bool validation = false;
   bool loading = false;
   bool wrongPassOrLog = false;
   bool emptyText = true;
   bool otp = false;
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -97,7 +97,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         height: 8,
                       ),
                       TextFormField(
-                        controller: loginEditingController,
+                        controller: EditingController,
                         // obscureText: true,
                         onChanged: (value) {
                           setState(() {
@@ -154,12 +154,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           ),
                         ),
                         style: TextButton.styleFrom(
-                          primary: loginEditingController.text != ''
-                              ? Colors.white
-                              : Color(0xff1A1A1A),
-                          backgroundColor: loginEditingController.text != ''
-                              ? Color(0xff3D3DD8)
-                              : Color(0xffE0E0E0),
+                          primary: EditingController.text != ''  ? Colors.white : Color(0xff1A1A1A),
+                          backgroundColor: EditingController.text != '' ? Color(0xff3D3DD8) : Color(0xffE0E0E0),
                           minimumSize: Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -167,20 +163,17 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            if (loginEditingController.text != '') otp = true;
+                            if(EditingController.text != '') otp = true;
                           });
-                          if (otp == true &&
-                              loginEditingController.text != '') {
+                          if(otp == true && EditingController.text != '') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OTPScreen(
-                                        loginEditingControllerText:
-                                            loginEditingController.text,
-                                      )),
+                                  builder: (context) => OTPScreen(loginEditingControllerText: EditingController.text,)
+                              ),
                             );
                           }
-                          print(loginEditingController.text);
+                          print(EditingController.text);
                         },
                       ),
                       SizedBox(

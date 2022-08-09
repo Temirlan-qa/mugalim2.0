@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'package:mugalim/presentation/auth/screens/success.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'dart:async';
 import 'dart:math';
+
+import '../../../core/const/const_color.dart';
 
 class PinPage extends StatefulWidget {
   PinPage({Key? key}) : super(key: key);
@@ -70,20 +73,30 @@ class _PinPageState extends State<PinPage> {
         title: const Text(
           'Жедел авторландыру',
           style: TextStyle(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title:  Transform(
+          child: const Text(
+            'Жедел авторландыру',
+            style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 23,
               fontStyle: FontStyle.normal,
               fontFamily: 'font/Cera Pro Black.ttf',
               color: Color(0xff1A1A1A),
-              letterSpacing: 0.2),
+            ),
+          ),
         ),
+        titleSpacing: 0.0,
+        centerTitle: false,
         actions: [
           IconButton(
               color: const Color(0xff3D3DD8),
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.cancel_outlined)),
+              icon: SvgPicture.asset('assets/icons/cancel_outlined.svg'),
+          )
         ],
         elevation: 0,
         backgroundColor: Colors.white,
@@ -148,241 +161,6 @@ class _PinPageState extends State<PinPage> {
                       color: Color(0xff767676)),
                 ),
                 const SizedBox(height: 32),
-                // Text('1111 is ur password'),
-
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Container(
-                //       width: 46,
-                //       height: 56,
-                //       decoration: BoxDecoration(
-                //         color: Color(0xffE0E0E0),
-                //         borderRadius: BorderRadius.circular(5),
-                //       ),
-                //       child: TextFormField(
-                //         textInputAction: TextInputAction.next,
-                //         maxLength: 1,
-                //         keyboardType: TextInputType.number,
-                //         autofocus: true,
-                //         controller: controllerPin1,
-                //         textAlign: TextAlign.center,
-                //         decoration: const InputDecoration(
-                //           hintText: '•',
-                //           counterText: "",
-                //           border: InputBorder.none,
-                //           hintStyle: TextStyle(
-                //             height: 1.3,
-                //             fontSize: 29,
-                //             fontWeight: FontWeight.w700,
-                //             fontStyle: FontStyle.normal,
-                //             color: Color(0xFF767676),
-                //             fontFamily: 'font/Cera Pro Black.ttf',
-                //           ),
-                //         ),
-                //         style: TextStyle(
-                //           height: 1.3,
-                //           fontSize: 29,
-                //           fontWeight: FontWeight.w700,
-                //           fontStyle: FontStyle.normal,
-                //           color: !hasError ? Color(0xFFE71D36) : Color(0xff3D3DD8),
-                //           fontFamily: 'font/Cera Pro Black.ttf',
-                //         ),
-                //
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       width: 16,
-                //     ),
-                //     Container(
-                //       width: 46,
-                //       height: 56,
-                //       decoration: BoxDecoration(
-                //         color: Color(0xffE0E0E0),
-                //         borderRadius: BorderRadius.circular(5),
-                //       ),
-                //       child: TextFormField(
-                //         textInputAction: TextInputAction.next,
-                //         maxLength: 1,
-                //         keyboardType: TextInputType.number,
-                //         autofocus: true,
-                //         controller: controllerPin2,
-                //         textAlign: TextAlign.center,
-                //         decoration: InputDecoration(
-                //           hintText: '•',
-                //           counterText: "",
-                //           border: InputBorder.none,
-                //           hintStyle: TextStyle(
-                //             height: 1.3,
-                //             fontSize: 29,
-                //             fontWeight: FontWeight.w700,
-                //             fontStyle: FontStyle.normal,
-                //             color: Color(0xFF767676),
-                //             fontFamily: 'font/Cera Pro Black.ttf',
-                //           ),
-                //         ),
-                //         style: TextStyle(
-                //           height: 1.3,
-                //           fontSize: 29,
-                //           fontWeight: FontWeight.w700,
-                //           fontStyle: FontStyle.normal,
-                //           color:
-                //               !hasError ? Color(0xFFE71D36) : Color(0xff3D3DD8),
-                //           fontFamily: 'font/Cera Pro Black.ttf',
-                //         ),
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       width: 16,
-                //     ),
-                //     Container(
-                //       width: 46,
-                //       height: 56,
-                //       decoration: BoxDecoration(
-                //         color: Color(0xffE0E0E0),
-                //         borderRadius: BorderRadius.circular(5),
-                //       ),
-                //       child: TextFormField(
-                //         textInputAction: TextInputAction.next,
-                //         maxLength: 1,
-                //         keyboardType: TextInputType.number,
-                //         autofocus: true,
-                //         controller: controllerPin3,
-                //         textAlign: TextAlign.center,
-                //         decoration: InputDecoration(
-                //           hintText: '•',
-                //           counterText: "",
-                //           border: InputBorder.none,
-                //           hintStyle: TextStyle(
-                //             height: 1.3,
-                //             fontSize: 29,
-                //             fontWeight: FontWeight.w700,
-                //             fontStyle: FontStyle.normal,
-                //             color: Color(0xFF767676),
-                //             fontFamily: 'font/Cera Pro Black.ttf',
-                //           ),
-                //         ),
-                //         style: TextStyle(
-                //           height: 1.3,
-                //           fontSize: 29,
-                //           fontWeight: FontWeight.w700,
-                //           fontStyle: FontStyle.normal,
-                //           color:
-                //               !hasError ? Color(0xFFE71D36) : Color(0xff3D3DD8),
-                //           fontFamily: 'font/Cera Pro Black.ttf',
-                //         ),
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       width: 16,
-                //     ),
-                //     Container(
-                //       width: 46,
-                //       height: 56,
-                //       decoration: BoxDecoration(
-                //         color: Color(0xffE0E0E0),
-                //         borderRadius: BorderRadius.circular(5),
-                //       ),
-                //       child: TextFormField(
-                //         textInputAction: TextInputAction.done,
-                //         maxLength: 1,
-                //         keyboardType: TextInputType.number,
-                //         autofocus: true,
-                //         controller: controllerPin4,
-                //         onEditingComplete: (){
-                //           if (pin_page == 0) {
-                //             setState(() {
-                //               startTimer();
-                //               pin_page = 1;
-                //               print(pin_page);
-                //             });
-                //           } else if(pin_page == 1){
-                //             Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                 builder: (context) => JenreScreen(
-                //                   index_month: 0,
-                //                   list: [
-                //                     'Бизнес',
-                //                     'Классика',
-                //                     'Развитие',
-                //                     'Фантастика'
-                //                   ],
-                //                 ),
-                //               ),
-                //             );
-                //           }
-                //         },
-                //         textAlign: TextAlign.center,
-                //         decoration: InputDecoration(
-                //           hintText: '•',
-                //           counterText: "",
-                //           border: InputBorder.none,
-                //           hintStyle: TextStyle(
-                //             height: 1.3,
-                //             fontSize: 29,
-                //             fontWeight: FontWeight.w700,
-                //             fontStyle: FontStyle.normal,
-                //             color: Color(0xFF767676),
-                //             fontFamily: 'font/Cera Pro Black.ttf',
-                //           ),
-                //         ),
-                //         style: TextStyle(
-                //           height: 1.3,
-                //           fontSize: 29,
-                //           fontWeight: FontWeight.w700,
-                //           fontStyle: FontStyle.normal,
-                //           color:
-                //               !hasError ? Color(0xFFE71D36) : Color(0xff3D3DD8),
-                //           fontFamily: 'font/Cera Pro Black.ttf',
-                //         ),
-                //
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Container(
-                //       height: 1,
-                //       width: 46,
-                //       color: controllerPin1.text == null
-                //           ? Color(0xff3D3DD8)
-                //           : Color(0xFF767676),
-                //     ),
-                //     SizedBox(
-                //       width: 16,
-                //     ),
-                //     Container(
-                //       height: 1,
-                //       width: 46,
-                //       color: controllerPin2.text == null
-                //           ? Color(0xff3D3DD8)
-                //           : Color(0xFF767676),
-                //     ),
-                //     SizedBox(
-                //       width: 16,
-                //     ),
-                //     Container(
-                //       height: 1,
-                //       width: 46,
-                //       color: controllerPin3.text == null
-                //           ? Color(0xff3D3DD8)
-                //           : Color(0xFF767676),
-                //     ),
-                //     SizedBox(
-                //       width: 16,
-                //     ),
-                //     Container(
-                //       height: 1,
-                //       width: 46,
-                //       color: controllerPin4.text == null
-                //           ? Color(0xff3D3DD8)
-                //           : Color(0xFF767676),
-                //     ),
-                //   ],
-                // ),
 
                 PinCodeTextField(
                   autofocus: true,
