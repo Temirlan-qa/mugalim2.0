@@ -403,7 +403,7 @@ class _PinPageState extends State<PinPage> {
                       fontSize: 29,
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
-                      color: !hasError ? Color(0xFFE71D36) : Color(0xff3D3DD8),
+                      color: hasError ? Color(0xff3D3DD8) :Color(0xFFE71D36),
                       fontFamily: 'font/Cera Pro Black.ttf'),
                   onTextChanged: (text) {
                     if (pin_page == 1 && controllerPin.text != first_pin) {
