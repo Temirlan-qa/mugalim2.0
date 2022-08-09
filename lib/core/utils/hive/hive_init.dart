@@ -6,5 +6,6 @@ initHiveAdapters() {
 
 initHiveBoxes() async {
   await Hive.openBox('onBoarding');
+  await Hive.openBox('pinCode');
   await Hive.openBox('tokens');
 }
