@@ -31,7 +31,7 @@ class _PinPageState extends State<PinPage> {
         backgroundColor: Colors.white,
         title:  Transform(
           transform:  Matrix4.translationValues(-40.0, 0.0, 0.0),
-          child: Text(
+          child: const Text(
             'Жедел авторландыру',
             style: TextStyle(
               fontWeight: FontWeight.w700,
@@ -59,9 +59,9 @@ class _PinPageState extends State<PinPage> {
         child: Column(
           children: [
             const SizedBox(height: 96),
-            Align(
+            const Align(
               alignment: Alignment.center,
-              child: const Text(
+              child: Text(
                 'PIN-кодын қайта жазыңыз',
                 style: TextStyle(
                     color: Color(0xff1A1A1A),
