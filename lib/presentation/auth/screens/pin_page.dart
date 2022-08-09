@@ -73,30 +73,20 @@ class _PinPageState extends State<PinPage> {
         title: const Text(
           'Жедел авторландыру',
           style: TextStyle(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title:  Transform(
-          child: const Text(
-            'Жедел авторландыру',
-            style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 23,
               fontStyle: FontStyle.normal,
               fontFamily: 'font/Cera Pro Black.ttf',
               color: Color(0xff1A1A1A),
-            ),
-          ),
+              letterSpacing: 0.2),
         ),
-        titleSpacing: 0.0,
-        centerTitle: false,
         actions: [
           IconButton(
               color: const Color(0xff3D3DD8),
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: SvgPicture.asset('assets/icons/cancel_outlined.svg'),
-          )
+              icon: Icon(Icons.cancel_outlined)),
         ],
         elevation: 0,
         backgroundColor: Colors.white,

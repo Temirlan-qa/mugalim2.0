@@ -181,10 +181,6 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                                 context,
                                 MaterialPageRoute(builder: (context) => VerifyScreen(),
                                 ));
-
-                              context,
-                              MaterialPageRoute(builder: (context) => VerifyScreen(),
-                            ));
                           }
                         },
                         child: AnimatedSwitcher(
@@ -262,7 +258,6 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
 
                           MaterialPageRoute(builder: (context) => VerifyScreen(),),
                       );
-                          MaterialPageRoute(builder: (context) => VerifyScreen(),));
                     },
                   ),
                 ),
