@@ -1,6 +1,8 @@
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 
@@ -77,22 +79,22 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Container(
-                                height: screenHeight / 2,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Image.asset(
-                                    splashData[index]['image'],
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: screenHeight / 2,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Image.asset(
+                                  splashData[index]['image'],
+                                  width: MediaQuery.of(context).size.width,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
+                      ),
                     ],
                   );
                 },
@@ -148,7 +150,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           splashData.length,
-                          (index) => buildDot(index: index),
+                              (index) => buildDot(index: index),
                         ),
                       ),
                     ),
@@ -168,7 +170,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             });
                           } else if (currentPage == 2) {
                             setState(
-                              () {
+                                  () {
                                 indexController?.move(3);
                               },
                             );
@@ -176,6 +178,10 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                           else{
                             onBoarding.put('show', true);
                             Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => VerifyScreen(),
+                                ));
+
                               context,
                               MaterialPageRoute(builder: (context) => VerifyScreen(),
                             ));
@@ -253,6 +259,9 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                       onBoarding.put('show', true);
                       Navigator.push(
                           context,
+
+                          MaterialPageRoute(builder: (context) => VerifyScreen(),),
+                      );
                           MaterialPageRoute(builder: (context) => VerifyScreen(),));
                     },
                   ),
