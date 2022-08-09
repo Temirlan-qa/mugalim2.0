@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:mugalim/presentation/main/book_description_screen.dart';
 import 'package:mugalim/presentation/main/done.dart';
 import 'package:mugalim/presentation/main/select_book.dart';
