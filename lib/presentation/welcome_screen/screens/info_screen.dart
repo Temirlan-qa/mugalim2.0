@@ -63,25 +63,6 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Visibility(
-                visible: currentPage == 0 ? false : true,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    child: Text(
-                      'Өткізу',
-                      style: TextStyle(
-                        color: Color(0xFF3D3DD8),
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'CeraPro',
-                        fontSize: 13,
-                      ),
-                    ),
-                    onPressed: () {
-                    },
-                  ),
-                ),
-              ),
               TransformerPageView(
                 duration: _duration!,
                 controller: indexController!,
@@ -97,22 +78,22 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Container(
-                                height: screenHeight / 2,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Image.asset(
-                                    splashData[index]['image'],
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: screenHeight / 2,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Image.asset(
+                                  splashData[index]['image'],
+                                  width: MediaQuery.of(context).size.width,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
+                      ),
                     ],
                   );
                 },
@@ -168,7 +149,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           splashData.length,
-                          (index) => buildDot(index: index),
+                              (index) => buildDot(index: index),
                         ),
                       ),
                     ),
@@ -188,27 +169,17 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             });
                           } else if (currentPage == 2) {
                             setState(
-                              () {
+                                  () {
                                 indexController?.move(3);
                               },
                             );
                           }
                           else{
                             onBoarding.put('show', true);
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => JenreScreen(
-                            //     index_month: 0,
-                            //     list: ['Бизнес', 'Классика', 'Развитие', 'Фантастика'],
-                            //   ),
-                            //   ),
-                            // );
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => VerifyScreen(),
-                              ),
-                            );
-                            //PinPage()
+                                context,
+                                MaterialPageRoute(builder: (context) => VerifyScreen(),
+                                ));
                           }
                         },
                         child: AnimatedSwitcher(
@@ -263,6 +234,30 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                       ),
                     ),
                   ],
+                ),
+              ),
+              Visibility(
+                visible: currentPage == 0 ? false : true,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                    child: Text(
+                      'Өткізу',
+                      style: TextStyle(
+                        color: Color(0xFF3D3DD8),
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'CeraPro',
+                        fontSize: 13,
+                      ),
+                    ),
+                    onPressed: () {
+                      onBoarding.put('show', true);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => VerifyScreen(),),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
