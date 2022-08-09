@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/utils/hive/hive_init.dart';
@@ -26,10 +27,7 @@ class MyApp extends StatelessWidget {
           ),
           onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
           home: onBoarding.containsKey('show')
-              ? JenreScreen(
-            index_month: 0,
-            list: list,
-          ) : IntroScreen(),
+              ? VerifyScreen() : IntroScreen(),
     );
   }
 }

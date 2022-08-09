@@ -9,7 +9,6 @@ import '../../../core/const/text_style_const.dart';
 import 'auth_gmail.dart';
 import 'otp_verify.dart';
 
-
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({Key? key}) : super(key: key);
 
@@ -18,7 +17,6 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-
   TextEditingController loginEditingController = TextEditingController();
   TextEditingController passwordEditingController = TextEditingController();
   bool validation = false;
@@ -29,7 +27,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -38,13 +35,16 @@ class _VerifyScreenState extends State<VerifyScreen> {
         children: [
           Container(
             decoration: BoxDecoration(
-              image: new DecorationImage(image: AssetImage('assets/images/home-2.png'),fit: BoxFit.cover,),
+              image: new DecorationImage(
+                image: AssetImage('assets/images/home-2.png'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Positioned(
             top: 92,
             child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: (width-343)/2),
+              padding: EdgeInsets.symmetric(horizontal: (width - 343) / 2),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.75),
@@ -106,7 +106,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             emptyText = false;
                           });
                         },
-                        style: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextPrimaryColor),
+                        style: TextStyles.regularStyle.copyWith(
+                            fontSize: 14,
+                            color: ColorStyles.neutralsTextPrimaryColor),
                         obscuringCharacter: '*',
                         textAlignVertical: TextAlignVertical.bottom,
                         keyboardType: TextInputType.number,
@@ -115,28 +117,33 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ],
                         decoration: InputDecoration(
                           prefix: Text('+7 '),
-                          hintStyle: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextTertiaryColor),
+                          hintStyle: TextStyles.regularStyle.copyWith(
+                              fontSize: 14,
+                              color: ColorStyles.neutralsTextTertiaryColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
-                              color: validation ? ColorStyles.errorBorderColor : ColorStyles.neutralsBorderColor,
+                              color: validation
+                                  ? ColorStyles.errorBorderColor
+                                  : ColorStyles.neutralsBorderColor,
                               width: 1.0,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
-                              color: validation ? ColorStyles.errorBorderColor : ColorStyles.primaryBorderColor,
+                              color: validation
+                                  ? ColorStyles.errorBorderColor
+                                  : ColorStyles.primaryBorderColor,
                             ),
                           ),
-                          constraints: BoxConstraints(
-                              maxHeight: 48
-                          ),
+                          constraints: BoxConstraints(maxHeight: 48),
                           // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                         ),
                       ),
-
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       TextButton(
                         child: Text(
                           "SMS-кодты жіберу",
@@ -147,8 +154,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           ),
                         ),
                         style: TextButton.styleFrom(
-                          primary: loginEditingController.text != ''  ? Colors.white : Color(0xff1A1A1A),
-                          backgroundColor: loginEditingController.text != '' ? Color(0xff3D3DD8) : Color(0xffE0E0E0),
+                          primary: loginEditingController.text != ''
+                              ? Colors.white
+                              : Color(0xff1A1A1A),
+                          backgroundColor: loginEditingController.text != ''
+                              ? Color(0xff3D3DD8)
+                              : Color(0xffE0E0E0),
                           minimumSize: Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -156,20 +167,25 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            if(loginEditingController.text != '') otp = true;
+                            if (loginEditingController.text != '') otp = true;
                           });
-                          if(otp == true && loginEditingController.text != '') {
+                          if (otp == true &&
+                              loginEditingController.text != '') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OTPScreen(loginEditingControllerText: loginEditingController.text,)
-                              ),
+                                  builder: (context) => OTPScreen(
+                                        loginEditingControllerText:
+                                            loginEditingController.text,
+                                      )),
                             );
                           }
                           print(loginEditingController.text);
                         },
                       ),
-                      SizedBox(height: 8,),
+                      SizedBox(
+                        height: 8,
+                      ),
                       TextButton(
                         child: Text(
                           "Пошта арқылы кіру",
@@ -191,8 +207,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AuthGmailScreen()
-                            ),
+                                builder: (context) => AuthGmailScreen()),
                           );
                         },
                       ),
