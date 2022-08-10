@@ -64,6 +64,9 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
           }
         }
         if(state is AuthFailure) {
+          setState(() {
+            validation = true;
+          });
           print(state.message);
         }
         if(state is AuthLoading) {
@@ -150,15 +153,14 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                 emptyText = false;
                               });
                             },
-                            style: TextStyles.regularStyle.copyWith(fontSize: 14,
+                            style: TextStyles.mediumStyle.copyWith(fontSize: 16,
                                 color: ColorStyles.neutralsTextPrimaryColor),
-                            obscuringCharacter: '*',
+                            obscuringCharacter: '•',
                             textAlignVertical: TextAlignVertical.bottom,
                             decoration: InputDecoration(
                               hintText: 'example@mugalim.kz',
-                              hintStyle: TextStyles.regularStyle.copyWith(
-                                  fontSize: 14,
-                                  color: ColorStyles.neutralsTextTertiaryColor),
+                              hintStyle: TextStyles.mediumStyle.copyWith(fontSize: 16,
+                                  color: Color(0xff767676)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
@@ -208,15 +210,14 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                 });
                               },
                               textAlignVertical: TextAlignVertical.bottom,
-                              style: TextStyles.regularStyle.copyWith(fontSize: 14,
-                                  color: ColorStyles.neutralsTextPrimaryColor),
+                              style: obscureText ? TextStyles.boldStyle.copyWith(fontSize: 20,
+                                color: ColorStyles.neutralsTextPrimaryColor,letterSpacing: 3.0,):
+                              TextStyles.mediumStyle.copyWith(fontSize: 16,
+                                  color: ColorStyles.neutralsTextPrimaryColor,),
                               obscureText: obscureText,
-                              obscuringCharacter: '*',
+                              obscuringCharacter: '•',
                               decoration: InputDecoration(
                                 hintText: '',
-                                hintStyle: TextStyles.regularStyle.copyWith(
-                                    fontSize: 14,
-                                    color: ColorStyles.neutralsTextTertiaryColor),
                                 suffixIcon: CupertinoButton(
                                   minSize: 0,
                                   padding: EdgeInsets.zero,
@@ -225,20 +226,13 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                       obscureText = !obscureText;
                                     });
                                   },
-                                  child: Icon(
+                                  child: !validation ? Icon(
                                     obscureText ? Icons.visibility_off_outlined :
                                     Icons.visibility_outlined,
                                     size: 24,
                                     color: Color(0xff3D3DD8),
-                                  ),
-                                  // child: SvgPicture.asset(
-                                  //   obscureText ? 'assets/icons/eye_icon.svg' :
-                                  //   'assets/icons/eye_icon.svg',
-                                  //   // size: 24,
-                                  //   width: 22,
-                                  //   height: 16,
-                                  //   color: Color(0xff3D3DD8),
-                                  // ),
+                                  ) :
+                                  SvgPicture.asset('assets/icons/errorIcon.svg'),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -262,6 +256,18 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                 ),
                               )
                           ),
+                          validation ? SizedBox(height: 8,) : Offstage(),
+                          validation ?
+                          Text(
+                            "Қате E-mail немесе Пароль",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: 'CeraPro',
+                              fontWeight: FontWeight.w500,
+                              color: ColorStyles.errorBorderColor,
+                            ),
+                          )
+                              : Offstage(),
                           SizedBox(height: 20,),
                           TextButton(
                             child: Text(

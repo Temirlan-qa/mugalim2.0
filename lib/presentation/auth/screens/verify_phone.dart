@@ -106,20 +106,22 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             emptyText = false;
                           });
                         },
-                        style: TextStyles.regularStyle.copyWith(
-                            fontSize: 14,
+                        style: TextStyles.mediumStyle.copyWith(
+                            fontSize: 16,
                             color: ColorStyles.neutralsTextPrimaryColor),
-                        obscuringCharacter: '*',
                         textAlignVertical: TextAlignVertical.bottom,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                        // keyboardType: TextInputType.number,
+                        inputFormatters:[
+                          // LengthLimitingTextInputFormatter(11),
+                          CardFormatter(separator: ' ', sample: 'xx xxx xxx xx xx'),
                         ],
                         decoration: InputDecoration(
-                          prefix: Text('+7 '),
-                          hintStyle: TextStyles.regularStyle.copyWith(
-                              fontSize: 14,
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintStyle: TextStyles.mediumStyle.copyWith(
+                              fontSize: 16,
                               color: ColorStyles.neutralsTextTertiaryColor),
+                          hintText: '+7',
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
@@ -213,5 +215,34 @@ class _VerifyScreenState extends State<VerifyScreen> {
         ],
       ),
     );
+  }
+}
+
+class CardFormatter extends TextInputFormatter{
+
+  final String separator;
+  final String sample;
+  CardFormatter({required this.separator,required this.sample}){
+    assert(sample!=null);
+    assert(separator!=null);
+  }
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.length > 0) {
+      if (newValue.text.length > oldValue.text.length) {
+        if (newValue.text.length > sample.length) return oldValue;
+        if (newValue.text.length < sample.length &&
+            sample[newValue.text.length - 1] == separator) {
+          return TextEditingValue(
+            text: '${oldValue.text}$separator${newValue.text.substring(
+                newValue.text.length-1)}',
+            selection: TextSelection.collapsed(
+              offset: newValue.selection.end + 1,
+            ),
+          );
+        }
+      }
+    }
+    return newValue;
   }
 }

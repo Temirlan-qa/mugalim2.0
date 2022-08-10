@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 
 import '../../../core/const/const_color.dart';
@@ -141,17 +142,19 @@ class _OTPScreenState extends State<OTPScreen> {
                             emptyText = false;
                           });
                         },
-                        style: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextPrimaryColor),
+                        style: TextStyles.mediumStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextPrimaryColor),
                         obscuringCharacter: '*',
                         textAlignVertical: TextAlignVertical.bottom,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: '+7 ${widget.loginEditingControllerText}',
-                          hintStyle: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextTertiaryColor),
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: '${widget.loginEditingControllerText}',
+                          hintStyle: TextStyles.mediumStyle.copyWith(fontSize: 16, color: Color(0xff767676)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
-                              color: validation ? ColorStyles.errorBorderColor : ColorStyles.neutralsBorderColor,
+                              color: ColorStyles.neutralsBorderColor,
                               width: 1.0,
                             ),
                           ),
@@ -159,7 +162,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
-                              color: validation ? ColorStyles.errorBorderColor : ColorStyles.primaryBorderColor,
+                              color: ColorStyles.primaryBorderColor,
                             ),
                           ),
                           constraints: BoxConstraints(
@@ -193,14 +196,19 @@ class _OTPScreenState extends State<OTPScreen> {
                         },
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(4),
                         ],
-                        style: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextPrimaryColor),
-                        obscuringCharacter: '*',
+                        style: obscureText ? TextStyles.boldStyle.copyWith(fontSize: 20,
+                          color: ColorStyles.neutralsTextPrimaryColor,letterSpacing: 3.0,):
+                        TextStyles.mediumStyle.copyWith(fontSize: 16,
+                          color: ColorStyles.neutralsTextPrimaryColor,),
+                        obscuringCharacter: '•',
                         obscureText: obscureText,
-                        textAlignVertical: TextAlignVertical.bottom,
+                        textAlignVertical: TextAlignVertical.top,
                         decoration: InputDecoration(
-                          hintStyle: TextStyles.regularStyle.copyWith(fontSize: 14, color: ColorStyles.neutralsTextTertiaryColor),
+                          filled: true,
+                          fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
@@ -225,24 +233,29 @@ class _OTPScreenState extends State<OTPScreen> {
                                 obscureText = !obscureText;
                               });
                             },
-                            child: Icon(
+                            child: !validation ? Icon(
                               obscureText ? Icons.visibility_off_outlined :
                               Icons.visibility_outlined,
                               size: 24,
                               color: Color(0xff3D3DD8),
-                            ),
-                            // child: SvgPicture.asset(
-                            //   obscureText ? 'assets/icons/eye_icon.svg' :
-                            //   'assets/icons/eye_icon.svg',
-                            //   // size: 24,
-                            //   width: 22,
-                            //   height: 16,
-                            //   color: Color(0xff3D3DD8),
-                            // ),
+                            ) :
+                            SvgPicture.asset('assets/icons/errorIcon.svg'),
                           ),
                           // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                         ),
                       ),
+                      validation ? SizedBox(height: 8,) : Offstage(),
+                      validation ?
+                      Text(
+                        "Қате SMS-коды",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontFamily: 'CeraPro',
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.errorBorderColor,
+                        ),
+                      )
+                      : Offstage(),
                       SizedBox(height: 20,),
                       TextButton(
                         child: Text(
@@ -266,6 +279,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           setState(() {
                             start = 0;
                           });
+
                           if(loginEditingController.text == pinCode && loginEditingController.text != ''){
                             Navigator.push(
                               context,
@@ -273,6 +287,11 @@ class _OTPScreenState extends State<OTPScreen> {
                                   builder: (context) => PinPage()
                               ),
                             );
+                          }
+                          else{
+                            setState(() {
+                              validation = true;
+                            });
                           }
                         },
                       ),
