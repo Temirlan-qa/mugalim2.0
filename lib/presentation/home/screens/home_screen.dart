@@ -348,7 +348,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 8,),
                 Container(
-                  height: 360,
                   color: Colors.white,
                   // decoration: BoxDecoration(
                   //   color: Colors.white,
@@ -660,9 +659,92 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 8,
                       ),
                       Container(
+                        width: 343,
                         height: 1,
                         color: const Color(0xFFE0E0E0),
                       ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: Color(0xffF9F9F9),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(6,0,6,0),
+                              child: Expanded(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset('assets/icons/heart.svg',color: Color(0xff767676),),
+                                    SizedBox(width: 5,),
+                                    Text('102',style: TextStyle(color: Color(0xff767676),),),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 8,),
+                          Container(
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: Color(0xffF9F9F9),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(6,0,6,0),
+                              child: Expanded(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset('assets/icons/comment.svg',color: Color(0xff767676),),
+                                    SizedBox(width: 5,),
+                                    Text('2',style: TextStyle(color: Color(0xff767676),),),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 8,),
+                          Container(
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: Color(0xffFFB800).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(6,0,6,0),
+                              child: Expanded(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.bookmark,color: Color(0xffFFB800),size: 18,),
+                                    SizedBox(width: 5,),
+                                    Text('8',style: TextStyle(color: Color(0xffFFB800),),),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset('assets/icons/eyeIcon.svg',),
+                              SizedBox(width: 5,),
+                              Text('0',style: TextStyle(color: Color(0xff767676),),),
+                            ],
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
