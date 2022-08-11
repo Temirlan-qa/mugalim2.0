@@ -43,13 +43,13 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorKey: Get.nestedKey(1),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-                  builder: (_) => VerifyScreen(),
+                  builder: (_) => HomeScreen(),
                 ),
                 CupertinoTabView(
                     navigatorKey: Get.nestedKey(2),
                     navigatorObservers: [GetObserver((_) {}, Get.routing)],
                     onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-                  builder: (_) => IntroScreen(),
+                  builder: (_) => HomeScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(3),
