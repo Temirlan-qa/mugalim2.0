@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
@@ -290,21 +291,18 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                             ),
                             onPressed: () {
                               // if (loginEditingController.text != '' && passwordEditingController.text != '') {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           JenreScreen(
-                              //             index_month: 0,
-                              //             list: list,
-                              //           ),
-                              //     ),
-                              //   );
                               // }
                               if(loginEditingController.text != '' && passwordEditingController.text != '') {
                                 BlocProvider.of<AuthBloc>(context).add(GetTokens(
                                     loginEditingController.text,
                                     passwordEditingController.text));
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        HomeScreen()
+                                  ),
+                                );
                               }
                             },
 
