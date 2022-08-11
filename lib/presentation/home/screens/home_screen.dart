@@ -346,6 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: 8,),
                 Container(
                   height: 360,
                   // decoration: BoxDecoration(
