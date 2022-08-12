@@ -111,8 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
               //     },
               //   ),
               // ),
+
+
               Tab(
                 child: Text(
+                  maxLines: 1,
                   'Новости',
                   style: TextStyle(
                     fontSize: 16,
@@ -124,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Tab(
                 child: Text(
+                  maxLines: 1,
                   'Тренды',
                   style: TextStyle(
                     fontSize: 16,
