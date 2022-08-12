@@ -65,71 +65,81 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           elevation: 0,
-          bottom: TabBar(
+          bottom: const TabBar(
+            labelColor: Color(0xFF3D3DD8),
+            unselectedLabelColor: Color(0xFF767676),
             // indicatorColor: const Color(0xFF3D3DD8),
-            indicator: const UnderlineTabIndicator(
+            indicator: UnderlineTabIndicator(
               borderSide: BorderSide(color: Color(0xFF3D3DD8), width: 2),
               insets: EdgeInsets.symmetric(horizontal: 15),
             ),
             tabs: [
+              // ↓ this part of code just demo ver. p.s(tima)
+
+              // Tab(
+              //   child: DropdownButton(
+              //     underline: const SizedBox(),
+              //     // Initial Value
+              //     value: dropdownvalue,
+              //     // Down Arrow Icon
+              //     icon: const Icon(
+              //       Icons.keyboard_arrow_down,
+              //       size: 16,
+              //       color: Color(0xFF3D3DD8),
+              //     ),
+              //
+              //     // Array list of items
+              //     items: items.map((String items) {
+              //       return DropdownMenuItem(
+              //         value: items,
+              //         child: Text(items,
+              //           style: const TextStyle(
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.w500,
+              //             fontFamily: 'CeraPro',
+              //             color: Color(0xFF1A1A1A),
+              //           ),
+              //         ),
+              //       );
+              //     }).toList(),
+              //     // After selecting the desired option,it will
+              //     // change button value to selected value
+              //     onChanged: (String? newValue) {
+              //       setState(() {
+              //         dropdownvalue = newValue!;
+              //       });
+              //     },
+              //   ),
+              // ),
               Tab(
-                child: DropdownButton(
-                  underline: const SizedBox(),
-                  // Initial Value
-                  value: dropdownvalue,
-                  // Down Arrow Icon
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
-                    size: 16,
-                    color: Color(0xFF3D3DD8),
-                  ),
-
-                  // Array list of items
-                  items: items.map((String items) {
-                    return DropdownMenuItem(
-
-                      value: items,
-                      child: Text(
-                          items,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'CeraPro',
-                          color: Color(0xFF1A1A1A),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  // After selecting the desired option,it will
-                  // change button value to selected value
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  },
-                ),
-              ),
-
-              const Tab(
                 child: Text(
-                  'Тренды',
+                  'Новости',
                   style: TextStyle(
                     fontSize: 16,
                     decoration: TextDecoration.none,
-                    color: Color(0xFF767676),
                     fontWeight: FontWeight.w500,
                     fontFamily: 'CeraPro',
                   ),
                 ),
               ),
-              const Tab(
+              Tab(
+                child: Text(
+                  'Тренды',
+                  style: TextStyle(
+                    fontSize: 16,
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'CeraPro',
+                  ),
+                ),
+              ),
+              Tab(
                 child: Text(
                   maxLines: 1,
                   'Сохраненные',
                   style: TextStyle(
                     fontSize: 16,
                     decoration: TextDecoration.none,
-                    color: Color(0xFF767676),
                     fontWeight: FontWeight.w500,
                     fontFamily: 'CeraPro',
                   ),
@@ -254,7 +264,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 width: 45,
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xffF9F9F9),
+                                                  color:
+                                                      const Color(0xffF9F9F9),
                                                   borderRadius:
                                                       BorderRadius.circular(24),
                                                 ),
@@ -266,7 +277,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   children: [
                                                     SvgPicture.asset(
                                                       'assets/icons/heart.svg',
-                                                      color: const Color(0xff767676),
+                                                      color: const Color(
+                                                          0xff767676),
                                                     ),
                                                     const SizedBox(
                                                       width: 5,
@@ -288,7 +300,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 width: 45,
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xffF9F9F9),
+                                                  color:
+                                                      const Color(0xffF9F9F9),
                                                   borderRadius:
                                                       BorderRadius.circular(24),
                                                 ),
@@ -300,7 +313,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   children: [
                                                     SvgPicture.asset(
                                                       'assets/icons/comment.svg',
-                                                      color: const Color(0xff767676),
+                                                      color: const Color(
+                                                          0xff767676),
                                                     ),
                                                     const SizedBox(
                                                       width: 5,
@@ -322,7 +336,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 width: 45,
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xffF9F9F9),
+                                                  color:
+                                                      const Color(0xffF9F9F9),
                                                   borderRadius:
                                                       BorderRadius.circular(24),
                                                 ),
@@ -334,7 +349,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   children: [
                                                     SvgPicture.asset(
                                                       'assets/icons/share.svg',
-                                                      color: const Color(0xff767676),
+                                                      color: const Color(
+                                                          0xff767676),
                                                     ),
                                                     const SizedBox(
                                                       width: 5,
@@ -474,7 +490,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Container(
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xffF9F9F9),
+                                                  color:
+                                                      const Color(0xffF9F9F9),
                                                   borderRadius:
                                                       BorderRadius.circular(24),
                                                 ),
@@ -492,8 +509,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     children: [
                                                       SvgPicture.asset(
                                                         'assets/icons/heart.svg',
-                                                        color:
-                                                        const Color(0xff767676),
+                                                        color: const Color(
+                                                            0xff767676),
                                                       ),
                                                       const SizedBox(
                                                         width: 5,
@@ -515,7 +532,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Container(
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xffF9F9F9),
+                                                  color:
+                                                      const Color(0xffF9F9F9),
                                                   borderRadius:
                                                       BorderRadius.circular(24),
                                                 ),
@@ -533,8 +551,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     children: [
                                                       SvgPicture.asset(
                                                         'assets/icons/comment.svg',
-                                                        color:
-                                                        const Color(0xff767676),
+                                                        color: const Color(
+                                                            0xff767676),
                                                       ),
                                                       const SizedBox(
                                                         width: 5,
@@ -576,7 +594,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Icon(
                                                         Icons.bookmark,
                                                         color:
-                                                        Color(0xffFFB800),
+                                                            Color(0xffFFB800),
                                                         size: 18,
                                                       ),
                                                       SizedBox(
