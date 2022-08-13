@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // List of items in our dropdown menu
   var items = [
     'Новости',
-    'Local Новости',
+    'Local',
   ];
 
   @override
