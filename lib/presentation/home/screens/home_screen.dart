@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String title =
       "Нельзя же все на свете брать в голову, на что-то можно и наплевать, иначе и свихнуться недолго.\nАнна Гавальда\n'35 кило надежды'";
   bool click_to_show = false;
-
+  int tabIndex = 0;
   // Initial Selected Value
   String dropdownvalue = 'Новости';
 
@@ -31,12 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: tabIndex,
       length: 3,
       child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+              },
               icon: const Icon(
                 Icons.search,
                 color: Color(0xFF3D3DD8),
@@ -59,75 +61,67 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.w700,
-              decoration: TextDecoration.none,
               color: Color(0xFF1A1A1A),
               fontFamily: 'CeraPro',
             ),
           ),
           elevation: 0,
-          bottom: const TabBar(
-            labelColor: Color(0xFF3D3DD8),
-            unselectedLabelColor: Color(0xFF767676),
+          bottom: TabBar(
+            // ↓ labelPadding Сохраненные ны толык корсету ушин
+            // labelPadding: EdgeInsets.all(0),
+            labelColor: const Color(0xFF3D3DD8),
+            unselectedLabelColor: const Color(0xFF767676),
             // indicatorColor: const Color(0xFF3D3DD8),
-            indicator: UnderlineTabIndicator(
+            indicator: const UnderlineTabIndicator(
               borderSide: BorderSide(color: Color(0xFF3D3DD8), width: 2),
               insets: EdgeInsets.symmetric(horizontal: 15),
             ),
             tabs: [
               // ↓ this part of code just demo ver. p.s(tima)
 
-              // Tab(
-              //   child: DropdownButton(
-              //     underline: const SizedBox(),
-              //     // Initial Value
-              //     value: dropdownvalue,
-              //     // Down Arrow Icon
-              //     icon: const Icon(
-              //       Icons.keyboard_arrow_down,
-              //       size: 16,
-              //       color: Color(0xFF3D3DD8),
-              //     ),
-              //
-              //     // Array list of items
-              //     items: items.map((String items) {
-              //       return DropdownMenuItem(
-              //         value: items,
-              //         child: Text(items,
-              //           style: const TextStyle(
-              //             fontSize: 16,
-              //             fontWeight: FontWeight.w500,
-              //             fontFamily: 'CeraPro',
-              //             color: Color(0xFF1A1A1A),
-              //           ),
-              //         ),
-              //       );
-              //     }).toList(),
-              //     // After selecting the desired option,it will
-              //     // change button value to selected value
-              //     onChanged: (String? newValue) {
-              //       setState(() {
-              //         dropdownvalue = newValue!;
-              //       });
-              //     },
-              //   ),
-              // ),
-
-
               Tab(
-                child: Text(
-                  maxLines: 1,
-                  'Новости',
-                  style: TextStyle(
-                    fontSize: 16,
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'CeraPro',
+                child: DropdownButton(
+                  isExpanded: true,
+                  underline: const SizedBox(),
+                  // Initial Value
+                  value: dropdownvalue,
+                  // Down Arrow Icon
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 16,
+                    color: Color(0xFF3D3DD8),
                   ),
+
+                  // Array list of items
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        items,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'CeraPro',
+                          color: Color(0xFF1A1A1A),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  // After selecting the desired option,it will
+                  // change button value to selected value
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                    });
+                  },
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   maxLines: 1,
+                  overflow: TextOverflow.clip,
                   'Тренды',
                   style: TextStyle(
                     fontSize: 16,
@@ -137,9 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   maxLines: 1,
+                  overflow: TextOverflow.clip,
                   'Сохраненные',
                   style: TextStyle(
                     fontSize: 16,
@@ -1007,7 +1002,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Container(
                                             height: 28,
                                             decoration: BoxDecoration(
-                                              color: Color(0xffF9F9F9),
+                                              color: const Color(0xffF9F9F9),
                                               borderRadius:
                                                   BorderRadius.circular(24),
                                             ),
@@ -1023,12 +1018,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                     'assets/icons/heart.svg',
-                                                    color: Color(0xff767676),
+                                                    color: const Color(0xff767676),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     '102',
                                                     style: TextStyle(
                                                       color: Color(0xff767676),
@@ -1038,13 +1033,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
                                           Container(
                                             height: 28,
                                             decoration: BoxDecoration(
-                                              color: Color(0xffF9F9F9),
+                                              color: const Color(0xffF9F9F9),
                                               borderRadius:
                                                   BorderRadius.circular(24),
                                             ),
@@ -1060,12 +1055,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                     'assets/icons/comment.svg',
-                                                    color: Color(0xff767676),
+                                                    color: const Color(0xff767676),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     '2',
                                                     style: TextStyle(
                                                       color: Color(0xff767676),
@@ -1075,13 +1070,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
                                           Container(
                                             height: 28,
                                             decoration: BoxDecoration(
-                                              color: Color(0xffFFB800)
+                                              color: const Color(0xffFFB800)
                                                   .withOpacity(0.1),
                                               borderRadius:
                                                   BorderRadius.circular(24),
@@ -1095,7 +1090,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
+                                                children: const [
                                                   Icon(
                                                     Icons.bookmark,
                                                     color: Color(0xffFFB800),
@@ -1114,7 +1109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
@@ -1124,10 +1119,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                               SvgPicture.asset(
                                                 'assets/icons/eyeIcon.svg',
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(
+                                              const Text(
                                                 '0',
                                                 style: TextStyle(
                                                   color: Color(0xff767676),
