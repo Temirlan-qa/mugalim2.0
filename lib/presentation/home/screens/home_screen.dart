@@ -239,11 +239,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 4,
                                       ),
-                                      TextButton(
-                                        onPressed: () {},
+                                      InkWell(
+                                        onTap: (){
+                                          print('Показать полностью...');
+                                        },
                                         child: const Text(
                                           'Показать полностью...',
                                           style: TextStyle(
+                                            fontWeight: FontWeight.w500,
                                             fontSize: 14,
                                             decoration: TextDecoration.none,
                                             color: Color(0xff3D3DD8),
@@ -487,8 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
 
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 8),
+                                        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1038,8 +1040,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: const [
                                                   Icon(
                                                     Icons.favorite,
-                                                    color:
-                                                        const Color(0xFFE71D36),
+                                                    color: Color(0xFFE71D36),
                                                     size: 16,
                                                   ),
                                                   SizedBox(
@@ -1048,7 +1049,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Text(
                                                     '102',
                                                     style: TextStyle(
-                                                      color: const Color(
+                                                      color: Color(
                                                           0xFFE71D36),
                                                       fontFamily: 'Cera Pro',
                                                       fontWeight:
