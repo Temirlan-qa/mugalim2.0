@@ -1001,7 +1001,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Container(
                                             height: 28,
                                             decoration: BoxDecoration(
-                                              color: const Color(0xffF9F9F9),
+                                              color: const Color(0xFFE71D36).withOpacity(0.1),
                                               borderRadius:
                                                   BorderRadius.circular(24),
                                             ),
@@ -1014,19 +1014,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'assets/icons/heart.svg',
-                                                    color:
-                                                        const Color(0xff767676),
+                                                children: const [
+                                                  Icon(
+                                                      Icons.favorite,
+                                                    color: const Color(0xFFE71D36),
+                                                    size: 16,
                                                   ),
-                                                  const SizedBox(
+                                                  SizedBox(
                                                     width: 5,
                                                   ),
-                                                  const Text(
+                                                  Text(
                                                     '102',
                                                     style: TextStyle(
-                                                      color: Color(0xff767676),
+                                                      color: const Color(0xFFE71D36),
+                                                      fontFamily: 'Cera Pro',
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 14,
                                                     ),
                                                   ),
                                                 ],
@@ -1104,6 +1107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     '8',
                                                     style: TextStyle(
                                                       color: Color(0xffFFB800),
+                                                      fontFamily: 'Cera Pro',
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 14,
                                                     ),
                                                   ),
                                                 ],
