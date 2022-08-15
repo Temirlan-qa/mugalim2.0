@@ -15,9 +15,11 @@ class AuthTokensModel {
   final String? scope;
   final String? jti;
 
-  factory AuthTokensModel.fromJson(Map<String, dynamic> json) => _$AuthTokensModelFromJson(json);
+  factory AuthTokensModel.fromJson(Map<String, dynamic> json) =>
+      _$AuthTokensModelFromJson(json);
 
-  AuthTokensModel(this.access, this.tokenType, this.refreshToken, this.expiresIn, this.scope, this.jti);
+  AuthTokensModel(this.access, this.tokenType, this.refreshToken,
+      this.expiresIn, this.scope, this.jti);
 
   Map<String, dynamic> toJson() => _$AuthTokensModelToJson(this);
 }

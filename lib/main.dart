@@ -15,7 +15,7 @@ Future<void> main() async {
   initHiveAdapters();
   await initHiveBoxes();
   initGetIt();
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
         // home: onBoarding.containsKey('show')
         //     ? VerifyScreen() : IntroScreen(),
       ),
-
     );
   }
 }

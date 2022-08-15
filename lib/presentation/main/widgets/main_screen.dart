@@ -19,7 +19,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   int _currentView = 0;
 
   @override
@@ -28,7 +27,9 @@ class _MainScreenState extends State<MainScreen> {
     return Stack(
       children: [
         Scaffold(
-            backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+            backgroundColor: brightness == Brightness.dark
+                ? ColorStyles.darkthemePageBackgroundColor
+                : Colors.white,
             body: IndexedStack(
               index: _currentView,
               children: <Widget>[
@@ -42,13 +43,15 @@ class _MainScreenState extends State<MainScreen> {
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
+                  onGenerateRoute: (settings) =>
+                      InnLabRouter.generateRoute(settings),
                   builder: (_) => HomeScreen(),
                 ),
                 CupertinoTabView(
-                    navigatorKey: Get.nestedKey(2),
-                    navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                    onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
+                  navigatorKey: Get.nestedKey(2),
+                  navigatorObservers: [GetObserver((_) {}, Get.routing)],
+                  onGenerateRoute: (settings) =>
+                      InnLabRouter.generateRoute(settings),
                   builder: (_) => HomeScreen(),
                 ),
                 CupertinoTabView(
@@ -61,23 +64,24 @@ class _MainScreenState extends State<MainScreen> {
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(4),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
+                  onGenerateRoute: (settings) =>
+                      InnLabRouter.generateRoute(settings),
                   builder: (_) => HomeScreen(),
                 )
               ],
             ),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
-                color: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+                color: brightness == Brightness.dark
+                    ? ColorStyles.darkthemePageBackgroundColor
+                    : Colors.white,
                 border: Border(
-                    top: BorderSide(
-                        width: 0.5,
-                        color: Color(0xffE2E3E4)
-                    )
-                ),
+                    top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
                 boxShadow: [
                   BoxShadow(
-                    color: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+                    color: brightness == Brightness.dark
+                        ? ColorStyles.darkthemePageBackgroundColor
+                        : Colors.white,
                     spreadRadius: 0,
                     blurRadius: 0,
                     offset: Offset(0, 0.5), // changes position of shadow
@@ -86,7 +90,9 @@ class _MainScreenState extends State<MainScreen> {
               ),
               child: ClipRRect(
                 child: CupertinoTabBar(
-                  backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+                  backgroundColor: brightness == Brightness.dark
+                      ? ColorStyles.darkthemePageBackgroundColor
+                      : Colors.white,
                   border: Border(top: BorderSide(color: Colors.transparent)),
                   onTap: (int index) {
                     setState(() {
@@ -96,29 +102,28 @@ class _MainScreenState extends State<MainScreen> {
                   items: [
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget(
-                          'assets/icons/feed.svg',  _currentView, 'feed'),
+                          'assets/icons/feed.svg', _currentView, 'feed'),
                     ),
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget(
                           'assets/icons/zap.svg', _currentView, 'zap'),
                     ),
                     BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                          'assets/icons/mcalendar.svg', _currentView, 'mcalendar'),
+                      icon: NavBarItemWidget('assets/icons/mcalendar.svg',
+                          _currentView, 'mcalendar'),
                     ),
                     BottomNavigationBarItem(
                         icon: NavBarItemWidget(
-                            'assets/icons/arrow-up-circle.svg', _currentView, 'arrow-up-circle')
-                    ),
+                            'assets/icons/arrow-up-circle.svg',
+                            _currentView,
+                            'arrow-up-circle')),
                     BottomNavigationBarItem(
                         icon: NavBarItemWidget(
-                            'assets/icons/user.svg', _currentView, 'user')
-                    ),
+                            'assets/icons/user.svg', _currentView, 'user')),
                   ],
                 ),
               ),
-            )
-        ),
+            )),
       ],
     );
   }

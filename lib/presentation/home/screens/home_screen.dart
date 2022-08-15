@@ -37,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               icon: const Icon(
                 Icons.search,
                 color: Color(0xFF3D3DD8),
@@ -1018,7 +1017,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                     'assets/icons/heart.svg',
-                                                    color: const Color(0xff767676),
+                                                    color:
+                                                        const Color(0xff767676),
                                                   ),
                                                   const SizedBox(
                                                     width: 5,
@@ -1055,7 +1055,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                     'assets/icons/comment.svg',
-                                                    color: const Color(0xff767676),
+                                                    color:
+                                                        const Color(0xff767676),
                                                   ),
                                                   const SizedBox(
                                                     width: 5,

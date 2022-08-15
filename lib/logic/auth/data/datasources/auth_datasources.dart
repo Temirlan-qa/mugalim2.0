@@ -21,7 +21,8 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
     String username1 = 'browser';
     String password = '';
 
-    var basicAuth = 'Basic ' + base64Encode(utf8.encode('$username1:$password'));
+    var basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username1:$password'));
 
     Response response = await Dio().post(
       '${EnvironmentConfig.url}/uaa/oauth/token',
@@ -33,8 +34,7 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
       },
       options: Options(
           contentType: Headers.formUrlEncodedContentType,
-          headers: {"authorization": basicAuth}
-      ),
+          headers: {"authorization": basicAuth}),
     );
 
     print(response);
@@ -42,12 +42,10 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
     return response;
   }
 
-
   @override
   Future<Response> saveDeviceId(String deviceId) async {
-    Response response = await dioWrapper!.post('/notification/device/save',
-        data: deviceId
-    );
+    Response response =
+        await dioWrapper!.post('/notification/device/save', data: deviceId);
     return response;
   }
 }

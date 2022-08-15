@@ -14,24 +14,24 @@ var sl = GetIt.instance;
 void initGetIt() async {
   Box tokensBox = Hive.box('tokens');
   sl.registerFactory<Dio>(
-        () => Dio(BaseOptions(baseUrl: EnvironmentConfig.url)),
+    () => Dio(BaseOptions(baseUrl: EnvironmentConfig.url)),
   );
   sl.registerLazySingleton<DioInterceptor>(
-        () => DioInterceptor(tokens: tokensBox, dio: sl()),
+    () => DioInterceptor(tokens: tokensBox, dio: sl()),
   );
 
   sl.registerFactory<DioWrapper>(
-        () => DioWrapper(sl(), sl()),
+    () => DioWrapper(sl(), sl()),
   );
   sl.registerLazySingleton<TokensRemoteDataSource>(
-        () => TokensRemoteDataSourceImpl(dioWrapper: sl()),
+    () => TokensRemoteDataSourceImpl(dioWrapper: sl()),
   );
 
   sl.registerLazySingleton<TokensRepository>(
-        () => TokensRepositoryImpl(sl()),
+    () => TokensRepositoryImpl(sl()),
   );
 
   sl.registerFactory<AuthBloc>(
-        () => AuthBloc(sl()),
+    () => AuthBloc(sl()),
   );
 }
