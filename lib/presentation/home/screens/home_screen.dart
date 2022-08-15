@@ -239,15 +239,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 4,
                                       ),
-                                      const Text(
-                                        'Показать полностью...',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          decoration: TextDecoration.none,
-                                          color: Color(0xff3D3DD8),
-                                          fontFamily: 'CeraPro',
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: const Text(
+                                          'Показать полностью...',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            decoration: TextDecoration.none,
+                                            color: Color(0xff3D3DD8),
+                                            fontFamily: 'CeraPro',
+                                          ),
+                                          maxLines: 1,
                                         ),
-                                        maxLines: 1,
                                       ),
                                       const SizedBox(
                                         height: 12,
@@ -484,7 +487,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
 
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
