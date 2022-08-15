@@ -159,482 +159,451 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 16),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      color: Colors.white,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: Colors.white,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.center,
                                         children: [
+                                          CircleAvatar(
+                                            radius: 22,
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                  "assets/images/mugalim.png"),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 16,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: const [
+                                              Text(
+                                                'Mugalim Global',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'CeraPro',
+                                                ),
+                                              ),
+                                              Text(
+                                                'час назад',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Color(0xff767676),
+                                                  fontFamily: 'CeraPro',
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          const Icon(
+                                            Icons.more_horiz,
+                                            color: Color(0xff767676),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        str,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          decoration: TextDecoration.none,
+                                          color: Colors.black,
+                                          fontFamily: 'CeraPro',
+                                        ),
+                                        maxLines: 4,
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      const Text(
+                                        'Показать полностью...',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          decoration: TextDecoration.none,
+                                          color: Color(0xff3D3DD8),
+                                          fontFamily: 'CeraPro',
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 45,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffF9F9F9),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/heart.svg',
+                                                  color:
+                                                      const Color(0xff767676),
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                const Text(
+                                                  '0',
+                                                  style: TextStyle(
+                                                    color: Color(0xff767676),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Container(
+                                            width: 45,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffF9F9F9),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/comment.svg',
+                                                  color:
+                                                      const Color(0xff767676),
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                const Text(
+                                                  '0',
+                                                  style: TextStyle(
+                                                    color: Color(0xff767676),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Container(
+                                            width: 45,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffF9F9F9),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/share.svg',
+                                                  color:
+                                                      const Color(0xff767676),
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                const Text(
+                                                  '0',
+                                                  style: TextStyle(
+                                                    color: Color(0xff767676),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const Spacer(),
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              CircleAvatar(
-                                                radius: 22,
-                                                child: ClipOval(
-                                                  child: Image.asset(
-                                                      "assets/images/mugalim.png"),
-                                                ),
+                                              SvgPicture.asset(
+                                                'assets/icons/eyeIcon.svg',
                                               ),
                                               const SizedBox(
-                                                width: 16,
+                                                width: 5,
                                               ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: const [
-                                                  Text(
-                                                    'Mugalim Global',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily: 'CeraPro',
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'час назад',
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      color: Color(0xff767676),
-                                                      fontFamily: 'CeraPro',
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const Spacer(),
-                                              const Icon(
-                                                Icons.more_horiz,
-                                                color: Color(0xff767676),
+                                              const Text(
+                                                '0',
+                                                style: TextStyle(
+                                                  color: Color(0xff767676),
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(
-                                            height: 16,
-                                          ),
-                                          Text(
-                                            str,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              decoration: TextDecoration.none,
-                                              color: Colors.black,
-                                              fontFamily: 'CeraPro',
-                                            ),
-                                            maxLines: 4,
-                                          ),
-                                          const SizedBox(
-                                            height: 4,
-                                          ),
-                                          const Text(
-                                            'Показать полностью...',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              decoration: TextDecoration.none,
-                                              color: Color(0xff3D3DD8),
-                                              fontFamily: 'CeraPro',
-                                            ),
-                                            maxLines: 1,
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 45,
-                                                height: 28,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xffF9F9F9),
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      'assets/icons/heart.svg',
-                                                      color: const Color(
-                                                          0xff767676),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    const Text(
-                                                      '0',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff767676),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Container(
-                                                width: 45,
-                                                height: 28,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xffF9F9F9),
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      'assets/icons/comment.svg',
-                                                      color: const Color(
-                                                          0xff767676),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    const Text(
-                                                      '0',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff767676),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Container(
-                                                width: 45,
-                                                height: 28,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xffF9F9F9),
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      'assets/icons/share.svg',
-                                                      color: const Color(
-                                                          0xff767676),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    const Text(
-                                                      '0',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff767676),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const Spacer(),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'assets/icons/eyeIcon.svg',
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  const Text(
-                                                    '0',
-                                                    style: TextStyle(
-                                                      color: Color(0xff767676),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )
                                         ],
-                                      ),
-                                    ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 16),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      color: Colors.white,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: Colors.white,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Row(
+                                          CircleAvatar(
+                                            radius: 22,
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                  "assets/images/mugalim.png"),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 16,
+                                          ),
+                                          Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                CrossAxisAlignment.start,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 22,
-                                                child: ClipOval(
-                                                  child: Image.asset(
-                                                      "assets/images/mugalim.png"),
+                                                MainAxisAlignment.start,
+                                            children: const [
+                                              Text(
+                                                'Mugalim Global',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'CeraPro',
                                                 ),
                                               ),
-                                              const SizedBox(
-                                                width: 16,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: const [
-                                                  Text(
-                                                    'Mugalim Global',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily: 'CeraPro',
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '5 авг в 10:32',
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      color: Color(0xff767676),
-                                                      fontFamily: 'CeraPro',
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const Spacer(),
-                                              const Icon(
-                                                Icons.more_horiz,
-                                                color: Color(0xff767676),
+                                              Text(
+                                                '5 авг в 10:32',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Color(0xff767676),
+                                                  fontFamily: 'CeraPro',
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(
-                                            height: 16,
+                                          const Spacer(),
+                                          const Icon(
+                                            Icons.more_horiz,
+                                            color: Color(0xff767676),
                                           ),
-                                          Text(
-                                            title,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              decoration: TextDecoration.none,
-                                              color: Colors.black,
-                                              fontFamily: 'CeraPro',
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        title,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          decoration: TextDecoration.none,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'CeraPro',
+                                        ),
+                                        maxLines: 4,
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Image.asset(
+                                        'assets/images/space.png',
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                      ),
+                                      // SizedBox(height: 16,),
+                                      const Divider(),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffF9F9F9),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
                                             ),
-                                            maxLines: 4,
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          Image.asset(
-                                            'assets/images/space.png',
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                          ),
-                                          // SizedBox(height: 16,),
-                                          const Divider(),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                height: 28,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xffF9F9F9),
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          6, 0, 6, 0),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        'assets/icons/heart.svg',
-                                                        color: const Color(
-                                                            0xff767676),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      const Text(
-                                                        '102',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xff767676),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Container(
-                                                height: 28,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xffF9F9F9),
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          6, 0, 6, 0),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        'assets/icons/comment.svg',
-                                                        color: const Color(
-                                                            0xff767676),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      const Text(
-                                                        '2',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xff767676),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Container(
-                                                height: 28,
-                                                decoration: BoxDecoration(
-                                                  color: const Color(0xffFFB800)
-                                                      .withOpacity(0.1),
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          6, 0, 6, 0),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: const [
-                                                      Icon(
-                                                        Icons.bookmark,
-                                                        color:
-                                                            Color(0xffFFB800),
-                                                        size: 18,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Text(
-                                                        '8',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xffFFB800),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              const Spacer(),
-                                              Row(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      6, 0, 6, 0),
+                                              child: Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   SvgPicture.asset(
-                                                    'assets/icons/eyeIcon.svg',
+                                                    'assets/icons/heart.svg',
+                                                    color:
+                                                        const Color(0xff767676),
                                                   ),
                                                   const SizedBox(
                                                     width: 5,
                                                   ),
                                                   const Text(
-                                                    '0',
+                                                    '102',
                                                     style: TextStyle(
                                                       color: Color(0xff767676),
                                                     ),
                                                   ),
                                                 ],
                                               ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Container(
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffF9F9F9),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      6, 0, 6, 0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/icons/comment.svg',
+                                                    color:
+                                                        const Color(0xff767676),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                      color: Color(0xff767676),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Container(
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffFFB800)
+                                                  .withOpacity(0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      6, 0, 6, 0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: const [
+                                                  Icon(
+                                                    Icons.bookmark,
+                                                    color: Color(0xffFFB800),
+                                                    size: 18,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    '8',
+                                                    style: TextStyle(
+                                                      color: Color(0xffFFB800),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/icons/eyeIcon.svg',
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const Text(
+                                                '0',
+                                                style: TextStyle(
+                                                  color: Color(0xff767676),
+                                                ),
+                                              ),
                                             ],
-                                          )
+                                          ),
                                         ],
-                                      ),
-                                    ),
+                                      )
+                                    ],
                                   ),
                                 ),
                                 const SizedBox(
@@ -701,13 +670,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 16,
                                       ),
-                                      const Text(
-                                        'Проходим опрос по случаю Дня Независомости',
-                                        style: TextStyle(
-                                          fontFamily: 'Cera Pro',
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xFF1A1A1A),
+                                      const Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          'Проходим опрос по случаю Дня Независомости',
+                                          style: TextStyle(
+                                            fontFamily: 'Cera Pro',
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xFF1A1A1A),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(
@@ -1001,7 +973,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Container(
                                             height: 28,
                                             decoration: BoxDecoration(
-                                              color: const Color(0xFFE71D36).withOpacity(0.1),
+                                              color: const Color(0xFFE71D36)
+                                                  .withOpacity(0.1),
                                               borderRadius:
                                                   BorderRadius.circular(24),
                                             ),
@@ -1016,8 +989,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     MainAxisAlignment.center,
                                                 children: const [
                                                   Icon(
-                                                      Icons.favorite,
-                                                    color: const Color(0xFFE71D36),
+                                                    Icons.favorite,
+                                                    color:
+                                                        const Color(0xFFE71D36),
                                                     size: 16,
                                                   ),
                                                   SizedBox(
@@ -1026,9 +1000,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Text(
                                                     '102',
                                                     style: TextStyle(
-                                                      color: const Color(0xFFE71D36),
+                                                      color: const Color(
+                                                          0xFFE71D36),
                                                       fontFamily: 'Cera Pro',
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -1108,7 +1084,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xffFFB800),
                                                       fontFamily: 'Cera Pro',
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
