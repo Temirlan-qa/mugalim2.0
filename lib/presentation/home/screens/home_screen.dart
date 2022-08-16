@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/home/screens/home_comments.dart';
 
 import '../../../core/const/const_color.dart';
@@ -28,9 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
   // List of items in our dropdown menu
   var items = [
     'Новости',
-    'Мой регион',
-    'Мой город',
+    'Регион',
+    'Город',
   ];
+  bool search = false;
+  TextEditingController searchEditingController = TextEditingController();
+
   String selectedValue = 'Новости';
   bool isExpanded = false;
   @override
@@ -41,42 +45,106 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: ColorStyles.neutralsPageBackgroundColor,
         appBar: AppBar(
+          leading: !search
+              ? const SizedBox()
+              : IconButton(
+                  onPressed: () {
+                    setState(() {
+                      search = !search;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 16,
+                    color: Color(0xFF3D3DD8),
+                  ),
+                ),
           actions: <Widget>[
-            IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  'assets/icons/search.svg',
-                  color: Color(0xFF3D3DD8),
-                  height: 23.33,
-                  width: 21,
-                )),
-            IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  'assets/icons/bell.svg',
-                  color: Color(0xFF3D3DD8),
-                  height: 23.33,
-                  width: 21,
-                )),
+            Visibility(
+              visible:!search,
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    search = !search;
+                  });
+                },
+                icon: !search
+                    ? const Icon(
+                        Icons.search,
+                        size: 28,
+                        color: Color(0xFF3D3DD8),
+                      )
+                    : const SizedBox(),
+              ),
+            ),
+            Visibility(
+              visible: !search,
+              child: IconButton(
+                  onPressed: () {
+                    print('bell');
+                  },
+                  icon: SvgPicture.asset(
+                    'assets/icons/bell.svg',
+                    color: Color(0xFF3D3DD8),
+                    height: 23.33,
+                    width: 21,
+                  )),
+            ),
           ],
           centerTitle: true,
           backgroundColor: Colors.white,
-          title: const Text(
-            'Главная',
-            style: TextStyle(
-              fontSize: 23,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
-              fontFamily: 'CeraPro',
-            ),
-          ),
+          title: !search
+              ? const Text(
+                  'Главная',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF1A1A1A),
+                    fontFamily: 'CeraPro',
+                  ),
+                )
+              : TextFormField(
+                  controller: searchEditingController,
+                  autofocus: true,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Cera Pro',
+                    fontSize: 18,
+                    color: Color(0xFF1A1A1A),
+                  ),
+                  textAlignVertical: TextAlignVertical.bottom,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Color(0xFFF9F9F9),
+                    disabledBorder: InputBorder.none,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(),
+                    ),
+                    focusedBorder: InputBorder.none,
+                    hintText: 'іздеңіз',
+                    hintStyle: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Cera Pro',
+                      fontSize: 16,
+                      color: Color(0xFF1A1A1A),
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      size: 18,
+                      color: Color(0xFF767676),
+                    ),
+                    constraints: const BoxConstraints(maxHeight: 32),
+                    // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
+                  ),
+                ),
           elevation: 0,
           bottom: TabBar(
             // ↓ labelPadding Сохраненные ны толык корсету ушин
-            // labelPadding: EdgeInsets.all(0),
+            //labelPadding: EdgeInsets.all(0),
             labelColor: const Color(0xFF3D3DD8),
             unselectedLabelColor: const Color(0xFF767676),
-            // indicatorColor: const Color(0xFF3D3DD8),
+            indicatorColor: const Color(0xFF3D3DD8),
             indicator: const UnderlineTabIndicator(
               borderSide: BorderSide(color: Color(0xFF3D3DD8), width: 2),
               insets: EdgeInsets.symmetric(horizontal: 15),
@@ -114,20 +182,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   items: items.map((String items) {
                     return DropdownMenuItem(
                       value: items,
-                      child: Row(
-                        children: [
-                          Text(
-                            maxLines: 1,
-                            overflow: TextOverflow.clip,
-                            items,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'CeraPro',
-                              color: Color(0xFF1A1A1A),
-                            ),
+                      child: Expanded(
+                        child: Text(
+                          maxLines: 2,
+                          overflow: TextOverflow.clip,
+                          items,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'CeraPro',
+                            color: Color(0xFF1A1A1A),
                           ),
-                        ],
+                        ),
                       ),
                     );
                   }).toList(),
@@ -765,8 +831,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              HomeCommentsPage()
-                                      ),
+                                              HomeCommentsPage()),
                                     );
                                   },
                                   child: ConstrainedBox(
@@ -2141,9 +2206,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           }),
                     ),
                   )
-                : selectedValue == 'Мой регион'
-                    ? const Center(child: Text('Мой регион'))
-                    : const Center(child: Text('Мой город')),
+                : selectedValue == 'Регион'
+                    ? const Center(child: Text('Регион'))
+                    : const Center(child: Text('Город')),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
