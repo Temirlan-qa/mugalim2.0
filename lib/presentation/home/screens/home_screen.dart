@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderSide: BorderSide(),
                     ),
                     focusedBorder: InputBorder.none,
-                    hintText: 'іздеңіз',
+                    hintText: '',
                     hintStyle: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Cera Pro',
