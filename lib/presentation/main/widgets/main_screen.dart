@@ -102,24 +102,26 @@ class _MainScreenState extends State<MainScreen> {
                   items: [
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget(
-                          'assets/icons/feed.svg', _currentView, 'feed'),
+                          'assets/icons/feed.svg', _currentView, 'Главная'),
                     ),
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget(
-                          'assets/icons/zap.svg', _currentView, 'zap'),
+                          'assets/icons/zap.svg', _currentView, 'Развитие'),
                     ),
                     BottomNavigationBarItem(
-                      icon: NavBarItemWidget('assets/icons/mcalendar.svg',
-                          _currentView, 'mcalendar'),
+                      icon: NavBarItemWidget(
+                          'assets/icons/mcalendar.svg',
+                          _currentView, 'Расписание'
+                      ),
                     ),
                     BottomNavigationBarItem(
                         icon: NavBarItemWidget(
                             'assets/icons/arrow-up-circle.svg',
                             _currentView,
-                            'arrow-up-circle')),
+                            'Рейтинг')),
                     BottomNavigationBarItem(
                         icon: NavBarItemWidget(
-                            'assets/icons/user.svg', _currentView, 'user')),
+                            'assets/icons/user.svg', _currentView, 'Профиль')),
                   ],
                 ),
               ),
