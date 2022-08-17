@@ -355,10 +355,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                             ),
                                             const Spacer(),
-                                            const Icon(
-                                              Icons.more_horiz,
-                                              size: 28,
-                                              color: Color(0xFF767676),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.more_horiz,
+                                                size: 28,
+                                                color: Color(0xFF767676),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -897,10 +900,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ],
                                               ),
                                               const Spacer(),
-                                              const Icon(
-                                                Icons.more_horiz,
-                                                size: 28,
-                                                color: Color(0xFF767676),
+                                              IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.more_horiz,
+                                                  size: 28,
+                                                  color: Color(0xFF767676),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -1172,10 +1178,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ],
                                                     ),
                                                     const Spacer(),
-                                                    const Icon(
-                                                      Icons.more_horiz,
-                                                      size: 28,
-                                                      color: Color(0xFF767676),
+                                                    IconButton(
+                                                      onPressed: () {},
+                                                      icon: Icon(
+                                                        Icons.more_horiz,
+                                                        size: 28,
+                                                        color: Color(0xFF767676),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -1453,10 +1462,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ],
                                               ),
                                               const Spacer(),
-                                              const Icon(
-                                                Icons.more_horiz,
-                                                size: 28,
-                                                color: Color(0xFF767676),
+                                              IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.more_horiz,
+                                                  size: 28,
+                                                  color: Color(0xFF767676),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -1706,10 +1718,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                             ),
                                             const Spacer(),
-                                            const Icon(
-                                              Icons.more_horiz,
-                                              size: 28,
-                                              color: Color(0xFF767676),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.more_horiz,
+                                                size: 28,
+                                                color: Color(0xFF767676),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -2258,10 +2273,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       const Spacer(),
-                      const Icon(
-                        Icons.more_horiz,
-                        size: 28,
-                        color: Color(0xFF767676),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.more_horiz,
+                          size: 28,
+                          color: Color(0xFF767676),
+                        ),
                       ),
                     ],
                   ),
@@ -2741,10 +2759,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                             ),
                                             const Spacer(),
-                                            const Icon(
-                                              Icons.more_horiz,
-                                              size: 28,
-                                              color: Color(0xFF767676),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.more_horiz,
+                                                size: 28,
+                                                color: Color(0xFF767676),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -2982,10 +3003,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                     const Spacer(),
-                                    const Icon(
-                                      Icons.more_horiz,
-                                      size: 28,
-                                      color: Color(0xFF767676),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.more_horiz,
+                                        size: 28,
+                                        color: Color(0xFF767676),
+                                      ),
                                     ),
                                   ],
                                 ),

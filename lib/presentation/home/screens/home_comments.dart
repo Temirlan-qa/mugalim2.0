@@ -31,11 +31,11 @@ class HomeCommentsPage extends StatelessWidget {
         actions: [
           IconButton(
             color: const Color(0xFF3D3DD8),
-              onPressed: (){},
-              icon: const Icon(
-                  Icons.ios_share,
-                size: 20,
-              ),
+            onPressed: () {},
+            icon: const Icon(
+              Icons.ios_share,
+              size: 20,
+            ),
           ),
         ],
         leading: IconButton(
@@ -101,10 +101,13 @@ class HomeCommentsPage extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      const Icon(
-                        Icons.more_horiz,
-                        size: 28,
-                        color: Color(0xFF767676),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.more_horiz,
+                            size: 28,
+                            color: Color(0xFF767676),
+                          ),
                       ),
                     ],
                   ),
@@ -302,7 +305,9 @@ class HomeCommentsPage extends StatelessWidget {
                                   fontFamily: 'CeraPro',
                                 ),
                               ),
-                              SizedBox(height: 5,),
+                              SizedBox(
+                                height: 5,
+                              ),
                               Text(
                                 str1,
                                 style: const TextStyle(
@@ -316,7 +321,8 @@ class HomeCommentsPage extends StatelessWidget {
                                 height: 16,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
                                     '5 авг в 13:54',
@@ -327,9 +333,11 @@ class HomeCommentsPage extends StatelessWidget {
                                       fontFamily: 'Cera Pro',
                                     ),
                                   ),
-                                  const SizedBox(width: 16,),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
                                   TextButton(
-                                    onPressed: (){},
+                                    onPressed: () {},
                                     child: const Text(
                                       'Ответить',
                                       style: TextStyle(
@@ -340,14 +348,16 @@ class HomeCommentsPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 85,),
+                                  const SizedBox(
+                                    width: 85,
+                                  ),
                                   InkWell(
-                                    onTap: (){},
+                                    onTap: () {},
                                     child: Row(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: const [
                                         Icon(
                                           Icons.favorite,
@@ -362,8 +372,7 @@ class HomeCommentsPage extends StatelessWidget {
                                           style: TextStyle(
                                             color: Color(0xFFE71D36),
                                             fontFamily: 'Cera Pro',
-                                            fontWeight:
-                                            FontWeight.w500,
+                                            fontWeight: FontWeight.w500,
                                             fontSize: 14,
                                           ),
                                         ),
