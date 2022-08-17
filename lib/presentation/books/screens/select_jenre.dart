@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:mugalim/presentation/main/book_description_screen.dart';
-import 'package:mugalim/presentation/main/done.dart';
-import 'package:mugalim/presentation/main/select_book.dart';
+import 'package:mugalim/presentation/books/screens/book_description_screen.dart';
+import 'package:mugalim/presentation/books/screens/done.dart';
+import 'package:mugalim/presentation/books/screens/select_book.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import '../../core/const/const_color.dart';
+import '../../../core/const/const_color.dart';
 
 class JenreScreen extends StatefulWidget {
   JenreScreen({Key? key, required this.index_month, required this.list,})
@@ -525,7 +525,7 @@ class _JenreScreenState extends State<JenreScreen> {
                     }
                   }),
               SizedBox(
-                height: 8,
+                height: 16,
               )
             ],
           ),

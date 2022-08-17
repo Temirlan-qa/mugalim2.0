@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:mugalim/presentation/welcome_screen/widgets/transformer.dart';

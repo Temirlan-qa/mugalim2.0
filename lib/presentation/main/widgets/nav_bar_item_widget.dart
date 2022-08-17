@@ -19,11 +19,11 @@ class NavBarItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
     return Container(
-      padding: EdgeInsets.only(top: 4),
+      padding: EdgeInsets.only(top: 4,bottom: 7),
       color: brightness == Brightness.dark
           ? ColorStyles.darkthemePageBackgroundColor
           : Colors.white,
-      width: MediaQuery.of(context).size.width / 4,
+      width: MediaQuery.of(context).size.width / 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

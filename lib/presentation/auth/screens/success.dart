@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
 import 'dart:async';
 import 'dart:math';
 

@@ -10,7 +10,7 @@ import '../../../core/const/text_style_const.dart';
 import '../../../core/injection_container.dart';
 import '../../../core/utils/dio/dio_interceptor.dart';
 import '../../../logic/auth/bloc/auth_bloc.dart';
-import '../../main/select_jenre.dart';
+import '../../books/screens/select_jenre.dart';
 
 class AuthGmailScreen extends StatefulWidget {
   const AuthGmailScreen({Key? key}) : super(key: key);

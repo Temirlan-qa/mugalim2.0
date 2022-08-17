@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
-import '../../core/const/const_color.dart';
+import '../../../core/const/const_color.dart';
 
 class ChoosenPage extends StatelessWidget {
   const ChoosenPage({Key? key}) : super(key: key);
