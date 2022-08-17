@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/presentation/main/done.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/presentation/books/screens/done.dart';
+import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
 class BookDescriptionScreen extends StatefulWidget {
   BookDescriptionScreen(
@@ -171,7 +171,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               ],
             ),
             Positioned(
-              bottom: 40,
+              bottom: 16,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Center(

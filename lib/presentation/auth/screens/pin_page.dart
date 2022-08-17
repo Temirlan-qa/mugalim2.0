@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mugalim/presentation/main/done.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/presentation/books/screens/done.dart';
 import 'package:mugalim/presentation/auth/screens/success.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'dart:async';
 import 'dart:math';
 
 import '../../../core/const/const_color.dart';
+import '../../books/screens/select_jenre.dart';
 
 class PinPage extends StatefulWidget {
   PinPage({Key? key}) : super(key: key);

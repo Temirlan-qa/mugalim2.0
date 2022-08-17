@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/core/widgets/button_widget.dart';
-import 'package:mugalim/presentation/main/book_description_screen.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/presentation/books/screens/book_description_screen.dart';
+import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
 import 'done.dart';
 
@@ -228,7 +228,7 @@ class _BookScreenState extends State<BookScreen> {
             ),
           ),
           Positioned(
-            bottom: 100,
+            bottom: 74,
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -285,7 +285,7 @@ class _BookScreenState extends State<BookScreen> {
             ),
           ),
           Positioned(
-            bottom: 40,
+            bottom: 16,
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Center(

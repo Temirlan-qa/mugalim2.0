@@ -9,7 +9,6 @@ import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
-import '../../main/select_jenre.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key,required this.loginEditingControllerText,}) : super(key: key);
