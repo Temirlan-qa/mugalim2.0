@@ -102,12 +102,12 @@ class HomeCommentsPage extends StatelessWidget {
                       ),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.more_horiz,
-                            size: 28,
-                            color: Color(0xFF767676),
-                          ),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.more_horiz,
+                          size: 28,
+                          color: Color(0xFF767676),
+                        ),
                       ),
                     ],
                   ),

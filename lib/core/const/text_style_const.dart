@@ -11,19 +11,25 @@ class TextStyles {
     fontFamily: 'CeraPro',
     // letterSpacing: 0.3
   );
-  static TextStyle mediumStyle = TextStyle(
+  static TextStyle mediumStyle = const TextStyle(
     decoration: TextDecoration.none,
-    fontSize: 16,
     fontWeight: FontWeight.w500,
-    color: ColorStyles.infoTextColor,
     fontFamily: 'CeraPro',
     // letterSpacing: 0.3
   );
-  static TextStyle regularStyle = TextStyle(
+  static TextStyle regularStyle = const TextStyle(
     decoration: TextDecoration.none,
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: FontWeight.w400,
-    color: ColorStyles.infoTextColor,
+    fontFamily: 'CeraPro',
+    height: 1.2,
+  );
+
+  static TextStyle voteStyle = const TextStyle(
+    height: 1.2,
+    decoration: TextDecoration.none,
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
     fontFamily: 'CeraPro',
     // letterSpacing: 0.3
   );

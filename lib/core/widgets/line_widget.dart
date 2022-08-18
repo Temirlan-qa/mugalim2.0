@@ -11,10 +11,10 @@ class LineWidget extends StatelessWidget {
     var brightness = Theme.of(context).brightness;
     // neutralsdarkthemePageBackgroundColor
     return Container(
-      color: brightness == Brightness.dark ? ColorStyles.neutralsdarkthemePageBackgroundColor : ColorStyles.neutralsPageBackgroundColor,
-      // color: ColorStyles.neutralsPageBackgroundColor,
+      //color: brightness == Brightness.dark ? ColorStyles.neutralsdarkthemePageBackgroundColor : ColorStyles.neutralsPageBackgroundColor,
+      color: Color(0xFFE0E0E0),
       height: 1,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width -32,
     );
   }
 }
