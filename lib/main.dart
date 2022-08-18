@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/main/PIN_code.dart';
+import 'package:mugalim/presentation/main/coursePage.dart';
 import 'package:mugalim/presentation/main/done_pin.dart';
 import 'package:mugalim/presentation/main/select_book.dart';
 import 'package:mugalim/presentation/main/done.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-      home: PINCode()
+      home: CoursePage()
     );
   }
 }
