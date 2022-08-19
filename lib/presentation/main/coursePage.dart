@@ -1,3 +1,5 @@
+import 'dart:core';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,8 +10,11 @@ import 'coursePageDetailed.dart';
 import 'coursePage_myCourses.dart';
 import 'courseWidget.dart';
 
+
+
 class CoursePage extends StatefulWidget {
   const CoursePage({Key? key}) : super(key: key);
+
 
   @override
   State<CoursePage> createState() => _CoursePageState();
@@ -51,7 +56,7 @@ class _CoursePageState extends State<CoursePage> {
                 ? ColorStyles.darkthemePageBackgroundColor
                 : Colors.white,
             border:
-                Border(top: BorderSide(width: 1, color: Color(0xffE2E3E4))),
+                Border(top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
             boxShadow: [
               BoxShadow(
                 color: brightness == Brightness.dark
@@ -64,48 +69,28 @@ class _CoursePageState extends State<CoursePage> {
             ],
           ),
           child: ClipRRect(
-            child: BottomNavigationBar(
-                selectedIconTheme: IconThemeData(color: Color(0xff3D3DD8)),
-                unselectedIconTheme: IconThemeData(color: Color(0xff1a1a1a)),
-                type: BottomNavigationBarType.fixed,
-                elevation: 0,
-                selectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 11,
-                  fontFamily: 'CeraPro',
-                  color: Color(0xff3d3dd8)
-                ),
-                unselectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 11,
-                  fontFamily: 'CeraPro',
-                  color: Color(0xff3D3DD8)
-                ),
-                selectedItemColor: Color(0xff3D3DD8),
-                unselectedItemColor: Color(0xff1A1A1A),
-                backgroundColor: brightness == Brightness.dark
-                    ? ColorStyles.darkthemePageBackgroundColor
-                    : Colors.white,
-                onTap: (int index) {
-                  setState(() {
-                    currentPage = index;
-                  });
-                },
-                items: [
-                  BottomNavigationBarItem(
-                  icon: NavBarItemWidget(
-                    'assets/icons/Icon.svg', currentPage, 'Главная',
-                  ),
-                    label: ''
-                ),
-                  BottomNavigationBarItem(
+            child: CupertinoTabBar(
+                backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+                border: Border(top: BorderSide(color: Colors.transparent)),
+                  onTap: (int index) {
+                    setState(() {
+                      currentPage = index;
+                    });
+                  },
+                  items: [
+                    BottomNavigationBarItem(
                     icon: NavBarItemWidget(
-                        'assets/icons/Icon1.svg', currentPage, 'Мои курсы'),
-                    label: ''
-                  ),]),
+                      'assets/icons/Icon.svg', currentPage, 'Главная',
+                    ),
+                  ),
+                    BottomNavigationBarItem(
+                      icon: NavBarItemWidget(
+                          'assets/icons/Icon1.svg', currentPage, 'Мои курсы'),
+                    ),]),
+            ),
           ),
         ),
-      )
+
     ]);
   }
 

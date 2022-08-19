@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CoursePageDetailed extends StatefulWidget {
-  const CoursePageDetailed({Key? key}) : super(key: key);
 
+class CoursePageDetailed extends StatefulWidget {
   @override
   State<CoursePageDetailed> createState() => _CoursePageDetailedState();
 }
@@ -14,13 +13,47 @@ class CoursePageDetailed extends StatefulWidget {
 class _CoursePageDetailedState extends State<CoursePageDetailed> {
   final Search = TextEditingController();
 
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     Search.dispose();
   }
-
+  List<Map<String, dynamic>> listsofCourses = [
+    {
+      'image': 'assets/images/Banner.png',
+      'lessons': '34 уроков',
+      'tests': '2 теста',
+      'title': 'Изменить других можно! Как помочь...',
+      'author': 'М. Изимбетов',
+      'percentage': '45%',
+      'firstLesson': 'Первый урок: Как меняться самому',
+      'firstLessonDuration': '356',
+      'firstLessonTest': 'Первый тест: Как меняться самому',
+      'firstLessonQuestions': '5',
+      'secondLesson': 'Второй урок: Как меняться самому',
+      'secondLessonDuration': '12',
+      'secondLessonTest': 'Второй тест: Как меняться самому',
+      'secondLessonQuestions': '23'
+    },
+    {
+      'image': 'assets/images/Rectangle 1425.png',
+      'lessons': '41 урока',
+      'tests': '5 теста',
+      'title': 'fdsdaffdaafdfdafdaaaaaaaadfffffffffqfqqf',
+      'author': 'Aybolali',
+      'percentage': '133%',
+      'firstLesson': 'weovguxujexdvbovuebwvewbguevwbguewvgwegv',
+      'firstLessonDuration': '123',
+      'firstLessonTest': 'wgrfvergwewgfqwfqeffeqefqeqf',
+      'firstLessonQuestions': '14',
+      'secondLesson': 'qfeefeorvwibirwjhibhbriwophvnwrovhbg',
+      'secondLessonDuration': '43',
+      'secondLessonTest': 'fwdsfcfwedqaefqaecdefqaqfe',
+      'secondLessonQuestions': '12'
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,21 +85,25 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
               child: TextFormField(
                 textAlign: TextAlign.justify,
                 decoration: InputDecoration(
-                  isDense: true,
-                  iconColor: Color(0xff767676),
-                  hintText: 'Поиск',
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(14.5),
-                    child: SvgPicture.asset('assets/icons/Search Icon.svg'),
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          BorderSide(width: 0, style: BorderStyle.none)),
-                  filled: true,
-                  hintStyle: TextStyle(color: Color(0xff767676), fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.normal, fontFamily: 'assets/fonts/CeraPro-Regular.ttf' ),
-                  contentPadding: EdgeInsets.all(8)
-                ),
+                    isDense: true,
+                    iconColor: Color(0xff767676),
+                    hintText: 'Поиск',
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(14.5),
+                      child: SvgPicture.asset('assets/icons/Search Icon.svg'),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            BorderSide(width: 0, style: BorderStyle.none)),
+                    filled: true,
+                    hintStyle: TextStyle(
+                        color: Color(0xff767676),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'assets/fonts/CeraPro-Regular.ttf'),
+                    contentPadding: EdgeInsets.all(8)),
                 controller: Search,
               ),
             )),
@@ -103,7 +140,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                     height: 156,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: 5,
+                      itemCount: listsofCourses.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Container(
                         margin: EdgeInsets.only(right: 8),
@@ -124,7 +161,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                             Padding(
                               padding: EdgeInsets.only(left: 16),
                               child: Text(
-                                'Базовый курс по \nUI/UX',
+                                  listsofCourses[index]['title'],
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
@@ -139,7 +176,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                               children: [
                                 SizedBox(width: 16),
                                 Text(
-                                  '96%',
+                                  listsofCourses[index]['percentage'],
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontStyle: FontStyle.normal,
@@ -159,7 +196,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                                         color: Color(0x0ffFFFFFF))),
                                 SizedBox(width: 4),
                                 Text(
-                                  '34 урока',
+                                  listsofCourses[index]['lessons'],
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontFamily:
@@ -179,7 +216,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                                         color: Color(0x0ffFFFFFF))),
                                 SizedBox(width: 4),
                                 Text(
-                                  '2 теста',
+                                  listsofCourses[index]['tests'],
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontFamily:
@@ -306,7 +343,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                       crossAxisSpacing: 8,
                       crossAxisCount: 2,
                       children: List.generate(
-                        4,
+                        listsofCourses.length,
                         (index) => Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
@@ -334,7 +371,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 11),
-                                    child: Text('34 Урока',
+                                    child: Text( listsofCourses[index]['lessons'],
                                         style: TextStyle(
                                             fontStyle: FontStyle.normal,
                                             fontSize: 13,
@@ -353,7 +390,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                                               'assets/fonts/CeraPro-Regular.ttf',
                                           color: Color(0xff1a1a1a))),
                                   SizedBox(width: 4),
-                                  Text('2 теста',
+                                  Text( listsofCourses[index]['tests'],
                                       style: TextStyle(
                                           fontStyle: FontStyle.normal,
                                           fontSize: 13,
@@ -367,11 +404,10 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 11),
                                 child: Text(
-                                    'Изменить других \nможно! Как помочь...',
+                                    listsofCourses[index]['title'],
                                     maxLines: 2,
-
                                     style: TextStyle(
-                                      wordSpacing: 0.9,
+                                        wordSpacing: 0.9,
                                         fontFamily:
                                             'assets/fonts/CeraPro-Regular.ttf',
                                         fontWeight: FontWeight.w500,
@@ -382,7 +418,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 11),
                                 child: Text(
-                                  'М. Изимбетов',
+                                    listsofCourses[index]['author'],
                                   maxLines: 1,
                                   style: TextStyle(
                                       fontSize: 13,

@@ -12,7 +12,50 @@ class CourseMyCourses extends StatefulWidget {
 }
 
 class _CourseMyCoursesState extends State<CourseMyCourses> {
+  final Search = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Search.dispose();
+  }
   bool unselected = true;
+  List<Map<String, dynamic>> listsofCourses = [
+    {
+      'image': 'assets/images/Banner.png',
+      'lessons': '34 уроков',
+      'tests': '2 теста',
+      'title': 'Изменить других можно! Как помочь...',
+      'author': 'М. Изимбетов',
+      'percentage': '45%',
+      'firstLesson': 'Первый урок: Как меняться самому',
+      'firstLessonDuration': '356 м',
+      'firstLessonTest': 'Первый тест: Как меняться самому',
+      'firstLessonQuestions': '5 вопросов',
+      'secondLesson': 'Второй урок: Как меняться самому',
+      'secondLessonDuration': '12 м',
+      'secondLessonTest': 'Второй тест: Как меняться самому',
+      'secondLessonQuestions': '23 вопросов'
+    },
+    {
+      'image': 'assets/images/Rectangle 1425.png',
+      'lessons': '41 урока',
+      'tests': '5 теста',
+      'title': 'fdsdaffdaafdfdafdaaaaaaaadfffffffffqfqqf',
+      'author': 'Aybolali',
+      'percentage': '133%',
+      'firstLesson': 'weovguxujexdvbovuebwvewbguevwbguewvgwegv',
+      'firstLessonDuration': '123 м',
+      'firstLessonTest': 'wgrfvergwewgfqwfqeffeqefqeqf',
+      'firstLessonQuestions': '14 вопросов',
+      'secondLesson': 'qfeefeorvwibirwjhibhbriwophvnwrovhbg',
+      'secondLessonDuration': '43 м',
+      'secondLessonTest': 'fwdsfcfwedqaefqaecdefqaqfe',
+      'secondLessonQuestions': '12 вопросов'
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -71,7 +114,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
           children: [
             SizedBox(height: 16),
             Container(
-              height: 564,
+              height: 630,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -104,12 +147,36 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                           color: Color(0xff1a1a1a)),
                     ),
                   ),
+                  SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: TextFormField(
+                      textAlign: TextAlign.justify,
+                      decoration: InputDecoration(
+                          isDense: true,
+                          iconColor: Color(0xff767676),
+                          hintText: 'Поиск',
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(14.5),
+                            child: SvgPicture.asset('assets/icons/Search Icon.svg'),
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                              BorderSide(width: 0, style: BorderStyle.none)),
+                          filled: true,
+                          hintStyle: TextStyle(color: Color(0xff767676), fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.normal, fontFamily: 'assets/fonts/CeraPro-Regular.ttf' ),
+                          contentPadding: EdgeInsets.all(8)
+                      ),
+                      controller: Search,
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.all(16),
                     height: 487,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: 5,
+                      itemCount: listsofCourses.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Container(
                         margin: EdgeInsets.only(right: 16),
@@ -143,9 +210,10 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                   children: [
                                     SizedBox(height: 16),
                                     Padding(
-                                      padding: EdgeInsets.only(left: 16),
+                                      padding: EdgeInsets.only(left: 16, right: 16),
                                       child: Text(
-                                        'Базовый курс по \nUI/UX',
+                                        listsofCourses[index]['title'],
+                                        maxLines: 2,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontStyle: FontStyle.normal,
@@ -162,7 +230,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                       children: [
                                         SizedBox(width: 16),
                                         Text(
-                                          '96%',
+                                          listsofCourses[index]['percentage'],
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontStyle: FontStyle.normal,
@@ -182,7 +250,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                                 color: Color(0x0ffFFFFFF))),
                                         SizedBox(width: 4),
                                         Text(
-                                          '34 урока',
+                                          listsofCourses[index]['lessons'],
                                           style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -202,7 +270,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                                 color: Color(0x0ffFFFFFF))),
                                         SizedBox(width: 4),
                                         Text(
-                                          '2 теста',
+                                          listsofCourses[index]['tests'],
                                           style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -291,7 +359,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         width: 170,
                                         height: 32,
                                         child: Text(
-                                          'Первый урок: Как меняться самому',
+                                          listsofCourses[index]['firstLesson'],
                                           maxLines: 2,
                                           style: TextStyle(
                                               fontFamily:
@@ -313,7 +381,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                           ),
                                           SizedBox(width: 5.33),
                                           Text(
-                                            '21 м',
+                                            listsofCourses[index]['firstLessonDuration'],
                                             style: TextStyle(
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 13,
@@ -355,7 +423,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         width: 170,
                                         height: 32,
                                         child: Text(
-                                          'Первый тест: Как меняться самому',
+                                          listsofCourses[index]['firstLessonTest'],
                                           maxLines: 2,
                                           style: TextStyle(
                                               fontFamily:
@@ -377,7 +445,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                           ),
                                           SizedBox(width: 5.33),
                                           Text(
-                                            '4 вопроса',
+                                            listsofCourses[index]['firstLessonQuestions'],
                                             style: TextStyle(
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 13,
@@ -419,7 +487,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         width: 170,
                                         height: 32,
                                         child: Text(
-                                          'Второй урок: Как меняться самому',
+                                          listsofCourses[index]['secondLesson'],
                                           maxLines: 2,
                                           style: TextStyle(
                                               fontFamily:
@@ -441,7 +509,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                           ),
                                           SizedBox(width: 5.33),
                                           Text(
-                                            '21 м',
+                                            listsofCourses[index]['secondLessonDuration'],
                                             style: TextStyle(
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 13,
@@ -483,7 +551,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         width: 170,
                                         height: 32,
                                         child: Text(
-                                          'Второй тест: Как меняться самому',
+                                          listsofCourses[index]['secondLessonTest'],
                                           maxLines: 2,
                                           style: TextStyle(
                                               fontFamily:
@@ -505,7 +573,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                           ),
                                           SizedBox(width: 5.33),
                                           Text(
-                                            '4 вопроса',
+                                            listsofCourses[index]['secondLessonQuestions'],
                                             style: TextStyle(
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 13,
@@ -552,7 +620,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
         children: [
           SizedBox(height: 16),
           Container(
-              height: 560,
+              height: double.maxFinite,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -587,6 +655,30 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   ),
                   SizedBox(height: 8),
                   Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: TextFormField(
+                      textAlign: TextAlign.justify,
+                      decoration: InputDecoration(
+                          isDense: true,
+                          iconColor: Color(0xff767676),
+                          hintText: 'Поиск',
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(14.5),
+                            child: SvgPicture.asset('assets/icons/Search Icon.svg'),
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                              BorderSide(width: 0, style: BorderStyle.none)),
+                          filled: true,
+                          hintStyle: TextStyle(color: Color(0xff767676), fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.normal, fontFamily: 'assets/fonts/CeraPro-Regular.ttf' ),
+                          contentPadding: EdgeInsets.all(8)
+                      ),
+                      controller: Search,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Padding(
                     padding: const EdgeInsets.only(right: 16, left: 16, top: 8),
                     child: GridView.count(
                       childAspectRatio: 167 / 190,
@@ -595,7 +687,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                       crossAxisSpacing: 8,
                       crossAxisCount: 2,
                       children: List.generate(
-                        4,
+                        listsofCourses.length,
                         (index) => Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
@@ -623,7 +715,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 11),
-                                    child: Text('34 Урока',
+                                    child: Text( listsofCourses[index]['lessons'],
                                         style: TextStyle(
                                             fontStyle: FontStyle.normal,
                                             fontSize: 13,
@@ -642,7 +734,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                               'assets/fonts/CeraPro-Regular.ttf',
                                           color: Color(0xff1a1a1a))),
                                   SizedBox(width: 4),
-                                  Text('2 теста',
+                                  Text( listsofCourses[index]['tests'],
                                       style: TextStyle(
                                           fontStyle: FontStyle.normal,
                                           fontSize: 13,
@@ -656,7 +748,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 11),
                                 child: Text(
-                                    'Изменить других \nможно! Как помочь...',
+                                    listsofCourses[index]['title'],
                                     maxLines: 2,
                                     style: TextStyle(
                                         wordSpacing: 0.9,
@@ -670,7 +762,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 11),
                                 child: Text(
-                                  'М. Изимбетов',
+                                  listsofCourses[index]['author'],
                                   maxLines: 1,
                                   style: TextStyle(
                                       fontSize: 13,
