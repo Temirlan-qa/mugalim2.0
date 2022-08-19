@@ -1,25 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mugalim/presentation/main/book_description_screen.dart';
-import 'package:mugalim/presentation/main/done.dart';
-import 'package:mugalim/presentation/main/select_book.dart';
-
-import '../../core/const/const_color.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:mugalim/presentation/books/screens/book_description_screen.dart';
+import 'package:mugalim/presentation/books/screens/done.dart';
+import 'package:mugalim/presentation/books/screens/select_book.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
+import '../../../core/const/const_color.dart';
 
 class JenreScreen extends StatefulWidget {
-  JenreScreen({Key? key, required this.index_month, required this.list})
+  JenreScreen({Key? key, required this.index_month, required this.list,})
       : super(key: key);
   int index_month;
   List list;
+
 
   @override
   State<JenreScreen> createState() => _JenreScreenState();
 }
 
 class _JenreScreenState extends State<JenreScreen> {
+  int index_month = 0;
   List list = ['Сентября', 'Октября', 'Ноября', 'Декабря'];
   List select_list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
   List array = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +62,17 @@ class _JenreScreenState extends State<JenreScreen> {
                             fontFamily: 'CeraPro',
                           ),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Книга ${list[widget.index_month.toInt()]} :',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'CeraPro',
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
@@ -472,7 +487,7 @@ class _JenreScreenState extends State<JenreScreen> {
                     ),
                   ),
                   onPressed: () {
-                    if (!list.isEmpty) {
+                    if (!widget.list.isEmpty) {
                       int index = array.contains(0)
                           ? 0
                           : array.contains(1)
@@ -483,7 +498,7 @@ class _JenreScreenState extends State<JenreScreen> {
                       // int size = widget.list.length;
                       String select_index = select_list[index];
                       print(select_index);
-                      if (widget.index_month.toInt() >= 3) {
+                      if (widget.index_month.toInt() >= 4) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -492,18 +507,25 @@ class _JenreScreenState extends State<JenreScreen> {
                       } else {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => BookScreen(
-                                    index_month: widget.index_month,
-                                    select_index: select_index,
-                                    list: widget.list,
-                                  )),
+                          MaterialPageRoute (
+                            builder: (BuildContext context) => BookScreen(
+                              index_month: widget.index_month,
+                              select_index: select_index,
+                              list: widget.list,
+                            ),
+                          ),
                         );
+                        // Navigator.pushReplacementNamed(context, BookRoute,
+                        //     arguments: {
+                        //       index_month: widget.index_month,
+                        //       select_index: select_index,
+                        //       list: widget.list,
+                        //     });
                       }
                     }
                   }),
               SizedBox(
-                height: 8,
+                height: 16,
               )
             ],
           ),

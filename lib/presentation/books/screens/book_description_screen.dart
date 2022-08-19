@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
-import 'package:mugalim/presentation/main/done.dart';
-import 'package:mugalim/presentation/main/select_jenre.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
+import 'package:mugalim/presentation/books/screens/done.dart';
+import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
 class BookDescriptionScreen extends StatefulWidget {
   BookDescriptionScreen(
@@ -72,8 +73,9 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         Center(
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(16),
-                              child: Image.asset('assets/images/image 15.png',
-                                  width: 140, height: 220, fit: BoxFit.cover)),
+                              child: Image.asset('assets/images/book1.png',
+                                  width: 140, height: 220, fit: BoxFit.cover)
+                          ),
                         ),
                         SizedBox(height: 8),
                         Text(
@@ -169,7 +171,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               ],
             ),
             Positioned(
-              bottom: 40,
+              bottom: 16,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Center(
@@ -196,12 +198,18 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ChoosenPage()),
+                                builder: (context) => ChoosenPage()
+                            ),
                           );
                         }
                         if (!widget.list.isEmpty &&
                             widget.index_month.toInt() < 3) {
                           widget.list.remove(widget.select_index);
+                          // Navigator.pushReplacementNamed(context, JenreRoute,
+                          //     arguments: {
+                          //       index_month: widget.index_month.toInt() + 1,
+                          //       list: widget.list,
+                          //     });
                           Navigator.push(
                             context,
                             MaterialPageRoute(

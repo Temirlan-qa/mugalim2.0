@@ -33,11 +33,21 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  cached_network_image: ^3.2.1
-  flutter_svg: ^1.1.1+1
+  flutter_bloc: ^8.0.1
+  bloc: ^8.1.0
+  cupertino_icons: ^1.0.5
+  flutter_svg: ^1.1.3
   pin_code_text_field: ^1.8.0
+  json_serializable: ^6.3.1
+  another_transformer_page_view: ^2.0.0
+  firebase_core: ^1.20.0
+  cached_network_image: ^3.2.1
+  firebase_auth: ^3.6.2
+  hive: ^2.2.3
+  get_it: ^7.2.0
   get: ^4.6.5
+  dio: ^4.0.6
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -48,12 +58,18 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
+  flutter_native_splash: ^2.2.7
+  build_runner: ^2.2.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+flutter_native_splash:
 
-# The following section is specific to Flutter packages.
+  color: "#FFFFFF"
+  #background_image: "assets/images/second.png"
+  image: assets/images/second.png
+  fullscreen: true
+  web: false
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -84,6 +100,8 @@ flutter:
         - asset: assets/fonts/CeraPro-Bold.ttf
         - asset: assets/fonts/CeraPro-Medium.ttf
         - asset: assets/fonts/CeraPro-Regular.ttf
+
+
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
