@@ -91,18 +91,10 @@ class _MainScreenState extends State<MainScreen> {
               ),
               child: ClipRRect(
                 child: BottomNavigationBar(
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
                   type: BottomNavigationBarType.fixed,
                   elevation: 0,
-                  selectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,fontSize: 11,color: Colors.red,
-                    fontFamily: 'CeraPro',
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,fontSize: 11,color: Colors.red,
-                    fontFamily: 'CeraPro',
-                  ),
-                  selectedItemColor: Color(0xff1A1A1A),
-                  unselectedItemColor: Color(0xff1A1A1A),
                   backgroundColor: brightness == Brightness.dark
                       ? ColorStyles.darkthemePageBackgroundColor
                       : Colors.white,
@@ -113,33 +105,45 @@ class _MainScreenState extends State<MainScreen> {
                   },
                   items: [
                     BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                          'assets/icons/feed.svg', _currentView, 'feed',
-                      ),
-                      label: 'Главная',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                          'assets/icons/zap.svg', _currentView, 'zap'),
-                      label: 'Развитие',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget('assets/icons/mcalendar.svg',
-                          _currentView, 'mcalendar'),
-                      label: 'Расписание',
-                    ),
+                        icon: NavBarItemWidget(
+                          'assets/icons/feed.svg',
+                          _currentView,
+                          'Главная',
+                        ),
+                      label: ''
+                        ),
                     BottomNavigationBarItem(
                         icon: NavBarItemWidget(
-                            'assets/icons/arrow-up-circle.svg',
-                            _currentView,
-                            'arrow-up-circle'),
-                      label: 'Рейтинг',
-                    ),
+                          'assets/icons/zap.svg',
+                          _currentView,
+                          'Развитие',
+                        ),
+                        label: ''
+                        ),
                     BottomNavigationBarItem(
                         icon: NavBarItemWidget(
-                            'assets/icons/user.svg', _currentView, 'user'),
-                      label: 'Профиль',
-                    ),
+                          'assets/icons/mcalendar.svg',
+                          _currentView,
+                          'Расписание',
+                        ),
+                        label: ''
+                        ),
+                    BottomNavigationBarItem(
+                        icon: NavBarItemWidget(
+                          'assets/icons/arrow-up-circle.svg',
+                          _currentView,
+                          'Рейтинг',
+                        ),
+                        label: ''
+                        ),
+                    BottomNavigationBarItem(
+                        icon: NavBarItemWidget(
+                          'assets/icons/user.svg',
+                          _currentView,
+                          'Профиль',
+                        ),
+                        label: ''
+                        ),
                   ],
                 ),
               ),

@@ -1,18 +1,23 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/home/screens/home_comments.dart';
 import 'package:mugalim/presentation/home/widgets/SizedBox.dart';
+import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
 import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
 
 class PostWidget extends StatefulWidget {
+  // post data
   final String postAuthor;
   final String postPublicationDate;
+
   final String title;
   final String imageAuthor;
 
+  // All info about image
   final bool hasImg;
   final String image;
 
@@ -25,6 +30,12 @@ class PostWidget extends StatefulWidget {
   final int votePPL2;
   final int voteProcent1;
   final int voteProcent2;
+
+  // Like Save Comments Show
+  final int pplLike;
+  final int pplCommented;
+  final int pplSaved;
+  final int pplShow;
 
   const PostWidget({
     Key? key,
@@ -46,6 +57,11 @@ class PostWidget extends StatefulWidget {
     required this.voteProcent1,
     required this.voteProcent2,
     required this.votetitle,
+    // Like Save Comments Show
+    required this.pplLike,
+    required this.pplCommented,
+    required this.pplSaved,
+    required this.pplShow,
   }) : super(key: key);
 
   @override
@@ -53,7 +69,10 @@ class PostWidget extends StatefulWidget {
 }
 
 class _PostWidgetState extends State<PostWidget> {
-  bool click_to_show = false;
+  String str =
+      'Нельзя без последствий для здоровья изо дня в день проявлять себя противно тому, что чувствуешь; распинаться перед тем, чего не любишь, радоваться тому, что приносит несчастье. Наша нервная система не пустой звук, не выдумка. Она — состоящее из волокон физическое тело. Наша душа занимает место в пространстве и помещается в нас как зубы во рту. Ее нельзя без конца насиловать безнаказанно.\n\nБорис Пастернак, «Доктор Живаго»';
+  String title =
+      "Нельзя без последствий для здоровья изо дня в день проявлять себя противно тому, что чувствуешь; распинаться перед тем, чего не любишь, радоваться тому, что приносит несчастье. Наша нервная систем";
   String gonna = "";
   bool isExpanded = false;
   @override
@@ -62,7 +81,29 @@ class _PostWidgetState extends State<PostWidget> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomeCommentsPage()),
+          MaterialPageRoute(
+            builder: (context) => HomeCommentsPage(
+              pplLike: widget.pplLike,
+              pplCommented: widget.pplCommented,
+              pplSaved: widget.pplSaved,
+              pplShow: widget.pplShow,
+
+              hasImg: widget.hasImg,
+              hasVote: widget.hasVote,
+              image: widget.image,
+              imageAuthor: widget.imageAuthor,
+              title: widget.title,
+              postAuthor: widget.postAuthor,
+              postPublicationDate: widget.postPublicationDate,
+              votePPL1: widget.votePPL1,
+              votePPL2: widget.votePPL2,
+              voteProcent1: widget.voteProcent1,
+              voteProcent2: widget.voteProcent2,
+              voteAnswer1: widget.voteAnswer1,
+              voteAnswer2: widget.voteAnswer2,
+              votetitle: widget.votetitle,
+            ),
+          ),
         );
       },
       child: Container(
@@ -97,7 +138,7 @@ class _PostWidgetState extends State<PostWidget> {
                           Text(
                             widget.postAuthor,
                             style: TextStyles.mediumStyle.copyWith(
-                              color: const Color(0xFF1A1A1A),
+                              color: ColorStyles.neutralsTextPrimaryColor,
                               fontSize: 14,
                               height: 1.4,
                             ),
@@ -105,7 +146,7 @@ class _PostWidgetState extends State<PostWidget> {
                           Text(
                             widget.postPublicationDate,
                             style: TextStyles.regularStyle.copyWith(
-                              color: const Color(0xff767676),
+                              color: ColorStyles.primarySurfaceHoverColor,
                             ),
                           ),
                         ],
@@ -113,22 +154,21 @@ class _PostWidgetState extends State<PostWidget> {
                       const Spacer(),
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.more_horiz,
                           size: 28,
-                          color: Color(0xFF767676),
+                          color: ColorStyles.primarySurfaceHoverColor,
                         ),
                       ),
                     ],
                   ),
                   sizedBoxHeight16(),
-
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
                       widget.title,
                       style: TextStyles.regularStyle.copyWith(
-                        color: const Color(0xFF1A1A1A),
+                        color: ColorStyles.neutralsTextPrimaryColor,
                       ),
                       maxLines: isExpanded ? 11 : 4,
                       softWrap: true,
@@ -139,55 +179,43 @@ class _PostWidgetState extends State<PostWidget> {
                     height: 4,
                   ),
                   widget.title.length < 197
-                      ? SizedBox()
-                      : InkWell(
-                          onTap: () {
-                            setState(() {
-                              isExpanded = !isExpanded;
-                            });
-                          },
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              isExpanded == false
-                                  ? 'Показать полностью...'
-                                  : 'Show less',
-                              style: TextStyles.mediumStyle.copyWith(
-                                fontSize: 14,
-                                color: const Color(0xff3D3DD8),
+                      ? const SizedBox()
+                      : Visibility(
+                          visible: !isExpanded,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                isExpanded = true;
+                              });
+                            },
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                isExpanded ? '' : 'Показать полностью...',
+                                style: TextStyles.mediumStyle.copyWith(
+                                  fontSize: 14,
+                                  color: ColorStyles.primaryBorderColor,
+                                ),
+                                maxLines: 1,
                               ),
-                              maxLines: 1,
                             ),
                           ),
                         ),
-
                   sizedBoxHeight8(),
-                  Visibility(
-                    visible: widget.hasVote,
-                    child: Column(
-                      children: [
-                        VoteWidget(
-                          votetitle: widget.votetitle,
-                          voteAnswer1: widget.voteAnswer1,
-                          voteAnswer2: widget.voteAnswer2,
-                          voteProcent1: widget.voteProcent1,
-                          voteProcent2: widget.voteProcent2,
-                          votePPL1: widget.votePPL1,
-                          votePPL2: widget.votePPL2,
-                        ),
-                        sizedBoxHeight8(),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
             Visibility(
               visible: widget.hasImg,
-              child: Image.asset(
-                widget.image,
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.image,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  sizedBoxHeight8(),
+                ],
               ),
             ),
             Container(
@@ -198,114 +226,26 @@ class _PostWidgetState extends State<PostWidget> {
               ),
               child: Column(
                 children: [
+                  Visibility(
+                    visible: widget.hasVote,
+                    child: VoteWidget(
+                      votetitle: widget.votetitle,
+                      voteAnswer1: widget.voteAnswer1,
+                      voteAnswer2: widget.voteAnswer2,
+                      voteProcent1: widget.voteProcent1,
+                      voteProcent2: widget.voteProcent2,
+                      votePPL1: widget.votePPL1,
+                      votePPL2: widget.votePPL2,
+                    ),
+                  ),
                   sizedBoxHeight8(),
                   const LineWidget(),
                   sizedBoxHeight8(),
-                  Row(
-                    children: [
-                      Container(
-                        width: 45,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF9F9F9),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/heart.svg',
-                              color: const Color(0xff767676),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Text(
-                              '0',
-                              style: TextStyle(
-                                color: Color(0xff767676),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      sizedBoxWidth8(),
-                      Container(
-                        width: 45,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF9F9F9),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/comment.svg',
-                              color: const Color(0xff767676),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Text(
-                              '0',
-                              style: TextStyle(
-                                color: Color(0xff767676),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      sizedBoxWidth8(),
-                      Container(
-                        width: 45,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF9F9F9),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/share.svg',
-                              color: const Color(0xff767676),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Text(
-                              '0',
-                              style: TextStyle(
-                                color: Color(0xff767676),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/eyeIcon.svg',
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          const Text(
-                            '2',
-                            style: TextStyle(
-                              color: Color(0xff767676),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  ActionsRowWidget(
+                    pplLike: widget.pplLike,
+                    pplCommented: widget.pplCommented,
+                    pplSaved: widget.pplSaved,
+                    pplShow: widget.pplShow,
                   ),
                   sizedBoxHeight16(),
                 ],
