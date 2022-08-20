@@ -19,6 +19,7 @@ class NavBarItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
     return Container(
+
       padding: EdgeInsets.only(top: 9),
       color: brightness == Brightness.dark
           ? ColorStyles.darkthemePageBackgroundColor
@@ -69,6 +70,7 @@ class NavBarItemWidget extends StatelessWidget {
                   : Color(0xff1a1a1a),
             )),
           )
+
         ],
       ),
     );

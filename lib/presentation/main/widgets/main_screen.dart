@@ -93,6 +93,7 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
               child: ClipRRect(
+
                 child: CupertinoTabBar(
                   backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
                   border: Border(top: BorderSide(color: Colors.transparent)),
