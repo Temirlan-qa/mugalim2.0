@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class ColorStyles {
   //primary
-  static Color primarySurfaceColor = const Color(0xFFE6EEFF);
-  static Color primarySurfaceHoverColor = const Color(0xFFCBDBFF);
-  static Color primaryBorderColor = const Color(0xFF1656FD);
+  static Color primarySurfaceColor = const Color(0xffF9F9F9);
+  static Color primarySurfaceHoverColor = const Color(0xff767676);
+  static Color primaryBorderColor = const Color(0xff3D3DD8);
   static Color primaryBorderHoverColor = const Color(0xFF0243EC);
   static Color primaryShapeColor = const Color(0xFF0243EC);
   static Color primaryShapeHoverColor = const Color(0xFF002583);
@@ -100,7 +100,7 @@ class ColorStyles {
   static Color neutralsShapeSecondaryDisabledColor = const Color(0xFFB8C4E5);
   static Color neutralsTextSecondaryColor = const Color(0xFF333E5A);
   static Color neutralsTextSecondaryDisabledColor = const Color(0xFFB9C4D9);
-  static Color neutralsTextPrimaryColor = const Color(0xFF11151F);
+  static Color neutralsTextPrimaryColor = const Color(0xFF1A1A1A);
   static Color neutralsTextPrimaryDisabledColor = const Color(0xFFB9C4D9);
   // dark theme
   static Color darkthemePageBackgroundColor = const Color(0xFF272831);
