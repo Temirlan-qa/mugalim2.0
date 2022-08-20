@@ -19,12 +19,11 @@ class NavBarItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
     return Container(
-
-      padding: EdgeInsets.only(top: 9),
+      padding: const EdgeInsets.only(top: 9),
       color: brightness == Brightness.dark
           ? ColorStyles.darkthemePageBackgroundColor
           : Colors.white,
-      width: MediaQuery.of(context).size.width / 2,
+      width: MediaQuery.of(context).size.width / 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,44 +32,42 @@ class NavBarItemWidget extends StatelessWidget {
             imgUrl,
             height: 19,
             color: _currentView == 0 && title == 'Главная'
-                ? Color(0xff3D3DD8)
+                ? ColorStyles.primaryBorderColor
                 : _currentView == 1 && title == 'Развитие'
-                ? Color(0xff3D3DD8)
-                : _currentView == 2 && title == 'Расписание'
-                ? Color(0xff3D3DD8)
-                : _currentView == 3 && title == 'Рейтинг'
-                ? Color(0xff3D3DD8)
-                : _currentView == 4 && title == 'Профиль'
-                ? Color(0xff3D3DD8)
-                : brightness == Brightness.dark
-                ? Colors.white
-                : Color(0xff1a1a1a)
-            // : ColorStyles.neutralsShapeSecondaryColor ,
+                    ? ColorStyles.primaryBorderColor
+                    : _currentView == 2 && title == 'Расписание'
+                        ? ColorStyles.primaryBorderColor
+                        : _currentView == 3 && title == 'Рейтинг'
+                            ? ColorStyles.primaryBorderColor
+                            : _currentView == 4 && title == 'Профиль'
+                                ? ColorStyles.primaryBorderColor
+                                : brightness == Brightness.dark
+                                    ? Colors.white
+                                    : ColorStyles.neutralsTextPrimaryColor,
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             title,
-            style: (TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 11,
               fontStyle: FontStyle.normal,
               fontFamily: 'assets/fonts/CeraPro-Regular.ttf',
               color: _currentView == 0 && title == 'Главная'
-                  ? Color(0xff3D3DD8)
+                  ? ColorStyles.primaryBorderColor
                   : _currentView == 1 && title == 'Развитие'
-                  ? Color(0xff3D3DD8)
-                  : _currentView == 2 && title == 'Расписание'
-                  ? Color(0xff3D3DD8)
-                  : _currentView == 3 && title == 'Рейтинг'
-                  ? Color(0xff3D3DD8)
-                  : _currentView == 4 && title == 'Профиль'
-                  ? Color(0xff3D3DD8)
-                  : brightness == Brightness.dark
-                  ? Colors.white
-                  : Color(0xff1a1a1a),
-            )),
-          )
-
+                      ? ColorStyles.primaryBorderColor
+                      : _currentView == 2 && title == 'Расписание'
+                          ? ColorStyles.primaryBorderColor
+                          : _currentView == 3 && title == 'Рейтинг'
+                              ? ColorStyles.primaryBorderColor
+                              : _currentView == 4 && title == 'Профиль'
+                                  ? ColorStyles.primaryBorderColor
+                                  : brightness == Brightness.dark
+                                      ? Colors.white
+                                      : ColorStyles.neutralsTextPrimaryColor,
+            ),
+          ),
         ],
       ),
     );

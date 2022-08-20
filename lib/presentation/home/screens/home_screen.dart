@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/presentation/home/widgets/SizedBox.dart';
+import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import '../../../core/const/const_color.dart';
 

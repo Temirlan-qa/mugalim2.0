@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../core/const/const_color.dart';
+import '../../../core/const/const_color.dart';
 
 class NavBarItemWidget extends StatelessWidget {
   final String imgUrl;
@@ -20,7 +19,7 @@ class NavBarItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
     return Container(
-      padding: EdgeInsets.only(top: 9),
+      padding: const EdgeInsets.only(top: 9),
       color: brightness == Brightness.dark
           ? ColorStyles.darkthemePageBackgroundColor
           : Colors.white,
@@ -33,31 +32,30 @@ class NavBarItemWidget extends StatelessWidget {
             imgUrl,
             height: 19,
             color: _currentView == 0 && title == 'Главная'
-                ? Color(0xff3D3DD8)
+                ? ColorStyles.primaryBorderColor
                 : _currentView == 1 && title == 'Мои курсы'
-                    ? Color(0xff3D3DD8)
+                    ? ColorStyles.primaryBorderColor
                     : brightness == Brightness.dark
                         ? Colors.white
                         : ColorStyles.neutralsShapeSecondaryColor,
-            // : ColorStyles.neutralsShapeSecondaryColor ,
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             title,
-            style: (TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 11,
               fontStyle: FontStyle.normal,
               fontFamily: 'assets/fonts/CeraPro-Regular.ttf',
               color: _currentView == 0 && title == 'Главная'
-                  ? Color(0xff3D3DD8)
+                  ? ColorStyles.primaryBorderColor
                   : _currentView == 1 && title == 'Мои курсы'
-                      ? Color(0xff3D3DD8)
+                      ? ColorStyles.primaryBorderColor
                       : brightness == Brightness.dark
                           ? Colors.white
                           : ColorStyles.neutralsShapeSecondaryColor,
-            )),
-          )
+            ),
+          ),
         ],
       ),
     );

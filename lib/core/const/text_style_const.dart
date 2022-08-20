@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'const_color.dart';
 
 class TextStyles {
-  static TextStyle boldStyle = TextStyle(
+  static TextStyle boldStyle = const TextStyle(
     decoration: TextDecoration.none,
-    fontSize: 16,
     fontWeight: FontWeight.w700,
-    color: ColorStyles.infoTextColor,
     fontFamily: 'CeraPro',
     // letterSpacing: 0.3
   );

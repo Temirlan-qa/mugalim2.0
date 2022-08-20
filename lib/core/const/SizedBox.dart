@@ -11,6 +11,17 @@ SizedBox sizedBoxHeight8() {
     height: 8,
   );
 }
+SizedBox sizedBoxHeight4() {
+  return const SizedBox(
+    height: 4,
+  );
+}
+
+SizedBox sizedBoxHeight24() {
+  return const SizedBox(
+    height: 24,
+  );
+}
 
 SizedBox sizedBoxWidth4() {
   return const SizedBox(width: 4);
@@ -25,3 +36,5 @@ SizedBox sizedBoxWidth16() {
     width: 16,
   );
 }
+
+

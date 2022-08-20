@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/presentation/home/widgets/SizedBox.dart';
+import 'package:mugalim/core/const/SizedBox.dart';
 
 class VoteWidget extends StatefulWidget {
   final String votetitle;

@@ -9,8 +9,8 @@ import 'package:mugalim/core/routes/routes.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
-import 'package:mugalim/presentation/main/coursePageDetailed.dart';
-import 'package:mugalim/presentation/main/coursePage_myCourses.dart';
+import 'package:mugalim/presentation/development/widgets/coursePageDetailed.dart';
+import 'package:mugalim/presentation/development/widgets/coursePage_myCourses.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
 import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 
