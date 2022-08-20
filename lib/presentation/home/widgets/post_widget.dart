@@ -1,6 +1,6 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_svg/svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
@@ -69,15 +69,13 @@ class PostWidget extends StatefulWidget {
 }
 
 class _PostWidgetState extends State<PostWidget> {
-  String str =
-      'Нельзя без последствий для здоровья изо дня в день проявлять себя противно тому, что чувствуешь; распинаться перед тем, чего не любишь, радоваться тому, что приносит несчастье. Наша нервная система не пустой звук, не выдумка. Она — состоящее из волокон физическое тело. Наша душа занимает место в пространстве и помещается в нас как зубы во рту. Ее нельзя без конца насиловать безнаказанно.\n\nБорис Пастернак, «Доктор Живаго»';
-  String title =
-      "Нельзя без последствий для здоровья изо дня в день проявлять себя противно тому, что чувствуешь; распинаться перед тем, чего не любишь, радоваться тому, что приносит несчастье. Наша нервная систем";
   String gonna = "";
   bool isExpanded = false;
+
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
@@ -87,7 +85,6 @@ class _PostWidgetState extends State<PostWidget> {
               pplCommented: widget.pplCommented,
               pplSaved: widget.pplSaved,
               pplShow: widget.pplShow,
-
               hasImg: widget.hasImg,
               hasVote: widget.hasVote,
               image: widget.image,
@@ -182,7 +179,7 @@ class _PostWidgetState extends State<PostWidget> {
                       ? const SizedBox()
                       : Visibility(
                           visible: !isExpanded,
-                          child: InkWell(
+                          child: GestureDetector(
                             onTap: () {
                               setState(() {
                                 isExpanded = true;
@@ -215,6 +212,8 @@ class _PostWidgetState extends State<PostWidget> {
                     width: MediaQuery.of(context).size.width,
                   ),
                   sizedBoxHeight8(),
+                  const LineWidget(),
+                  sizedBoxHeight8(),
                 ],
               ),
             ),
@@ -228,18 +227,22 @@ class _PostWidgetState extends State<PostWidget> {
                 children: [
                   Visibility(
                     visible: widget.hasVote,
-                    child: VoteWidget(
-                      votetitle: widget.votetitle,
-                      voteAnswer1: widget.voteAnswer1,
-                      voteAnswer2: widget.voteAnswer2,
-                      voteProcent1: widget.voteProcent1,
-                      voteProcent2: widget.voteProcent2,
-                      votePPL1: widget.votePPL1,
-                      votePPL2: widget.votePPL2,
+                    child: Column(
+                      children: [
+                        VoteWidget(
+                          votetitle: widget.votetitle,
+                          voteAnswer1: widget.voteAnswer1,
+                          voteAnswer2: widget.voteAnswer2,
+                          voteProcent1: widget.voteProcent1,
+                          voteProcent2: widget.voteProcent2,
+                          votePPL1: widget.votePPL1,
+                          votePPL2: widget.votePPL2,
+                        ),
+                        sizedBoxHeight8(),
+                        const LineWidget(),
+                      ],
                     ),
                   ),
-                  sizedBoxHeight8(),
-                  const LineWidget(),
                   sizedBoxHeight8(),
                   ActionsRowWidget(
                     pplLike: widget.pplLike,

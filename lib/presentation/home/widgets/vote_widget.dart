@@ -29,6 +29,16 @@ class VoteWidget extends StatefulWidget {
 class _VoteWidgetState extends State<VoteWidget> {
   bool clickToShow = false;
   String gonna = "";
+
+  // final _textWidgetKey = GlobalKey();
+  // double _textWidgetSize = 0;
+  //
+  // void _getSize() {
+  //   setState(() {
+  //     _textWidgetSize = _textWidgetKey.currentContext!.size!.height;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,15 +57,17 @@ class _VoteWidgetState extends State<VoteWidget> {
             widget.votetitle,
             textAlign: TextAlign.center,
             style: TextStyles.mediumStyle.copyWith(
-              color: Color(0xFF1A1A1A),
+              color: const Color(0xFF1A1A1A),
               fontSize: 20,
               height: 1.2,
             ),
           ),
           sizedBoxHeight16(),
-          inkWell(widget.voteAnswer1, widget.voteProcent1, widget.votePPL1),
+          gestureDetector(
+              widget.voteAnswer1, widget.voteProcent1, widget.votePPL1),
           sizedBoxHeight8(),
-          inkWell(widget.voteAnswer2, widget.voteProcent2, widget.votePPL2),
+          gestureDetector(
+              widget.voteAnswer2, widget.voteProcent2, widget.votePPL2),
           sizedBoxHeight16(),
           Center(
             child: Text(
@@ -70,18 +82,19 @@ class _VoteWidgetState extends State<VoteWidget> {
     );
   }
 
-  InkWell inkWell(String text, int procent, int votePPL1) {
-    return InkWell(
+  GestureDetector gestureDetector(String text, int procent, int votePPL1) {
+    return GestureDetector(
       onTap: () {
+        // _getSize();
         setState(() {
           clickToShow = !clickToShow;
           gonna = text;
         });
-        print('You tap $text');
       },
       child: Container(
-        width: (MediaQuery.of(context).size.width - 32),
-        //height: 32,
+        // key: _textWidgetKey,
+        width: (MediaQuery.of(context).size.width - 64),
+        // height: 32,
         decoration: const BoxDecoration(
           color: Color(0xFFF9F9F9),
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -97,8 +110,8 @@ class _VoteWidgetState extends State<VoteWidget> {
                   topLeft: Radius.circular(8),
                 ),
               ),
-              width: (MediaQuery.of(context).size.width - 32) * procent / 100,
-              //height: 32,
+              width: (MediaQuery.of(context).size.width - 64) * procent / 100,
+              height: 32,
             ),
             Container(
               padding: const EdgeInsets.only(
