@@ -9,6 +9,8 @@ import 'package:mugalim/core/routes/routes.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
+import 'package:mugalim/presentation/main/coursePageDetailed.dart';
+import 'package:mugalim/presentation/main/coursePage_myCourses.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
 import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 
@@ -27,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     var brightness = Theme.of(context).brightness;
     return Stack(
       children: [
+
         Scaffold(
             backgroundColor: brightness == Brightness.dark
                 ? ColorStyles.darkthemePageBackgroundColor
@@ -90,14 +93,10 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
               child: ClipRRect(
-                child: BottomNavigationBar(
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  type: BottomNavigationBarType.fixed,
-                  elevation: 0,
-                  backgroundColor: brightness == Brightness.dark
-                      ? ColorStyles.darkthemePageBackgroundColor
-                      : Colors.white,
+
+                child: CupertinoTabBar(
+                  backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+                  border: Border(top: BorderSide(color: Colors.transparent)),
                   onTap: (int index) {
                     setState(() {
                       _currentView = index;
@@ -105,49 +104,37 @@ class _MainScreenState extends State<MainScreen> {
                   },
                   items: [
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
-                          'assets/icons/feed.svg',
-                          _currentView,
-                          'Главная',
-                        ),
-                      label: ''
-                        ),
+                      icon: NavBarItemWidget(
+                        'assets/icons/feed.svg', _currentView, 'Главная',
+                      ),
+                    ),
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
-                          'assets/icons/zap.svg',
-                          _currentView,
-                          'Развитие',
-                        ),
-                        label: ''
-                        ),
+                      icon: NavBarItemWidget(
+                          'assets/icons/zap.svg', _currentView, 'Развитие'),
+
+                    ),
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
-                          'assets/icons/mcalendar.svg',
-                          _currentView,
-                          'Расписание',
-                        ),
-                        label: ''
-                        ),
+                      icon: NavBarItemWidget('assets/icons/mcalendar.svg',
+                          _currentView, 'Расписание'),
+
+                    ),
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
+                      icon: NavBarItemWidget(
                           'assets/icons/arrow-up-circle.svg',
                           _currentView,
-                          'Рейтинг',
-                        ),
-                        label: ''
-                        ),
+                          'Рейтинг'),
+
+                    ),
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
-                          'assets/icons/user.svg',
-                          _currentView,
-                          'Профиль',
-                        ),
-                        label: ''
-                        ),
+                      icon: NavBarItemWidget(
+                          'assets/icons/user.svg', _currentView, 'Профиль'),
+
+                    ),
                   ],
                 ),
               ),
-            )),
+              ),
+            ),
       ],
     );
   }
