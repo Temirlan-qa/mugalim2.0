@@ -9,6 +9,8 @@ import 'package:mugalim/core/routes/routes.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
+import 'package:mugalim/presentation/main/coursePageDetailed.dart';
+import 'package:mugalim/presentation/main/coursePage_myCourses.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
 import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 
@@ -27,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     var brightness = Theme.of(context).brightness;
     return Stack(
       children: [
+
         Scaffold(
             backgroundColor: brightness == Brightness.dark
                 ? ColorStyles.darkthemePageBackgroundColor
@@ -90,22 +93,9 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
               child: ClipRRect(
-                child: BottomNavigationBar(
-                  type: BottomNavigationBarType.fixed,
-                  elevation: 0,
-                  selectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,fontSize: 11,color: Colors.red,
-                    fontFamily: 'CeraPro',
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,fontSize: 11,color: Colors.red,
-                    fontFamily: 'CeraPro',
-                  ),
-                  selectedItemColor: Color(0xff1A1A1A),
-                  unselectedItemColor: Color(0xff1A1A1A),
-                  backgroundColor: brightness == Brightness.dark
-                      ? ColorStyles.darkthemePageBackgroundColor
-                      : Colors.white,
+                child: CupertinoTabBar(
+                  backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
+                  border: Border(top: BorderSide(color: Colors.transparent)),
                   onTap: (int index) {
                     setState(() {
                       _currentView = index;
@@ -114,36 +104,36 @@ class _MainScreenState extends State<MainScreen> {
                   items: [
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget(
-                          'assets/icons/feed.svg', _currentView, 'feed',
+                        'assets/icons/feed.svg', _currentView, 'Главная',
                       ),
-                      label: 'Главная',
                     ),
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget(
-                          'assets/icons/zap.svg', _currentView, 'zap'),
-                      label: 'Развитие',
+                          'assets/icons/zap.svg', _currentView, 'Развитие'),
+
                     ),
                     BottomNavigationBarItem(
                       icon: NavBarItemWidget('assets/icons/mcalendar.svg',
-                          _currentView, 'mcalendar'),
-                      label: 'Расписание',
+                          _currentView, 'Расписание'),
+
                     ),
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
-                            'assets/icons/arrow-up-circle.svg',
-                            _currentView,
-                            'arrow-up-circle'),
-                      label: 'Рейтинг',
+                      icon: NavBarItemWidget(
+                          'assets/icons/arrow-up-circle.svg',
+                          _currentView,
+                          'Рейтинг'),
+
                     ),
                     BottomNavigationBarItem(
-                        icon: NavBarItemWidget(
-                            'assets/icons/user.svg', _currentView, 'user'),
-                      label: 'Профиль',
+                      icon: NavBarItemWidget(
+                          'assets/icons/user.svg', _currentView, 'Профиль'),
+
                     ),
                   ],
                 ),
               ),
-            )),
+              ),
+            ),
       ],
     );
   }

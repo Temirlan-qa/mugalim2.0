@@ -35,14 +35,14 @@ class _CoursePageState extends State<CoursePage> {
           index: currentPage,
           children: <Widget>[
             CupertinoTabView(
-              navigatorKey: Get.nestedKey(0),
+              navigatorKey: Get.nestedKey(4),
               navigatorObservers: [GetObserver((_) {}, Get.routing)],
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
               builder: (_) => CoursePageDetailed(),
             ),
             CupertinoTabView(
-              navigatorKey: Get.nestedKey(1),
+              navigatorKey: Get.nestedKey(5),
               navigatorObservers: [GetObserver((_) {}, Get.routing)],
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),

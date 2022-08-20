@@ -19,32 +19,56 @@ class NavBarItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
     return Container(
-      padding: EdgeInsets.only(top: 4,bottom: 7),
+      padding: EdgeInsets.only(top: 9),
       color: brightness == Brightness.dark
           ? ColorStyles.darkthemePageBackgroundColor
           : Colors.white,
-      width: MediaQuery.of(context).size.width / 5,
+      width: MediaQuery.of(context).size.width / 2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(imgUrl,
-              height: 24,
-              color: _currentView == 0 && title == 'feed'
-                  ? ColorStyles.primaryShapeColor
-                  : _currentView == 1 && title == 'zap'
-                      ? ColorStyles.primaryShapeColor
-                      : _currentView == 2 && title == 'mcalendar'
-                          ? ColorStyles.primaryShapeColor
-                          : _currentView == 3 && title == 'arrow-up-circle'
-                              ? ColorStyles.primaryShapeColor
-                              : _currentView == 4 && title == 'user'
-                                  ? ColorStyles.primaryShapeColor
-                                  : brightness == Brightness.dark
-                                      ? Colors.white
-                                      : ColorStyles.neutralsShapeSecondaryColor
-              // : ColorStyles.neutralsShapeSecondaryColor ,
-              ),
+          SvgPicture.asset(
+            imgUrl,
+            height: 19,
+            color: _currentView == 0 && title == 'Главная'
+                ? Color(0xff3D3DD8)
+                : _currentView == 1 && title == 'Развитие'
+                ? Color(0xff3D3DD8)
+                : _currentView == 2 && title == 'Расписание'
+                ? Color(0xff3D3DD8)
+                : _currentView == 3 && title == 'Рейтинг'
+                ? Color(0xff3D3DD8)
+                : _currentView == 4 && title == 'Профиль'
+                ? Color(0xff3D3DD8)
+                : brightness == Brightness.dark
+                ? Colors.white
+                : Color(0xff1a1a1a)
+            // : ColorStyles.neutralsShapeSecondaryColor ,
+          ),
+          SizedBox(height: 5),
+          Text(
+            title,
+            style: (TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 11,
+              fontStyle: FontStyle.normal,
+              fontFamily: 'assets/fonts/CeraPro-Regular.ttf',
+              color: _currentView == 0 && title == 'Главная'
+                  ? Color(0xff3D3DD8)
+                  : _currentView == 1 && title == 'Развитие'
+                  ? Color(0xff3D3DD8)
+                  : _currentView == 2 && title == 'Расписание'
+                  ? Color(0xff3D3DD8)
+                  : _currentView == 3 && title == 'Рейтинг'
+                  ? Color(0xff3D3DD8)
+                  : _currentView == 4 && title == 'Профиль'
+                  ? Color(0xff3D3DD8)
+                  : brightness == Brightness.dark
+                  ? Colors.white
+                  : Color(0xff1a1a1a),
+            )),
+          )
         ],
       ),
     );
