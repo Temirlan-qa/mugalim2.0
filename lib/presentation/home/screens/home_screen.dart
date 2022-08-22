@@ -36,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 1111,
       'pplSaved': 21111,
@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 111,
       'pplSaved': 222,
@@ -78,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 11,
       'pplSaved': 22,
@@ -99,8 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 1,
       'pplSaved': 2,
@@ -120,9 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
-      'votetitle': 'Пойдете ли вы ы Kokshetau вместе с группой?',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
+      'votetitle': 'Пойдете ли вы в Kokshetau вместе с группой?',
       'pplShow': 0,
       'pplSaved': 0,
       'pplLike': 0,
@@ -141,8 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 9,
       'pplSaved': 9,
@@ -153,9 +153,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // List of items in our dropdown menu
   var items = [
-    'Новости ',
-    'Регион ',
-    'Город ',
+    'Новости',
+    'Регион',
+    'Город',
   ];
   bool search = false;
   TextEditingController searchEditingController = TextEditingController();
@@ -196,11 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                     icon: !search
-                        ? Icon(
-                            Icons.search,
-                            size: 28,
-                            color: ColorStyles.primaryBorderColor,
-                          )
+                        ? SvgPicture.asset('assets/icons/search.svg',width: 21,height: 21,)
                         : const SizedBox(),
                   ),
                 ),

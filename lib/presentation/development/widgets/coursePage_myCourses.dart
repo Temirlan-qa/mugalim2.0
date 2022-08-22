@@ -77,7 +77,9 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
               IconButton(
                 icon: SvgPicture.asset('assets/icons/cancel.svg'),
                 color: Color(0xff3D3DD8),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ],
             backgroundColor: Colors.white,

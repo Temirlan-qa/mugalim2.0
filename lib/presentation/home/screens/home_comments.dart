@@ -96,10 +96,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
           IconButton(
             color: const Color(0xFF3D3DD8),
             onPressed: () {},
-            icon: const Icon(
-              Icons.ios_share,
-              size: 20,
-            ),
+            icon: SvgPicture.asset('assets/icons/ios_share.svg',width: 18.67,height: 23.33,),
           ),
         ],
         leading: IconButton(
@@ -313,7 +310,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                 style: const TextStyle(
                                   fontSize: 13,
                                   decoration: TextDecoration.none,
-                                  color: Color(0xff767676),
+                                  color: Colors.black,
                                   fontFamily: 'CeraPro',
                                 ),
                               ),
