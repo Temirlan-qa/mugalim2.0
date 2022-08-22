@@ -8,7 +8,7 @@ import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/select_jenre.dart';
-import '../../presentation/development/widgets/course_main_screen.dart';
+import '../../presentation/development/widgets/coursePage.dart';
 import '../../presentation/main/widgets/main_screen.dart';
 import '../injection_container.dart';
 

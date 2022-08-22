@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../core/const/const_color.dart';
 import 'coursePageDetailed.dart';
 import 'coursePage_myCourses.dart';
-import 'course_nav_bar_item_widget.dart';
+import 'courseWidget.dart';
 
 
 
