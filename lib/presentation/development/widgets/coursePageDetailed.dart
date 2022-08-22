@@ -62,6 +62,8 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Text(
           'Курсы',
           style: TextStyles.boldStyle.copyWith(
@@ -73,10 +75,14 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
           IconButton(
             icon: SvgPicture.asset('assets/icons/cancel.svg'),
             color: ColorStyles.primaryBorderColor,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         ],
         bottom: AppBar(
+            automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
             elevation: 1,
             title: SizedBox(
               width: double.maxFinite,

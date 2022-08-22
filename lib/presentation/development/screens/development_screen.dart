@@ -6,6 +6,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/development/widgets/coursePage.dart';
 
 import '../../../core/const/const_color.dart';
+import '../../../core/routes/routes_const.dart';
 import '../../books/screens/select_jenre.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -91,12 +92,13 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const CoursePage()),
-                                        );
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           const CoursePage()),
+                                        // );
+                                        Navigator.pushNamed(context, CourseRoute);
                                       },
                                       child: SizedBox(
                                         width: 80,
