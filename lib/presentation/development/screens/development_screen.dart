@@ -98,7 +98,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                         //       builder: (context) =>
                                         //           const CoursePage()),
                                         // );
-                                        Navigator.pushNamed(context, CourseRoute);
+                                        Navigator.of(context, rootNavigator: true).pushNamed(CourseRoute);
                                       },
                                       child: SizedBox(
                                         width: 80,
@@ -134,7 +134,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           ),
                                         );
                                       },
-                                      child: SizedBox(
+                                      child: Container(
                                         width: 80,
                                         height: 80,
                                         child: Column(

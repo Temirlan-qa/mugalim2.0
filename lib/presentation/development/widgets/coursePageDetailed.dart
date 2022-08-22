@@ -302,7 +302,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             ),
             SizedBox(height: 8),
             Container(
-              height: 528,
+              // height: 528,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -327,10 +327,11 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                   ),
                   SizedBox(height: 16),
                   Padding(
-                    padding: const EdgeInsets.only(right: 16, left: 16, top: 8),
+                    padding: const EdgeInsets.only(right: 16, left: 16, top: 8,bottom: 16),
                     child: GridView.count(
                       childAspectRatio: 167 / 190,
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
                       crossAxisCount: 2,
@@ -448,7 +449,8 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                   ),
                 ],
               ),
-            )
+            ),
+            // SizedBox(height: 100,),
           ],
         ),
       ),

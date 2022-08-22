@@ -1,6 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
@@ -164,6 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int dropDownindex = 0;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return DefaultTabController(
       initialIndex: tabIndex,
       length: 3,
@@ -271,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(
                       color: ColorStyles.primaryBorderColor, width: 2),
-                  insets: const EdgeInsets.symmetric(horizontal: 15),
+                  insets: const EdgeInsets.symmetric(horizontal: 16),
                 ),
                 onTap: (index){
                   setState((){
@@ -281,39 +284,46 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   });
                 },
+                isScrollable: true,
                 tabs: [
-                  Tab(
-                    child: Row(
-                      children: [
-                        Text(
-                          maxLines: 1,
-                          overflow: TextOverflow.clip,
-                          'Новости',
-                          style: TextStyles.mediumStyle.copyWith(
-                            fontSize: 16,
-                            color: dropDownindex == 0 ? Colors.black : ColorStyles.primarySurfaceHoverColor,
+                  Container(
+                    width: width/3-40,
+                    child: Tab(
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 5,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 3,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              buttonDown = !buttonDown;
-                            });
-                          },
-                          child: Visibility(
-                            visible: dropDownindex == 0,
-                            child: Icon(
-                              buttonDown ? Icons.keyboard_arrow_up :Icons.keyboard_arrow_down,
-                              //Icons.keyboard_arrow_up,
-                              size: 16,
-                              color: ColorStyles.primaryBorderColor,
+                          Text(
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            'Новости',
+                            style: TextStyles.mediumStyle.copyWith(
+                              fontSize: 16,
+                              color: dropDownindex == 0 ? Colors.black : ColorStyles.primarySurfaceHoverColor,
                             ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                buttonDown = !buttonDown;
+                              });
+                            },
+                            child: Visibility(
+                              visible: dropDownindex == 0,
+                              child: Icon(
+                                buttonDown ? Icons.keyboard_arrow_up :Icons.keyboard_arrow_down,
+                                //Icons.keyboard_arrow_up,
+                                size: 16,
+                                color: ColorStyles.primaryBorderColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   //Package сиз жасалган
@@ -355,23 +365,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   //     },
                   //   ),
                   // ),
-                  Tab(
-                    child: Text(
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      'Тренды',
-                      style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
+                  Container(
+                    width: width/3-40,
+                    child: Tab(
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        'Тренды',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                  Tab(
-                    child: Text(
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      'Сохраненные',
-                      style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
+                  Container(
+                    width: width/3-20,
+                    child: Tab(
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        'Сохраненныe',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
