@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/presentation/development/screens/mPassword_screen.dart';
+import 'package:mugalim/presentation/development/screens/statistic_screen.dart';
 import 'package:mugalim/presentation/development/widgets/coursePage.dart';
 
 import '../../../core/const/const_color.dart';
@@ -51,16 +53,18 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                     Container(
                       width: width,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.white.withOpacity(0.4),
-                                Colors.white.withOpacity(0),
-                              ]),
-                          border: Border.all(
-                              color: Colors.white.withOpacity(0.7), width: 4)),
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.white.withOpacity(0.4),
+                            Colors.white.withOpacity(0),
+                          ],
+                        ),
+                        border: Border.all(
+                            color: Colors.white.withOpacity(0.7), width: 4),
+                      ),
                       child: ClipRRect(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -103,8 +107,22 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                         height: 80,
                                         child: Column(
                                           children: [
-                                            SvgPicture.asset(
-                                                'assets/icons/courseIcon.svg'),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: ColorStyles
+                                                    .primaryBorderColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              width: 40,
+                                              height: 40,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 8),
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/courseIcon.svg'),
+                                            ),
                                             sizedBoxHeight8(),
                                             Text(
                                               'Курсы',
@@ -137,8 +155,22 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                         height: 80,
                                         child: Column(
                                           children: [
-                                            SvgPicture.asset(
-                                                'assets/icons/bookIcon.svg'),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: ColorStyles
+                                                    .primaryBorderColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              width: 40,
+                                              height: 40,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 8),
+                                              child: Image.asset(
+                                                  'assets/icons/bookIcon.png'),
+                                            ),
                                             sizedBoxHeight8(),
                                             Text(
                                               'Книги',
@@ -154,45 +186,79 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                       ),
                                     ),
                                     const Spacer(),
-                                    SizedBox(
-                                      width: 80,
-                                      height: 80,
-                                      child: Column(
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/icons/passportIcon.svg'),
-                                          sizedBoxHeight8(),
-                                          Text(
-                                            'M Passport',
-                                            style:
-                                                TextStyles.mediumStyle.copyWith(
-                                              fontSize: 13,
-                                              color: Colors.black,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MPasswordScreen()),
+                                        );
+                                      },
+                                      child: SizedBox(
+                                        width: 80,
+                                        height: 80,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: ColorStyles
+                                                    .primaryBorderColor,
+                                                borderRadius:
+                                                BorderRadius.circular(12),
+                                              ),
+                                              width: 40,
+                                              height: 40,
+                                              padding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 8),
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/passportIcon.svg'),
                                             ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
+                                            sizedBoxHeight8(),
+                                            Text(
+                                              'M Passport',
+                                              style: TextStyles.mediumStyle
+                                                  .copyWith(
+                                                fontSize: 13,
+                                                color: Colors.black,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     const Spacer(),
-                                    SizedBox(
-                                      width: 80,
-                                      height: 80,
-                                      child: Column(
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/icons/statisticsIcon.svg'),
-                                          sizedBoxHeight8(),
-                                          Text(
-                                            'Статистика',
-                                            style:
-                                                TextStyles.mediumStyle.copyWith(
-                                              fontSize: 13,
-                                              color: Colors.black,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const StatisticScreen()),
+                                        );
+                                      },
+                                      child: SizedBox(
+                                        width: 80,
+                                        height: 80,
+                                        child: Column(
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/icons/statisticsIcon.svg'),
+                                            sizedBoxHeight8(),
+                                            Text(
+                                              'Статистика',
+                                              style: TextStyles.mediumStyle
+                                                  .copyWith(
+                                                fontSize: 13,
+                                                color: Colors.black,
+                                              ),
+                                              textAlign: TextAlign.center,
                                             ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -479,7 +545,9 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   children: [
                                                     Text(
                                                       'Figma: начало работы',
-                                                      style: TextStyles.mediumStyle.copyWith(
+                                                      style: TextStyles
+                                                          .mediumStyle
+                                                          .copyWith(
                                                         fontSize: 13,
                                                         color: Colors.black,
                                                       ),
@@ -492,14 +560,18 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         const Icon(
                                                           Icons.access_time,
                                                           size: 15,
-                                                          color: Color(0xff767676),
+                                                          color:
+                                                              Color(0xff767676),
                                                         ),
                                                         sizedBoxWidth4(),
                                                         Text(
                                                           '1 ч 21 м',
-                                                          style: TextStyles.regularStyle.copyWith(
+                                                          style: TextStyles
+                                                              .regularStyle
+                                                              .copyWith(
                                                             fontSize: 13,
-                                                            color: const Color(0xFF767676),
+                                                            color: const Color(
+                                                                0xFF767676),
                                                           ),
                                                         ),
                                                       ],

@@ -8,10 +8,13 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
+import 'package:mugalim/presentation/development/screens/mPassword_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 import 'package:mugalim/presentation/development/widgets/coursePageDetailed.dart';
 import 'package:mugalim/presentation/development/widgets/coursePage_myCourses.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
+import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
+import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
 import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -56,14 +59,14 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => TimetableScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(3),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => RatingScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(4),

@@ -31,7 +31,7 @@ class NavBarItemWidget extends StatelessWidget {
           SvgPicture.asset(
             imgUrl,
             height: 19,
-            color: _currentView == 0 && title == 'Главная'
+            color: _currentView == 0 && title == 'Главная '
                 ? ColorStyles.primaryBorderColor
                 : _currentView == 1 && title == 'Мои курсы'
                     ? ColorStyles.primaryBorderColor
@@ -47,7 +47,7 @@ class NavBarItemWidget extends StatelessWidget {
               fontSize: 11,
               fontStyle: FontStyle.normal,
               fontFamily: 'assets/fonts/CeraPro-Regular.ttf',
-              color: _currentView == 0 && title == 'Главная'
+              color: _currentView == 0 && title == 'Главная '
                   ? ColorStyles.primaryBorderColor
                   : _currentView == 1 && title == 'Мои курсы'
                       ? ColorStyles.primaryBorderColor
