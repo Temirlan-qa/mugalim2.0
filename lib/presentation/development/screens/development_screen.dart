@@ -362,10 +362,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                       ClipOval(
                                                         child: CircleAvatar(
                                                             radius: 12,
-                                                            child: SvgPicture
+                                                            child: Image
                                                                 .asset(
-                                                              'assets/icons/avatar1.svg',
-                                                              color: Colors.red,
+                                                              'assets/images/avataricon1.png',
+                                                              // color: Colors.red,
                                                             )),
                                                       ),
                                                       Positioned(
@@ -373,19 +373,27 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         child: ClipOval(
                                                           child: CircleAvatar(
                                                               radius: 12,
-                                                              child: SvgPicture
+                                                              child: Image
                                                                   .asset(
-                                                                      'assets/icons/avatar2.svg')),
+                                                                  'assets/images/avataricon2.png')),
                                                         ),
                                                       ),
                                                       Positioned(
                                                         left: 36,
                                                         child: ClipOval(
                                                           child: CircleAvatar(
+                                                            backgroundColor: Color(0xff3D3DD8),
                                                               radius: 12,
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                      'assets/icons/mugalim_logo.png')),
+                                                              child: Text(
+                                                                '+21',
+                                                                style: TextStyles.regularStyle
+                                                                    .copyWith(
+                                                                  fontSize: 13,
+                                                                  color:
+                                                                  Colors.white,
+                                                                ),
+                                                              ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
