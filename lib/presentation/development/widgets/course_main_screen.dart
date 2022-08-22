@@ -2,13 +2,10 @@ import 'dart:core';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import '../../../core/const/const_color.dart';
-import '../../../core/routes/routes.dart';
 import 'coursePageDetailed.dart';
 import 'coursePage_myCourses.dart';
-import 'courseWidget.dart';
+import 'course_nav_bar_item_widget.dart';
 
 
 
@@ -57,8 +54,7 @@ class _CoursePageState extends State<CoursePage> {
             color: brightness == Brightness.dark
                 ? ColorStyles.darkthemePageBackgroundColor
                 : Colors.white,
-            border:
-                Border(top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
+            border: const Border(top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
             boxShadow: [
               BoxShadow(
                 color: brightness == Brightness.dark
@@ -73,7 +69,7 @@ class _CoursePageState extends State<CoursePage> {
           child: ClipRRect(
             child: CupertinoTabBar(
                 backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
-                border: Border(top: BorderSide(color: Colors.transparent)),
+                border: const Border(top: BorderSide(color: Colors.transparent)),
                   onTap: (int index) {
                     setState(() {
                       currentPage = index;

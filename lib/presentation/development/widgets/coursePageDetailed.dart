@@ -8,6 +8,8 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 
 class CoursePageDetailed extends StatefulWidget {
+  const CoursePageDetailed({Key? key}) : super(key: key);
+
   @override
   State<CoursePageDetailed> createState() => _CoursePageDetailedState();
 }
@@ -82,7 +84,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
         ],
         bottom: AppBar(
             automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
+            backgroundColor: Colors.white,
             elevation: 1,
             title: SizedBox(
               width: double.maxFinite,
@@ -146,7 +148,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                       itemBuilder: (context, index) => Container(
                         margin: const EdgeInsets.only(right: 8),
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                               image:
                                   ExactAssetImage('assets/images/Banner.png'),
                               fit: BoxFit.fill,
@@ -275,24 +277,21 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                               width: 101,
                               height: 16,
                               child: GestureDetector(
-                                onTap: () {
-                                },
+                                onTap: () {},
                                 child: Text(
                                   ('Посмотреть все'),
-                                  style: TextStyle(
-                                    color: Color(0xff3D3DD8),
+                                  style: TextStyles.mediumStyle.copyWith(
+                                    color: ColorStyles.primaryBorderColor,
                                     fontStyle: FontStyle.normal,
                                     fontSize: 13,
-                                    fontFamily: 'assets/fonts/CeraPro-Bold.ttf',
-                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
                             )),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Icon(
                           Icons.chevron_right_outlined,
-                          color: Color(0xff3D3DD8),
+                          color: ColorStyles.primaryBorderColor,
                         )
                       ],
                     ),
@@ -300,32 +299,30 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                 ],
               ),
             ),
-            SizedBox(height: 8),
+            sizedBoxHeight8(),
             Container(
               height: 528,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Color(0xffFFFFFF),
+                color: Colors.white,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 16),
+                  sizedBoxHeight16(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16),
                     child: Text(
                       'Доступные вам курсы',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
+                      style: TextStyles.mediumStyle.copyWith(
                         fontSize: 20,
-                        color: Color(0xff1a1a1a),
+                        color: ColorStyles.neutralsTextPrimaryColor,
                         fontStyle: FontStyle.normal,
-                        fontFamily: 'assets/fonts/CeraPro-Bold.ttf',
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  sizedBoxHeight16(),
                   Padding(
                     padding: const EdgeInsets.only(right: 16, left: 16, top: 8),
                     child: GridView.count(
@@ -339,20 +336,20 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                         (index) => Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: Color(0xffFFFFFF),
+                              color: Colors.white,
                               border: Border.all(
-                                  color: Color(0xffD5D7F6), width: 1)),
+                                  color: const Color(0xffD5D7F6), width: 1)),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Container(
                                   height: 73,
                                   width: 168,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6),
-                                      image: DecorationImage(
+                                      image: const DecorationImage(
                                           image: ExactAssetImage(
                                               'assets/images/Rectangle 1425.png'),
                                           fit: BoxFit.fill)),
@@ -364,82 +361,79 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 11),
                                     child: Text(
-                                        listsofCourses[index]['lessons'],
-                                        style: TextStyle(
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily:
-                                                'assets/fonts/CeraPro-Regular.ttf',
-                                            color: Color(0xff1a1a1a))),
-                                  ),
-                                  SizedBox(width: 4),
-                                  Text('•',
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily:
-                                              'assets/fonts/CeraPro-Regular.ttf',
-                                          color: Color(0xff1a1a1a))),
-                                  SizedBox(width: 4),
-                                  Text(listsofCourses[index]['tests'],
-                                      style: TextStyle(
+                                      listsofCourses[index]['lessons'],
+                                      style: TextStyles.regularStyle.copyWith(
                                           fontStyle: FontStyle.normal,
                                           fontSize: 13,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily:
-                                              'assets/fonts/CeraPro-Regular.ttf',
-                                          color: Color(0xff1a1a1a))),
+                                          color: ColorStyles
+                                              .neutralsTextPrimaryColor),
+                                    ),
+                                  ),
+                                  sizedBoxWidth4(),
+                                  Text(
+                                    '•',
+                                    style: TextStyles.mediumStyle.copyWith(
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14,
+                                      color:
+                                          ColorStyles.neutralsTextPrimaryColor,
+                                    ),
+                                  ),
+                                  sizedBoxWidth4(),
+                                  Text(
+                                    listsofCourses[index]['tests'],
+                                    style: TextStyles.regularStyle.copyWith(
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 13,
+                                      color:
+                                          ColorStyles.neutralsTextPrimaryColor,
+                                    ),
+                                  ),
                                 ],
                               ),
-                              SizedBox(height: 4),
+                              sizedBoxHeight4(),
                               Padding(
                                 padding: const EdgeInsets.only(left: 11),
-                                child: Text(listsofCourses[index]['title'],
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        wordSpacing: 0.9,
-                                        fontFamily:
-                                            'assets/fonts/CeraPro-Regular.ttf',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                        color: Color(0xff1a1a1a))),
+                                child: Text(
+                                  listsofCourses[index]['title'],
+                                  maxLines: 2,
+                                  style: TextStyles.mediumStyle.copyWith(
+                                    wordSpacing: 0.9,
+                                    fontSize: 14,
+                                    color: ColorStyles.neutralsTextPrimaryColor,
+                                  ),
+                                ),
                               ),
-                              SizedBox(height: 4),
+                              //sizedBoxHeight4(),
                               Padding(
                                 padding: const EdgeInsets.only(left: 11),
                                 child: Text(
                                   listsofCourses[index]['author'],
                                   maxLines: 1,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily:
-                                          'assets/fonts/CeraPro-Regular.ttf',
-                                      color: Color(0xff767676)),
-                                ),
-                              ),
-                              SizedBox(height: 16),
-                              Center(
-                                  child: Container(
-                                width: double.maxFinite,
-                                height: 16,
-                                alignment: Alignment.center,
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: Text(
-                                    'Начать',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily:
-                                            'assets/fonts/CeraPro-Regular.ttf',
-                                        color: Color(0xff3d3dd8)),
+                                  style: TextStyles.regularStyle.copyWith(
+                                    fontSize: 13,
+                                    color: ColorStyles.primarySurfaceHoverColor,
                                   ),
                                 ),
-                              ))
+                              ),
+                              sizedBoxHeight16(),
+                              Center(
+                                child: Container(
+                                  width: double.maxFinite,
+                                  height: 16,
+                                  alignment: Alignment.center,
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Text(
+                                      'Начать',
+                                      style: TextStyles.mediumStyle.copyWith(
+                                          fontSize: 13,
+                                          color:
+                                              ColorStyles.primaryBorderColor),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

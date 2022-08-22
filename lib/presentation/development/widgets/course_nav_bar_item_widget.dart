@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mugalim/core/const/text_style_const.dart';
 import '../../../core/const/const_color.dart';
 
 class NavBarItemWidget extends StatelessWidget {
@@ -8,7 +9,7 @@ class NavBarItemWidget extends StatelessWidget {
   final String title;
   final int _currentView;
 
-  NavBarItemWidget(
+  const NavBarItemWidget(
     this.imgUrl,
     this._currentView,
     this.title, {
@@ -19,7 +20,7 @@ class NavBarItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
     return Container(
-      padding: const EdgeInsets.only(top: 9),
+      padding: const EdgeInsets.only(top: 8),
       color: brightness == Brightness.dark
           ? ColorStyles.darkthemePageBackgroundColor
           : Colors.white,
@@ -31,7 +32,7 @@ class NavBarItemWidget extends StatelessWidget {
           SvgPicture.asset(
             imgUrl,
             height: 19,
-            color: _currentView == 0 && title == 'Главная '
+            color: _currentView == 0 && title == 'Главная'
                 ? ColorStyles.primaryBorderColor
                 : _currentView == 1 && title == 'Мои курсы'
                     ? ColorStyles.primaryBorderColor
@@ -42,12 +43,10 @@ class NavBarItemWidget extends StatelessWidget {
           const SizedBox(height: 5),
           Text(
             title,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
+            style: TextStyles.boldStyle.copyWith(
               fontSize: 11,
               fontStyle: FontStyle.normal,
-              fontFamily: 'assets/fonts/CeraPro-Regular.ttf',
-              color: _currentView == 0 && title == 'Главная '
+              color: _currentView == 0 && title == 'Главная'
                   ? ColorStyles.primaryBorderColor
                   : _currentView == 1 && title == 'Мои курсы'
                       ? ColorStyles.primaryBorderColor

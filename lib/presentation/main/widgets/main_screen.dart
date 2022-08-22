@@ -1,21 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes.dart';
-import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
-import 'package:mugalim/presentation/development/screens/mPassword_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
-import 'package:mugalim/presentation/development/widgets/coursePageDetailed.dart';
-import 'package:mugalim/presentation/development/widgets/coursePage_myCourses.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
 import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
 import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
-import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
