@@ -1,6 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
@@ -36,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 1111,
       'pplSaved': 21111,
@@ -57,8 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 111,
       'pplSaved': 222,
@@ -78,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 11,
       'pplSaved': 22,
@@ -99,8 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 1,
       'pplSaved': 2,
@@ -120,9 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
-      'votetitle': 'Пойдете ли вы ы Kokshetau вместе с группой?',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
+      'votetitle': 'Пойдете ли вы в Kokshetau вместе с группой?',
       'pplShow': 0,
       'pplSaved': 0,
       'pplLike': 0,
@@ -141,8 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду  77777777 7777777777 777777777 7777777 777777',
-      'voteAnswer2': 'Нет, не пойду 8888888888888 888888888 888888 ',
+      'voteAnswer1': 'Да, пойду',
+      'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 9,
       'pplSaved': 9,
@@ -153,9 +154,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // List of items in our dropdown menu
   var items = [
-    'Новости ',
-    'Регион ',
-    'Город ',
+    'Новости',
+    'Регион',
+    'Город',
   ];
   bool search = false;
   TextEditingController searchEditingController = TextEditingController();
@@ -164,6 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int dropDownindex = 0;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return DefaultTabController(
       initialIndex: tabIndex,
       length: 3,
@@ -196,11 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                     icon: !search
-                        ? Icon(
-                            Icons.search,
-                            size: 28,
-                            color: ColorStyles.primaryBorderColor,
-                          )
+                        ? SvgPicture.asset('assets/icons/search.svg',width: 21,height: 21,)
                         : const SizedBox(),
                   ),
                 ),
@@ -275,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(
                       color: ColorStyles.primaryBorderColor, width: 2),
-                  insets: const EdgeInsets.symmetric(horizontal: 15),
+                  insets: const EdgeInsets.symmetric(horizontal: 16),
                 ),
                 onTap: (index){
                   setState((){
@@ -285,39 +284,46 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   });
                 },
+                isScrollable: true,
                 tabs: [
-                  Tab(
-                    child: Row(
-                      children: [
-                        Text(
-                          maxLines: 1,
-                          overflow: TextOverflow.clip,
-                          'Новости',
-                          style: TextStyles.mediumStyle.copyWith(
-                            fontSize: 16,
-                            color: dropDownindex == 0 ? Colors.black : ColorStyles.primarySurfaceHoverColor,
+                  Container(
+                    width: width/3-40,
+                    child: Tab(
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 5,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 3,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              buttonDown = !buttonDown;
-                            });
-                          },
-                          child: Visibility(
-                            visible: dropDownindex == 0,
-                            child: Icon(
-                              buttonDown ? Icons.keyboard_arrow_up :Icons.keyboard_arrow_down,
-                              //Icons.keyboard_arrow_up,
-                              size: 16,
-                              color: ColorStyles.primaryBorderColor,
+                          Text(
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            'Новости',
+                            style: TextStyles.mediumStyle.copyWith(
+                              fontSize: 16,
+                              color: dropDownindex == 0 ? Colors.black : ColorStyles.primarySurfaceHoverColor,
                             ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                buttonDown = !buttonDown;
+                              });
+                            },
+                            child: Visibility(
+                              visible: dropDownindex == 0,
+                              child: Icon(
+                                buttonDown ? Icons.keyboard_arrow_up :Icons.keyboard_arrow_down,
+                                //Icons.keyboard_arrow_up,
+                                size: 16,
+                                color: ColorStyles.primaryBorderColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   //Package сиз жасалган
@@ -359,23 +365,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   //     },
                   //   ),
                   // ),
-                  Tab(
-                    child: Text(
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      'Тренды',
-                      style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
+                  Container(
+                    width: width/3-40,
+                    child: Tab(
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        'Тренды',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                  Tab(
-                    child: Text(
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      'Сохраненные',
-                      style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
+                  Container(
+                    width: width/3-20,
+                    child: Tab(
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        'Сохраненныe',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),

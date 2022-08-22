@@ -141,7 +141,9 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
               IconButton(
                 icon: SvgPicture.asset('assets/icons/cancel.svg'),
                 color: Color(0xff3D3DD8),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ],
             backgroundColor: Colors.white,
@@ -745,7 +747,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   Padding(
                     padding: const EdgeInsets.only(right: 16, left: 16, top: 8),
                     child: GridView.count(
-                      childAspectRatio: 167 / 190,
+                      childAspectRatio: 167 / 200,
                       shrinkWrap: true,
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
