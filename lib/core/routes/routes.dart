@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/main.dart';
 import 'package:mugalim/presentation/books/screens/select_book.dart';
+import 'package:mugalim/presentation/development/screens/development_screen.dart';
+import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
+import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/select_jenre.dart';
+import '../../presentation/development/widgets/coursePage.dart';
+import '../../presentation/main/widgets/main_screen.dart';
+import '../injection_container.dart';
 
 class InnLabRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -14,7 +21,31 @@ class InnLabRouter {
       case MainRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => MyApp(),
+          builder: (_) => MultiBlocProvider(
+              providers: [
+                // HomeScreen(),
+                // DevelopmentScreen(),
+                // HomeScreen(),
+                // HomeScreen(),
+                // HomeScreen(),
+                BlocProvider<HomeBloc>(
+                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                ),
+                BlocProvider<HomeBloc>(
+                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                ),
+                BlocProvider<HomeBloc>(
+                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                ),
+                BlocProvider<HomeBloc>(
+                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                ),
+                BlocProvider<HomeBloc>(
+                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                ),
+              ],
+              child: MainScreen()
+          ),
         );
       case JenreRoute:
         return CupertinoPageRoute(
@@ -23,6 +54,11 @@ class InnLabRouter {
             index_month: (0),
             list: list,
           ),
+        );
+      case CourseRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => CoursePage(),
         );
       // case BookRoute:
       //   return CupertinoPageRoute(
