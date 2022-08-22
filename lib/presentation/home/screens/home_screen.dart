@@ -192,30 +192,33 @@ class _HomeScreenState extends State<HomeScreen> {
               actions: <Widget>[
                 Visibility(
                   visible: !search,
-                  child: IconButton(
-                    onPressed: () {
+                  child: GestureDetector(
+                    onTap: () {
                       setState(() {
                         search = !search;
                       });
                     },
-                    icon: !search
+                    child: !search
                         ? SvgPicture.asset('assets/icons/search.svg',width: 21,height: 21,)
                         : const SizedBox(),
                   ),
                 ),
+                SizedBox(width: 24,),
                 Visibility(
                   visible: !search,
-                  child: IconButton(
-                      onPressed: () {
+                  child: GestureDetector(
+                      onTap: () {
 
-                      },
-                      icon: SvgPicture.asset(
-                        'assets/icons/bell.svg',
-                        color: ColorStyles.primaryBorderColor,
-                        height: 23.33,
-                        width: 21,
-                      )),
+                  },
+                  child: SvgPicture.asset(
+                    'assets/icons/bell.svg',
+                    color: ColorStyles.primaryBorderColor,
+                    height: 23.33,
+                    width: 21,
+                    )
+                  ),
                 ),
+                SizedBox(width: 16,),
               ],
               centerTitle: true,
               backgroundColor: Colors.white,

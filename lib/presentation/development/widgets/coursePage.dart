@@ -34,22 +34,20 @@ class _CoursePageState extends State<CoursePage> {
         body: IndexedStack(
           index: currentPage,
           children: <Widget>[
-            // CupertinoTabView(
-            //   navigatorKey: Get.nestedKey(4),
-            //   navigatorObservers: [GetObserver((_) {}, Get.routing)],
-            //   onGenerateRoute: (settings) =>
-            //       InnLabRouter.generateRoute(settings),
-            //   builder: (_) => CoursePageDetailed(),
-            // ),
-            CoursePageDetailed(),
-            CourseMyCourses(),
-            // CupertinoTabView(
-            //   navigatorKey: Get.nestedKey(5),
-            //   navigatorObservers: [GetObserver((_) {}, Get.routing)],
-            //   onGenerateRoute: (settings) =>
-            //       InnLabRouter.generateRoute(settings),
-            //   builder: (_) => CourseMyCourses(),
-            // ),
+            CupertinoTabView(
+              navigatorKey: Get.nestedKey(5),
+              navigatorObservers: [GetObserver((_) {}, Get.routing)],
+              onGenerateRoute: (settings) =>
+                  InnLabRouter.generateRoute(settings),
+              builder: (_) => CoursePageDetailed(),
+            ),
+            CupertinoTabView(
+              navigatorKey: Get.nestedKey(6),
+              navigatorObservers: [GetObserver((_) {}, Get.routing)],
+              onGenerateRoute: (settings) =>
+                  InnLabRouter.generateRoute(settings),
+              builder: (_) => CourseMyCourses(),
+            ),
           ],
         ),
         bottomNavigationBar: Container(
@@ -77,6 +75,7 @@ class _CoursePageState extends State<CoursePage> {
                   onTap: (int index) {
                     setState(() {
                       currentPage = index;
+                      print(currentPage);
                     });
                   },
                   items: [
