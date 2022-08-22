@@ -23,6 +23,9 @@ class MPasswordScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        actions: [
+
+        ],
       ),
       body: const InProcessWidget(),
     );
