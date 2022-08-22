@@ -5,8 +5,6 @@ import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/development/screens/mPassword_screen.dart';
 import 'package:mugalim/presentation/development/screens/statistic_screen.dart';
-import 'package:mugalim/presentation/development/widgets/coursePage.dart';
-
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../books/screens/select_jenre.dart';
@@ -22,7 +20,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    //double height = MediaQuery.of(context).size.height;
     List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return Scaffold(
       body: SafeArea(
