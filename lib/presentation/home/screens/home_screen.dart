@@ -238,19 +238,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Cera Pro',
-                        fontSize: 18,
+                        fontSize: 16,
                         color: ColorStyles.neutralsTextPrimaryColor,
                       ),
                       textAlignVertical: TextAlignVertical.bottom,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: const Color(0xFFF9F9F9),
-                        disabledBorder: InputBorder.none,
+                        // disabledBorder: InputBorder.none,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(),
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                          ),
                         ),
-                        focusedBorder: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                          ),
+                        ),
                         hintText: 'Поиск',
                         hintStyle: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -258,12 +265,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 16,
                           color: ColorStyles.primarySurfaceHoverColor,
                         ),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          size: 18,
-                          color: ColorStyles.primarySurfaceHoverColor,
-                        ),
-                        constraints: const BoxConstraints(maxHeight: 32),
+                        prefixIcon: SvgPicture.asset('assets/icons/search.svg',color: ColorStyles.primarySurfaceHoverColor,),
+                        constraints: const BoxConstraints(maxHeight: 36),
                         // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                       ),
                     ),
@@ -282,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: (index){
                   setState((){
                     dropDownindex = index;
-                    if(dropDownindex == 1 || dropDownindex == 2){
+                    if(dropDownindex == 1 || dropDownindex == 2) {
                       buttonDown = false;
                     }
                   });

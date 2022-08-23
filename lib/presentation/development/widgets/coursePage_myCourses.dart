@@ -6,9 +6,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/presentation/development/screens/development_screen.dart';
+import 'package:mugalim/presentation/home/screens/home_screen.dart';
+
+import '../../../core/routes/routes_const.dart';
 
 class CourseMyCourses extends StatefulWidget {
-  const CourseMyCourses({Key? key}) : super(key: key);
+  final BuildContext devScreenContext;
+  const CourseMyCourses({Key? key, required this.devScreenContext}) : super(key: key);
 
   @override
   State<CourseMyCourses> createState() => _CourseMyCoursesState();
@@ -22,6 +27,10 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
     // TODO: implement dispose
     super.dispose();
     Search.dispose();
+  }
+  @override
+  void initState() {
+    super.initState();
   }
 
   bool unselected = true;
@@ -144,7 +153,9 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 icon: SvgPicture.asset('assets/icons/cancel.svg'),
                 color: ColorStyles.primaryBorderColor,
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(widget.devScreenContext);
+                  // Navigator.pushReplacementNamed(context, CourseRoute);
+                  // );
                 },
               ),
             ],

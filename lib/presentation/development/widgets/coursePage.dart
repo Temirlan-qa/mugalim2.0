@@ -2,7 +2,10 @@ import 'dart:core';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../core/const/const_color.dart';
+import '../../../core/routes/routes.dart';
 import 'coursePageDetailed.dart';
 import 'coursePage_myCourses.dart';
 import 'courseWidget.dart';
@@ -36,14 +39,14 @@ class _CoursePageState extends State<CoursePage> {
               navigatorObservers: [GetObserver((_) {}, Get.routing)],
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
-              builder: (_) => CoursePageDetailed(),
+              builder: (_) => CoursePageDetailed(devScreenContext: context),
             ),
             CupertinoTabView(
               navigatorKey: Get.nestedKey(6),
               navigatorObservers: [GetObserver((_) {}, Get.routing)],
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
-              builder: (_) => CourseMyCourses(),
+              builder: (_) => CourseMyCourses(devScreenContext: context),
             ),
           ],
         ),
