@@ -2,6 +2,8 @@ import 'dart:core';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mugalim/core/routes/routes.dart';
 import '../../../core/const/const_color.dart';
 import 'coursePageDetailed.dart';
 import 'coursePage_myCourses.dart';

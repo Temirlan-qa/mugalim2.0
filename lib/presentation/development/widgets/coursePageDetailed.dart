@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
 
 class CoursePageDetailed extends StatefulWidget {
   const CoursePageDetailed({Key? key}) : super(key: key);
@@ -78,7 +79,8 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             icon: SvgPicture.asset('assets/icons/cancel.svg'),
             color: ColorStyles.primaryBorderColor,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/cources');
+              //Navigator.pop(context);
             },
           ),
         ],
@@ -151,7 +153,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                           image: const DecorationImage(
                               image:
                                   ExactAssetImage('assets/images/Banner.png'),
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                               opacity: 0.5),
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black,

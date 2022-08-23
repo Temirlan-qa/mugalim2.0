@@ -27,6 +27,7 @@ class InProcessWidget extends StatelessWidget {
         ),
         const SizedBox(height: 50,),
         CupertinoButton(
+          pressedOpacity : 0.7,
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           color: ColorStyles.primaryBorderColor,
           child: Text(

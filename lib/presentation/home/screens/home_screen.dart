@@ -1,10 +1,10 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
+import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         : const SizedBox(),
                   ),
                 ),
-                SizedBox(width: 24,),
+                !search ?const SizedBox(width: 24,) :const SizedBox(),
                 Visibility(
                   visible: !search,
                   child: GestureDetector(
@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ),
                 ),
-                SizedBox(width: 16,),
+                !search ?const SizedBox(width: 16,) :const SizedBox(),
               ],
               centerTitle: true,
               backgroundColor: Colors.white,
@@ -232,41 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontFamily: 'CeraPro',
                       ),
                     )
-                  : TextFormField(
-                      controller: searchEditingController,
-                      autofocus: true,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Cera Pro',
-                        fontSize: 18,
-                        color: ColorStyles.neutralsTextPrimaryColor,
-                      ),
-                      textAlignVertical: TextAlignVertical.bottom,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xFFF9F9F9),
-                        disabledBorder: InputBorder.none,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(),
-                        ),
-                        focusedBorder: InputBorder.none,
-                        hintText: 'Поиск',
-                        hintStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Cera Pro',
-                          fontSize: 16,
-                          color: ColorStyles.primarySurfaceHoverColor,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          size: 18,
-                          color: ColorStyles.primarySurfaceHoverColor,
-                        ),
-                        constraints: const BoxConstraints(maxHeight: 32),
-                        // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
-                      ),
-                    ),
+                  : SearchWidget(hintText: 'Поиск',),
               elevation: 0,
               bottom: TabBar(
                 // ↓ labelPadding Сохраненные ны толык корсету ушин
@@ -289,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 isScrollable: true,
                 tabs: [
-                  Container(
+                  SizedBox(
                     width: width/3-40,
                     child: Tab(
                       child: Row(
@@ -303,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Новости',
                             style: TextStyles.mediumStyle.copyWith(
                               fontSize: 16,
-                              color: dropDownindex == 0 ? Colors.black : ColorStyles.primarySurfaceHoverColor,
+                              color: dropDownindex == 0 ? ColorStyles.neutralsTextPrimaryColor : ColorStyles.primarySurfaceHoverColor,
                             ),
                           ),
                           const SizedBox(
@@ -329,46 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  //Package сиз жасалган
-
-                  // Tab(
-                  //   child: DropdownButton(
-                  //     underline: const SizedBox(),
-                  //     // Initial Value
-                  //     value: dropdownvalue,
-                  //     // Down Arrow Icon
-                  //     icon: const Icon(
-                  //       Icons.keyboard_arrow_down,
-                  //       size: 16,
-                  //       color: Color(0xFF3D3DD8),
-                  //     ),
-                  //     // Array list of items
-                  //     items: items.map((String items) {
-                  //       return DropdownMenuItem(
-                  //         value: items,
-                  //         child: Text(
-                  //           maxLines: 1,
-                  //           overflow: TextOverflow.clip,
-                  //           items,
-                  //           style: const TextStyle(
-                  //             fontSize: 16,
-                  //             fontWeight: FontWeight.w500,
-                  //             fontFamily: 'CeraPro',
-                  //             color: Color(0xFF1A1A1A),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     // After selecting the desired option,it will
-                  //     // change button value to selected value
-                  //     onChanged: (String? newValue) {
-                  //       setState(() {
-                  //         dropdownvalue = newValue!;
-                  //       });
-                  //     },
-                  //   ),
-                  // ),
-                  Container(
+                  SizedBox(
                     width: width/3-40,
                     child: Tab(
                       child: Text(
@@ -381,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: width/3-20,
                     child: Tab(
                       child: Text(
@@ -512,6 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
+                            buttonDown = false;
                             dropdownvalue = 'Новости ';
                           });
                         },
@@ -519,7 +447,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Общие',
                           style: TextStyles.mediumStyle.copyWith(
                             fontSize: 13,
-                            color: const Color(0xFF1A1A1A),
+                            color: ColorStyles.neutralsTextPrimaryColor,
                             height: 1.2,
                           ),
                         ),
@@ -528,6 +456,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
+                            buttonDown = false;
                             dropdownvalue = 'Регион ';
                           });
                         },
@@ -535,7 +464,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Мой регион',
                           style: TextStyles.mediumStyle.copyWith(
                             fontSize: 13,
-                            color: const Color(0xFF1A1A1A),
+                            color: ColorStyles.neutralsTextPrimaryColor,
                             height: 1.2,
                           ),
                         ),
@@ -544,6 +473,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
+                            buttonDown = false;
                             dropdownvalue = 'Город ';
                           });
                         },
@@ -551,7 +481,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Мой город',
                           style: TextStyles.mediumStyle.copyWith(
                             fontSize: 13,
-                            color: const Color(0xFF1A1A1A),
+                            color: ColorStyles.neutralsTextPrimaryColor,
                             height: 1.2,
                           ),
                         ),

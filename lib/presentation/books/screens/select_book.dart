@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
+import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/core/widgets/button_widget.dart';
 import 'package:mugalim/presentation/books/screens/book_description_screen.dart';
@@ -16,7 +18,7 @@ class BookScreen extends StatefulWidget {
       required this.list})
       : super(key: key);
   int index_month;
-  String  select_index;
+  String select_index;
   List list;
   @override
   State<BookScreen> createState() => _BookScreenState();
@@ -43,25 +45,18 @@ class _BookScreenState extends State<BookScreen> {
                             children: [
                               Text(
                                 'Выберите книгу',
-                                style: TextStyle(
+                                style: TextStyles.boldStyle.copyWith(
                                   fontSize: 32,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black,
-                                  fontFamily: 'CeraPro',
+                                  color: ColorStyles.neutralsTextPrimaryColor,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
-                                height: 8,
-                              ),
+                              sizedBoxHeight8(),
                               Text(
                                 'От этого зависит какую книгу вы будете читать в текущем учебном году ',
-                                style: TextStyle(
-                                  decoration: TextDecoration.none,
+                                style: TextStyles.mediumStyle.copyWith(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                  fontFamily: 'CeraPro',
+                                  color: ColorStyles.neutralsTextPrimaryColor,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -73,7 +68,7 @@ class _BookScreenState extends State<BookScreen> {
                     ListView.builder(
                         shrinkWrap: true,
                         itemCount: 5,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -94,11 +89,11 @@ class _BookScreenState extends State<BookScreen> {
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
                                       color: list.contains(index)
-                                          ? Color(0xff3D3DD8)
+                                          ? ColorStyles.primaryBorderColor
                                           : ColorStyles
                                               .neutralsPageBackgroundColor,
                                       width: 2),
-                                  color: Color(0xffF9F9F9),
+                                  color: ColorStyles.primarySurfaceColor,
                                   // color: Colors.gre,
                                 ),
                                 child: Padding(
@@ -123,9 +118,7 @@ class _BookScreenState extends State<BookScreen> {
                                                     : Image.asset(
                                                         'assets/images/book2.png'),
                                       ),
-                                      SizedBox(
-                                        width: 16,
-                                      ),
+                                      sizedBoxHeight16(),
                                       Expanded(
                                         child: Column(
                                           mainAxisAlignment:
@@ -135,35 +128,34 @@ class _BookScreenState extends State<BookScreen> {
                                           children: [
                                             Text(
                                               'Создавая инновации. Креативные идеи дл...',
-                                              style: TextStyle(
+                                              style: TextStyles.mediumStyle.copyWith(
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
                                                   color: list.contains(index)
-                                                      ? Colors.black
-                                                      : Color(0xff767676),
-                                                  fontFamily: 'CeraPro',
+                                                      ? ColorStyles
+                                                          .neutralsTextPrimaryColor
+                                                      : ColorStyles
+                                                          .primarySurfaceHoverColor,
                                                   height: 1.5),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            SizedBox(
-                                              height: 4,
-                                            ),
+                                            sizedBoxHeight4(),
                                             Text(
                                               'Даер Джефф, Натан Ферр, Клейтон Крситен...',
-                                              style: TextStyle(
+                                              style: TextStyles.regularStyle
+                                                  .copyWith(
                                                 fontSize: 14,
-                                                fontWeight: FontWeight.w400,
                                                 color: list.contains(index)
-                                                    ? Colors.black
-                                                    : Color(0xff767676),
-                                                fontFamily: 'CeraPro',
+                                                    ? ColorStyles
+                                                        .neutralsTextPrimaryColor
+                                                    : ColorStyles
+                                                        .primarySurfaceHoverColor,
                                                 height: 1.5,
                                               ),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 12,
                                             ),
                                             Padding(
@@ -186,11 +178,11 @@ class _BookScreenState extends State<BookScreen> {
                                                 },
                                                 child: Text(
                                                   'Подробнее',
-                                                  style: TextStyle(
+                                                  style: TextStyles.mediumStyle
+                                                      .copyWith(
                                                     fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color(0xff3D3DD8),
-                                                    fontFamily: 'CeraPro',
+                                                    color: ColorStyles
+                                                        .primaryBorderColor,
                                                   ),
                                                 ),
                                               ),
@@ -206,8 +198,10 @@ class _BookScreenState extends State<BookScreen> {
                                               BorderRadius.circular(100),
                                           border: Border.all(
                                               color: list.contains(index)
-                                                  ? Color(0xff3D3DD8)
-                                                  : Colors.black,
+                                                  ? ColorStyles
+                                                      .primaryBorderColor
+                                                  : ColorStyles
+                                                      .neutralsTextPrimaryColor,
                                               width:
                                                   list.contains(index) ? 5 : 1),
                                         ),
@@ -219,7 +213,7 @@ class _BookScreenState extends State<BookScreen> {
                             ),
                           );
                         }),
-                    SizedBox(
+                    const SizedBox(
                       height: 200,
                     ),
                   ],
@@ -229,24 +223,19 @@ class _BookScreenState extends State<BookScreen> {
           ),
           Positioned(
             bottom: 74,
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Center(
                 child: TextButton(
-                  child: Text(
-                    "Выбрать книгу",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'CeraPro',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
                   style: TextButton.styleFrom(
-                    primary: (list.isEmpty) ? Colors.black : Color(0xFFE0E0E0),
-                    backgroundColor:
-                        (list.isEmpty) ? Color(0xFFE0E0E0) : Color(0xff3D3DD8),
+                    primary: (list.isEmpty)
+                        ? ColorStyles.neutralsTextPrimaryColor
+                        : const Color(0xFFE0E0E0),
+                    backgroundColor: (list.isEmpty)
+                        ? const Color(0xFFE0E0E0)
+                        : ColorStyles.primaryBorderColor,
                     elevation: 3,
-                    minimumSize: Size(343, 48),
+                    minimumSize: const Size(343, 48),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
@@ -280,29 +269,28 @@ class _BookScreenState extends State<BookScreen> {
                       }
                     }
                   },
+                  child: Text(
+                    "Выбрать книгу",
+                    style: TextStyles.mediumStyle.copyWith(
+                      fontSize: 16,
+                      color: ColorStyles.neutralsTextPrimaryColor,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
           Positioned(
             bottom: 16,
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Center(
                 child: TextButton(
-                  child: Text(
-                    "Обратно к жанрам",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'CeraPro',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
                   style: TextButton.styleFrom(
-                    primary: Color(0xff3D3DD8),
+                    primary: ColorStyles.primaryBorderColor,
                     backgroundColor: ColorStyles.neutralsPageBackgroundColor,
                     elevation: 3,
-                    minimumSize: Size(343, 48),
+                    minimumSize: const Size(343, 48),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
@@ -315,6 +303,12 @@ class _BookScreenState extends State<BookScreen> {
                     //       list: widget.list,
                     //     });
                   },
+                  child: Text(
+                    "Обратно к жанрам",
+                    style: TextStyles.mediumStyle.copyWith(
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
             ),
