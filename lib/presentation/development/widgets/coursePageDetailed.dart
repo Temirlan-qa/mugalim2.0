@@ -7,8 +7,12 @@ import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 
+import '../../../core/routes/routes_const.dart';
+import '../../cources/widgets/card_widget.dart';
+
 class CoursePageDetailed extends StatefulWidget {
-  const CoursePageDetailed({Key? key}) : super(key: key);
+  final BuildContext devScreenContext;
+  const CoursePageDetailed({Key? key, required this.devScreenContext}) : super(key: key);
 
   @override
   State<CoursePageDetailed> createState() => _CoursePageDetailedState();
@@ -16,7 +20,10 @@ class CoursePageDetailed extends StatefulWidget {
 
 class _CoursePageDetailedState extends State<CoursePageDetailed> {
   final Search = TextEditingController();
-
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   void dispose() {
     // TODO: implement dispose
@@ -78,7 +85,8 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             icon: SvgPicture.asset('assets/icons/cancel.svg'),
             color: ColorStyles.primaryBorderColor,
             onPressed: () {
-              Navigator.pop(context);
+              // Navigator.pushReplacementNamed(context, CourseRoute);
+              Navigator.pop(widget.devScreenContext);
             },
           ),
         ],
@@ -86,7 +94,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
             elevation: 1,
-            title: SizedBox(
+            title: Container(
               width: double.maxFinite,
               child: TextFormField(
                 textAlign: TextAlign.justify,
@@ -103,8 +111,11 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                       borderSide:
                           const BorderSide(width: 0, style: BorderStyle.none),
                     ),
-                    filled: true,
                     hintStyle: TextStyles.regularStyle.copyWith(
+                      color: ColorStyles.primarySurfaceHoverColor,
+                      fontSize: 16,
+                    ),
+                    labelStyle: TextStyles.regularStyle.copyWith(
                       color: ColorStyles.primarySurfaceHoverColor,
                       fontSize: 16,
                     ),
@@ -118,7 +129,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
           children: [
             sizedBoxHeight16(),
             Container(
-              height: 260,
+              height: 262,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -140,7 +151,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                   Container(
                     padding:
                         const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                    height: 156,
+                    height: 165,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: listsofCourses.length,
@@ -151,8 +162,9 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                           image: const DecorationImage(
                               image:
                                   ExactAssetImage('assets/images/Banner.png'),
-                              fit: BoxFit.fill,
-                              opacity: 0.5),
+                              fit: BoxFit.cover,
+                              opacity: 0.5
+                          ),
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black,
                         ),
@@ -220,35 +232,38 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, top: 16),
-                              child: ClipRRect(
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 15, sigmaY: 13),
-                                  child: Container(
-                                    width: 123,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      gradient: const RadialGradient(colors: [
-                                        Color.fromRGBO(255, 255, 255, 0),
-                                        Color.fromRGBO(255, 255, 255, 0.4),
-                                      ]),
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.white.withOpacity(0.5),
-                                    ),
+                              padding: const EdgeInsets.all(16),
+                              child: Container(
+                                width: 123,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const RadialGradient(
+                                      colors: [
+                                    Color.fromRGBO(255, 255, 255, 0),
+
+                                    Color.fromRGBO(255, 255, 255, 0.4),
+                                  ]),
+                                  color: Colors.white.withOpacity(0.5),
+                                  //   border: Border.all(
+                                  //       color: Colors.white.withOpacity(0.5), width: 0),
+                                ),
+
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: Text(
-                                            'Продолжить',
-                                            style:
-                                                TextStyles.mediumStyle.copyWith(
-                                              fontSize: 13,
-                                              color: Colors.white,
-                                            ),
+                                        Text(
+                                          'Продолжить',
+                                          style:
+                                              TextStyles.mediumStyle.copyWith(
+                                            fontSize: 13,
+                                            color: Colors.white,
                                           ),
                                         ),
                                         const Icon(
@@ -301,7 +316,6 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             ),
             sizedBoxHeight8(),
             Container(
-              // height: 528,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -322,128 +336,10 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                       ),
                     ),
                   ),
-                  sizedBoxHeight16(),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16, left: 16, top: 8,bottom: 16),
-                    child: GridView.count(
-                      childAspectRatio: 167 / 190,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      crossAxisCount: 2,
-                      children: List.generate(
-                        listsofCourses.length,
-                        (index) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: const Color(0xffD5D7F6), width: 1)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Container(
-                                  height: 73,
-                                  width: 168,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      image: const DecorationImage(
-                                          image: ExactAssetImage(
-                                              'assets/images/Rectangle 1425.png'),
-                                          fit: BoxFit.fill)),
-                                ),
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 11),
-                                    child: Text(
-                                      listsofCourses[index]['lessons'],
-                                      style: TextStyles.regularStyle.copyWith(
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 13,
-                                          color: ColorStyles
-                                              .neutralsTextPrimaryColor),
-                                    ),
-                                  ),
-                                  sizedBoxWidth4(),
-                                  Text(
-                                    '•',
-                                    style: TextStyles.mediumStyle.copyWith(
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14,
-                                      color:
-                                          ColorStyles.neutralsTextPrimaryColor,
-                                    ),
-                                  ),
-                                  sizedBoxWidth4(),
-                                  Text(
-                                    listsofCourses[index]['tests'],
-                                    style: TextStyles.regularStyle.copyWith(
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 13,
-                                      color:
-                                          ColorStyles.neutralsTextPrimaryColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              sizedBoxHeight4(),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 11),
-                                child: Text(
-                                  listsofCourses[index]['title'],
-                                  maxLines: 2,
-                                  style: TextStyles.mediumStyle.copyWith(
-                                    wordSpacing: 0.9,
-                                    fontSize: 14,
-                                    color: ColorStyles.neutralsTextPrimaryColor,
-                                  ),
-                                ),
-                              ),
-                              //sizedBoxHeight4(),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 11),
-                                child: Text(
-                                  listsofCourses[index]['author'],
-                                  maxLines: 1,
-                                  style: TextStyles.regularStyle.copyWith(
-                                    fontSize: 13,
-                                    color: ColorStyles.primarySurfaceHoverColor,
-                                  ),
-                                ),
-                              ),
-                              sizedBoxHeight16(),
-                              Center(
-                                child: Container(
-                                  width: double.maxFinite,
-                                  height: 16,
-                                  alignment: Alignment.center,
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Text(
-                                      'Начать',
-                                      style: TextStyles.mediumStyle.copyWith(
-                                          fontSize: 13,
-                                          color:
-                                              ColorStyles.primaryBorderColor),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  CourseCardWidget(),
                 ],
               ),
-            ),
+            )
             // SizedBox(height: 100,),
           ],
         ),
