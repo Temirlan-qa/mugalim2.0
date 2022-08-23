@@ -120,8 +120,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 10,
                                                       vertical: 8),
-                                              child: SvgPicture.asset(
-                                                  'assets/icons/courseIcon.svg'),
+                                              child: Image.asset(
+                                                  'assets/images/courseIcon.png',
+                                                width: 24,
+                                                height: 24,
+                                              ),
                                             ),
                                             sizedBoxHeight8(),
                                             Text(
@@ -169,7 +172,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                       horizontal: 10,
                                                       vertical: 8),
                                               child: Image.asset(
-                                                  'assets/icons/bookIcon.png'),
+                                                  'assets/images/newBookIcon.png',
+                                                width: 24,
+                                                height: 24,
+                                              ),
                                             ),
                                             sizedBoxHeight8(),
                                             Text(
@@ -212,9 +218,13 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               padding:
                                               const EdgeInsets.symmetric(
                                                   horizontal: 10,
-                                                  vertical: 8),
-                                              child: SvgPicture.asset(
-                                                  'assets/icons/passportIcon.svg'),
+                                                  vertical: 8
+                                              ),
+                                              child: Image.asset(
+                                                  'assets/images/passportIcon.png',
+                                                width: 24,
+                                                height: 24,
+                                              ),
                                             ),
                                             sizedBoxHeight8(),
                                             Text(
@@ -245,8 +255,25 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                         height: 80,
                                         child: Column(
                                           children: [
-                                            SvgPicture.asset(
-                                                'assets/icons/statisticsIcon.svg'),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: ColorStyles
+                                                    .primaryBorderColor,
+                                                borderRadius:
+                                                BorderRadius.circular(12),
+                                              ),
+                                              width: 40,
+                                              height: 40,
+                                              padding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 8),
+                                              child: Image.asset(
+                                                'assets/images/statisticsIcon.png',
+                                                width: 24,
+                                                height: 24,
+                                              ),
+                                            ),
                                             sizedBoxHeight8(),
                                             Text(
                                               'Статистика',

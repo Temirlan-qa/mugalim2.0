@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/widgets/textform_widget.dart';
 
 import '../../../core/routes/routes_const.dart';
 import '../../cources/widgets/card_widget.dart';
@@ -96,33 +97,9 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             elevation: 1,
             title: Container(
               width: double.maxFinite,
-              child: TextFormField(
-                textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    isDense: true,
-                    iconColor: ColorStyles.primarySurfaceHoverColor,
-                    hintText: 'Поиск',
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(14.5),
-                      child: SvgPicture.asset('assets/icons/Search Icon.svg'),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(width: 0, style: BorderStyle.none),
-                    ),
-                    hintStyle: TextStyles.regularStyle.copyWith(
-                      color: ColorStyles.primarySurfaceHoverColor,
-                      fontSize: 16,
-                    ),
-                    labelStyle: TextStyles.regularStyle.copyWith(
-                      color: ColorStyles.primarySurfaceHoverColor,
-                      fontSize: 16,
-                    ),
-                    contentPadding: const EdgeInsets.all(8)),
-                controller: Search,
-              ),
-            )),
+              child: TextFormFieldWidget(),
+            ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

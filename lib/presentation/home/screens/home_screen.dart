@@ -6,6 +6,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import '../../../core/const/const_color.dart';
+import '../../../core/widgets/textform_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -177,18 +178,22 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: AppBar(
               leading: !search
                   ? const SizedBox()
-                  : IconButton(
-                      onPressed: () {
-                        setState(() {
-                          search = !search;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios_new,
-                        size: 16,
-                        color: ColorStyles.primaryBorderColor,
+                  : Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            search = !search;
+                          });
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                          size: 20,
+                          color: ColorStyles.primaryBorderColor,
+                        ),
                       ),
-                    ),
+                  ),
+              leadingWidth: !search ? 30 : 30,
               actions: <Widget>[
                 Visibility(
                   visible: !search,
@@ -232,44 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontFamily: 'CeraPro',
                       ),
                     )
-                  : TextFormField(
-                      controller: searchEditingController,
-                      autofocus: true,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Cera Pro',
-                        fontSize: 16,
-                        color: ColorStyles.neutralsTextPrimaryColor,
-                      ),
-                      textAlignVertical: TextAlignVertical.bottom,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xFFF9F9F9),
-                        // disabledBorder: InputBorder.none,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        hintText: 'Поиск',
-                        hintStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Cera Pro',
-                          fontSize: 16,
-                          color: ColorStyles.primarySurfaceHoverColor,
-                        ),
-                        prefixIcon: SvgPicture.asset('assets/icons/search.svg',color: ColorStyles.primarySurfaceHoverColor,height: 14,width: 14,),
-                        constraints: const BoxConstraints(maxHeight: 24),
-                        // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
-                      ),
-                    ),
+                  : TextFormFieldWidget(controller: searchEditingController,),
               elevation: 0,
               bottom: TabBar(
                 // ↓ labelPadding Сохраненные ны толык корсету ушин

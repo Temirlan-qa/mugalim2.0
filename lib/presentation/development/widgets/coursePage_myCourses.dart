@@ -10,6 +10,7 @@ import 'package:mugalim/presentation/development/screens/development_screen.dart
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 import '../../../core/routes/routes_const.dart';
+import '../../../core/widgets/textform_widget.dart';
 
 class CourseMyCourses extends StatefulWidget {
   final BuildContext devScreenContext;
@@ -226,29 +227,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   sizedBoxHeight8(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: TextFormField(
-                      textAlign: TextAlign.justify,
-                      decoration: InputDecoration(
-                          isDense: true,
-                          iconColor: ColorStyles.primarySurfaceHoverColor,
-                          hintText: 'Поиск',
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(14.5),
-                            child: SvgPicture.asset(
-                                'assets/icons/Search Icon.svg'),
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  width: 0, style: BorderStyle.none)),
-                          filled: true,
-                          hintStyle: TextStyles.regularStyle.copyWith(
-                            color: ColorStyles.primarySurfaceHoverColor,
-                            fontSize: 16,
-                          ),
-                          contentPadding: const EdgeInsets.all(8)),
-                      controller: Search,
-                    ),
+                    child: TextFormFieldWidget(),
                   ),
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -731,29 +710,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   sizedBoxHeight8(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: TextFormField(
-                      textAlign: TextAlign.justify,
-                      decoration: InputDecoration(
-                          isDense: true,
-                          iconColor: ColorStyles.primarySurfaceHoverColor,
-                          hintText: 'Поиск',
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(14.5),
-                            child: SvgPicture.asset(
-                                'assets/icons/Search Icon.svg'),
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  width: 0, style: BorderStyle.none)),
-                          filled: true,
-                          hintStyle: TextStyles.regularStyle.copyWith(
-                            color: ColorStyles.primarySurfaceHoverColor,
-                            fontSize: 16,
-                          ),
-                          contentPadding: const EdgeInsets.all(8)),
-                      controller: Search,
-                    ),
+                    child: TextFormFieldWidget(),
                   ),
                   sizedBoxHeight8(),
                   Padding(
