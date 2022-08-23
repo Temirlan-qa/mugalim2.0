@@ -11,21 +11,32 @@ class MPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 1,
-        backgroundColor: Colors.white,
-        title: Text(
-            'M Passport',
-          style: TextStyles.boldStyle.copyWith(
-            fontSize: 23,
-            color: ColorStyles.neutralsTextPrimaryColor,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: ColorStyles.primarySurfaceHoverColor.withOpacity(0.1),
+              blurRadius: 1,
+            )
+          ]),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            elevation: 1,
+            backgroundColor: Colors.white,
+            title: Text(
+                'M Passport',
+              style: TextStyles.boldStyle.copyWith(
+                fontSize: 23,
+                color: ColorStyles.neutralsTextPrimaryColor,
+              ),
+            ),
+            centerTitle: true,
+            actions: [
+
+            ],
           ),
         ),
-        centerTitle: true,
-        actions: [
-
-        ],
       ),
       body: const InProcessWidget(),
     );
