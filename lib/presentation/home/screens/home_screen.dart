@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                   ),
-              leadingWidth: !search ? 30 : 30,
+              leadingWidth: !search ? 30 : 50,
               actions: <Widget>[
                 Visibility(
                   visible: !search,
@@ -239,7 +239,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontFamily: 'CeraPro',
                       ),
                     )
-                  : TextFormFieldWidget(controller: searchEditingController,),
                   : Padding(
                     padding: const EdgeInsets.only(right: 12.0),
                     child: SearchWidget(hintText: '123'),

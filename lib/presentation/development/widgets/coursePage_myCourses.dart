@@ -679,7 +679,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
           children: [
             sizedBoxHeight16(),
             Container(
-              height: double.maxFinite,
+              // height: double.maxFinite,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16), color: Colors.white),
@@ -718,6 +718,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     child: GridView.count(
                       childAspectRatio: 167 / 190,
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
                       crossAxisCount: 2,
@@ -829,9 +830,11 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                       ),
                     ),
                   ),
+                  sizedBoxHeight16(),
                 ],
               ),
             ),
+            SizedBox(height: 100,),
           ],
         ),
       );
