@@ -30,14 +30,22 @@ class _VoteWidgetState extends State<VoteWidget> {
   bool clickToShow = false;
   String gonna = "";
 
-  // final _textWidgetKey = GlobalKey();
-  // double _textWidgetSize = 0;
-  //
+  final GlobalKey<FormState> _textWidgetKey = GlobalKey<FormState>();
+  // double _textWidgetSize = 100;
+
   // void _getSize() {
   //   setState(() {
   //     _textWidgetSize = _textWidgetKey.currentContext!.size!.height;
   //   });
   // }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // WidgetsBinding.instance
+    //     .addPostFrameCallback((_) => _getSize());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,14 +93,12 @@ class _VoteWidgetState extends State<VoteWidget> {
   GestureDetector gestureDetector(String text, int procent, int votePPL1) {
     return GestureDetector(
       onTap: () {
-        // _getSize();
         setState(() {
           clickToShow = !clickToShow;
           gonna = text;
         });
       },
       child: Container(
-        // key: _textWidgetKey,
         width: (MediaQuery.of(context).size.width - 64),
         // height: 32,
         decoration: const BoxDecoration(
@@ -111,9 +117,10 @@ class _VoteWidgetState extends State<VoteWidget> {
                 ),
               ),
               width: (MediaQuery.of(context).size.width - 64) * procent / 100,
-              height: 32,
+              // height: _textWidgetSize,
             ),
             Container(
+              // key: _textWidgetKey,
               padding: const EdgeInsets.only(
                 top: 8,
                 bottom: 8,

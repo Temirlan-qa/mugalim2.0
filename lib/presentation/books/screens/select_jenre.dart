@@ -22,7 +22,7 @@ class JenreScreen extends StatefulWidget {
 class _JenreScreenState extends State<JenreScreen> {
   int index_month = 0;
   List list = ['Сентября', 'Октября', 'Ноября', 'Декабря'];
-  List select_list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
+  List selectList = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
   List array = [];
   int indexGrid = 0;
   @override
@@ -464,7 +464,7 @@ class _JenreScreenState extends State<JenreScreen> {
               TextButton(
                 style: TextButton.styleFrom(
                   // primary: Colors.black,
-                  backgroundColor: !array.isEmpty
+                  backgroundColor: array.isNotEmpty
                       ? ColorStyles.primaryBorderColor
                       : const Color(0xFFE0E0E0),
                   //backgroundColor: Color(0xFFE0E0E0),
@@ -475,16 +475,10 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 onPressed: () {
-                  if (!widget.list.isEmpty) {
-                    int index = array.contains(0)
-                        ? indexGrid
-                        : array.contains(1)
-                            ? indexGrid
-                            : array.contains(2)
-                                ? indexGrid
-                                : indexGrid;
+                  if (widget.list.isNotEmpty) {
+                    int index = indexGrid;
                     // int size = widget.list.length;
-                    String select_index = select_list[index];
+                    String selectIndex = widget.list[index];
                     if (widget.index_month.toInt() >= 4) {
                       Navigator.push(
                         context,
@@ -497,7 +491,7 @@ class _JenreScreenState extends State<JenreScreen> {
                         MaterialPageRoute(
                           builder: (BuildContext context) => BookScreen(
                             index_month: widget.index_month,
-                            select_index: select_index,
+                            select_index: selectIndex,
                             list: widget.list,
                           ),
                         ),
@@ -508,7 +502,7 @@ class _JenreScreenState extends State<JenreScreen> {
                 child: Text(
                   "Далее",
                   style: TextStyles.mediumStyle.copyWith(
-                    color: !array.isEmpty
+                    color: array.isNotEmpty
                         ? Colors.white
                         : ColorStyles.neutralsTextPrimaryColor,
                     fontSize: 16,
@@ -536,10 +530,10 @@ class _JenreScreenState extends State<JenreScreen> {
         return GestureDetector(
           onTap: () {
             setState(() {
-              if (!array.contains(index)) {
+              if (!array.contains(widget.list[index])) {
                 array.clear();
-                array.add(index);
-              } else if (array.contains(index)) {
+                array.add(widget.list[index]);
+              } else if (array.contains(widget.list[index])) {
                 array.clear();
               }
               indexGrid = index;
@@ -554,7 +548,7 @@ class _JenreScreenState extends State<JenreScreen> {
               color: Colors.grey,
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               border: Border.all(
-                color: array.contains(index)
+                color: array.contains(widget.list[index])
                     ? ColorStyles.primaryBorderColor
                     : ColorStyles.neutralsPageBackgroundColor,
                 width: 2,
@@ -573,7 +567,7 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 const Spacer(),
-                array.contains(index)
+                array.contains(widget.list[index])
                     ? Container(
                         height: 24,
                         width: 24,

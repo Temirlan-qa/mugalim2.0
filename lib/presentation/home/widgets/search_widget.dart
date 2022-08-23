@@ -14,33 +14,47 @@ class SearchWidget extends StatelessWidget {
     return TextFormField(
       controller: searchEditingController,
       autofocus: true,
-      style: TextStyles.regularStyle.copyWith(
-        fontSize: 18,
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Cera Pro',
+        fontSize: 16,
         color: ColorStyles.neutralsTextPrimaryColor,
       ),
       textAlignVertical: TextAlignVertical.bottom,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(12),
         filled: true,
-        fillColor: ColorStyles.primarySurfaceColor,
-        disabledBorder: InputBorder.none,
+        fillColor: const Color(0xFFF9F9F9),
+        // disabledBorder: InputBorder.none,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
         ),
-        focusedBorder: InputBorder.none,
-        hintText: hintText,
-        hintStyle: TextStyles.regularStyle.copyWith(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        hintText: 'Поиск',
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Cera Pro',
           fontSize: 16,
           color: ColorStyles.primarySurfaceHoverColor,
         ),
-        prefixIcon: Image.asset(
-          width: 12,
-          height:12,
-          'assets/icons/Icon_test.png',
-          color: ColorStyles.primarySurfaceHoverColor,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SvgPicture.asset('assets/icons/search.svg',color: ColorStyles.primarySurfaceHoverColor),
         ),
-        constraints: const BoxConstraints(maxHeight: 32),
+        constraints: const BoxConstraints(maxHeight: 36),
         // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
       ),
     );

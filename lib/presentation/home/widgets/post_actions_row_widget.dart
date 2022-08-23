@@ -69,7 +69,7 @@ class _ActionsRowWidgetState extends State<ActionsRowWidget> {
                       NumberFormat.compactCurrency(
                         decimalDigits: 0,
                         symbol: ' ',
-                      ).format(widget.pplLike),
+                      ).format(widget.pplLike + (isLiked ? 1 : 0)),
                       style: TextStyles.mediumStyle.copyWith(
                         fontSize: 14,
                         color: isLiked

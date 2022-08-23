@@ -4,7 +4,7 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 
 class InProcessWidget extends StatelessWidget {
-  const InProcessWidget({Key? key}) : super(key: key);
+  const InProcessWidget({Key? key, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class InProcessWidget extends StatelessWidget {
             ),
           ),
           onPressed: (){
-            // HomeScreen();
+            Navigator.pop(context);
           },
         ),
       ],

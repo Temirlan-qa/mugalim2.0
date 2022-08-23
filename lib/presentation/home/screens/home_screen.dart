@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
+import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/widgets/textform_widget.dart';
 
@@ -33,17 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
           'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf длпкпдлукпдпдупдлукт длтукдлтпдлуптдукпдлукпт длтупдлтудлкптукдлптукдлптудк пддлукт дтпд лтукпдлу  длтпдлкутпдлкутпдлукп ',
       'postAuthor': 'Mugalim Global',
       'postPublicationDate': '2 авг в 13:54',
-      'hasVote': false,
+      'hasVote': true,
       'votePPL1': 45,
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду',
+      'voteAnswer1': 'Да, пойду truyytyit guyvuiiio ihihuig78tf',
       'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 1111,
       'pplSaved': 21111,
-      'pplLike': 311111,
+      'pplLike': 311499,
       'pplCommented': 4111,
     },
     {
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'votePPL2': 70,
       'voteProcent1': 90,
       'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду',
+      'voteAnswer1': 'Да, пойду wetetgweewtwtewtgw wettegeggesgesw rehhrhhrreher',
       'voteAnswer2': 'Нет, не пойду',
       'votetitle': 'Пойдете ли в горы вместе с группой?',
       'pplShow': 111,
@@ -208,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         : const SizedBox(),
                   ),
                 ),
-                !search ?const SizedBox(width: 24,) : const SizedBox(),
+                !search ?const SizedBox(width: 24,) : const Offstage(),
                 Visibility(
                   visible: !search,
                   child: GestureDetector(
@@ -223,9 +224,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ),
                 ),
-                !search?const SizedBox(width: 16,) : const SizedBox(),
+                !search?const SizedBox(width: 16,) : const Offstage(),
               ],
               centerTitle: true,
+              titleSpacing: 0,
               backgroundColor: Colors.white,
               title: !search
                   ? Text(
@@ -238,6 +240,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   : TextFormFieldWidget(controller: searchEditingController,),
+                  : Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: SearchWidget(hintText: '123'),
+                  ),
               elevation: 0,
               bottom: TabBar(
                 // ↓ labelPadding Сохраненные ны толык корсету ушин
