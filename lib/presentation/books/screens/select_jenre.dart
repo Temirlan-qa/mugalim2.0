@@ -587,7 +587,6 @@ class _JenreScreenState extends State<JenreScreen> {
                           color: Colors.white,
                         ),
                       )
-
                     : Container(
                         height: 24,
                         width: 24,

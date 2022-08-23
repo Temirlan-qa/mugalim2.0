@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         : const SizedBox(),
                   ),
                 ),
-                SizedBox(width: 24,),
+                !search ?const SizedBox(width: 24,) : const SizedBox(),
                 Visibility(
                   visible: !search,
                   child: GestureDetector(
@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ),
                 ),
-                SizedBox(width: 16,),
+                !search?const SizedBox(width: 16,) : const SizedBox(),
               ],
               centerTitle: true,
               backgroundColor: Colors.white,
@@ -248,13 +248,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         // disabledBorder: InputBorder.none,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                           ),
                         ),
@@ -265,8 +265,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 16,
                           color: ColorStyles.primarySurfaceHoverColor,
                         ),
-                        prefixIcon: SvgPicture.asset('assets/icons/search.svg',color: ColorStyles.primarySurfaceHoverColor,),
-                        constraints: const BoxConstraints(maxHeight: 36),
+                        prefixIcon: SvgPicture.asset('assets/icons/search.svg',color: ColorStyles.primarySurfaceHoverColor,height: 14,width: 14,),
+                        constraints: const BoxConstraints(maxHeight: 24),
                         // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                       ),
                     ),
@@ -292,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 isScrollable: true,
                 tabs: [
-                  Container(
+                  SizedBox(
                     width: width/3-40,
                     child: Tab(
                       child: Row(
@@ -332,46 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  //Package сиз жасалган
-
-                  // Tab(
-                  //   child: DropdownButton(
-                  //     underline: const SizedBox(),
-                  //     // Initial Value
-                  //     value: dropdownvalue,
-                  //     // Down Arrow Icon
-                  //     icon: const Icon(
-                  //       Icons.keyboard_arrow_down,
-                  //       size: 16,
-                  //       color: Color(0xFF3D3DD8),
-                  //     ),
-                  //     // Array list of items
-                  //     items: items.map((String items) {
-                  //       return DropdownMenuItem(
-                  //         value: items,
-                  //         child: Text(
-                  //           maxLines: 1,
-                  //           overflow: TextOverflow.clip,
-                  //           items,
-                  //           style: const TextStyle(
-                  //             fontSize: 16,
-                  //             fontWeight: FontWeight.w500,
-                  //             fontFamily: 'CeraPro',
-                  //             color: Color(0xFF1A1A1A),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     // After selecting the desired option,it will
-                  //     // change button value to selected value
-                  //     onChanged: (String? newValue) {
-                  //       setState(() {
-                  //         dropdownvalue = newValue!;
-                  //       });
-                  //     },
-                  //   ),
-                  // ),
-                  Container(
+                  SizedBox(
                     width: width/3-40,
                     child: Tab(
                       child: Text(
@@ -384,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: width/3-20,
                     child: Tab(
                       child: Text(
@@ -515,6 +476,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
+                            buttonDown = false;
                             dropdownvalue = 'Новости ';
                           });
                         },
@@ -531,6 +493,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
+                            buttonDown = false;
                             dropdownvalue = 'Регион ';
                           });
                         },
@@ -547,6 +510,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
+                            buttonDown = false;
                             dropdownvalue = 'Город ';
                           });
                         },

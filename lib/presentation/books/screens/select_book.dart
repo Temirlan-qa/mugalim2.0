@@ -118,7 +118,7 @@ class _BookScreenState extends State<BookScreen> {
                                                     : Image.asset(
                                                         'assets/images/book2.png'),
                                       ),
-                                      sizedBoxHeight16(),
+                                      sizedBoxWidth16(),
                                       Expanded(
                                         child: Column(
                                           mainAxisAlignment:
@@ -273,7 +273,9 @@ class _BookScreenState extends State<BookScreen> {
                     "Выбрать книгу",
                     style: TextStyles.mediumStyle.copyWith(
                       fontSize: 16,
-                      color: ColorStyles.neutralsTextPrimaryColor,
+                      color: (list.isEmpty)
+                          ? ColorStyles.neutralsTextPrimaryColor
+                          : const Color(0xFFE0E0E0),
                     ),
                   ),
                 ),
