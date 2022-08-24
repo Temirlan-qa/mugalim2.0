@@ -345,32 +345,35 @@ class _HomeScreenState extends State<HomeScreen> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
-                                return PostWidget(
-                                  hasImg: testPostData[index]['hasImg'],
-                                  hasVote: testPostData[index]['hasVote'],
-                                  image: testPostData[index]['image'],
-                                  imageAuthor: testPostData[index]
-                                      ['imageAuthor'],
-                                  title: testPostData[index]['title'],
-                                  postAuthor: testPostData[index]['postAuthor'],
-                                  postPublicationDate: testPostData[index]
-                                      ['postPublicationDate'],
-                                  votePPL1: testPostData[index]['votePPL1'],
-                                  votePPL2: testPostData[index]['votePPL2'],
-                                  voteProcent1: testPostData[index]
-                                      ['voteProcent1'],
-                                  voteProcent2: testPostData[index]
-                                      ['voteProcent2'],
-                                  voteAnswer1: testPostData[index]
-                                      ['voteAnswer1'],
-                                  voteAnswer2: testPostData[index]
-                                      ['voteAnswer2'],
-                                  votetitle: testPostData[index]['votetitle'],
-                                  pplShow: testPostData[index]['pplShow'],
-                                  pplSaved: testPostData[index]['pplSaved'],
-                                  pplLike: testPostData[index]['pplLike'],
-                                  pplCommented: testPostData[index]
-                                      ['pplCommented'],
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 16,),
+                                  child: PostWidget(
+                                    hasImg: testPostData[index]['hasImg'],
+                                    hasVote: testPostData[index]['hasVote'],
+                                    image: testPostData[index]['image'],
+                                    imageAuthor: testPostData[index]
+                                        ['imageAuthor'],
+                                    title: testPostData[index]['title'],
+                                    postAuthor: testPostData[index]['postAuthor'],
+                                    postPublicationDate: testPostData[index]
+                                        ['postPublicationDate'],
+                                    votePPL1: testPostData[index]['votePPL1'],
+                                    votePPL2: testPostData[index]['votePPL2'],
+                                    voteProcent1: testPostData[index]
+                                        ['voteProcent1'],
+                                    voteProcent2: testPostData[index]
+                                        ['voteProcent2'],
+                                    voteAnswer1: testPostData[index]
+                                        ['voteAnswer1'],
+                                    voteAnswer2: testPostData[index]
+                                        ['voteAnswer2'],
+                                    votetitle: testPostData[index]['votetitle'],
+                                    pplShow: testPostData[index]['pplShow'],
+                                    pplSaved: testPostData[index]['pplSaved'],
+                                    pplLike: testPostData[index]['pplLike'],
+                                    pplCommented: testPostData[index]
+                                        ['pplCommented'],
+                                  ),
                                 );
                               }),
                         ),
