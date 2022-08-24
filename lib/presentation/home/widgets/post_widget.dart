@@ -114,7 +114,7 @@ class _PostWidgetState extends State<PostWidget> {
               padding: const EdgeInsets.only(
                 left: 16,
                 right: 16,
-                top: 16,
+                top: 8,
               ),
               child: Column(
                 children: [
@@ -250,7 +250,7 @@ class _PostWidgetState extends State<PostWidget> {
                     pplSaved: widget.pplSaved,
                     pplShow: widget.pplShow,
                   ),
-                  sizedBoxHeight16(),
+                  // sizedBoxHeight16(),
                 ],
               ),
             ),
