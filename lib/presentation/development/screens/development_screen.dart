@@ -570,7 +570,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             Row(
                                               children: [
                                                 Image.asset(
-                                                    'assets/images/courseImage.png'),
+                                                    'assets/images/courseImage.png',
+                                                  fit: BoxFit.cover,
+                                                  width: 92,
+                                                  height: 52,
+                                                ),
                                                 sizedBoxWidth8(),
                                                 Column(
                                                   crossAxisAlignment:
