@@ -138,52 +138,76 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-            elevation: 0.3,
-            centerTitle: true,
-            title: Text(
-              'Курсы',
-              style: TextStyles.boldStyle.copyWith(
-                fontSize: 23,
-                color: ColorStyles.neutralsTextPrimaryColor,
-              ),
-            ),
-            actions: [
-              IconButton(
-                icon: SvgPicture.asset('assets/icons/cancel.svg'),
-                color: ColorStyles.primaryBorderColor,
-                onPressed: () {
-                  Navigator.pop(widget.devScreenContext);
-                  // Navigator.pushReplacementNamed(context, CourseRoute);
-                  // );
-                },
-              ),
-            ],
-            backgroundColor: Colors.white,
-            bottom: TabBar(
-              indicatorColor: ColorStyles.primaryBorderColor,
-              indicatorPadding:
-                  const EdgeInsets.only(left: 15, right: 15, bottom: 9),
-              labelColor: Colors.black,
-              unselectedLabelColor: unselected
-                  ? ColorStyles.primarySurfaceHoverColor
-                  : Colors.black,
-              labelStyle: TextStyles.mediumStyle.copyWith(
-                fontSize: 16,
-              ),
-              indicatorWeight: 2,
-              tabs: const [
-                Tab(
-                  text: 'Текущие',
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+              elevation: 0.3,
+              centerTitle: true,
+              title: Text(
+                'Курсы',
+                style: TextStyles.boldStyle.copyWith(
+                  fontSize: 23,
+                  color: ColorStyles.neutralsTextPrimaryColor,
                 ),
-                Tab(
-                  text: 'Завершённые',
-                )
+              ),
+              actions: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(widget.devScreenContext);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        //color: Colors.black
+                        color: Color(0xFFF9F9F9),
+                      ),
+                      child: Icon(
+                        CupertinoIcons.clear,
+                        color: ColorStyles.primaryBorderColor,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // IconButton(
+                //   icon: SvgPicture.asset('assets/icons/cancel.svg'),
+                //   color: ColorStyles.primaryBorderColor,
+                //   onPressed: () {
+                //     Navigator.pop(widget.devScreenContext);
+                //     // Navigator.pushReplacementNamed(context, CourseRoute);
+                //     // );
+                //   },
+                // ),
               ],
-            )),
-        body: TabBarView(
-          children: [CurrentPage(), FinishedPage()],
+              backgroundColor: Colors.white,
+              bottom: TabBar(
+                indicatorColor: ColorStyles.primaryBorderColor,
+                indicatorPadding:
+                    const EdgeInsets.only(left: 15, right: 15, bottom: 9),
+                labelColor: Colors.black,
+                unselectedLabelColor: unselected
+                    ? ColorStyles.primarySurfaceHoverColor
+                    : Colors.black,
+                labelStyle: TextStyles.mediumStyle.copyWith(
+                  fontSize: 16,
+                ),
+                indicatorWeight: 2,
+                tabs: const [
+                  Tab(
+                    text: 'Текущие',
+                  ),
+                  Tab(
+                    text: 'Завершённые',
+                  )
+                ],
+              )),
+          body: TabBarView(
+            children: [CurrentPage(), FinishedPage()],
+          ),
         ),
       ),
     );

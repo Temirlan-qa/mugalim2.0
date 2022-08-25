@@ -151,7 +151,7 @@ class _ActionsRowWidgetState extends State<ActionsRowWidget> {
                       NumberFormat.compactCurrency(
                         decimalDigits: 0,
                         symbol: ' ',
-                      ).format(widget.pplSaved),
+                      ).format(widget.pplSaved + (isSaved ? 1 : 0)),
                       style: TextStyles.mediumStyle.copyWith(
                         fontSize: 14,
                         color: isSaved

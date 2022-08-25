@@ -82,14 +82,35 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: SvgPicture.asset('assets/icons/cancel.svg'),
-            color: ColorStyles.primaryBorderColor,
-            onPressed: () {
-              // Navigator.pushReplacementNamed(context, CourseRoute);
+          GestureDetector(
+            onTap: (){
               Navigator.pop(widget.devScreenContext);
             },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
+              child: Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  //color: Colors.black
+                  color: const Color(0xFFF9F9F9),
+                ),
+                child: Icon(
+                  CupertinoIcons.clear,
+                  color: ColorStyles.primaryBorderColor,
+                ),
+              ),
+            ),
           ),
+          // IconButton(
+          //   icon: SvgPicture.asset('assets/icons/cancel.svg'),
+          //   color: ColorStyles.primaryBorderColor,
+          //   onPressed: () {
+          //     // Navigator.pushReplacementNamed(context, CourseRoute);
+          //     Navigator.pop(widget.devScreenContext);
+          //   },
+          // ),
         ],
         bottom: AppBar(
             automaticallyImplyLeading: false,
