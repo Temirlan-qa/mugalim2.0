@@ -694,6 +694,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
+            SizedBox(height: 76,),
           ],
         ),
       );
@@ -858,7 +859,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
-            SizedBox(height: 100,),
+            SizedBox(height: 76,),
           ],
         ),
       );

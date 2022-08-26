@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/core/widgets/button_widget.dart';
 import 'package:mugalim/presentation/books/screens/book_description_screen.dart';
 import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
@@ -15,7 +13,8 @@ class BookScreen extends StatefulWidget {
       {Key? key,
       required this.index_month,
       required this.select_index,
-      required this.list})
+      required this.list}
+      )
       : super(key: key);
   int index_month;
   String select_index;
@@ -203,7 +202,8 @@ class _BookScreenState extends State<BookScreen> {
                                                   : ColorStyles
                                                       .neutralsTextPrimaryColor,
                                               width:
-                                                  list.contains(index) ? 5 : 1),
+                                                  list.contains(index) ? 5 : 1
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -252,11 +252,6 @@ class _BookScreenState extends State<BookScreen> {
                       if (!list.isEmpty && widget.index_month.toInt() < 3) {
                         widget.list.remove(widget.select_index);
 
-                        // Navigator.pushReplacementNamed(context, JenreRoute,
-                        //     arguments: {
-                        //       widget.index_month[0]: widget.index_month[0] + 1,
-                        //       list: widget.list,
-                        //     });
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -299,11 +294,6 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
-                    // Navigator.pushReplacementNamed(context, JenreRoute,
-                    //     arguments: {
-                    //       widget.index_month: widget.index_month,
-                    //       list: widget.list,
-                    //     });
                   },
                   child: Text(
                     "Обратно к жанрам",

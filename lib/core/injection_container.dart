@@ -8,6 +8,9 @@ import 'package:mugalim/core/utils/dio/dio_wrapper.dart';
 import '../logic/auth/bloc/auth_bloc.dart';
 import '../logic/auth/data/datasources/auth_datasources.dart';
 import '../logic/auth/data/repositories/auth_repository.dart';
+import '../logic/home/bloc/home_bloc.dart';
+import '../logic/home/data/datasources/home_datasources.dart';
+import '../logic/home/data/repositories/home_repositories.dart';
 
 var sl = GetIt.instance;
 
@@ -33,5 +36,16 @@ void initGetIt() async {
 
   sl.registerFactory<AuthBloc>(
     () => AuthBloc(sl()),
+  );
+  sl.registerLazySingleton<HomeDatasource>(
+        () => HomeDataSourceImpl(dioWrapper: sl()),
+  );
+
+  sl.registerLazySingleton<HomeRepository>(
+        () => HomeRepositoryImpl(sl()),
+  );
+
+  sl.registerFactory<HomeBloc>(
+        () => HomeBloc(sl()),
   );
 }

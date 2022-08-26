@@ -73,7 +73,10 @@ class _JenreScreenState extends State<JenreScreen> {
               const SizedBox(
                 height: 125,
               ),
-              gridView(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: gridView(),
+              ),
               const Spacer(),
               TextButton(
                 style: TextButton.styleFrom(
@@ -89,10 +92,11 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 onPressed: () {
-                  if (widget.list.isNotEmpty) {
+                  if (array.isNotEmpty) {
                     int index = indexGrid;
                     // int size = widget.list.length;
                     String selectIndex = widget.list[index];
+                    print(index);
                     if (widget.index_month.toInt() >= 4) {
                       Navigator.push(
                         context,
@@ -156,7 +160,6 @@ class _JenreScreenState extends State<JenreScreen> {
           child: Container(
             // height: 120,
             // width: (MediaQuery.of(context).size.width -40 )/2,
-            margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.grey,
