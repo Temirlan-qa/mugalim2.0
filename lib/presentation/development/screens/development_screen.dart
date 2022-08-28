@@ -76,7 +76,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Добрый день, Мухаммед!',
                                   style: TextStyles.boldStyle.copyWith(
                                     fontSize: 23,
-                                    color: Colors.black,
+                                    color: ColorStyles.neutralsTextPrimaryColor,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -85,7 +85,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Сегодня прекрасный день для развития',
                                   style: TextStyles.mediumStyle.copyWith(
                                     fontSize: 13,
-                                    color: Colors.black,
+                                    color: ColorStyles.neutralsTextPrimaryColor,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -94,12 +94,6 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //       builder: (context) =>
-                                        //           const CoursePage()),
-                                        // );
                                         Navigator.of(context, rootNavigator: true).pushNamed(CourseRoute);
                                       },
                                       child: SizedBox(
@@ -132,7 +126,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               style: TextStyles.mediumStyle
                                                   .copyWith(
                                                 fontSize: 13,
-                                                color: Colors.black,
+                                                color: ColorStyles.neutralsTextPrimaryColor,
                                               ),
                                               textAlign: TextAlign.center,
                                             ),
@@ -153,7 +147,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           ),
                                         );
                                       },
-                                      child: Container(
+                                      child: SizedBox(
                                         width: 80,
                                         height: 80,
                                         child: Column(
@@ -183,7 +177,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               style: TextStyles.mediumStyle
                                                   .copyWith(
                                                 fontSize: 13,
-                                                color: Colors.black,
+                                                color: ColorStyles.neutralsTextPrimaryColor,
                                               ),
                                               textAlign: TextAlign.center,
                                             ),
@@ -232,7 +226,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               style: TextStyles.mediumStyle
                                                   .copyWith(
                                                 fontSize: 13,
-                                                color: Colors.black,
+                                                color: ColorStyles.neutralsTextPrimaryColor,
                                               ),
                                               textAlign: TextAlign.center,
                                             ),
@@ -280,7 +274,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               style: TextStyles.mediumStyle
                                                   .copyWith(
                                                 fontSize: 13,
-                                                color: Colors.black,
+                                                color: ColorStyles.neutralsTextPrimaryColor,
                                               ),
                                               textAlign: TextAlign.center,
                                             ),
@@ -305,7 +299,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 24,
-                                              color: Colors.black,
+                                              color: ColorStyles.neutralsTextPrimaryColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -315,7 +309,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 14,
-                                              color: Colors.black,
+                                              color: ColorStyles.neutralsTextPrimaryColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -333,7 +327,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 24,
-                                              color: Colors.black,
+                                              color: ColorStyles.neutralsTextPrimaryColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -343,7 +337,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 14,
-                                              color: Colors.black,
+                                              color: ColorStyles.neutralsTextPrimaryColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -361,7 +355,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 24,
-                                              color: Colors.black,
+                                              color: ColorStyles.neutralsTextPrimaryColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -371,7 +365,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 14,
-                                              color: Colors.black,
+                                              color: ColorStyles.neutralsTextPrimaryColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -414,7 +408,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Продолжите задания',
                                   style: TextStyles.mediumStyle.copyWith(
                                     fontSize: 18,
-                                    color: Colors.black,
+                                    color: ColorStyles.neutralsTextPrimaryColor,
                                   ),
                                 ),
                                 sizedBoxHeight8(),
@@ -440,7 +434,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               style: TextStyles.mediumStyle
                                                   .copyWith(
                                                 fontSize: 16,
-                                                color: Colors.black,
+                                                color: ColorStyles.neutralsTextPrimaryColor,
                                               ),
                                             ),
                                             sizedBoxHeight4(),
@@ -473,7 +467,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         left: 36,
                                                         child: ClipOval(
                                                           child: CircleAvatar(
-                                                            backgroundColor: Color(0xff3D3DD8),
+                                                            backgroundColor: ColorStyles.primaryBorderColor,
                                                               radius: 12,
                                                               child: Text(
                                                                 '+21',
@@ -495,8 +489,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   style: TextStyles.regularStyle
                                                       .copyWith(
                                                     fontSize: 13,
-                                                    color:
-                                                        const Color(0xFF767676),
+                                                    color: ColorStyles.primarySurfaceHoverColor,
                                                   ),
                                                 ),
                                               ],
@@ -504,10 +497,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           ],
                                         ),
                                         const Spacer(),
-                                        const Icon(
+                                        Icon(
                                           Icons.arrow_forward_ios,
                                           size: 18,
-                                          color: Color(0xff3D3DD8),
+                                          color: ColorStyles.primaryBorderColor,
                                         )
                                       ],
                                     ),
@@ -546,7 +539,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Продолжите курс',
                                   style: TextStyles.mediumStyle.copyWith(
                                     fontSize: 18,
-                                    color: Colors.black,
+                                    color: ColorStyles.neutralsTextPrimaryColor,
                                   ),
                                 ),
                                 sizedBoxHeight8(),
@@ -588,7 +581,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                           .mediumStyle
                                                           .copyWith(
                                                         fontSize: 13,
-                                                        color: Colors.black,
+                                                        color: ColorStyles.neutralsTextPrimaryColor,
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -596,11 +589,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        const Icon(
+                                                        Icon(
                                                           Icons.access_time,
                                                           size: 15,
-                                                          color:
-                                                              Color(0xff767676),
+                                                          color: ColorStyles.primarySurfaceHoverColor,
                                                         ),
                                                         sizedBoxWidth4(),
                                                         Text(
@@ -609,8 +601,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                               .regularStyle
                                                               .copyWith(
                                                             fontSize: 13,
-                                                            color: const Color(
-                                                                0xFF767676),
+                                                            color: ColorStyles.primarySurfaceHoverColor,
                                                           ),
                                                         ),
                                                       ],
@@ -622,10 +613,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           ],
                                         ),
                                         const Spacer(),
-                                        const Icon(
+                                        Icon(
                                           Icons.arrow_forward_ios,
                                           size: 18,
-                                          color: Color(0xff3D3DD8),
+                                          color: ColorStyles.primaryBorderColor,
                                         ),
                                       ],
                                     ),

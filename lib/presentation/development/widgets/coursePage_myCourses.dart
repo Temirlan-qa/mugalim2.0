@@ -14,7 +14,8 @@ import '../../../core/widgets/textform_widget.dart';
 
 class CourseMyCourses extends StatefulWidget {
   final BuildContext devScreenContext;
-  const CourseMyCourses({Key? key, required this.devScreenContext}) : super(key: key);
+  const CourseMyCourses({Key? key, required this.devScreenContext})
+      : super(key: key);
 
   @override
   State<CourseMyCourses> createState() => _CourseMyCoursesState();
@@ -29,6 +30,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
     super.dispose();
     Search.dispose();
   }
+
   @override
   void initState() {
     super.initState();
@@ -152,18 +154,19 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
               ),
               actions: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(widget.devScreenContext);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
+                    padding:
+                        const EdgeInsets.only(top: 12, bottom: 12, right: 14),
                     child: Container(
                       width: 28,
                       height: 28,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         //color: Colors.black
-                        color: Color(0xFFF9F9F9),
+                        color: ColorStyles.primarySurfaceColor,
                       ),
                       child: Icon(
                         CupertinoIcons.clear,
@@ -188,10 +191,10 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 indicatorColor: ColorStyles.primaryBorderColor,
                 indicatorPadding:
                     const EdgeInsets.only(left: 15, right: 15, bottom: 9),
-                labelColor: Colors.black,
+                labelColor: ColorStyles.neutralsTextPrimaryColor,
                 unselectedLabelColor: unselected
                     ? ColorStyles.primarySurfaceHoverColor
-                    : Colors.black,
+                    : ColorStyles.neutralsTextPrimaryColor,
                 labelStyle: TextStyles.mediumStyle.copyWith(
                   fontSize: 16,
                 ),
@@ -249,8 +252,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     ),
                   ),
                   sizedBoxHeight8(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),
                   Container(
@@ -286,7 +289,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                           'assets/images/Rectangle 1425.png'),
                                       fit: BoxFit.fitHeight,
                                       opacity: 0.5),
-                                  color: Colors.black,
+                                  color: ColorStyles.neutralsTextPrimaryColor,
                                   border: Border.all(
                                     color: const Color(0xff42236A),
                                   ),
@@ -371,14 +374,13 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                             width: 123,
                                             height: 32,
                                             decoration: BoxDecoration(
-                                                gradient:
-                                                    const RadialGradient(colors: [
-                                                  Color.fromRGBO(
-                                                      255, 255, 255, 0),
-
-                                                  Color.fromRGBO(
-                                                      255, 255, 255, 0.4),
-                                                ]),
+                                                gradient: const RadialGradient(
+                                                    colors: [
+                                                      Color.fromRGBO(
+                                                          255, 255, 255, 0),
+                                                      Color.fromRGBO(
+                                                          255, 255, 255, 0.4),
+                                                    ]),
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                                 color: Colors.white
@@ -519,7 +521,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/icons/tasks.svg',
-                                            color: ColorStyles.primarySurfaceHoverColor,
+                                            color: ColorStyles
+                                                .primarySurfaceHoverColor,
                                             width: 13.33,
                                             height: 13.33,
                                           ),
@@ -584,7 +587,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/icons/time.svg',
-                                            color: ColorStyles.primarySurfaceHoverColor,
+                                            color: ColorStyles
+                                                .primarySurfaceHoverColor,
                                             width: 13.33,
                                             height: 13.33,
                                           ),
@@ -732,8 +736,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     ),
                   ),
                   sizedBoxHeight8(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),
                   sizedBoxHeight8(),
@@ -858,7 +862,9 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
-            SizedBox(height: 100,),
+            const SizedBox(
+              height: 100,
+            ),
           ],
         ),
       );

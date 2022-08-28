@@ -4,7 +4,8 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 
 class InProcessWidget extends StatelessWidget {
-  const InProcessWidget({Key? key, }) : super(key: key);
+  final onPressed;
+  const InProcessWidget({Key? key,required this.onPressed }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class InProcessWidget extends StatelessWidget {
           pressedOpacity : 0.7,
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           color: ColorStyles.primaryBorderColor,
+          onPressed: onPressed,
           child: Text(
             'На главную',
             style: TextStyles.mediumStyle.copyWith(
@@ -37,9 +39,6 @@ class InProcessWidget extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          onPressed: (){
-            Navigator.pop(context);
-          },
         ),
       ],
     );

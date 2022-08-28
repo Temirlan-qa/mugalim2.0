@@ -422,7 +422,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         }),
                   ),
                 ),
-                const Center(child: Text('Сохраненные ')),
+                Center(
+                    // child: Text('Сохраненные ')
+                  child: SvgPicture.network('https://svgartista.net/')
+                ),
               ],
             ),
           ),

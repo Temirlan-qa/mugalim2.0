@@ -63,7 +63,7 @@ class _CoursePageState extends State<CoursePage> {
                     : Colors.white,
                 spreadRadius: 0,
                 blurRadius: 0,
-                offset: Offset(0, 0.5), // changes position of shadow
+                offset: const Offset(0, 0.5), // changes position of shadow
               ),
             ],
           ),

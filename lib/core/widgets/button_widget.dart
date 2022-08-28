@@ -27,6 +27,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
     return CupertinoButton(
         minSize: 0,
         padding: EdgeInsets.zero,
+        onPressed: widget.onPressed,
         child: Container(
           width: MediaQuery.of(context).size.width - 64,
           decoration: BoxDecoration(
@@ -47,7 +48,6 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               ),
             ),
           ),
-        ),
-        onPressed: widget.onPressed);
+        ));
   }
 }

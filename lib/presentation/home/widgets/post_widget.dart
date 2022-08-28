@@ -212,7 +212,9 @@ class _PostWidgetState extends State<PostWidget> {
                     width: MediaQuery.of(context).size.width,
                   ),
                   sizedBoxHeight8(),
-                  const LineWidget(),
+                  LineWidget(
+                    width: MediaQuery.of(context).size.width -32,
+                  ),
                   sizedBoxHeight8(),
                 ],
               ),
@@ -239,7 +241,9 @@ class _PostWidgetState extends State<PostWidget> {
                           votePPL2: widget.votePPL2,
                         ),
                         sizedBoxHeight8(),
-                        const LineWidget(),
+                        LineWidget(
+                          width: MediaQuery.of(context).size.width -32,
+                        ),
                       ],
                     ),
                   ),

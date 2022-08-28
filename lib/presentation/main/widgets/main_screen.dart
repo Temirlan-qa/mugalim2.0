@@ -6,6 +6,7 @@ import 'package:mugalim/core/routes/routes.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
+import 'package:mugalim/presentation/profile/screens/profile_screen.dart';
 import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
 import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
 
@@ -37,35 +38,35 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => const HomeScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => DevelopmentScreen(),
+                  builder: (_) => const DevelopmentScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(2),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => TimetableScreen(),
+                  builder: (_) => const TimetableScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(3),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => RatingScreen(),
+                  builder: (_) => const RatingScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(4),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => const ProfileScreen(),
                 )
               ],
             ),
@@ -74,7 +75,7 @@ class _MainScreenState extends State<MainScreen> {
                 color: brightness == Brightness.dark
                     ? ColorStyles.darkthemePageBackgroundColor
                     : Colors.white,
-                border: Border(
+                border: const Border(
                     top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
                 boxShadow: [
                   BoxShadow(
@@ -83,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                         : Colors.white,
                     spreadRadius: 0,
                     blurRadius: 0,
-                    offset: Offset(0, 0.5), // changes position of shadow
+                    offset: const Offset(0, 0.5), // changes position of shadow
                   ),
                 ],
               ),
@@ -91,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
 
                 child: CupertinoTabBar(
                   backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
-                  border: Border(top: BorderSide(color: Colors.transparent)),
+                  border: const Border(top: BorderSide(color: Colors.transparent)),
                   onTap: (int index) {
                     setState(() {
                       _currentView = index;

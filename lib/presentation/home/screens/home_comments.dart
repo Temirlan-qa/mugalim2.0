@@ -96,7 +96,11 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
           IconButton(
             color: const Color(0xFF3D3DD8),
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/ios_share.svg',width: 18.67,height: 23.33,),
+            icon: SvgPicture.asset(
+              'assets/icons/ios_share.svg',
+              width: 18.67,
+              height: 23.33,
+            ),
           ),
         ],
         leading: IconButton(
@@ -188,25 +192,25 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                         widget.title.length < 197
                             ? SizedBox()
                             : InkWell(
-                          onTap: () {
-                            setState(() {
-                              isExpanded = !isExpanded;
-                            });
-                          },
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              isExpanded == false
-                                  ? 'Показать полностью...'
-                                  : 'Show less',
-                              style: TextStyles.mediumStyle.copyWith(
-                                fontSize: 14,
-                                color: const Color(0xff3D3DD8),
+                                onTap: () {
+                                  setState(() {
+                                    isExpanded = !isExpanded;
+                                  });
+                                },
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    isExpanded == false
+                                        ? 'Показать полностью...'
+                                        : 'Show less',
+                                    style: TextStyles.mediumStyle.copyWith(
+                                      fontSize: 14,
+                                      color: const Color(0xff3D3DD8),
+                                    ),
+                                    maxLines: 1,
+                                  ),
+                                ),
                               ),
-                              maxLines: 1,
-                            ),
-                          ),
-                        ),
                         sizedBoxHeight8(),
                         Visibility(
                           visible: widget.hasVote,
@@ -252,7 +256,9 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                           pplShow: widget.pplShow,
                         ),
                         sizedBoxHeight16(),
-                        const LineWidget(),
+                        LineWidget(
+                          width: MediaQuery.of(context).size.width - 32,
+                        ),
                       ],
                     ),
                   ),
