@@ -5,9 +5,7 @@ import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/core/widgets/button_widget.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
-import 'package:mugalim/presentation/profile/screens/aboutApplication_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutProject_screen.dart';
 import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
 import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
@@ -49,8 +47,7 @@ class ProfileScreen extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: ColorStyles.primarySurfaceColor,
@@ -58,14 +55,21 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Lottie.asset(
-                        // mloader.json
-                        //repeat: false,
-                        'assets/animations/Loader.json',
+                      Image.asset(
+                        'assets/images/male.png',
+                        // 'assets/images/female.png',
                         width: 56,
                         height: 56,
                         fit: BoxFit.fill,
                       ),
+                      // Lottie.asset(
+                      //   // mloader.json
+                      //   //repeat: false,
+                      //   'assets/animations/Loader.json',
+                      //   width: 56,
+                      //   height: 56,
+                      //   fit: BoxFit.fill,
+                      // ),
                       sizedBoxWidth16(),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +162,6 @@ class ProfileScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
               ),
               sizedBoxHeight16(),
-              //  mugalim_logo_for_profile.svg
               InfoListTileWidget(
                 text: 'Написать отзыв',
                 leading_img: 'assets/icons/feedback_for_profile.svg',
@@ -177,13 +180,6 @@ class ProfileScreen extends StatelessWidget {
                 leading_img: 'assets/icons/about_for_profile.svg',
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pushNamed(AboutApp);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const AboutApplicationScreen(),
-                  //   ),
-                  // );
-                  //AboutApplicationScreen
                 },
               ),
               sizedBoxHeight16(),
