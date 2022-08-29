@@ -1,6 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:drawing_animation/drawing_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -9,6 +10,7 @@ import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/widgets/textform_widget.dart';
+import '../../../logic/home/bloc/home_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -343,45 +345,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? SingleChildScrollView(
                         child: Container(
                           color: ColorStyles.neutralsPageBackgroundColor,
-                          child: ListView.builder(
-                              itemCount: testPostData.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    index == 0 ? SizedBox(height: 16,) : SizedBox(),
-                                    PostWidget(
-                                      hasImg: testPostData[index]['hasImg'],
-                                      hasVote: testPostData[index]['hasVote'],
-                                      image: testPostData[index]['image'],
-                                      imageAuthor: testPostData[index]
-                                          ['imageAuthor'],
-                                      title: testPostData[index]['title'],
-                                      postAuthor: testPostData[index]['postAuthor'],
-                                      postPublicationDate: testPostData[index]
-                                          ['postPublicationDate'],
-                                      votePPL1: testPostData[index]['votePPL1'],
-                                      votePPL2: testPostData[index]['votePPL2'],
-                                      voteProcent1: testPostData[index]
-                                          ['voteProcent1'],
-                                      voteProcent2: testPostData[index]
-                                          ['voteProcent2'],
-                                      voteAnswer1: testPostData[index]
-                                          ['voteAnswer1'],
-                                      voteAnswer2: testPostData[index]
-                                          ['voteAnswer2'],
-                                      votetitle: testPostData[index]['votetitle'],
-                                      pplShow: testPostData[index]['pplShow'],
-                                      pplSaved: testPostData[index]['pplSaved'],
-                                      pplLike: testPostData[index]['pplLike'],
-                                      pplCommented: testPostData[index]
-                                          ['pplCommented'],
-                                    ),
-                                    index == testPostData.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
-                                  ],
-                                );
-                              }),
+                          child: BlocBuilder<HomeBloc, HomeState>(
+                          builder: (context, state) {
+                            if(state is PostListSuccess){
+                              return ListView.builder(
+                                  itemCount: state.posts.length,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        index == 0 ? SizedBox(height: 16,) : SizedBox(),
+                                        PostWidget(
+                                            viewNumber : state.posts[index].viewNumber,
+                                            savedNumber : state.posts[index].savedNumber,
+                                            saved :state.posts[index].saved,
+                                            commentNumber : state.posts[index].commentNumber,
+                                            likeNumber: state.posts[index].likeNumber,
+                                            createdAt: state.posts[index].createdAt,
+                                            title: state.posts[index].title,
+                                            id : state.posts[index].id,
+                                            content: state.posts[index].content,
+                                            liked: state.posts[index].liked,
+                                            cityId: state.posts[index].cityId,
+                                            commeted: state.posts[index].commeted,
+                                            imgs: state.posts[index].imgs,
+                                            regionId : state.posts[index].regionId,
+                                            type: state.posts[index].type,
+                                            userId: state.posts[index].userId,
+                                            updatedAt : state.posts[index].updatedAt
+                                        ),
+                                        index == testPostData.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                                      ],
+                                    );
+                                  });
+                            }
+                            else if(state is HomeFailure){
+                              print('oshibka');
+                              return Text('ошибка');
+                            }
+                            else if(state is HomeLoading){
+                              print('loading');
+                              return Text('loading');
+                            }
+                            return Text("Post don't loaded");
+                            },
+                          ),
                         ),
                       )
                     : dropdownvalue == 'Регион '
@@ -391,34 +400,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     color: ColorStyles.neutralsPageBackgroundColor,
                     child: ListView.builder(
-                        itemCount: testPostData.length,
+                        itemCount: 1,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
                               index == 0 ? SizedBox(height: 16,) : SizedBox(),
-                              PostWidget(
-                                hasImg: testPostData[index]['hasImg'],
-                                hasVote: testPostData[index]['hasVote'],
-                                image: testPostData[index]['image'],
-                                imageAuthor: testPostData[index]['imageAuthor'],
-                                title: testPostData[index]['title'],
-                                postAuthor: testPostData[index]['postAuthor'],
-                                postPublicationDate: testPostData[index]
-                                    ['postPublicationDate'],
-                                votePPL1: testPostData[index]['votePPL1'],
-                                votePPL2: testPostData[index]['votePPL2'],
-                                voteProcent1: testPostData[index]['voteProcent1'],
-                                voteProcent2: testPostData[index]['voteProcent2'],
-                                voteAnswer1: testPostData[index]['voteAnswer1'],
-                                voteAnswer2: testPostData[index]['voteAnswer2'],
-                                votetitle: testPostData[index]['votetitle'],
-                                pplShow: testPostData[index]['pplShow'],
-                                pplSaved: testPostData[index]['pplSaved'],
-                                pplLike: testPostData[index]['pplLike'],
-                                pplCommented: testPostData[index]['pplCommented'],
-                              ),
+                              Text('Trend'),
                               index == testPostData.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
                             ],
                           );

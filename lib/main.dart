@@ -8,6 +8,7 @@ import 'core/injection_container.dart';
 import 'core/utils/hive/hive_init.dart';
 import 'core/routes/routes.dart';
 import 'logic/auth/bloc/auth_bloc.dart';
+import 'logic/home/bloc/home_bloc.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
+          create: (_) => sl(),
+        ),
+        BlocProvider<HomeBloc>(
           create: (_) => sl(),
         ),
       ],

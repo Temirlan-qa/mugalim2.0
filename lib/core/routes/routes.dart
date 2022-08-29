@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/main.dart';
+import 'package:mugalim/presentation/books/screens/myChoice.dart';
 import 'package:mugalim/presentation/books/screens/select_book.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/select_jenre.dart';
-import '../../presentation/development/widgets/coursePage.dart';
+import '../../presentation/cources/screens/coursePage.dart';
 import '../../presentation/main/widgets/main_screen.dart';
 import '../injection_container.dart';
 
@@ -60,15 +61,16 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => CoursePage(),
         );
-      // case BookRoute:
-      //   return CupertinoPageRoute(
-      //     settings: routeSettings,
-      //     builder: (_) => BookScreen(
-      //       index_month: (routeSettings.arguments as Map),
-      //       select_index: (routeSettings.arguments as Map),
-      //       list: (routeSettings.arguments as Map),
-      //     ),
-      //   );
+      case DevelopmentRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => DevelopmentScreen(),
+        );
+      case ChoiceRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => MyChoiceScreen(),
+        );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,

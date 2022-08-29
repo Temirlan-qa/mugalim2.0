@@ -6,7 +6,6 @@ import '../../../../core/utils/dio/dio_wrapper.dart';
 abstract class TokensRemoteDataSource {
   Future<Response> getTokens(String username, String code);
 
-  Future<Response> saveDeviceId(String deviceId);
 }
 
 class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
@@ -38,13 +37,6 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
 
     print(response);
 
-    return response;
-  }
-
-  @override
-  Future<Response> saveDeviceId(String deviceId) async {
-    Response response =
-        await dioWrapper!.post('/notification/device/save', data: deviceId);
     return response;
   }
 }
