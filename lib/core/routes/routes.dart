@@ -30,23 +30,32 @@ class InnLabRouter {
                 // HomeScreen(),
                 // HomeScreen(),
                 BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                  create: (_) => sl<HomeBloc>()..add(GetPostsList()),
                 ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
+                // BlocProvider<HomeBloc>(
+                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                // ),
+                // BlocProvider<HomeBloc>(
+                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                // ),
+                // BlocProvider<HomeBloc>(
+                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                // ),
+                // BlocProvider<HomeBloc>(
+                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+                // ),
               ],
               child: MainScreen()
           ),
+        );
+      case MainRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => JenreScreen(
+            index_month: (0),
+            list: list,
+          ),
+
         );
       case JenreRoute:
         return CupertinoPageRoute(

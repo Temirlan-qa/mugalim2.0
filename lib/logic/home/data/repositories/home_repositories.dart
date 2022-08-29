@@ -8,6 +8,7 @@ import '../datasources/home_datasources.dart';
 abstract class HomeRepository {
   Future<List<PostModel>> getPostsList();
   Future<List<PostByIdModel>> getPosts(String postId);
+  Future<Response> likedPost(String postId,String likeType);
 }
 
 class HomeRepositoryImpl extends HomeRepository {
@@ -28,5 +29,10 @@ class HomeRepositoryImpl extends HomeRepository {
     Response response = await homeDatasource.getPost(postId);
 
     return (response.data as List).map((data) => PostByIdModel.fromJson(data)).toList();
+  }
+  @override
+  Future<Response> likedPost(String postId,String likeType) async {
+    Response response = await homeDatasource.likedPost(postId,likeType);
+    return response;
   }
 }

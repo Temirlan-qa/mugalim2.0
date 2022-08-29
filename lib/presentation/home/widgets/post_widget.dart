@@ -30,11 +30,12 @@ class PostWidget extends StatefulWidget {
   final String? type;
   final String? userId;
   final String? updatedAt;
-
   final List? imgs;
+  final int? index;
+  final String? fio;
   const PostWidget( {
     Key? key,
-    this.viewNumber, this.savedNumber, this.saved, this.commentNumber, this.likeNumber, this.createdAt, this.title, this.id, this.content, this.liked, this.cityId, this.commeted, this.img, this.regionId, this.type, this.userId, this.updatedAt,this.imgs,
+    this.viewNumber, this.savedNumber, this.saved, this.commentNumber, this.likeNumber, this.createdAt, this.title, this.id, this.content, this.liked, this.cityId, this.commeted, this.img, this.regionId, this.type, this.userId, this.updatedAt,this.imgs, this.index , this.fio,
 
   }) : super(key: key);
 
@@ -45,7 +46,6 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   String gonna = "";
   bool isExpanded = false;
-
   bool hasVote = true;
   int votePPL1 = 45;
   int votePPL2 = 45;
@@ -56,33 +56,31 @@ class _PostWidgetState extends State<PostWidget> {
   String votetitle =  'Пойдете ли в горы вместе с группой?';
   @override
   Widget build(BuildContext context) {
+    bool hasVote = widget.index! % 2 != 0 ? true : false;
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => HomeCommentsPage(
-        //       pplLike: widget.pplLike,
-        //       pplCommented: widget.pplCommented,
-        //       pplSaved: widget.pplSaved,
-        //       pplShow: widget.pplShow,
-        //       hasImg: widget.hasImg,
-        //       hasVote: widget.hasVote,
-        //       image: widget.image,
-        //       imageAuthor: widget.imageAuthor,
-        //       title: widget.title,
-        //       postAuthor: widget.postAuthor,
-        //       postPublicationDate: widget.postPublicationDate,
-        //       votePPL1: widget.votePPL1,
-        //       votePPL2: widget.votePPL2,
-        //       voteProcent1: widget.voteProcent1,
-        //       voteProcent2: widget.voteProcent2,
-        //       voteAnswer1: widget.voteAnswer1,
-        //       voteAnswer2: widget.voteAnswer2,
-        //       votetitle: widget.votetitle,
-        //     ),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeCommentsPage(
+              pplLike: widget.likeNumber!,
+              pplCommented: widget.commentNumber!,
+              pplSaved: widget.savedNumber!,
+              pplShow: widget.viewNumber!,
+              hasImg: hasVote,
+              hasVote: hasVote,
+              image: 'assets/icons/space.png',
+              postPublicationDate: widget.createdAt!,
+              votePPL1: votePPL1,
+              votePPL2: votePPL2,
+              voteProcent1: voteProcent1,
+              voteProcent2: voteProcent2,
+              voteAnswer1: voteAnswer1,
+              voteAnswer2: voteAnswer2,
+              votetitle: votetitle, title: widget.content!, imageAuthor: 'assets/icons/mugalim_logo.png', postAuthor: widget.fio!,
+            ),
+          ),
+        );
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -103,7 +101,7 @@ class _PostWidgetState extends State<PostWidget> {
                     children: [
                       CircleAvatar(
                         child: Image.asset(
-                          'assets/icons/mugalim_logo.svg',
+                          'assets/icons/mugalim_logo.png',
                           width: 44,
                           height: 44,
                         ),
@@ -114,7 +112,7 @@ class _PostWidgetState extends State<PostWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            widget.title!,
+                            widget.fio!,
                             style: TextStyles.mediumStyle.copyWith(
                               color: ColorStyles.neutralsTextPrimaryColor,
                               fontSize: 14,
@@ -122,7 +120,7 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                           ),
                           Text(
-                            widget.updatedAt!,
+                            widget.createdAt!,
                             style: TextStyles.regularStyle.copyWith(
                               color: ColorStyles.primarySurfaceHoverColor,
                             ),
@@ -207,7 +205,7 @@ class _PostWidgetState extends State<PostWidget> {
                     child: Column(
                       children: [
                         Visibility(
-                          visible: hasVote,
+                          visible: widget.index! % 2 != 0 ? true : false,
                           child: Column(
                             children: [
                               VoteWidget(
@@ -225,12 +223,12 @@ class _PostWidgetState extends State<PostWidget> {
                           ),
                         ),
                         sizedBoxHeight8(),
-                        ActionsRowWidget(
-                          pplLike: widget.likeNumber!,
-                          pplCommented: widget.commentNumber!,
-                          pplSaved: widget.savedNumber!,
-                          pplShow: widget.viewNumber!,
-                        ),
+                        // ActionsRowWidget(
+                        //   pplLike: widget.likeNumber!,
+                        //   pplCommented: widget.commentNumber!,
+                        //   pplSaved: widget.savedNumber!,
+                        //   pplShow: widget.viewNumber!,
+                        // ),
                         // sizedBoxHeight16(),
                       ],
                     ),

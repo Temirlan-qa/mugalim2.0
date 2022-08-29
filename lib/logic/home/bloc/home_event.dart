@@ -11,3 +11,8 @@ class GetPostByIdList extends HomeEvent{
 
   GetPostByIdList(this.postId);
 }
+class LikePostStudents extends HomeEvent {
+  final String id;
+  final String likeType;
+  LikePostStudents(this.id,this.likeType);
+}
