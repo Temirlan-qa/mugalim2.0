@@ -20,7 +20,7 @@ class VerifyScreen extends StatefulWidget {
 
 class _VerifyScreenState extends State<VerifyScreen> {
   Box accessToken = Hive.box('tokens');
-  TextEditingController EditingController = TextEditingController();
+  TextEditingController phoneEditingController = TextEditingController();
   bool validation = false;
   bool loading = false;
   bool wrongPassOrLog = false;
@@ -105,7 +105,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         height: 8,
                       ),
                       TextFormField(
-                        controller: EditingController,
+                        controller: phoneEditingController,
                         // obscureText: true,
                         onChanged: (value) {
                           setState(() {
@@ -165,26 +165,26 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           ),
                         ),
                         style: TextButton.styleFrom(
-                          primary: EditingController.text != ''  ? Colors.white : Color(0xff1A1A1A),
-                          backgroundColor: EditingController.text != '' ? Color(0xff3D3DD8) : Color(0xffE0E0E0),
+                          primary: phoneEditingController.text != ''  ? Colors.white : Color(0xff1A1A1A),
+                          backgroundColor: phoneEditingController.text != '' ? Color(0xff3D3DD8) : Color(0xffE0E0E0),
                           minimumSize: Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
                         onPressed: () {
-                          setState(() {
-                            if(EditingController.text != '') otp = true;
-                          });
-                          if(otp == true && EditingController.text != '') {
+                          if(phoneEditingController.text != '' && phoneEditingController.text.length == 16) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OTPScreen(loginEditingControllerText: EditingController.text,)
+                                  builder: (context) => OTPScreen(loginEditingControllerText: phoneEditingController.text,)
                               ),
                             );
+                          } else {
+                            setState(() {
+                              validation = true;
+                            });
                           }
-                          print(EditingController.text);
                         },
                       ),
                       SizedBox(

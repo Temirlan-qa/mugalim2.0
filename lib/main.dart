@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-        //home: VerifyScreen(),
-        home: MainScreen(),
+        home: VerifyScreen(),
+        // home: MainScreen(),
         // home: onBoarding.containsKey('show')
         //     ? VerifyScreen() : IntroScreen(),
       ),
