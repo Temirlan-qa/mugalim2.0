@@ -198,10 +198,11 @@ class _OTPScreenState extends State<OTPScreen> {
                           FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(4),
                         ],
-                        style: obscureText ? TextStyles.boldStyle.copyWith(fontSize: 20,
-                          color: ColorStyles.neutralsTextPrimaryColor,letterSpacing: 3.0,):
-                        TextStyles.mediumStyle.copyWith(fontSize: 16,
-                          color: ColorStyles.neutralsTextPrimaryColor,),
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 16,
+                          color: ColorStyles.neutralsTextPrimaryColor,
+                          letterSpacing: obscureText ? 3.0 : 0,
+                        ),
                         obscuringCharacter: '•',
                         obscureText: obscureText,
                         textAlignVertical: TextAlignVertical.top,

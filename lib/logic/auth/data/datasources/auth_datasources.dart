@@ -26,11 +26,10 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
 
     Response response = await Dio().post(
       '${EnvironmentConfig.url}/uaa/oauth/token',
-      // 'https://v3.mugalim.online/uaa/oauth/token',
       data: {
         'username': username,
         'password': code,
-        'grant_type': 'password',
+        'grant_type': 'password'
       },
       options: Options(
           contentType: Headers.formUrlEncodedContentType,

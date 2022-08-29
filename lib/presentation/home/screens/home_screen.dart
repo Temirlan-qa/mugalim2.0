@@ -1,4 +1,5 @@
 // import 'package:flutter/cupertino.dart';
+import 'package:drawing_animation/drawing_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -153,6 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'pplCommented': 9,
     },
   ];
+
+  bool run = true;
 
   // List of items in our dropdown menu
   var items = [
@@ -422,7 +425,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         }),
                   ),
                 ),
-                const Center(child: Text('Сохраненные ')),
+                Center(child: AnimatedDrawing.svg(
+                  "assets/icons/check-circle.svg",
+                  run: run,
+                  duration: const Duration(milliseconds: 1000),
+                  lineAnimation: LineAnimation.allAtOnce,
+                  animationCurve: Curves.fastOutSlowIn,
+                  animationOrder: PathOrders.leftToRight,
+                  onFinish: () => setState(() {
+                    run  = false;
+                  }),
+                  width: 100,
+                  height: 100,
+                )),
               ],
             ),
           ),
