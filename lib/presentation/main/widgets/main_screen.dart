@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes.dart';
+import 'package:mugalim/logic/home/bloc/home_bloc.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
-import 'package:mugalim/presentation/profile/screens/profile_screen.dart';
 import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
 import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
+
+import '../../../core/injection_container.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -38,35 +41,39 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => const HomeScreen(),
+                  // builder: (_) => HomeScreen(),
+                  builder: (_) => BlocProvider(
+                    create: (context) => sl<HomeBloc>()..add(GetPostsList()),
+                    child: HomeScreen(),
+                  ),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => const DevelopmentScreen(),
+                  builder: (_) => DevelopmentScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(2),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => const TimetableScreen(),
+                  builder: (_) => TimetableScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(3),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => const RatingScreen(),
+                  builder: (_) => RatingScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(4),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => const ProfileScreen(),
+                  builder: (_) => HomeScreen(),
                 )
               ],
             ),
@@ -75,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
                 color: brightness == Brightness.dark
                     ? ColorStyles.darkthemePageBackgroundColor
                     : Colors.white,
-                border: const Border(
+                border: Border(
                     top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
                 boxShadow: [
                   BoxShadow(
@@ -84,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                         : Colors.white,
                     spreadRadius: 0,
                     blurRadius: 0,
-                    offset: const Offset(0, 0.5), // changes position of shadow
+                    offset: Offset(0, 0.5), // changes position of shadow
                   ),
                 ],
               ),
@@ -92,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
 
                 child: CupertinoTabBar(
                   backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
-                  border: const Border(top: BorderSide(color: Colors.transparent)),
+                  border: Border(top: BorderSide(color: Colors.transparent)),
                   onTap: (int index) {
                     setState(() {
                       _currentView = index;

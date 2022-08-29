@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 import '../../../core/const/const_color.dart';
@@ -50,18 +51,18 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
           if(state.authTokensModel.access!.isNotEmpty) {
             accessToken.put('refresh', state.authTokensModel.refreshToken);
             accessToken.put('access', state.authTokensModel.access);
-            DioInterceptor(tokens: accessToken, dio: sl());
-            // Navigator.of(context).pushNamedAndRemoveUntil(MainRoute, (Route<dynamic> route) => false);
-            Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        JenreScreen(
-                          index_month: 0,
-                          list: list,
-                        ),
-                  ),
-            );
+            // DioInterceptor(tokens: accessToken, dio: sl());
+            Navigator.of(context).pushNamedAndRemoveUntil(MainRoute, (Route<dynamic> route) => false);
+            // Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) =>
+            //             JenreScreen(
+            //               index_month: 0,
+            //               list: list,
+            //             ),
+            //       ),
+            // );
           }
         }
         if(state is AuthFailure) {
@@ -211,10 +212,11 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                 });
                               },
                               textAlignVertical: TextAlignVertical.bottom,
-                              style: obscureText ? TextStyles.boldStyle.copyWith(fontSize: 20,
-                                color: ColorStyles.neutralsTextPrimaryColor,letterSpacing: 3.0,):
-                              TextStyles.mediumStyle.copyWith(fontSize: 16,
-                                  color: ColorStyles.neutralsTextPrimaryColor,),
+                              style: TextStyles.mediumStyle.copyWith(
+                                fontSize: 16,
+                                color: ColorStyles.neutralsTextPrimaryColor,
+                                letterSpacing: obscureText ? 3.0 : 0,
+                              ),
                               obscureText: obscureText,
                               obscuringCharacter: '•',
                               decoration: InputDecoration(
@@ -271,14 +273,14 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               : Offstage(),
                           SizedBox(height: 20,),
                           TextButton(
-                            child: Text(
+                            child: !loading ? Text(
                               "Кіру",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: 'CeraPro',
                                 fontWeight: FontWeight.w500,
                               ),
-                            ),
+                            ) : CupertinoActivityIndicator(color: Colors.white,),
                             style: TextButton.styleFrom(
                               primary: loginEditingController.text == '' || passwordEditingController.text == ''
                                   ? Colors.black
@@ -290,33 +292,20 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               ),
                             ),
                             onPressed: () {
-                              // if (loginEditingController.text != '' && passwordEditingController.text != '') {
-                              // }
-                              if(loginEditingController.text != 'aza' && passwordEditingController.text != 'admin'){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          HomeScreen()
-                                  ),
-                                );
-                              }
-                              else if(loginEditingController.text != '' && passwordEditingController.text != '') {
-                                BlocProvider.of<AuthBloc>(context).add(GetTokens(
+                              if(loginEditingController.text != '' && passwordEditingController.text != '') {
+                                BlocProvider.of<AuthBloc>(context).add(
+                                  GetTokens(
                                     loginEditingController.text,
-                                    passwordEditingController.text));
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomeScreen()
-                                  ),
+                                    passwordEditingController.text
+                                  )
                                 );
+                              } else {
+                                setState(() {
+                                  validation = true;
+                                });
                               }
                             },
-
                           ),
-
                         ],
                       ),
                     ),

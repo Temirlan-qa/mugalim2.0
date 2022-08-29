@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/done.dart';
@@ -93,34 +92,30 @@ class _JenreScreenState extends State<JenreScreen> {
                   ),
                 ),
                 onPressed: () {
-                  if(array.contains == [] || array.isEmpty || array.isNull){
-                    print('hi');
-                  }else{
-                    if (widget.list.isNotEmpty) {
-                      int index = indexGrid;
-                      // int size = widget.list.length;
-                      String selectIndex = widget.list[index];
-                      if (widget.index_month.toInt() >= 4) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ChoosenPage()),
-                        );
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => BookScreen(
-                              index_month: widget.index_month,
-                              select_index: selectIndex,
-                              list: widget.list,
-                            ),
+                  if (array.isNotEmpty) {
+                    int index = indexGrid;
+                    // int size = widget.list.length;
+                    String selectIndex = widget.list[index];
+                    print(index);
+                    if (widget.index_month.toInt() >= 4) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ChoosenPage()),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => BookScreen(
+                            index_month: widget.index_month,
+                            select_index: selectIndex,
+                            list: widget.list,
                           ),
-                        );
-                      }
+                        ),
+                      );
                     }
                   }
-
                 },
                 child: Text(
                   "Далее",

@@ -8,6 +8,7 @@ import 'package:mugalim/presentation/development/screens/statistic_screen.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../books/screens/select_jenre.dart';
+import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Добрый день, Мухаммед!',
                                   style: TextStyles.boldStyle.copyWith(
                                     fontSize: 23,
-                                    color: ColorStyles.neutralsTextPrimaryColor,
+                                    color: Colors.black,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -85,202 +86,38 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Сегодня прекрасный день для развития',
                                   style: TextStyles.mediumStyle.copyWith(
                                     fontSize: 13,
-                                    color: ColorStyles.neutralsTextPrimaryColor,
+                                    color: Colors.black,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
                                 sizedBoxHeight24(),
                                 Row(
                                   children: [
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
+
                                         Navigator.of(context, rootNavigator: true).pushNamed(CourseRoute);
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 8),
-                                              child: Image.asset(
-                                                  'assets/images/courseIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'Курсы',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: ColorStyles.neutralsTextPrimaryColor,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      }, title: 'Курсы', path: 'assets/images/courseIcon.png',
                                     ),
                                     const Spacer(),
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => JenreScreen(
-                                              index_month: 0,
-                                              list: list,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 8),
-                                              child: Image.asset(
-                                                  'assets/images/newBookIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'Книги',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: ColorStyles.neutralsTextPrimaryColor,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                        Navigator.of(context).pushNamed(ChoiceRoute);
+
+                                      }, title: 'Книги', path: 'assets/images/newBookIcon.png',
                                     ),
                                     const Spacer(),
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const MPasswordScreen()),
-                                        );
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 8
-                                              ),
-                                              child: Image.asset(
-                                                  'assets/images/passportIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'M Passport',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: ColorStyles.neutralsTextPrimaryColor,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+
+                                      }, title: 'M Passport', path: 'assets/images/passportIcon.png',
                                     ),
                                     const Spacer(),
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const StatisticScreen()),
-                                        );
+
                                       },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 8),
-                                              child: Image.asset(
-                                                'assets/images/statisticsIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'Статистика',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: ColorStyles.neutralsTextPrimaryColor,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      title: 'Статистика', path: 'assets/images/statisticsIcon.png',
                                     ),
                                   ],
                                 ),
@@ -299,7 +136,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 24,
-                                              color: ColorStyles.neutralsTextPrimaryColor,
+                                              color: Colors.black,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -309,7 +146,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 14,
-                                              color: ColorStyles.neutralsTextPrimaryColor,
+                                              color: Colors.black,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -327,7 +164,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 24,
-                                              color: ColorStyles.neutralsTextPrimaryColor,
+                                              color: Colors.black,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -337,7 +174,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 14,
-                                              color: ColorStyles.neutralsTextPrimaryColor,
+                                              color: Colors.black,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -355,7 +192,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 24,
-                                              color: ColorStyles.neutralsTextPrimaryColor,
+                                              color: Colors.black,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -365,7 +202,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             style:
                                                 TextStyles.boldStyle.copyWith(
                                               fontSize: 14,
-                                              color: ColorStyles.neutralsTextPrimaryColor,
+                                              color: Colors.black,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -408,7 +245,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Продолжите задания',
                                   style: TextStyles.mediumStyle.copyWith(
                                     fontSize: 18,
-                                    color: ColorStyles.neutralsTextPrimaryColor,
+                                    color: Colors.black,
                                   ),
                                 ),
                                 sizedBoxHeight8(),
@@ -434,7 +271,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               style: TextStyles.mediumStyle
                                                   .copyWith(
                                                 fontSize: 16,
-                                                color: ColorStyles.neutralsTextPrimaryColor,
+                                                color: Colors.black,
                                               ),
                                             ),
                                             sizedBoxHeight4(),
@@ -467,7 +304,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         left: 36,
                                                         child: ClipOval(
                                                           child: CircleAvatar(
-                                                            backgroundColor: ColorStyles.primaryBorderColor,
+                                                            backgroundColor: Color(0xff3D3DD8),
                                                               radius: 12,
                                                               child: Text(
                                                                 '+21',
@@ -489,7 +326,8 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   style: TextStyles.regularStyle
                                                       .copyWith(
                                                     fontSize: 13,
-                                                    color: ColorStyles.primarySurfaceHoverColor,
+                                                    color:
+                                                        const Color(0xFF767676),
                                                   ),
                                                 ),
                                               ],
@@ -497,10 +335,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           ],
                                         ),
                                         const Spacer(),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_ios,
                                           size: 18,
-                                          color: ColorStyles.primaryBorderColor,
+                                          color: Color(0xff3D3DD8),
                                         )
                                       ],
                                     ),
@@ -539,7 +377,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   'Продолжите курс',
                                   style: TextStyles.mediumStyle.copyWith(
                                     fontSize: 18,
-                                    color: ColorStyles.neutralsTextPrimaryColor,
+                                    color: Colors.black,
                                   ),
                                 ),
                                 sizedBoxHeight8(),
@@ -581,7 +419,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                           .mediumStyle
                                                           .copyWith(
                                                         fontSize: 13,
-                                                        color: ColorStyles.neutralsTextPrimaryColor,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -589,10 +427,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.access_time,
                                                           size: 15,
-                                                          color: ColorStyles.primarySurfaceHoverColor,
+                                                          color:
+                                                              Color(0xff767676),
                                                         ),
                                                         sizedBoxWidth4(),
                                                         Text(
@@ -601,7 +440,8 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                               .regularStyle
                                                               .copyWith(
                                                             fontSize: 13,
-                                                            color: ColorStyles.primarySurfaceHoverColor,
+                                                            color: const Color(
+                                                                0xFF767676),
                                                           ),
                                                         ),
                                                       ],
@@ -613,10 +453,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           ],
                                         ),
                                         const Spacer(),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_ios,
                                           size: 18,
-                                          color: ColorStyles.primaryBorderColor,
+                                          color: Color(0xff3D3DD8),
                                         ),
                                       ],
                                     ),

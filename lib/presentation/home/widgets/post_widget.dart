@@ -1,5 +1,6 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -9,59 +10,32 @@ import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
 import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
 
+import '../../../logic/home/bloc/home_bloc.dart';
+
 class PostWidget extends StatefulWidget {
-  // post data
-  final String postAuthor;
-  final String postPublicationDate;
+  final int? viewNumber;
+  final int? savedNumber;
+  final bool? saved;
+  final int? commentNumber;
+  final int? likeNumber;
+  final String? createdAt;
+  final String? title;
+  final String? id;
+  final String? content;
+  final bool? liked;
+  final String? cityId;
+  final bool? commeted;
+  final List? img;
+  final String? regionId;
+  final String? type;
+  final String? userId;
+  final String? updatedAt;
 
-  final String title;
-  final String imageAuthor;
-
-  // All info about image
-  final bool hasImg;
-  final String image;
-
-  // All info about Vote
-  final bool hasVote;
-  final String votetitle;
-  final String voteAnswer1;
-  final String voteAnswer2;
-  final int votePPL1;
-  final int votePPL2;
-  final int voteProcent1;
-  final int voteProcent2;
-
-  // Like Save Comments Show
-  final int pplLike;
-  final int pplCommented;
-  final int pplSaved;
-  final int pplShow;
-
-  const PostWidget({
+  final List? imgs;
+  const PostWidget( {
     Key? key,
-    required this.title,
-    required this.postPublicationDate,
-    required this.postAuthor,
-    required this.imageAuthor,
+    this.viewNumber, this.savedNumber, this.saved, this.commentNumber, this.likeNumber, this.createdAt, this.title, this.id, this.content, this.liked, this.cityId, this.commeted, this.img, this.regionId, this.type, this.userId, this.updatedAt,this.imgs,
 
-    // All info about image
-    required this.hasImg,
-    required this.image,
-
-    // All info about Vote
-    required this.hasVote,
-    required this.voteAnswer1,
-    required this.voteAnswer2,
-    required this.votePPL1,
-    required this.votePPL2,
-    required this.voteProcent1,
-    required this.voteProcent2,
-    required this.votetitle,
-    // Like Save Comments Show
-    required this.pplLike,
-    required this.pplCommented,
-    required this.pplSaved,
-    required this.pplShow,
   }) : super(key: key);
 
   @override
@@ -72,36 +46,43 @@ class _PostWidgetState extends State<PostWidget> {
   String gonna = "";
   bool isExpanded = false;
 
-
+  bool hasVote = true;
+  int votePPL1 = 45;
+  int votePPL2 = 45;
+  int voteProcent1 = 90;
+  int voteProcent2 = 90;
+  String voteAnswer1 = 'Да, пойду truyytyit guyvuiiio ihihuig78tf';
+  String voteAnswer2 =  'Нет, не пойду';
+  String votetitle =  'Пойдете ли в горы вместе с группой?';
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeCommentsPage(
-              pplLike: widget.pplLike,
-              pplCommented: widget.pplCommented,
-              pplSaved: widget.pplSaved,
-              pplShow: widget.pplShow,
-              hasImg: widget.hasImg,
-              hasVote: widget.hasVote,
-              image: widget.image,
-              imageAuthor: widget.imageAuthor,
-              title: widget.title,
-              postAuthor: widget.postAuthor,
-              postPublicationDate: widget.postPublicationDate,
-              votePPL1: widget.votePPL1,
-              votePPL2: widget.votePPL2,
-              voteProcent1: widget.voteProcent1,
-              voteProcent2: widget.voteProcent2,
-              voteAnswer1: widget.voteAnswer1,
-              voteAnswer2: widget.voteAnswer2,
-              votetitle: widget.votetitle,
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => HomeCommentsPage(
+        //       pplLike: widget.pplLike,
+        //       pplCommented: widget.pplCommented,
+        //       pplSaved: widget.pplSaved,
+        //       pplShow: widget.pplShow,
+        //       hasImg: widget.hasImg,
+        //       hasVote: widget.hasVote,
+        //       image: widget.image,
+        //       imageAuthor: widget.imageAuthor,
+        //       title: widget.title,
+        //       postAuthor: widget.postAuthor,
+        //       postPublicationDate: widget.postPublicationDate,
+        //       votePPL1: widget.votePPL1,
+        //       votePPL2: widget.votePPL2,
+        //       voteProcent1: widget.voteProcent1,
+        //       voteProcent2: widget.voteProcent2,
+        //       voteAnswer1: widget.voteAnswer1,
+        //       voteAnswer2: widget.voteAnswer2,
+        //       votetitle: widget.votetitle,
+        //     ),
+        //   ),
+        // );
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -122,7 +103,7 @@ class _PostWidgetState extends State<PostWidget> {
                     children: [
                       CircleAvatar(
                         child: Image.asset(
-                          widget.imageAuthor,
+                          'assets/icons/mugalim_logo.svg',
                           width: 44,
                           height: 44,
                         ),
@@ -133,7 +114,7 @@ class _PostWidgetState extends State<PostWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            widget.postAuthor,
+                            widget.title!,
                             style: TextStyles.mediumStyle.copyWith(
                               color: ColorStyles.neutralsTextPrimaryColor,
                               fontSize: 14,
@@ -141,7 +122,7 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                           ),
                           Text(
-                            widget.postPublicationDate,
+                            widget.updatedAt!,
                             style: TextStyles.regularStyle.copyWith(
                               color: ColorStyles.primarySurfaceHoverColor,
                             ),
@@ -163,7 +144,7 @@ class _PostWidgetState extends State<PostWidget> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      widget.title,
+                      widget.content!,
                       style: TextStyles.regularStyle.copyWith(
                         color: ColorStyles.neutralsTextPrimaryColor,
                       ),
@@ -175,7 +156,7 @@ class _PostWidgetState extends State<PostWidget> {
                   const SizedBox(
                     height: 4,
                   ),
-                  widget.title.length < 197
+                  widget.content!.length < 197
                       ? const SizedBox()
                       : Visibility(
                           visible: !isExpanded,
@@ -198,69 +179,66 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                           ),
                         ),
-                  sizedBoxHeight8(),
-                ],
-              ),
-            ),
-            Visibility(
-              visible: widget.hasImg,
-              child: Column(
-                children: [
-                  Image.asset(
-                    widget.image,
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  sizedBoxHeight8(),
-                  LineWidget(
-                    width: MediaQuery.of(context).size.width -32,
-                  ),
-                  sizedBoxHeight8(),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                // top: 16,
-              ),
-              child: Column(
-                children: [
-                  Visibility(
-                    visible: widget.hasVote,
-                    child: Column(
-                      children: [
-                        VoteWidget(
-                          votetitle: widget.votetitle,
-                          voteAnswer1: widget.voteAnswer1,
-                          voteAnswer2: widget.voteAnswer2,
-                          voteProcent1: widget.voteProcent1,
-                          voteProcent2: widget.voteProcent2,
-                          votePPL1: widget.votePPL1,
-                          votePPL2: widget.votePPL2,
-                        ),
                         sizedBoxHeight8(),
-                        LineWidget(
-                          width: MediaQuery.of(context).size.width -32,
-                        ),
                       ],
                     ),
                   ),
-                  sizedBoxHeight8(),
-                  ActionsRowWidget(
-                    pplLike: widget.pplLike,
-                    pplCommented: widget.pplCommented,
-                    pplSaved: widget.pplSaved,
-                    pplShow: widget.pplShow,
+                  Visibility(
+                    visible: widget.img!.isNotEmpty ? true : false,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/space.png',
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        sizedBoxHeight8(),
+                        const LineWidget(),
+                        sizedBoxHeight8(),
+                      ],
+                    ),
                   ),
-                  // sizedBoxHeight16(),
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      // top: 16,
+                    ),
+                    child: Column(
+                      children: [
+                        Visibility(
+                          visible: hasVote,
+                          child: Column(
+                            children: [
+                              VoteWidget(
+                                votetitle: votetitle,
+                                voteAnswer1: voteAnswer1,
+                                voteAnswer2: voteAnswer2,
+                                voteProcent1: voteProcent1,
+                                voteProcent2: voteProcent2,
+                                votePPL1: votePPL1,
+                                votePPL2: votePPL2,
+                              ),
+                              sizedBoxHeight8(),
+                              const LineWidget(),
+                            ],
+                          ),
+                        ),
+                        sizedBoxHeight8(),
+                        ActionsRowWidget(
+                          pplLike: widget.likeNumber!,
+                          pplCommented: widget.commentNumber!,
+                          pplSaved: widget.savedNumber!,
+                          pplShow: widget.viewNumber!,
+                        ),
+                        // sizedBoxHeight16(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            )
+
+      );
   }
 }

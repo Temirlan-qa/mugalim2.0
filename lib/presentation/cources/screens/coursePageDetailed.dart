@@ -9,7 +9,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/textform_widget.dart';
 
 import '../../../core/routes/routes_const.dart';
-import '../../cources/widgets/card_widget.dart';
+import '../widgets/card_widget.dart';
 
 class CoursePageDetailed extends StatefulWidget {
   final BuildContext devScreenContext;

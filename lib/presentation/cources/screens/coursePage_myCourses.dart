@@ -14,8 +14,7 @@ import '../../../core/widgets/textform_widget.dart';
 
 class CourseMyCourses extends StatefulWidget {
   final BuildContext devScreenContext;
-  const CourseMyCourses({Key? key, required this.devScreenContext})
-      : super(key: key);
+  const CourseMyCourses({Key? key, required this.devScreenContext}) : super(key: key);
 
   @override
   State<CourseMyCourses> createState() => _CourseMyCoursesState();
@@ -30,7 +29,6 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
     super.dispose();
     Search.dispose();
   }
-
   @override
   void initState() {
     super.initState();
@@ -154,19 +152,18 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
               ),
               actions: [
                 GestureDetector(
-                  onTap: () {
+                  onTap: (){
                     Navigator.pop(widget.devScreenContext);
                   },
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 12, bottom: 12, right: 14),
+                    padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
                     child: Container(
                       width: 28,
                       height: 28,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         //color: Colors.black
-                        color: ColorStyles.primarySurfaceColor,
+                        color: Color(0xFFF9F9F9),
                       ),
                       child: Icon(
                         CupertinoIcons.clear,
@@ -176,25 +173,16 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   ),
                 ),
 
-                // IconButton(
-                //   icon: SvgPicture.asset('assets/icons/cancel.svg'),
-                //   color: ColorStyles.primaryBorderColor,
-                //   onPressed: () {
-                //     Navigator.pop(widget.devScreenContext);
-                //     // Navigator.pushReplacementNamed(context, CourseRoute);
-                //     // );
-                //   },
-                // ),
               ],
               backgroundColor: Colors.white,
               bottom: TabBar(
                 indicatorColor: ColorStyles.primaryBorderColor,
                 indicatorPadding:
                     const EdgeInsets.only(left: 15, right: 15, bottom: 9),
-                labelColor: ColorStyles.neutralsTextPrimaryColor,
+                labelColor: Colors.black,
                 unselectedLabelColor: unselected
                     ? ColorStyles.primarySurfaceHoverColor
-                    : ColorStyles.neutralsTextPrimaryColor,
+                    : Colors.black,
                 labelStyle: TextStyles.mediumStyle.copyWith(
                   fontSize: 16,
                 ),
@@ -252,8 +240,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     ),
                   ),
                   sizedBoxHeight8(),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),
                   Container(
@@ -289,7 +277,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                           'assets/images/Rectangle 1425.png'),
                                       fit: BoxFit.fitHeight,
                                       opacity: 0.5),
-                                  color: ColorStyles.neutralsTextPrimaryColor,
+                                  color: Colors.black,
                                   border: Border.all(
                                     color: const Color(0xff42236A),
                                   ),
@@ -374,13 +362,14 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                             width: 123,
                                             height: 32,
                                             decoration: BoxDecoration(
-                                                gradient: const RadialGradient(
-                                                    colors: [
-                                                      Color.fromRGBO(
-                                                          255, 255, 255, 0),
-                                                      Color.fromRGBO(
-                                                          255, 255, 255, 0.4),
-                                                    ]),
+                                                gradient:
+                                                    const RadialGradient(colors: [
+                                                  Color.fromRGBO(
+                                                      255, 255, 255, 0),
+
+                                                  Color.fromRGBO(
+                                                      255, 255, 255, 0.4),
+                                                ]),
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                                 color: Colors.white
@@ -521,8 +510,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/icons/tasks.svg',
-                                            color: ColorStyles
-                                                .primarySurfaceHoverColor,
+                                            color: ColorStyles.primarySurfaceHoverColor,
                                             width: 13.33,
                                             height: 13.33,
                                           ),
@@ -587,8 +575,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/icons/time.svg',
-                                            color: ColorStyles
-                                                .primarySurfaceHoverColor,
+                                            color: ColorStyles.primarySurfaceHoverColor,
                                             width: 13.33,
                                             height: 13.33,
                                           ),
@@ -698,6 +685,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
+            SizedBox(height: 76,),
           ],
         ),
       );
@@ -736,8 +724,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     ),
                   ),
                   sizedBoxHeight8(),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),
                   sizedBoxHeight8(),
@@ -862,9 +850,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 100,
-            ),
+            SizedBox(height: 76,),
           ],
         ),
       );
