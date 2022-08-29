@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
@@ -28,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Личные данные',
+          'Настройки',
           style: TextStyles.boldStyle.copyWith(
             color: ColorStyles.neutralsTextPrimaryColor,
             fontSize: 23,
@@ -44,10 +45,12 @@ class SettingsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               color: Colors.white,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Lottie.asset(
-                    //repeat: false,
-                    'assets/animations/Loader.json',
+                  Image.asset(
+                    'assets/images/male.png',
+                    // 'assets/images/female.png',
                     width: 80,
                     height: 80,
                     fit: BoxFit.fill,

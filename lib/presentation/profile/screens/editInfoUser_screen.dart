@@ -7,12 +7,14 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
+import 'package:mugalim/presentation/profile/widgets/edit_text_field_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/text_field_widget.dart';
 
 class EditInfoUserScreen extends StatelessWidget {
   EditInfoUserScreen({Key? key}) : super(key: key);
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +49,36 @@ class EditInfoUserScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Lottie.asset(
-                  //repeat: false,
-                  'assets/animations/Loader.json',
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.fill,
+                Stack(
+                  children: [
+                    Image.asset(
+                      'assets/images/male.png',
+                      // 'assets/images/female.png',
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.fill,
+                    ),
+                    Container(
+                      color: Colors.white.withOpacity(0.35),
+                      width: 80,
+                      height: 80,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/icons/camera.svg',
+                          // width: 24,
+                          // height: 24,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                // Lottie.asset(
+                //   //repeat: false,
+                //   'assets/animations/Loader.json',
+                //   width: 80,
+                //   height: 80,
+                //   fit: BoxFit.fill,
+                // ),
                 sizedBoxWidth16(),
                 Text(
                   'Партизан Перизатов',
@@ -64,7 +89,9 @@ class EditInfoUserScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 32,),
+            const SizedBox(
+              height: 32,
+            ),
             LineWidget(
               width: MediaQuery.of(context).size.width,
             ),
@@ -78,8 +105,8 @@ class EditInfoUserScreen extends StatelessWidget {
             ),
             sizedBoxHeight8(),
             TextField(
-              controller: nameController,
-              decoration: textFieldStyle(),
+              controller: emailController,
+              decoration: textFieldStyleForEdit(),
             ),
             sizedBoxHeight16(),
             Text(
@@ -91,13 +118,13 @@ class EditInfoUserScreen extends StatelessWidget {
             ),
             sizedBoxHeight8(),
             TextField(
-              controller: nameController,
-              decoration: textFieldStyle(),
+              controller: phoneController,
+              decoration: textFieldStyleForEdit(),
             ),
             sizedBoxHeight16(),
             BtnWidget(
               fontSize: 16,
-              onPressed: (){},
+              onPressed: () {},
               textColor: ColorStyles.neutralsTextPrimaryColor,
               text: 'Готово',
               Color: ColorStyles.neutralsTextPrimaryDisabledColor,

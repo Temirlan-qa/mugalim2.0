@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/text_field_widget.dart';
 
 class PasswordScreen extends StatelessWidget {
   PasswordScreen({Key? key}) : super(key: key);
-  TextEditingController nameController = TextEditingController();
+  TextEditingController currentPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController newPasswordAgainController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +50,8 @@ class PasswordScreen extends StatelessWidget {
             ),
             sizedBoxHeight8(),
             TextField(
-              controller: nameController,
-              decoration: textFieldStyle(),
+              controller: currentPasswordController,
+              decoration: textFieldStyleForChangePassword(),
             ),
             sizedBoxHeight16(),
             Text(
@@ -64,8 +63,8 @@ class PasswordScreen extends StatelessWidget {
             ),
             sizedBoxHeight8(),
             TextField(
-              controller: nameController,
-              decoration: textFieldStyle(),
+              controller: newPasswordController,
+              decoration: textFieldStyleForChangePassword(),
             ),
             sizedBoxHeight16(),
             Text(
@@ -77,8 +76,8 @@ class PasswordScreen extends StatelessWidget {
             ),
             sizedBoxHeight8(),
             TextField(
-              controller: nameController,
-              decoration: textFieldStyle(),
+              controller: newPasswordAgainController,
+              decoration: textFieldStyleForChangePassword(),
             ),
             sizedBoxHeight16(),
             BtnWidget(

@@ -6,6 +6,7 @@ import 'package:mugalim/presentation/books/screens/myChoice.dart';
 import 'package:mugalim/presentation/books/screens/select_book.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
+import 'package:mugalim/presentation/profile/screens/aboutApplication_screen.dart';
 
 import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/select_jenre.dart';
@@ -22,31 +23,23 @@ class InnLabRouter {
       case MainRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => MultiBlocProvider(
-              providers: [
-                // HomeScreen(),
-                // DevelopmentScreen(),
-                // HomeScreen(),
-                // HomeScreen(),
-                // HomeScreen(),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                ),
-              ],
-              child: MainScreen()
-          ),
+          builder: (_) => MultiBlocProvider(providers: [
+            BlocProvider<HomeBloc>(
+              create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+            ),
+            BlocProvider<HomeBloc>(
+              create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+            ),
+            BlocProvider<HomeBloc>(
+              create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+            ),
+            BlocProvider<HomeBloc>(
+              create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+            ),
+            BlocProvider<HomeBloc>(
+              create: (_) => sl<HomeBloc>()..add(HomeLoad()),
+            ),
+          ], child: MainScreen()),
         );
       case JenreRoute:
         return CupertinoPageRoute(
@@ -70,6 +63,11 @@ class InnLabRouter {
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => MyChoiceScreen(),
+        );
+      case AboutApp:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => AboutApplicationScreen(),
         );
       default:
         return CupertinoPageRoute(
