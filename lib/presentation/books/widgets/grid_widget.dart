@@ -29,10 +29,10 @@ class _GridWidgetState extends State<GridWidget> {
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
     final double itemWidth = size.width-175;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8,16,16,16),
+      padding: const EdgeInsets.fromLTRB(8,16,16,0),
       child: GridView.count(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        // physics: NeverScrollableScrollPhysics(),
         childAspectRatio: (itemWidth / itemHeight),
         crossAxisCount: 2,
         children: List.generate(4, (index) {
@@ -84,7 +84,7 @@ class _GridWidgetState extends State<GridWidget> {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
-                    index % 2 == 1 ? SizedBox(width: 8,) : Offstage()
+                    SizedBox(height: 8,)
                   ],
                 ),
               )
