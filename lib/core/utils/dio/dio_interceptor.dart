@@ -38,7 +38,7 @@ class DioInterceptor extends Interceptor {
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
     print(err);
     if (err.response!.statusCode == 401) {
-      print('asjdasjfliasjflasndkajskdjlaskd');
+      print('auth error');
       if (tokens!.containsKey('refresh')) {
         await refreshToken();
         return handler.resolve(await _retry(err.requestOptions));
@@ -49,7 +49,7 @@ class DioInterceptor extends Interceptor {
 
   Future<Response> _retry(RequestOptions requestOptions) async {
     final options =
-        Options(method: requestOptions.method, headers: requestOptions.headers);
+        Options(method: requestOptions.method, headers: requestOptions.headers,);
 
     return DioWrapper(sl(), sl()).request(requestOptions.path,
         data: requestOptions.data,
@@ -66,7 +66,7 @@ class DioInterceptor extends Interceptor {
 
     final refreshToken = tokens!.get('refresh');
     Response response = await Dio().post(
-      'https://workplace.kitapp.space/uaa/oauth/token',
+      'https://demo.mugalim.academy/bcspc/uaa/oauth/token',
       data: {
         'refresh_token': refreshToken,
         'grant_type': 'refresh_token',
@@ -76,7 +76,6 @@ class DioInterceptor extends Interceptor {
           headers: {"authorization": basicAuth}),
     );
 
-    print('gggggggggggggggg');
     print(response);
 
     if (response.statusCode == 200) {
@@ -84,7 +83,7 @@ class DioInterceptor extends Interceptor {
       tokens!.put('refresh', response.data['refresh_token']);
     } else {
       tokens!.clear();
-      navigatorKey.currentState!.pushReplacementNamed('/auth');
+      // navigatorKey.currentState!.pushReplacementNamed('/auth');
     }
   }
 }

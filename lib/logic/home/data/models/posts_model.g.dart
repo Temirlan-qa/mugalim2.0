@@ -14,19 +14,19 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       json['likeNumber'] as int?,
       json['liked'] as bool?,
       json['createdAt'] as String?,
-      json['imgs'] as List<dynamic>?,
       json['cityId'] as String?,
       json['regionId'] as String?,
       json['type'] as String?,
-      json['user'] == null
-          ? null
-          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
       json['viewNumber'] as int?,
       json['commentNumber'] as int?,
       json['savedNumber'] as int?,
       json['commeted'] as bool?,
       json['saved'] as bool?,
       json['updatedAt'] as String?,
+      json['imgs'] as List<dynamic>?,
+      json['user'] == null
+          ? null
+          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{

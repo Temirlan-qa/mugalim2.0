@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import '../data/models/post_by_id.dart';
 import '../data/models/posts_model.dart';
 import '../data/repositories/home_repositories.dart';
 
@@ -18,11 +19,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeLoading());
       try {
         final List<PostModel> list = await homeRepository.getPostsList();
+        print(list);
         emit(PostListSuccess(list));
       } catch (e) {
         emit(HomeFailure(e.toString()));
       }
     });
-
+    on<GetPostByIdList>((event, emit) async {
+      emit(HomeLoading());
+      try {
+        final List<PostByIdModel> list = await homeRepository.getPosts(event.postId);
+        print(list);
+        emit(PostByIdListSuccess(list));
+      } catch (e) {
+        emit(HomeFailure(e.toString()));
+      }
+    });
   }
 }

@@ -350,7 +350,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) {
-
                                     return Column(
                                       children: [
                                         index == 0 ? SizedBox(height: 16,) : SizedBox(),

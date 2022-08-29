@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mugalim/logic/home/data/models/user_model.dart';
 
 
-part 'posts_model.g.dart';
+part 'post_by_id.g.dart';
 
 @JsonSerializable()
-class PostModel {
+class PostByIdModel {
   final String? id;
   final String? title;
   final String? content;
@@ -26,9 +26,9 @@ class PostModel {
   final String? updatedAt;
 
 
-  factory PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
+  factory PostByIdModel.fromJson(Map<String, dynamic> json) => _$PostByIdModelFromJson(json);
 
-  PostModel(this.id, this.title, this.content, this.userId,  this.likeNumber, this.liked, this.createdAt,  this.cityId, this.regionId, this.type, this.viewNumber, this.commentNumber, this.savedNumber, this.commeted, this.saved, this.updatedAt, this.imgs, this.user);
+  PostByIdModel(this.id, this.title, this.content, this.userId,  this.likeNumber, this.liked, this.createdAt,  this.cityId, this.regionId, this.type, this.viewNumber, this.commentNumber, this.savedNumber, this.commeted, this.saved, this.updatedAt, this.imgs, this.user);
 
-  Map<String, dynamic> toJson() => _$PostModelToJson(this);
+  Map<String, dynamic> toJson() => _$PostByIdModelToJson(this);
 }

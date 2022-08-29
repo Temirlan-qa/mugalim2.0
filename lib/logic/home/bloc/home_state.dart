@@ -17,3 +17,9 @@ class PostListSuccess extends HomeState {
 
   PostListSuccess(this.posts);
 }
+
+class PostByIdListSuccess extends HomeState {
+  final List<PostByIdModel> posts;
+
+  PostByIdListSuccess(this.posts);
+}

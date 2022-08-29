@@ -8,7 +8,7 @@ import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes.dart';
 import 'coursePageDetailed.dart';
 import 'coursePage_myCourses.dart';
-import 'courseWidget.dart';
+import '../widgets/courseWidget.dart';
 
 
 

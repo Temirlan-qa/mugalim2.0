@@ -8,6 +8,7 @@ import 'package:mugalim/presentation/development/screens/statistic_screen.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../books/screens/select_jenre.dart';
+import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
@@ -92,201 +93,31 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                 sizedBoxHeight24(),
                                 Row(
                                   children: [
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //       builder: (context) =>
-                                        //           const CoursePage()),
-                                        // );
+
                                         Navigator.of(context, rootNavigator: true).pushNamed(CourseRoute);
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 8),
-                                              child: Image.asset(
-                                                  'assets/images/courseIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'Курсы',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: Colors.black,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      }, title: 'Курсы', path: 'assets/images/courseIcon.png',
                                     ),
                                     const Spacer(),
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => JenreScreen(
-                                              index_month: 0,
-                                              list: list,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 8),
-                                              child: Image.asset(
-                                                  'assets/images/newBookIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'Книги',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: Colors.black,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                        Navigator.of(context).pushNamed(ChoiceRoute);
+
+                                      }, title: 'Книги', path: 'assets/images/newBookIcon.png',
                                     ),
                                     const Spacer(),
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const MPasswordScreen()),
-                                        );
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 8
-                                              ),
-                                              child: Image.asset(
-                                                  'assets/images/passportIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'M Passport',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: Colors.black,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+
+                                      }, title: 'M Passport', path: 'assets/images/passportIcon.png',
                                     ),
                                     const Spacer(),
-                                    GestureDetector(
+                                    GestureWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const StatisticScreen()),
-                                        );
+
                                       },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorStyles
-                                                    .primaryBorderColor,
-                                                borderRadius:
-                                                BorderRadius.circular(12),
-                                              ),
-                                              width: 40,
-                                              height: 40,
-                                              padding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 8),
-                                              child: Image.asset(
-                                                'assets/images/statisticsIcon.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            sizedBoxHeight8(),
-                                            Text(
-                                              'Статистика',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 13,
-                                                color: Colors.black,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      title: 'Статистика', path: 'assets/images/statisticsIcon.png',
                                     ),
                                   ],
                                 ),
