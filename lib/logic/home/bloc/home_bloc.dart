@@ -35,5 +35,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeFailure(e.toString()));
       }
     });
+    on<LikePostStudents>((event, emit) async {
+      try {
+        emit(HomeLoading());
+        final Response response = await homeRepository.likedPost(event.id,event.likeType);
+
+        emit(LikeSuccess());
+      } catch (e) {
+        emit(HomeFailure(e.toString()));
+      }
+    }
+    );
   }
 }

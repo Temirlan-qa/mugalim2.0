@@ -1,16 +1,22 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:drawing_animation/drawing_animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
+import 'package:dio/src/response.dart';
+import 'package:intl/intl.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
+import '../../../core/injection_container.dart';
 import '../../../core/widgets/textform_widget.dart';
 import '../../../logic/home/bloc/home_bloc.dart';
+import '../../../logic/home/data/datasources/home_datasources.dart';
+import 'home_comments.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,135 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Initial Selected Value
   String dropdownvalue = 'Новости ';
-  List<Map<String, dynamic>> testPostData = [
-    {
-      'hasImg': false,
-      'image': 'assets/images/space.png',
-      'imageAuthor': 'assets/icons/mugalim_logo.png',
-      'title':
-          'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf длпкпдлукпдпдупдлукт длтукдлтпдлуптдукпдлукпт длтупдлтудлкптукдлптукдлптудк пддлукт дтпд лтукпдлу  длтпдлкутпдлкутпдлукп ',
-      'postAuthor': 'Mugalim Global',
-      'postPublicationDate': '2 авг в 13:54',
-      'hasVote': true,
-      'votePPL1': 45,
-      'votePPL2': 70,
-      'voteProcent1': 90,
-      'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду truyytyit guyvuiiio ihihuig78tf',
-      'voteAnswer2': 'Нет, не пойду',
-      'votetitle': 'Пойдете ли в горы вместе с группой?',
-      'pplShow': 1111,
-      'pplSaved': 21111,
-      'pplLike': 311499,
-      'pplCommented': 4111,
-    },
-    {
-      'hasImg': false,
-      'hasVote': true,
-      'image': 'assets/images/space.png',
-      'imageAuthor': 'assets/icons/mugalim_logo.png',
-      'title':
-          'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf',
-      'postAuthor': 'Mugalim Global',
-      'postPublicationDate': '18 авг в 13:54',
-      'votePPL1': 45,
-      'votePPL2': 70,
-      'voteProcent1': 90,
-      'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду wetetgweewtwtewtgw wettegeggesgesw rehhrhhrreher',
-      'voteAnswer2': 'Нет, не пойду',
-      'votetitle': 'Пойдете ли в горы вместе с группой?',
-      'pplShow': 111,
-      'pplSaved': 222,
-      'pplLike': 333,
-      'pplCommented': 444,
-    },
-    {
-      'hasImg': true,
-      'hasVote': false,
-      'image': 'assets/images/space.png',
-      'imageAuthor': 'assets/icons/mugalim_logo.png',
-      'title':
-          'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf',
-      'postAuthor': 'Mugalim Global',
-      'postPublicationDate': '1 week ago',
-      'votePPL1': 45,
-      'votePPL2': 70,
-      'voteProcent1': 90,
-      'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду',
-      'voteAnswer2': 'Нет, не пойду',
-      'votetitle': 'Пойдете ли в горы вместе с группой?',
-      'pplShow': 11,
-      'pplSaved': 22,
-      'pplLike': 33,
-      'pplCommented': 44,
-    },
-    {
-      'hasImg': true,
-      'hasVote': true,
-      'image': 'assets/images/space.png',
-      'imageAuthor': 'assets/icons/mugalim_logo.png',
-      'title':
-          'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf',
-      'postAuthor': 'Mugalim Global',
-      'postPublicationDate': '2 weeks ago',
-      'votePPL1': 45,
-      'votePPL2': 70,
-      'voteProcent1': 90,
-      'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду',
-      'voteAnswer2': 'Нет, не пойду',
-      'votetitle': 'Пойдете ли в горы вместе с группой?',
-      'pplShow': 1,
-      'pplSaved': 2,
-      'pplLike': 3,
-      'pplCommented': 4,
-    },
-    {
-      'hasImg': true,
-      'hasVote': true,
-      'image': 'assets/images/space.png',
-      'imageAuthor': 'assets/icons/mugalim_logo.png',
-      'title':
-          'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf',
-      'postAuthor': 'Mugalim Global',
-      'postPublicationDate': 'now',
-      'votePPL1': 45,
-      'votePPL2': 70,
-      'voteProcent1': 90,
-      'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду',
-      'voteAnswer2': 'Нет, не пойду',
-      'votetitle': 'Пойдете ли вы в Kokshetau вместе с группой?',
-      'pplShow': 0,
-      'pplSaved': 0,
-      'pplLike': 0,
-      'pplCommented': 0,
-    },
-    {
-      'hasImg': false,
-      'hasVote': false,
-      'image': 'assets/images/space.png',
-      'imageAuthor': 'assets/icons/mugalim_logo.png',
-      'title':
-          'Post 1 lalalalaallalalldldlojfndjibefhbfjewlfkbfjibefjbkfwjfbkjwfbkjfbkjwfebkjfbkjfewbkfjbkf',
-      'postAuthor': 'Mugalim Global',
-      'postPublicationDate': '1 day ago',
-      'votePPL1': 45,
-      'votePPL2': 70,
-      'voteProcent1': 90,
-      'voteProcent2': 10,
-      'voteAnswer1': 'Да, пойду',
-      'voteAnswer2': 'Нет, не пойду',
-      'votetitle': 'Пойдете ли в горы вместе с группой?',
-      'pplShow': 9,
-      'pplSaved': 9,
-      'pplLike': 9,
-      'pplCommented': 9,
-    },
-  ];
 
+  bool isLiked = false;
+  bool isSaved = false;
   bool run = true;
 
   // List of items in our dropdown menu
@@ -169,7 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchEditingController = TextEditingController();
   bool buttonDown = false;
   int tabIndex = 0;
+  List liked = [];
+  List likedCount = [];
   int dropDownindex = 0;
+  bool hasVote = false;
+  int votePPL1 = 45;
+  int votePPL2 = 45;
+  int voteProcent1 = 90;
+  int voteProcent2 = 90;
+  String voteAnswer1 = 'Да, пойду truyytyit guyvuiiio ihihuig78tf';
+  String voteAnswer2 =  'Нет, не пойду';
+  String votetitle =  'Пойдете ли в горы вместе с группой?';
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -271,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 isScrollable: true,
                 tabs: [
                   SizedBox(
-                    width: width/3-40,
+                    width: width/3-30,
                     child: Tab(
                       child: Row(
                         children: [
@@ -311,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    width: width/3-40,
+                    width: width/3-50,
                     child: Tab(
                       child: Text(
                         maxLines: 1,
@@ -345,37 +235,273 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? SingleChildScrollView(
                         child: Container(
                           color: ColorStyles.neutralsPageBackgroundColor,
-                          child: BlocBuilder<HomeBloc, HomeState>(
+                          child: BlocConsumer<HomeBloc, HomeState>(
+                            listener: (context, state) {
+                              if(state is PostListSuccess) {
+                                setState((){
+                                  liked = List.filled(
+                                      state.posts.length, false,
+                                      growable: true);
+                                  for (int i = 0; i <
+                                      state.posts.length; i++) {
+                                    liked[i] = state.posts[i].liked;
+                                  }
+                                  likedCount = List.filled(
+                                      state.posts.length, 0,
+                                      growable: true);
+                                  for (int i = 0; i <
+                                      state.posts.length; i++) {
+                                    likedCount[i] =
+                                        state.posts[i].likeNumber;
+                                  }
+                                });
+                              }
+                            },
                           builder: (context, state) {
                             if(state is PostListSuccess){
-                              return ListView.builder(
+                            return ListView.builder(
                                   itemCount: state.posts.length,
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) {
+                                    DateTime now = DateTime.parse(state.posts[index].createdAt!);
+                                    String formattedDate = DateFormat('d MMM в H:m').format(now);
+                                    hasVote = index % 2 != 0 ? true : false;
                                     return Column(
                                       children: [
                                         index == 0 ? SizedBox(height: 16,) : SizedBox(),
                                         PostWidget(
-                                            viewNumber : state.posts[index].viewNumber,
-                                            savedNumber : state.posts[index].savedNumber,
-                                            saved :state.posts[index].saved,
-                                            commentNumber : state.posts[index].commentNumber,
-                                            likeNumber: state.posts[index].likeNumber,
-                                            createdAt: state.posts[index].createdAt,
-                                            title: state.posts[index].title,
-                                            id : state.posts[index].id,
-                                            content: state.posts[index].content,
-                                            liked: state.posts[index].liked,
-                                            cityId: state.posts[index].cityId,
-                                            commeted: state.posts[index].commeted,
-                                            imgs: state.posts[index].imgs,
-                                            regionId : state.posts[index].regionId,
-                                            type: state.posts[index].type,
-                                            userId: state.posts[index].userId,
-                                            updatedAt : state.posts[index].updatedAt
+                                            viewNumber : state.posts[index].viewNumber ?? 0,
+                                            savedNumber : state.posts[index].savedNumber ?? 0,
+                                            saved : state.posts[index].saved ?? false,
+                                            commentNumber : state.posts[index].commentNumber ?? 0,
+                                            likeNumber: state.posts[index].likeNumber ?? 0,
+                                            createdAt: formattedDate,
+                                            id : state.posts[index].id ?? '',
+                                            content: state.posts[index].content ?? '',
+                                            liked: state.posts[index].liked ?? false,
+                                            cityId: state.posts[index].cityId ?? '',
+                                            commeted: state.posts[index].commeted ?? false,
+                                            regionId : state.posts[index].regionId ?? '',
+                                            type: state.posts[index].type ?? '',
+                                            userId: state.posts[index].userId ?? '',
+                                            updatedAt : state.posts[index].updatedAt ?? '',
+                                            img: state.posts[index].imgs ?? [],
+                                            index: index,
+                                            fio: state.posts[index].user?.fio ?? 'Azamat',
                                         ),
-                                        index == testPostData.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                            left: 16,
+                                            right: 16,
+                                            // top: 16,
+                                          ),
+                                          color: Colors.white,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () async {
+                                                      setState(()  {
+                                                        liked[index] = !liked[index];
+                                                        if(liked[index]) {
+                                                          likedCount[index] += 1;
+                                                        }
+                                                        else {
+                                                          likedCount[index] -= 1;
+                                                        }
+                                                      });
+                                                      final HomeDatasource homeDatasource = sl();
+                                                      if(liked[index]){
+                                                        Response response = (await homeDatasource.likedPost(state.posts[index].id!,'POSTLIKE'));
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      padding: const EdgeInsets.all(8),
+                                                      // width: 60,
+                                                      // height: 28,
+                                                      decoration: BoxDecoration(
+                                                        color: liked[index]
+                                                            ? const Color(0xFFE71D36).withOpacity(0.1)
+                                                            : ColorStyles.primarySurfaceColor,
+                                                        borderRadius: BorderRadius.circular(24),
+                                                      ),
+                                                      child: Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          liked[index]
+                                                              ? SvgPicture.asset(
+                                                            'assets/icons/redheart.svg',
+                                                            color: const Color(0xFFE71D36),
+                                                          )
+                                                              : SvgPicture.asset(
+                                                            'assets/icons/heart.svg',
+                                                            color: ColorStyles.primarySurfaceHoverColor,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            NumberFormat.compactCurrency(
+                                                              decimalDigits: 0,
+                                                              symbol: ' ',
+                                                            ).format(state.posts[index].likeNumber! + (liked[index] ? 1 : 0)),
+                                                            style: TextStyles.mediumStyle.copyWith(
+                                                              fontSize: 14,
+                                                              color: liked[index]
+                                                                  ? const Color(0xFFE71D36)
+                                                                  : ColorStyles.primarySurfaceHoverColor,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  sizedBoxWidth8(),
+                                                  GestureDetector(
+                                                    onTap: (){
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) => HomeCommentsPage(
+                                                            pplLike: state.posts[index].likeNumber!,
+                                                            pplCommented: state.posts[index].commentNumber!,
+                                                            pplSaved: state.posts[index].savedNumber!,
+                                                            pplShow: state.posts[index].viewNumber!,
+                                                            hasImg: hasVote,
+                                                            hasVote: hasVote,
+                                                            image: 'assets/icons/space.png',
+                                                            postPublicationDate: formattedDate,
+                                                            votePPL1: votePPL1,
+                                                            votePPL2: votePPL2,
+                                                            voteProcent1: voteProcent1,
+                                                            voteProcent2: voteProcent2,
+                                                            voteAnswer1: voteAnswer1,
+                                                            voteAnswer2: voteAnswer2,
+                                                            votetitle: votetitle,
+                                                            title: state.posts[index].content!,
+                                                            imageAuthor: 'assets/icons/mugalim_logo.png',
+                                                            postAuthor: state.posts[index].user?.fio ?? '',
+                                                          ),
+                                                        ),
+                                                      );
+                                                     },
+                                                    child: Container(
+                                                      padding: const EdgeInsets.all(8),
+                                                      // width: 60,
+                                                      // height: 28,
+                                                      decoration: BoxDecoration(
+                                                        color: ColorStyles.primarySurfaceColor,
+                                                        borderRadius: BorderRadius.circular(24),
+                                                      ),
+                                                      child: Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          SvgPicture.asset(
+                                                            'assets/icons/comment.svg',
+                                                            color: ColorStyles.primarySurfaceHoverColor,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            NumberFormat.compactCurrency(
+                                                              decimalDigits: 0,
+                                                              symbol: ' ',
+                                                            ).format(state.posts[index].commentNumber!),
+                                                            style: TextStyles.mediumStyle.copyWith(
+                                                              fontSize: 14,
+                                                              color: ColorStyles.primarySurfaceHoverColor,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  sizedBoxWidth8(),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        isSaved = !isSaved;
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      padding: const EdgeInsets.all(8),
+                                                      // width: 60,
+                                                      // height: 28,
+                                                      decoration: BoxDecoration(
+                                                        color: isSaved
+                                                            ? const Color(0xFFFFB800).withOpacity(0.1)
+                                                            : ColorStyles.primarySurfaceColor,
+                                                        borderRadius: BorderRadius.circular(24),
+                                                      ),
+                                                      child: Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          isSaved
+                                                              ? SvgPicture.asset(
+                                                            'assets/icons/sharesave.svg',
+                                                            color: const Color(0xFFFFB800),
+                                                          )
+                                                              : SvgPicture.asset(
+                                                            'assets/icons/share.svg',
+                                                            color: ColorStyles.primarySurfaceHoverColor,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            NumberFormat.compactCurrency(
+                                                              decimalDigits: 0,
+                                                              symbol: ' ',
+                                                            ).format(state.posts[index].savedNumber! + (isSaved ? 1 : 0)),
+                                                            style: TextStyles.mediumStyle.copyWith(
+                                                              fontSize: 14,
+                                                              color: isSaved
+                                                                  ? const Color(0xFFFFB800)
+                                                                  : ColorStyles.primarySurfaceHoverColor,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const Spacer(),
+                                                  Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.remove_red_eye_sharp,
+                                                        size: 16,
+                                                        color: ColorStyles.primarySurfaceHoverColor,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text(
+                                                        NumberFormat.compactCurrency(
+                                                          decimalDigits: 0,
+                                                          symbol: ' ',
+                                                        ).format(state.posts[index].viewNumber!),
+                                                        style: TextStyles.mediumStyle.copyWith(
+                                                          fontSize: 14,
+                                                          color: ColorStyles.primarySurfaceHoverColor,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              sizedBoxHeight16(),
+                                            ],
+                                          ),
+                                        ),
+                                        index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
                                       ],
                                     );
                                   });
@@ -385,8 +511,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               return Text('ошибка');
                             }
                             else if(state is HomeLoading){
-                              print('loading');
-                              return Text('loading');
+                              return Container(
+                                height: MediaQuery.of(context).size.height,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 150,),
+                                    Center(child: CupertinoActivityIndicator())
+                                  ],
+                                ),
+                              );
                             }
                             return Text("Post don't loaded");
                             },
@@ -408,7 +541,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               index == 0 ? SizedBox(height: 16,) : SizedBox(),
                               Text('Trend'),
-                              index == testPostData.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                              // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
                             ],
                           );
                         }),

@@ -23,3 +23,4 @@ class PostByIdListSuccess extends HomeState {
 
   PostByIdListSuccess(this.posts);
 }
+class LikeSuccess extends HomeState {}
