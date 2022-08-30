@@ -95,29 +95,33 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   children: [
                                     GestureWidget(
                                       onTap: () {
-
-                                        Navigator.of(context, rootNavigator: true).pushNamed(CourseRoute);
-                                      }, title: 'Курсы', path: 'assets/images/courseIcon.png',
-                                    ),
-                                    const Spacer(),
-                                    GestureWidget(
-                                      onTap: () {
-                                        Navigator.of(context).pushNamed(ChoiceRoute);
-
-                                      }, title: 'Книги', path: 'assets/images/newBookIcon.png',
-                                    ),
-                                    const Spacer(),
-                                    GestureWidget(
-                                      onTap: () {
-
-                                      }, title: 'M Passport', path: 'assets/images/passportIcon.png',
-                                    ),
-                                    const Spacer(),
-                                    GestureWidget(
-                                      onTap: () {
-
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pushNamed(CourseRoute);
                                       },
-                                      title: 'Статистика', path: 'assets/images/statisticsIcon.png',
+                                      title: 'Курсы',
+                                      path: 'assets/images/courseIcon.png',
+                                    ),
+                                    const Spacer(),
+                                    GestureWidget(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .pushNamed(ChoiceRoute);
+                                      },
+                                      title: 'Книги',
+                                      path: 'assets/images/newBookIcon.png',
+                                    ),
+                                    const Spacer(),
+                                    GestureWidget(
+                                      onTap: () {},
+                                      title: 'M Passport',
+                                      path: 'assets/images/passportIcon.png',
+                                    ),
+                                    const Spacer(),
+                                    GestureWidget(
+                                      onTap: () {},
+                                      title: 'Статистика',
+                                      path: 'assets/images/statisticsIcon.png',
                                     ),
                                   ],
                                 ),
@@ -284,8 +288,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                       ClipOval(
                                                         child: CircleAvatar(
                                                             radius: 12,
-                                                            child: Image
-                                                                .asset(
+                                                            child: Image.asset(
                                                               'assets/images/avataricon1.png',
                                                               // color: Colors.red,
                                                             )),
@@ -295,8 +298,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         child: ClipOval(
                                                           child: CircleAvatar(
                                                               radius: 12,
-                                                              child: Image
-                                                                  .asset(
+                                                              child: Image.asset(
                                                                   'assets/images/avataricon2.png')),
                                                         ),
                                                       ),
@@ -304,17 +306,20 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         left: 36,
                                                         child: ClipOval(
                                                           child: CircleAvatar(
-                                                            backgroundColor: Color(0xff3D3DD8),
-                                                              radius: 12,
-                                                              child: Text(
-                                                                '+21',
-                                                                style: TextStyles.regularStyle
-                                                                    .copyWith(
-                                                                  fontSize: 13,
-                                                                  color:
-                                                                  Colors.white,
-                                                                ),
+                                                            backgroundColor:
+                                                                Color(
+                                                                    0xff3D3DD8),
+                                                            radius: 12,
+                                                            child: Text(
+                                                              '+21',
+                                                              style: TextStyles
+                                                                  .regularStyle
+                                                                  .copyWith(
+                                                                fontSize: 13,
+                                                                color: Colors
+                                                                    .white,
                                                               ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -401,7 +406,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                             Row(
                                               children: [
                                                 Image.asset(
-                                                    'assets/images/courseImage.png',
+                                                  'assets/images/courseImage.png',
                                                   fit: BoxFit.cover,
                                                   width: 92,
                                                   height: 52,

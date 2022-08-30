@@ -1,8 +1,6 @@
 part of 'profile_bloc.dart';
 
-//@immutable
+@immutable
 abstract class ProfileEvent {}
 
 class ProfileLoad extends ProfileEvent {}
-
-class NotificationLoad extends ProfileEvent {}
