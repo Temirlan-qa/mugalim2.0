@@ -11,19 +11,8 @@ import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
 import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
-//
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:mugalim/core/injection_container.dart';
-import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/core/utils/dio/dio_wrapper.dart';
-import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -80,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Row(
                           children: [
                             Image.asset(
-                              'assets/images/male.png',
+                              state.profileModel.avatar??'assets/images/male.png',
                               // 'assets/images/female.png',
                               width: 56,
                               height: 56,
@@ -99,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Партизан Перизатов',
+                                  '${state.profileModel.firstName} ${state.profileModel.lastName}',
                                   style: TextStyles.mediumStyle.copyWith(
                                     color: ColorStyles.neutralsTextPrimaryColor,
                                     fontSize: 18,
