@@ -10,6 +10,7 @@ import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
 import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
 
+import '../../../core/injection_container.dart';
 import '../../../logic/home/bloc/home_bloc.dart';
 
 class PostWidget extends StatefulWidget {
@@ -64,7 +65,9 @@ class _PostWidgetState extends State<PostWidget> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeCommentsPage(
+            builder: (context) => BlocProvider(
+              create: (context) => sl<HomeBloc>()..add(GetPostCommentList(widget.id!)),
+              child: HomeCommentsPage(
               pplLike: widget.likeNumber!,
               pplCommented: widget.commentNumber!,
               pplSaved: widget.savedNumber!,
@@ -85,6 +88,7 @@ class _PostWidgetState extends State<PostWidget> {
               liked: widget.liked!,
               saved : widget.saved!,
               bloc: widget.bloc,
+            ),
             ),
           ),
         );

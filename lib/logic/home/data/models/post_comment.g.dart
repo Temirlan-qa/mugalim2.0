@@ -16,9 +16,9 @@ PostCommentModel _$PostCommentModelFromJson(Map<String, dynamic> json) =>
       json['commentNumber'] as int?,
       json['relativeId'] as String?,
       json['likeNumber'] as int?,
-      json['user'] == null
-          ? null
-          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      json['userName'] as String?,
+      json['userAvatarId'] as String?,
+      json['fromStructure'] as bool?,
       json['liked'] as bool?,
       json['saved'] as bool?,
       json['createdAt'] as String?,
@@ -36,7 +36,9 @@ Map<String, dynamic> _$PostCommentModelToJson(PostCommentModel instance) =>
       'commentNumber': instance.commentNumber,
       'relativeId': instance.relativeId,
       'likeNumber': instance.likeNumber,
-      'user': instance.user,
+      'userName': instance.userName,
+      'userAvatarId': instance.userAvatarId,
+      'fromStructure': instance.fromStructure,
       'liked': instance.liked,
       'saved': instance.saved,
       'createdAt': instance.createdAt,

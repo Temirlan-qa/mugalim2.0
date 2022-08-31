@@ -14,7 +14,9 @@ class PostCommentModel {
   final int? commentNumber;
   final String? relativeId;
   final int? likeNumber;
-  final UserModel? user;
+  final String? userName;
+  final String? userAvatarId;
+  final bool? fromStructure;
   final bool? liked;
   final bool? saved;
   final String? createdAt;
@@ -24,7 +26,7 @@ class PostCommentModel {
 
   factory PostCommentModel.fromJson(Map<String, dynamic> json) => _$PostCommentModelFromJson(json);
 
-  PostCommentModel(this.id, this.eventLog, this.content, this.userId, this.parentId, this.commentNumber, this.relativeId, this.likeNumber, this.user, this.liked, this.saved, this.createdAt, this.updatedAt, this.deletedAt);
+  PostCommentModel(this.id, this.eventLog, this.content, this.userId, this.parentId, this.commentNumber, this.relativeId, this.likeNumber, this.userName, this.userAvatarId, this.fromStructure, this.liked, this.saved, this.createdAt, this.updatedAt, this.deletedAt);
 
   Map<String, dynamic> toJson() => _$PostCommentModelToJson(this);
 }

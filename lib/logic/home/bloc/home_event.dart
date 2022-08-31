@@ -5,7 +5,11 @@ abstract class HomeEvent {}
 
 class HomeLoad extends HomeEvent {}
 
-class GetPostsList extends HomeEvent{}
+class GetPostsList extends HomeEvent{
+  final bool? loadingState;
+
+  GetPostsList({this.loadingState});
+}
 
 class GetPostCommentList extends HomeEvent{
   final String parentId;

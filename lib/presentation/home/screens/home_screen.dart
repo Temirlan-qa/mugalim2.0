@@ -36,8 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // Initial Selected Value
   String dropdownvalue = 'Новости ';
 
-  bool isLiked = false;
-  bool isSaved = false;
   bool run = true;
 
   // List of items in our dropdown menu
@@ -50,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchEditingController = TextEditingController();
   bool buttonDown = false;
   int tabIndex = 0;
-  List liked = [];
-  List likedCount = [];
-
-  List saved = [];
-  List savedCount = [];
+  // List liked = [];
+  // List likedCount = [];
+  //
+  // List saved = [];
+  // List savedCount = [];
 
   int dropDownindex = 0;
   bool hasVote = false;
@@ -65,6 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
   String voteAnswer1 = 'Да, пойду truyytyit guyvuiiio ihihuig78tf';
   String voteAnswer2 =  'Нет, не пойду';
   String votetitle =  'Пойдете ли в горы вместе с группой?';
+
+  final HomeDatasource homeDatasource = sl();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -242,41 +243,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: ColorStyles.neutralsPageBackgroundColor,
                           child: BlocConsumer<HomeBloc, HomeState>(
                             listener: (context, state) {
-                              if(state is PostListSuccess) {
-                                setState((){
-                                  liked = List.filled(
-                                      state.posts.length, false,
-                                      growable: true);
-                                  for (int i = 0; i <
-                                      state.posts.length; i++) {
-                                    liked[i] = state.posts[i].liked;
-                                  }
-                                  likedCount = List.filled(
-                                      state.posts.length, 0,
-                                      growable: true);
-                                  for (int i = 0; i <
-                                      state.posts.length; i++) {
-                                    likedCount[i] =
-                                        state.posts[i].likeNumber;
-                                  }
-
-                                  saved = List.filled(
-                                      state.posts.length, false,
-                                      growable: true);
-                                  for (int i = 0; i <
-                                      state.posts.length; i++) {
-                                    saved[i] = state.posts[i].saved;
-                                  }
-                                  savedCount = List.filled(
-                                      state.posts.length, 0,
-                                      growable: true);
-                                  for (int i = 0; i <
-                                      state.posts.length; i++) {
-                                    savedCount[i] =
-                                        state.posts[i].savedNumber;
-                                  }
-                                });
-                              }
+                              // if(state is PostListSuccess) {
+                              //   setState((){
+                              //     liked = List.filled(
+                              //         state.posts.length, false,
+                              //         growable: true);
+                              //     for (int i = 0; i <
+                              //         state.posts.length; i++) {
+                              //       liked[i] = state.posts[i].liked;
+                              //     }
+                              //     likedCount = List.filled(
+                              //         state.posts.length, 0,
+                              //         growable: true);
+                              //     for (int i = 0; i <
+                              //         state.posts.length; i++) {
+                              //       likedCount[i] =
+                              //           state.posts[i].likeNumber;
+                              //     }
+                              //
+                              //     saved = List.filled(
+                              //         state.posts.length, false,
+                              //         growable: true);
+                              //     for (int i = 0; i <
+                              //         state.posts.length; i++) {
+                              //       saved[i] = state.posts[i].saved;
+                              //     }
+                              //     savedCount = List.filled(
+                              //         state.posts.length, 0,
+                              //         growable: true);
+                              //     for (int i = 0; i <
+                              //         state.posts.length; i++) {
+                              //       savedCount[i] =
+                              //           state.posts[i].savedNumber;
+                              //     }
+                              //   });
+                              // }
                             },
                           builder: (context, state) {
                             if(state is PostListSuccess){
@@ -284,9 +285,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemCount: state.posts.length,
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) {
+                                  itemBuilder: (context2, index) {
                                     DateTime now = DateTime.parse(state.posts[index].createdAt!);
-                                    String formattedDate = DateFormat('d MMM в H:m').format(now);
+                                    String formattedDate = DateFormat('d MMM в hh:mm').format(now);
                                     hasVote = index % 2 != 0 ? true : false;
                                     return Column(
                                       children: [
@@ -310,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             img: state.posts[index].imgs ?? [],
                                             index: index,
                                             fio: state.posts[index].user?.fio ?? 'Mugalim Global',
-                                            bloc: widget.bloc,
+                                            bloc: context.read<HomeBloc>(),
                                         ),
                                         Container(
                                           padding: const EdgeInsets.only(
@@ -326,26 +327,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   GestureDetector(
                                                     onTap: () async {
                                                       print(state.posts[index].savedNumber);
-                                                      setState(()  {
-                                                        liked[index] = !liked[index];
-                                                        if(liked[index]) {
-                                                          likedCount[index] += 1;
-                                                        }
-                                                        else {
-                                                          likedCount[index] -= 1;
-                                                        }
-                                                      });
-                                                      final HomeDatasource homeDatasource = sl();
-                                                      // if(liked[index]){
-                                                        Response response = (await homeDatasource.likedPost(state.posts[index].id!,'POSTLIKE'));
-                                                        await widget.bloc.add(GetPostsList());
+                                                      // setState(()  {
+                                                      //   liked[index] = !liked[index];
+                                                      //   if(liked[index]) {
+                                                      //     likedCount[index] += 1;
+                                                      //   }
+                                                      //   else {
+                                                      //     likedCount[index] -= 1;
+                                                      //   }
+                                                      // });
+                                                      await homeDatasource.likedPost(state.posts[index].id!,'POSTLIKE');
+                                                      context.read<HomeBloc>().add(GetPostsList(loadingState: false));
                                                     },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
                                                       // width: 60,
                                                       // height: 28,
                                                       decoration: BoxDecoration(
-                                                        color: liked[index]
+                                                        color: state.posts[index].liked!
                                                             ? const Color(0xFFE71D36).withOpacity(0.1)
                                                             : ColorStyles.primarySurfaceColor,
                                                         borderRadius: BorderRadius.circular(24),
@@ -354,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
-                                                          liked[index]
+                                                          state.posts[index].liked!
                                                               ? SvgPicture.asset(
                                                             'assets/icons/redheart.svg',
                                                             color: const Color(0xFFE71D36),
@@ -370,10 +369,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NumberFormat.compactCurrency(
                                                               decimalDigits: 0,
                                                               symbol: ' ',
-                                                            ).format(likedCount[index]),
+                                                            ).format(state.posts[index].likeNumber!),
                                                             style: TextStyles.mediumStyle.copyWith(
                                                               fontSize: 14,
-                                                              color: liked[index]
+                                                              color: state.posts[index].liked!
                                                                   ? const Color(0xFFE71D36)
                                                                   : ColorStyles.primarySurfaceHoverColor,
                                                             ),
@@ -388,8 +387,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              HomeCommentsPage(
+                                                          builder: (context2) =>
+                                                              BlocProvider(
+                                                                create: (context) => sl<HomeBloc>()..add(GetPostCommentList(state.posts[index].id!)),
+                                                                child: HomeCommentsPage(
                                                                 pplLike: state
                                                                     .posts[index]
                                                                     .likeNumber!,
@@ -430,18 +431,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 liked: state
                                                                     .posts[index]
                                                                     .liked!,
-                                                                bloc: widget.bloc
+                                                                bloc: context.read<HomeBloc>()
                                                               ),
+                                                          ),
                                                         ),
-
                                                       );
-
                                                       // final HomeDatasource homeDatasource = sl();
                                                       // Response response = await homeDatasource.getPostComment('7173ec3c-8dd8-4c87-998f-3cd9778f4290');
                                                       // print(response);
                                                       // print(state.posts[index].userId!);
-
-
                                                     },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
@@ -481,24 +479,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     onTap: () async {
                                                       print(state.posts[index].savedNumber);
                                                       setState(()  {
-                                                        saved[index] = !saved[index];
-                                                        if(saved[index]) {
-                                                          savedCount[index] += 1;
-                                                        }
-                                                        else {
-                                                          savedCount[index] -= 1;
-                                                        }
+                                                        // saved[index] = !saved[index];
+                                                        // if(saved[index]) {
+                                                        //   savedCount[index] += 1;
+                                                        // }
+                                                        // else {
+                                                        //   savedCount[index] -= 1;
+                                                        // }
                                                       });
-                                                      final HomeDatasource homeDatasource = sl();
-                                                      Response response = saved[index] ? (await homeDatasource.savedPost(state.posts[index].id!)) : (await homeDatasource.deletePost(state.posts[index].id!));
-                                                      await widget.bloc.add(GetPostsList());
+                                                      state.posts[index].saved!
+                                                          ? (await homeDatasource.deletePost(state.posts[index].id!))
+                                                          : (await homeDatasource.savedPost(state.posts[index].id!));
+                                                      context.read<HomeBloc>().add(GetPostsList(loadingState: false));
                                                       },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
                                                       // width: 60,
                                                       // height: 28,
                                                       decoration: BoxDecoration(
-                                                        color: saved[index]
+                                                        color: state.posts[index].saved!
                                                             ? const Color(0xFFFFB800).withOpacity(0.1)
                                                             : ColorStyles.primarySurfaceColor,
                                                         borderRadius: BorderRadius.circular(24),
@@ -507,7 +506,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
-                                                          saved[index]
+                                                          state.posts[index].saved!
                                                               ? SvgPicture.asset(
                                                             'assets/icons/sharesave.svg',
                                                             color: const Color(0xFFFFB800),
@@ -523,10 +522,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NumberFormat.compactCurrency(
                                                               decimalDigits: 0,
                                                               symbol: ' ',
-                                                            ).format(savedCount[index]),
+                                                            ).format(state.posts[index].savedNumber!),
                                                             style: TextStyles.mediumStyle.copyWith(
                                                               fontSize: 14,
-                                                              color: saved[index]
+                                                              color: state.posts[index].saved!
                                                                   ? const Color(0xFFFFB800)
                                                                   : ColorStyles.primarySurfaceHoverColor,
                                                             ),

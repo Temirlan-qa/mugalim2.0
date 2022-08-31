@@ -81,23 +81,31 @@ class HomeCommentsPage extends StatefulWidget {
 }
 
 class _HomeCommentsPageState extends State<HomeCommentsPage> {
-  bool isLiked = false;
-  bool isSaved = false;
-  int likedCount = 0;
-  int savedCount = 0;
-  int count = 0;
   String str =
       'Нельзя без последствий для здоровья изо дня в день проявлять себя противно тому, что чувствуешь; распинаться перед тем, чего не любишь, радоваться тому, что приносит несчастье. Наша нервная систем...';
 
   String str1 =
       "That's a fantastic new app feature.You and your\nteam did an excellent job of incorporating user\ntesting feedback.";
   bool isExpanded = false;
+
+  final HomeDatasource homeDatasource = sl();
+
+  late bool isLiked;
+  late bool isSaved;
+  late int likedNumber;
+  late int savedNumber;
+
+  @override
+  void initState() {
+    isLiked = widget.liked;
+    isSaved = widget.saved;
+    likedNumber = widget.pplLike;
+    savedNumber = widget.pplSaved;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    if(count == 0) {
-      isLiked = widget.liked;
-      isSaved = widget.saved;
-    }
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -276,23 +284,12 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                             children: [
                               GestureDetector(
                                 onTap: () async {
-
-                                  setState(()  {
+                                  setState(() {
                                     isLiked = !isLiked;
-                                    if(isLiked) {
-                                      likedCount += 1;
-                                    }
-                                    else {
-                                      likedCount -= 1;
-                                    }
-                                    count++;
+                                    isLiked ? likedNumber++ : likedNumber--;
                                   });
-                                  print(isLiked);
-                                  final HomeDatasource homeDatasource = sl();
-                                  // if(liked[index]){
-                                  Response response = (await homeDatasource.likedPost(widget.parentId,'POSTLIKE'));
-                                  await widget.bloc.add(GetPostsList());
-                                  // }
+                                  await homeDatasource.likedPost(widget.parentId,'POSTLIKE');
+                                  widget.bloc.add(GetPostsList());
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
@@ -324,7 +321,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                         NumberFormat.compactCurrency(
                                           decimalDigits: 0,
                                           symbol: ' ',
-                                        ).format(widget.pplLike+likedCount),
+                                        ).format(likedNumber),
                                         style: TextStyles.mediumStyle.copyWith(
                                           fontSize: 14,
                                           color: isLiked
@@ -377,19 +374,13 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                               sizedBoxWidth8(),
                               GestureDetector(
                                 onTap: () async {
-
-                                  setState(()  {
+                                  setState(() {
                                     isSaved = !isSaved;
-                                    if(isSaved) {
-                                      savedCount += 1;
-                                    }
-                                    else {
-                                      savedCount -= 1;
-                                    }
-                                    count++;
+                                    isSaved ? savedNumber++ : savedNumber--;
                                   });
-                                  final HomeDatasource homeDatasource = sl();
-                                  Response response = isSaved ? (await homeDatasource.savedPost(widget.parentId)) : (await homeDatasource.deletePost(widget.parentId));
+                                  widget.saved
+                                      ? (await homeDatasource.deletePost(widget.parentId))
+                                      : (await homeDatasource.savedPost(widget.parentId));
                                   await widget.bloc.add(GetPostsList());
                                   },
                                 child: Container(
@@ -422,7 +413,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                         NumberFormat.compactCurrency(
                                           decimalDigits: 0,
                                           symbol: ' ',
-                                        ).format(widget.pplSaved+savedCount),
+                                        ).format(savedNumber),
                                         style: TextStyles.mediumStyle.copyWith(
                                           fontSize: 14,
                                           color: isSaved
@@ -474,15 +465,15 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
             ),
             sizedBoxHeight8(),
             BlocConsumer<HomeBloc, HomeState>(
-
               builder: (context, state) {
-
                 if(state is PostCommentListSuccess){
                   return ListView.builder(
                     itemCount: state.comments.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
+                      DateTime now = DateTime.parse(state.comments[index].createdAt!);
+                      String formattedDate = DateFormat('d MMM в hh:mm').format(now);
                       return Container(
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
@@ -510,8 +501,8 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      'Mugalim Global',
+                                    Text(
+                                      state.comments[index].userName ?? "abc",
                                       style: TextStyle(
                                         fontSize: 14,
                                         decoration: TextDecoration.none,
@@ -523,78 +514,85 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                     SizedBox(
                                       height: 5,
                                     ),
-                                    Text(
-                                      str1,
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        decoration: TextDecoration.none,
-                                        color: Colors.black,
-                                        fontFamily: 'CeraPro',
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width - 92,
+                                      child: Text(
+                                        state.comments[index].content ?? "",
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          decoration: TextDecoration.none,
+                                          color: Colors.black,
+                                          fontFamily: 'CeraPro',
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Text(
-                                          '5 авг в 13:54',
-                                          style: TextStyle(
-                                            color: Color(0xFF767676),
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Cera Pro',
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 16,
-                                        ),
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: const Text(
-                                            'Ответить',
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width - 84,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                           Text(
+                                            formattedDate,
                                             style: TextStyle(
-                                              color: Color(0xFF3D3DD8),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xFF767676),
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w400,
                                               fontFamily: 'Cera Pro',
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 85,
-                                        ),
-                                        InkWell(
-                                          onTap: () {},
-                                          child: Row(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            children: const [
-                                              Icon(
-                                                Icons.favorite,
-                                                color: Color(0xFFE71D36),
-                                                size: 16,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                '1',
-                                                style: TextStyle(
-                                                  color: Color(0xFFE71D36),
-                                                  fontFamily: 'Cera Pro',
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ],
+                                          const SizedBox(
+                                            width: 16,
                                           ),
-                                        ),
-                                      ],
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: const Text(
+                                              'Ответить',
+                                              style: TextStyle(
+                                                color: Color(0xFF3D3DD8),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Cera Pro',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 85,
+                                          ),
+                                          InkWell(
+                                            onTap: () {},
+                                            child: Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              children: const [
+                                                Icon(
+                                                  Icons.favorite,
+                                                  color: Color(0xFFE71D36),
+                                                  size: 16,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  '1',
+                                                  style: TextStyle(
+                                                    color: Color(0xFFE71D36),
+                                                    fontFamily: 'Cera Pro',
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(width: 8)
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -729,7 +727,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                 return Text('ошибка2');
               },
               listener: (context, state) async {
-
+                print(state);
               },
             ),
           ],
