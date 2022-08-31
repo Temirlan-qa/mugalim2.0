@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
+import 'package:mugalim/presentation/books/screens/timer_screen.dart';
 import 'package:mugalim/presentation/main/widgets/main_screen.dart';
 import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/injection_container.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         ),
         onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
         //home: VerifyScreen(),
-        home: MainScreen(),
+        // home: MainScreen(),
+        home: TimerScreen(),
         // home: onBoarding.containsKey('show')
         //     ? VerifyScreen() : IntroScreen(),
       ),

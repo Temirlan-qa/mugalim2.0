@@ -60,6 +60,11 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => CoursePage(),
         );
+      case DevelopmentRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => DevelopmentScreen(),
+        );
       // case BookRoute:
       //   return CupertinoPageRoute(
       //     settings: routeSettings,
