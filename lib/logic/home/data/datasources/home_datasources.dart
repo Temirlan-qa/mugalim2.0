@@ -8,6 +8,10 @@ abstract class HomeDatasource {
   Future<Response> getPostList();
   Future<Response> getPost(String postId);
   Future<Response> likedPost(String postId,String likeType);
+  Future<Response> deletePost(String postId);
+  Future<Response> savedPost(String postId);
+  Future<Response> getPostComment(String parentId);
+  Future<Response> createPostComment(String parentId,String content);
 }
 
 class HomeDataSourceImpl implements HomeDatasource {
@@ -36,6 +40,37 @@ class HomeDataSourceImpl implements HomeDatasource {
         data: {
           'postId' : postId,
           'likeType' : likeType
+        }
+    );
+    return response;
+  }
+  @override
+  Future<Response> savedPost(String postId) async {
+    Response response = await dioWrapper!.post('/posts/saved/create',
+        data: {
+          'postId' : postId,
+        }
+    );
+    return response;
+  }
+  //posts/comments/list/pageable/{parentId}
+  @override
+  Future<Response> deletePost(String postId) async {
+    Response response = await dioWrapper!.delete('/posts/saved/delete/$postId');
+    return response;
+  }
+  @override
+  Future<Response> getPostComment(String parentId) async {
+    Response response = await dioWrapper!.get('/posts/post/$parentId');
+    print(response);
+    return response;
+  }
+  @override
+  Future<Response> createPostComment(String parentId,String content) async {
+    Response response = await dioWrapper!.post('/posts/comments/create',
+        data: {
+          'parentId' : parentId,
+          'content' : content,
         }
     );
     return response;
