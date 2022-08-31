@@ -110,13 +110,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                         ),
                       ],
                     ),
-                    // Lottie.asset(
-                    //   //repeat: false,
-                    //   'assets/animations/Loader.json',
-                    //   width: 80,
-                    //   height: 80,
-                    //   fit: BoxFit.fill,
-                    // ),
                     sizedBoxWidth16(),
                     Text(
                       'Партизан Перизатов',

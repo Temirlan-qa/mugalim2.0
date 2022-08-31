@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:mugalim/logic/profile/data/models/profile_model.dart';
-import 'package:mugalim/logic/profile/data/models/user_model.dart';
 import 'package:mugalim/logic/profile/data/repositories/profile_repository.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -26,4 +24,5 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
     );
   }
+
 }

@@ -20,4 +20,29 @@ class ProfileRepositoryImpl extends ProfileRepository {
     // print(response2);
     return ProfileModel.fromJson(response.data);
   }
+
+  @override
+  Future<ProfileModel> changePassword(oldPass,newPass) async {
+    Response response = await profileDatasource.changePassword(oldPass, newPass);
+    // Response response2 = await profileDatasource.getNotificationList();
+    // print(response2);
+    return ProfileModel.fromJson(response.data);
+  }
+
+  @override
+  Future<ProfileModel> changeAvatar(path) async {
+    Response response = await profileDatasource.changeAvatar(path);
+    // Response response2 = await profileDatasource.getNotificationList();
+    // print(response2);
+    return ProfileModel.fromJson(response.data);
+  }
+
+
+  @override
+  Future<ProfileModel> uploadAvatar(avatar) async {
+    Response response = await profileDatasource.uploadAvatar(avatar);
+    // Response response2 = await profileDatasource.getNotificationList();
+    // print(response2);
+    return ProfileModel.fromJson(response.data);
+  }
 }

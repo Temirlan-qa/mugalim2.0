@@ -34,8 +34,6 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           "newPassword": newPass
         }
     );
-
-
     return response;
   }
 
@@ -49,7 +47,6 @@ class ProfileDatasourceImpl implements ProfileDatasource {
       '/file/image/upload',
       data: formData,
     );
-
     return response;
   }
 
@@ -61,8 +58,6 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           "avatar": avatar
         }
     );
-
-
     return response;
   }
 }
