@@ -33,10 +33,11 @@ class PostWidget extends StatefulWidget {
   final List? imgs;
   final int? index;
   final String? fio;
+  final bloc;
   const PostWidget( {
     Key? key,
     this.viewNumber, this.savedNumber, this.saved, this.commentNumber, this.likeNumber, this.createdAt, this.title, this.id, this.content, this.liked, this.cityId, this.commeted, this.img, this.regionId, this.type, this.userId, this.updatedAt,this.imgs, this.index , this.fio,
-
+    this.bloc
   }) : super(key: key);
 
   @override
@@ -54,6 +55,7 @@ class _PostWidgetState extends State<PostWidget> {
   String voteAnswer1 = 'Да, пойду truyytyit guyvuiiio ihihuig78tf';
   String voteAnswer2 =  'Нет, не пойду';
   String votetitle =  'Пойдете ли в горы вместе с группой?';
+
   @override
   Widget build(BuildContext context) {
     bool hasVote = widget.index! % 2 != 0 ? true : false;
@@ -77,7 +79,12 @@ class _PostWidgetState extends State<PostWidget> {
               voteProcent2: voteProcent2,
               voteAnswer1: voteAnswer1,
               voteAnswer2: voteAnswer2,
-              votetitle: votetitle, title: widget.content!, imageAuthor: 'assets/icons/mugalim_logo.png', postAuthor: widget.fio!,
+              votetitle: votetitle, title: widget.content!,
+              imageAuthor: 'assets/icons/mugalim_logo.png',
+              postAuthor: widget.fio!, parentId: widget.id!,
+              liked: widget.liked!,
+              saved : widget.saved!,
+              bloc: widget.bloc,
             ),
           ),
         );

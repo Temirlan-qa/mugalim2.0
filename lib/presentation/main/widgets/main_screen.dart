@@ -28,7 +28,6 @@ class _MainScreenState extends State<MainScreen> {
     var brightness = Theme.of(context).brightness;
     return Stack(
       children: [
-
         Scaffold(
             backgroundColor: brightness == Brightness.dark
                 ? ColorStyles.darkthemePageBackgroundColor
@@ -44,7 +43,9 @@ class _MainScreenState extends State<MainScreen> {
                   // builder: (_) => HomeScreen(),
                   builder: (_) => BlocProvider(
                     create: (context) => sl<HomeBloc>()..add(GetPostsList()),
-                    child: HomeScreen(),
+                    child: HomeScreen(
+                        bloc: context.read<HomeBloc>()
+                    ),
                   ),
                 ),
                 CupertinoTabView(
@@ -73,7 +74,9 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => HomeScreen(
+                    bloc: context.read<HomeBloc>(),
+                  ),
                 )
               ],
             ),

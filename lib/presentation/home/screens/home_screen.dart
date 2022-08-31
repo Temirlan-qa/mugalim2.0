@@ -19,7 +19,8 @@ import '../../../logic/home/data/datasources/home_datasources.dart';
 import 'home_comments.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final bloc;
+  const HomeScreen({Key? key, required this.bloc}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -51,6 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int tabIndex = 0;
   List liked = [];
   List likedCount = [];
+
+  List saved = [];
+  List savedCount = [];
+
   int dropDownindex = 0;
   bool hasVote = false;
   int votePPL1 = 45;
@@ -254,6 +259,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                     likedCount[i] =
                                         state.posts[i].likeNumber;
                                   }
+
+                                  saved = List.filled(
+                                      state.posts.length, false,
+                                      growable: true);
+                                  for (int i = 0; i <
+                                      state.posts.length; i++) {
+                                    saved[i] = state.posts[i].saved;
+                                  }
+                                  savedCount = List.filled(
+                                      state.posts.length, 0,
+                                      growable: true);
+                                  for (int i = 0; i <
+                                      state.posts.length; i++) {
+                                    savedCount[i] =
+                                        state.posts[i].savedNumber;
+                                  }
                                 });
                               }
                             },
@@ -288,7 +309,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             updatedAt : state.posts[index].updatedAt ?? '',
                                             img: state.posts[index].imgs ?? [],
                                             index: index,
-                                            fio: state.posts[index].user?.fio ?? 'Azamat',
+                                            fio: state.posts[index].user?.fio ?? 'Mugalim Global',
+                                            bloc: widget.bloc,
                                         ),
                                         Container(
                                           padding: const EdgeInsets.only(
@@ -303,6 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () async {
+                                                      print(state.posts[index].savedNumber);
                                                       setState(()  {
                                                         liked[index] = !liked[index];
                                                         if(liked[index]) {
@@ -313,9 +336,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         }
                                                       });
                                                       final HomeDatasource homeDatasource = sl();
-                                                      if(liked[index]){
+                                                      // if(liked[index]){
                                                         Response response = (await homeDatasource.likedPost(state.posts[index].id!,'POSTLIKE'));
-                                                      }
+                                                        await widget.bloc.add(GetPostsList());
                                                     },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
@@ -347,7 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NumberFormat.compactCurrency(
                                                               decimalDigits: 0,
                                                               symbol: ' ',
-                                                            ).format(state.posts[index].likeNumber! + (liked[index] ? 1 : 0)),
+                                                            ).format(likedCount[index]),
                                                             style: TextStyles.mediumStyle.copyWith(
                                                               fontSize: 14,
                                                               color: liked[index]
@@ -361,33 +384,65 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   sizedBoxWidth8(),
                                                   GestureDetector(
-                                                    onTap: (){
+                                                    onTap: ()  async {
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                          builder: (context) => HomeCommentsPage(
-                                                            pplLike: state.posts[index].likeNumber!,
-                                                            pplCommented: state.posts[index].commentNumber!,
-                                                            pplSaved: state.posts[index].savedNumber!,
-                                                            pplShow: state.posts[index].viewNumber!,
-                                                            hasImg: hasVote,
-                                                            hasVote: hasVote,
-                                                            image: 'assets/icons/space.png',
-                                                            postPublicationDate: formattedDate,
-                                                            votePPL1: votePPL1,
-                                                            votePPL2: votePPL2,
-                                                            voteProcent1: voteProcent1,
-                                                            voteProcent2: voteProcent2,
-                                                            voteAnswer1: voteAnswer1,
-                                                            voteAnswer2: voteAnswer2,
-                                                            votetitle: votetitle,
-                                                            title: state.posts[index].content!,
-                                                            imageAuthor: 'assets/icons/mugalim_logo.png',
-                                                            postAuthor: state.posts[index].user?.fio ?? '',
-                                                          ),
+                                                          builder: (context) =>
+                                                              HomeCommentsPage(
+                                                                pplLike: state
+                                                                    .posts[index]
+                                                                    .likeNumber!,
+                                                                pplCommented: state
+                                                                    .posts[index]
+                                                                    .commentNumber!,
+                                                                pplSaved: state
+                                                                    .posts[index]
+                                                                    .savedNumber!,
+                                                                pplShow: state
+                                                                    .posts[index]
+                                                                    .viewNumber!,
+                                                                hasImg: hasVote,
+                                                                hasVote: hasVote,
+                                                                image: 'assets/images/space.png',
+                                                                postPublicationDate: formattedDate,
+                                                                votePPL1: votePPL1,
+                                                                votePPL2: votePPL2,
+                                                                voteProcent1: voteProcent1,
+                                                                voteProcent2: voteProcent2,
+                                                                voteAnswer1: voteAnswer1,
+                                                                voteAnswer2: voteAnswer2,
+                                                                votetitle: votetitle,
+                                                                title: state
+                                                                    .posts[index]
+                                                                    .content!,
+                                                                imageAuthor: 'assets/icons/mugalim_logo.png',
+                                                                postAuthor: state
+                                                                    .posts[index]
+                                                                    .user
+                                                                    ?.fio ?? '',
+                                                                parentId: state
+                                                                    .posts[index]
+                                                                    .id!,
+                                                                saved: state
+                                                                    .posts[index]
+                                                                    .saved!,
+                                                                liked: state
+                                                                    .posts[index]
+                                                                    .liked!,
+                                                                bloc: widget.bloc
+                                                              ),
                                                         ),
+
                                                       );
-                                                     },
+
+                                                      // final HomeDatasource homeDatasource = sl();
+                                                      // Response response = await homeDatasource.getPostComment('7173ec3c-8dd8-4c87-998f-3cd9778f4290');
+                                                      // print(response);
+                                                      // print(state.posts[index].userId!);
+
+
+                                                    },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
                                                       // width: 60,
@@ -423,17 +478,27 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   sizedBoxWidth8(),
                                                   GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        isSaved = !isSaved;
+                                                    onTap: () async {
+                                                      print(state.posts[index].savedNumber);
+                                                      setState(()  {
+                                                        saved[index] = !saved[index];
+                                                        if(saved[index]) {
+                                                          savedCount[index] += 1;
+                                                        }
+                                                        else {
+                                                          savedCount[index] -= 1;
+                                                        }
                                                       });
-                                                    },
+                                                      final HomeDatasource homeDatasource = sl();
+                                                      Response response = saved[index] ? (await homeDatasource.savedPost(state.posts[index].id!)) : (await homeDatasource.deletePost(state.posts[index].id!));
+                                                      await widget.bloc.add(GetPostsList());
+                                                      },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
                                                       // width: 60,
                                                       // height: 28,
                                                       decoration: BoxDecoration(
-                                                        color: isSaved
+                                                        color: saved[index]
                                                             ? const Color(0xFFFFB800).withOpacity(0.1)
                                                             : ColorStyles.primarySurfaceColor,
                                                         borderRadius: BorderRadius.circular(24),
@@ -442,7 +507,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
-                                                          isSaved
+                                                          saved[index]
                                                               ? SvgPicture.asset(
                                                             'assets/icons/sharesave.svg',
                                                             color: const Color(0xFFFFB800),
@@ -458,10 +523,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NumberFormat.compactCurrency(
                                                               decimalDigits: 0,
                                                               symbol: ' ',
-                                                            ).format(state.posts[index].savedNumber! + (isSaved ? 1 : 0)),
+                                                            ).format(savedCount[index]),
                                                             style: TextStyles.mediumStyle.copyWith(
                                                               fontSize: 14,
-                                                              color: isSaved
+                                                              color: saved[index]
                                                                   ? const Color(0xFFFFB800)
                                                                   : ColorStyles.primarySurfaceHoverColor,
                                                             ),

@@ -23,4 +23,14 @@ class PostByIdListSuccess extends HomeState {
 
   PostByIdListSuccess(this.posts);
 }
+
+class PostCommentListSuccess extends HomeState {
+  final List<PostCommentModel> comments;
+
+  PostCommentListSuccess(this.comments);
+}
 class LikeSuccess extends HomeState {}
+
+class SavedSuccess extends HomeState {}
+
+class DeletedSuccess extends HomeState {}
