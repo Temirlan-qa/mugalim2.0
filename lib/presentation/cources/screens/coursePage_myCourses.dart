@@ -173,15 +173,6 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   ),
                 ),
 
-                // IconButton(
-                //   icon: SvgPicture.asset('assets/icons/cancel.svg'),
-                //   color: ColorStyles.primaryBorderColor,
-                //   onPressed: () {
-                //     Navigator.pop(widget.devScreenContext);
-                //     // Navigator.pushReplacementNamed(context, CourseRoute);
-                //     // );
-                //   },
-                // ),
               ],
               backgroundColor: Colors.white,
               bottom: TabBar(
@@ -694,6 +685,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
+            SizedBox(height: 76,),
           ],
         ),
       );
@@ -858,7 +850,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
-            SizedBox(height: 100,),
+            SizedBox(height: 76,),
           ],
         ),
       );

@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes.dart';
+import 'package:mugalim/logic/home/bloc/home_bloc.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
 import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
 import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
+
+import '../../../core/injection_container.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -24,7 +28,6 @@ class _MainScreenState extends State<MainScreen> {
     var brightness = Theme.of(context).brightness;
     return Stack(
       children: [
-
         Scaffold(
             backgroundColor: brightness == Brightness.dark
                 ? ColorStyles.darkthemePageBackgroundColor
@@ -37,7 +40,13 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  // builder: (_) => HomeScreen(),
+                  builder: (_) => BlocProvider(
+                    create: (context) => sl<HomeBloc>()..add(GetPostsList()),
+                    child: HomeScreen(
+                        bloc: context.read<HomeBloc>()
+                    ),
+                  ),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),
@@ -65,7 +74,9 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => HomeScreen(
+                    bloc: context.read<HomeBloc>(),
+                  ),
                 )
               ],
             ),
