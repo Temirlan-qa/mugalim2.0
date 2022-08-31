@@ -50,7 +50,7 @@ class ColorStyles {
   //error
   static Color errorSurfaceColor = const Color(0xFFFFE5E8);
   static Color errorSurfaceHoverColor = const Color(0xFFFFB1B9);
-  static Color errorBorderColor = const Color(0xFFEE1E34);
+  static Color errorBorderColor = const Color(0xFFE71D36);
   static Color errorBorderHoverColor = const Color(0xFFE8132A);
   static Color errorShapeColor = const Color(0xFFE71D36);
   static Color errorShapeHoverColor = const Color(0xFFD20319);

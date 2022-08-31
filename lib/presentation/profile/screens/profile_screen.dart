@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -11,9 +10,10 @@ import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
 import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
+
+//TODO: add english level to backend
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -23,6 +23,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +55,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SettingsScreen()),
+                              builder: (context) => SettingsScreen(
+                                nameAndSurname : '${state.profileModel.firstName} ${state.profileModel.lastName}',
+                                role : state.profileModel.user!['roles'],
+                                image: state.profileModel.avatar,
+                                gender: state.profileModel.gender,
+                                user: state.profileModel.user,
+                              ),
+                          ),
                         );
                       },
                       child: Container(
@@ -69,8 +77,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Row(
                           children: [
                             Image.asset(
-                              state.profileModel.avatar??'assets/images/male.png',
-                              // 'assets/images/female.png',
+                              state.profileModel.avatar == null && state.profileModel.gender == "MAN"
+                                  ?'assets/images/male.png'
+                                  : state.profileModel.avatar == null
+                                  ? 'assets/images/female.png'
+                                  : state.profileModel.avatar.toString(),
                               width: 56,
                               height: 56,
                               fit: BoxFit.fill,
@@ -95,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Text(
-                                  'Студент',
+                                  '${state.profileModel.user!['roles'].join(", ")}',
                                   style: TextStyles.regularStyle.copyWith(
                                     color: ColorStyles.neutralsTextPrimaryColor,
                                     fontSize: 14,
@@ -114,6 +125,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     sizedBoxHeight16(),
+                    // TextButton(onPressed: (){
+                    //   print(state.profileModel.user!['roles'].join(", ").runtimeType);
+                    // }, child: Text('Test Data')),
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
@@ -134,7 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Text(
-                            'SCO-12-M',
+                            state.profileModel.groups.join(", ").toString(),
                             style: TextStyles.mediumStyle.copyWith(
                               color: Colors.white,
                               fontSize: 18,
@@ -208,14 +222,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 );
               }else if(state is ProfileFailure){
-                print('oshibka');
-                return Text('ошибка');
+                return const Text('ProfileFailure');
               }
               else if(state is ProfileLoading){
-                print('loading');
-                return Text('loading');
+                return const Text('ProfileLoading');
               }
-              return Text("Post don't loaded");
+              return const Text("Post don't loaded");
             },
           ),
         ),

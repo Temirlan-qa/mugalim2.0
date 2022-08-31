@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -10,7 +8,12 @@ import 'package:mugalim/presentation/profile/screens/password_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  final String? nameAndSurname;
+  final List role;
+  final String? image;
+  final String? gender;
+  final Map<String ,dynamic>? user;
+  const SettingsScreen({Key? key,required this.nameAndSurname,required this.role,required this.image,final this.gender,required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,11 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/male.png',
+                    image == null && gender == "MAN"
+                        ?'assets/images/male.png'
+                        : image == null
+                        ? 'assets/images/female.png'
+                        : image.toString(),
                     // 'assets/images/female.png',
                     width: 80,
                     height: 80,
@@ -57,14 +64,14 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   sizedBoxHeight16(),
                   Text(
-                    'Партизан Перизатов',
+                    nameAndSurname!,
                     style: TextStyles.mediumStyle.copyWith(
                       fontSize: 20,
                       color: ColorStyles.neutralsTextPrimaryColor,
                     ),
                   ),
                   Text(
-                    'Студент',
+                    role.join(", "),
                     style: TextStyles.regularStyle.copyWith(
                       fontSize: 16,
                       color: ColorStyles.neutralsTextPrimaryColor,
@@ -92,7 +99,12 @@ class SettingsScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditInfoUserScreen(),
+                          builder: (context) => EditInfoUserScreen(
+                            user: user,
+                            image: image,
+                            gender: gender,
+
+                          ),
                         ),
                       );
                       //  ChangePasswordScreen

@@ -1,16 +1,11 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:flutter_svg/svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/home/screens/home_comments.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
-import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
 import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
 
-import '../../../logic/home/bloc/home_bloc.dart';
 
 class PostWidget extends StatefulWidget {
   final int? viewNumber;

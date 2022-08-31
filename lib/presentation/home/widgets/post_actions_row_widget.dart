@@ -5,9 +5,6 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import "package:intl/intl.dart";
 
-import '../../../core/injection_container.dart';
-import '../../../logic/home/data/datasources/home_datasources.dart';
-
 class ActionsRowWidget extends StatefulWidget {
   final int pplShow;
   final int pplLike;

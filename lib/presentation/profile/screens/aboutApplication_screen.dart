@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -36,7 +35,7 @@ class AboutApplicationScreen extends StatelessWidget {
       ),
       body: Padding(
         //height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.only(top: 16,bottom: 16),
+        padding: const EdgeInsets.only(top: 16, bottom: 16),
         child: Column(
           children: [
             Container(
@@ -56,8 +55,11 @@ class AboutApplicationScreen extends StatelessWidget {
 Mugalim app - образовательный инструмент включающий в себя развлечение, формирование новых привычек, планирование времени, отслеживание прогресса, состязания и т.д.
 Mugalim app - это образовательная платформа для учителей, коуч-тренеров, менторов для построения задач и отслеживания прогресса своих подопечных.
 Добро пожаловать в приложение Mugalim!''',
-                    style: TextStyles.regularStyle
-                        .copyWith(color: Colors.black, fontSize: 16, height: 1.5),
+                    style: TextStyles.regularStyle.copyWith(
+                      color: Colors.black,
+                      fontSize: 16,
+                      height: 1.5,
+                    ),
                   ),
                   sizedBoxHeight16(),
                   BtnWidget(

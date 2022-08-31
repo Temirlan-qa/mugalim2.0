@@ -54,6 +54,7 @@ dependencies:
   svgator_player_flutter: ^1.0.3
   lottie: ^1.4.2
   dotted_border: ^2.0.0+2
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

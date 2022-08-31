@@ -15,5 +15,6 @@ class ProfileFailure extends ProfileState {
 
 class ProfileSuccess extends ProfileState {
   final ProfileModel profileModel;
+  // final UserModel userModel;
   ProfileSuccess(this.profileModel);
 }

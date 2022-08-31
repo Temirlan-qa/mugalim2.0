@@ -183,7 +183,6 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                     sizedBoxHeight8(),
                     GestureDetector(
                       onTap: () {
-                        print('Добавь скриншот или видео');
                       },
                       child: DottedBorder(
                         borderType: BorderType.RRect,

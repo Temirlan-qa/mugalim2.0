@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
+import 'package:mugalim/presentation/profile/widgets/glass_effect_with_success.dart';
 import 'package:mugalim/presentation/profile/widgets/text_field_widget.dart';
 
 class PasswordScreen extends StatefulWidget {
@@ -44,6 +42,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -137,39 +136,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
             ),
           ),
         ),
-        Visibility(
-          visible: successChange,
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.white.withOpacity(0.4),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Lottie.asset(
-                    // mloader.json
-                    repeat: false,
-                    'assets/animations/success.json',
-                    width: 72,
-                    height: 72,
-                    fit: BoxFit.fill,
-                  ),
-                  sizedBoxHeight16(),
-                  Text(
-                    'Вы успешно поменяли пароль',
-                    textAlign: TextAlign.center,
-                    style: TextStyles.boldStyle.copyWith(
-                      color: ColorStyles.neutralsTextPrimaryColor,
-                      fontSize: 26,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        GlassEffectWithSuccess(successChange:successChange,editedThing: 'пароль',),
       ],
     );
   }
