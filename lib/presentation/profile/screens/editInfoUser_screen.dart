@@ -47,6 +47,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
       }
     });
   }
+  bool onChanged = false;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -136,6 +137,11 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 ),
                 sizedBoxHeight8(),
                 TextField(
+                  onChanged: (text) {
+                    setState(() {
+                      onChanged = true;
+                    });
+                  },
                   controller: emailController,
                   decoration: textFieldStyleForEdit(emailController),
                 ),
@@ -149,6 +155,11 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 ),
                 sizedBoxHeight8(),
                 TextField(
+                  onChanged: (text) {
+                    setState(() {
+                      onChanged = true;
+                    });
+                  },
                   controller: phoneController,
                   decoration: textFieldStyleForEdit(phoneController),
                 ),
@@ -159,9 +170,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     startTimer();
                     successChange = !successChange;
                   },
-                  textColor: ColorStyles.neutralsTextPrimaryColor,
+                  textColor: onChanged ? Colors.white :ColorStyles.neutralsTextPrimaryColor,
                   text: 'Готово',
-                  Color: ColorStyles.neutralsTextPrimaryDisabledColor,
+                  Color:  onChanged ? ColorStyles.primaryBorderColor :ColorStyles.neutralsTextPrimaryDisabledColor,
                 ),
               ],
             ),

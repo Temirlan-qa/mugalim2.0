@@ -8,12 +8,8 @@ import 'package:mugalim/presentation/profile/screens/password_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
-  final String? nameAndSurname;
-  final List role;
-  final String? image;
-  final String? gender;
-  final Map<String ,dynamic>? user;
-  const SettingsScreen({Key? key,required this.nameAndSurname,required this.role,required this.image,final this.gender,required this.user}) : super(key: key);
+  final infoProfile;
+  const SettingsScreen({Key? key, this.infoProfile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +48,11 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    image == null && gender == "MAN"
+                    infoProfile['image'] == null && infoProfile['gender'] == "MAN"
                         ?'assets/images/male.png'
-                        : image == null
+                        : infoProfile['image'] == null
                         ? 'assets/images/female.png'
-                        : image.toString(),
+                        : infoProfile['image'].toString(),
                     // 'assets/images/female.png',
                     width: 80,
                     height: 80,
@@ -64,14 +60,14 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   sizedBoxHeight16(),
                   Text(
-                    nameAndSurname!,
+                    infoProfile['nameAndSurname']!,
                     style: TextStyles.mediumStyle.copyWith(
                       fontSize: 20,
                       color: ColorStyles.neutralsTextPrimaryColor,
                     ),
                   ),
                   Text(
-                    role.join(", "),
+                    infoProfile['role'].join(", "),
                     style: TextStyles.regularStyle.copyWith(
                       fontSize: 16,
                       color: ColorStyles.neutralsTextPrimaryColor,
@@ -100,9 +96,9 @@ class SettingsScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => EditInfoUserScreen(
-                            user: user,
-                            image: image,
-                            gender: gender,
+                            user: infoProfile['user'],
+                            image: infoProfile['image'],
+                            gender: infoProfile['gender'],
 
                           ),
                         ),

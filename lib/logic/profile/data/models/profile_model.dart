@@ -13,8 +13,10 @@ class ProfileModel {
   final String? middleName;
   final String? fio;
   final String? fioShort;
-  //
+  // Ask a question about
   final String? avatar;
+
+
   final String? gender;
   final Map<String, dynamic>? user;
 

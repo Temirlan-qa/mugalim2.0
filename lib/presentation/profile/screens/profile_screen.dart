@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
-import 'package:mugalim/presentation/profile/screens/aboutProject_screen.dart';
-import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
-import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +21,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
+  Box tokensBox = Hive.box('tokens');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,17 +50,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen(
-                                nameAndSurname : '${state.profileModel.firstName} ${state.profileModel.lastName}',
-                                role : state.profileModel.user!['roles'],
-                                image: state.profileModel.avatar,
-                                gender: state.profileModel.gender,
-                                user: state.profileModel.user,
-                              ),
-                          ),
+                        Navigator.of(
+                            context, rootNavigator: true
+                        ).pushNamed(
+                          SettingsRoute,
+                            arguments: {
+                              'nameAndSurname':'${state.profileModel.firstName} ${state.profileModel.lastName}',
+                              'role': state.profileModel.user!['roles'],
+                              'image': state.profileModel.avatar,
+                              'gender': state.profileModel.gender,
+                              'user': state.profileModel.user,
+                            },
                         );
                       },
                       child: Container(
@@ -177,14 +175,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'Про проект Мugalim',
                       leading_img: 'assets/icons/mugalim_logo_for_profile.svg',
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AboutProjectScreen(),
-                          ),
-                        );
+                        Navigator.of(context, rootNavigator: true).pushNamed(AboutProjectRoute);
                       },
                     ),
+                    //AboutProjectRoute
                     sizedBoxHeight16(),
                     LineWidget(
                       width: MediaQuery.of(context).size.width,
@@ -194,12 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'Написать отзыв',
                       leading_img: 'assets/icons/feedback_for_profile.svg',
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const WriteReviewScreen(),
-                          ),
-                        );
+                        Navigator.of(context, rootNavigator: true).pushNamed(WriteReviewRoute);
                       },
                     ),
                     sizedBoxHeight16(),
@@ -207,14 +196,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'О приложении',
                       leading_img: 'assets/icons/about_for_profile.svg',
                       onPressed: () {
-                        Navigator.of(context, rootNavigator: true)
-                            .pushNamed(AboutApp);
+                        Navigator.of(context, rootNavigator: true).pushNamed(AboutAppRoute);
                       },
                     ),
                     sizedBoxHeight16(),
                     BtnWidget(
                       Color: null,
-                      onPressed: () {},
+                      onPressed: () async {
+                        Navigator.of(context, rootNavigator: true).pushReplacementNamed(AuthRoute);
+                        await tokensBox.clear();
+                      },
                       text: 'Выйти',
                       fontSize: 16,
                       textColor: ColorStyles.errorShapeColor,

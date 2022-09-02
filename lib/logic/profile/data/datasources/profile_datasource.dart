@@ -5,11 +5,8 @@ abstract class ProfileDatasource {
   Future<Response> getProfileData();
 
   Future<Response> changePassword(String oldPass, String newPass);
-
-  Future<Response> changeAvatar(String path);
-
+  Future<Response> editUserInfo(String email, String phone);
   Future<Response> uploadAvatar(String avatar);
-
 }
 
 class ProfileDatasourceImpl implements ProfileDatasource {
@@ -38,14 +35,15 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   }
 
   @override
-  Future<Response> changeAvatar(String path) async {
-    FormData formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(path),
-    });
-
-    Response response = await dioWrapper!.post(
-      '/file/image/upload',
-      data: formData,
+  Future<Response> editUserInfo(String email, String phone) async {
+    Response response = await dioWrapper!.put(
+        '/users/my-info/update',
+        data: {
+          "user": {
+            "email": email,
+            "phone": phone,
+          },
+        }
     );
     return response;
   }
@@ -60,4 +58,5 @@ class ProfileDatasourceImpl implements ProfileDatasource {
     );
     return response;
   }
+
 }
