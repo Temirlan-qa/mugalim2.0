@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
@@ -6,11 +5,11 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 
 class InfoListTileWidget extends StatelessWidget {
-  final onPressed ;
+  final void Function()? onPressed ;
   final String text;
-  final String leading_img;
+  final String leadingImg;
   const InfoListTileWidget(
-      {Key? key, required this.text, required this.leading_img, required this.onPressed})
+      {Key? key, required this.text, required this.leadingImg, required this.onPressed})
       : super(key: key);
 
   @override
@@ -19,7 +18,7 @@ class InfoListTileWidget extends StatelessWidget {
       onTap: onPressed,
       child: Row(
         children: [
-          SvgPicture.asset(leading_img),
+          SvgPicture.asset(leadingImg),
           sizedBoxWidth16(),
           Text(
             text,

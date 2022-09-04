@@ -233,7 +233,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                     ),
                     sizedBoxHeight16(),
                     BtnWidget(
-                      Color: const Color(0xFFE0E0E0),
+                      color: const Color(0xFFE0E0E0),
                       textColor: ColorStyles.neutralsTextPrimaryColor,
                       text: 'Отправить',
                       onPressed: () {

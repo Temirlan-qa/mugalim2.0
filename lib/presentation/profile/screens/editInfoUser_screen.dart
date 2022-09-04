@@ -7,9 +7,7 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
-import 'package:mugalim/presentation/profile/widgets/glass_effect_with_success.dart';
-// import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
-// import 'package:mugalim/presentation/profile/widgets/text_field_widget.dart';
+import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
   final Map<String ,dynamic>? user;
@@ -172,7 +170,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   },
                   textColor: onChanged ? Colors.white :ColorStyles.neutralsTextPrimaryColor,
                   text: 'Готово',
-                  Color:  onChanged ? ColorStyles.primaryBorderColor :ColorStyles.neutralsTextPrimaryDisabledColor,
+                  color:  onChanged ? ColorStyles.primaryBorderColor :ColorStyles.neutralsTextPrimaryDisabledColor,
                 ),
               ],
             ),

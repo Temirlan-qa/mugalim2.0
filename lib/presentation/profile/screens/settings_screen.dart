@@ -90,7 +90,7 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   InfoListTileWidget(
                     text: 'Личные данные',
-                    leading_img: 'assets/icons/user_for_profile.svg',
+                    leadingImg: 'assets/icons/user_for_profile.svg',
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -109,12 +109,12 @@ class SettingsScreen extends StatelessWidget {
                   sizedBoxHeight16(),
                   InfoListTileWidget(
                     text: 'Изменить пароль',
-                    leading_img: 'assets/icons/key_for_profile.svg',
+                    leadingImg: 'assets/icons/key_for_profile.svg',
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PasswordScreen(),
+                          builder: (context) => const PasswordScreen(),
                         ),
                       );
                     },

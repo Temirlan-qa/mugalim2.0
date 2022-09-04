@@ -56,14 +56,14 @@ Mugalim app - образовательный инструмент включаю
 Mugalim app - это образовательная платформа для учителей, коуч-тренеров, менторов для построения задач и отслеживания прогресса своих подопечных.
 Добро пожаловать в приложение Mugalim!''',
                     style: TextStyles.regularStyle.copyWith(
-                      color: Colors.black,
+                      color: ColorStyles.neutralsTextPrimaryColor,
                       fontSize: 16,
                       height: 1.5,
                     ),
                   ),
                   sizedBoxHeight16(),
                   BtnWidget(
-                    Color: ColorStyles.primaryBorderColor,
+                    color: ColorStyles.primaryBorderColor,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -74,7 +74,7 @@ Mugalim app - это образовательная платформа для у
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),

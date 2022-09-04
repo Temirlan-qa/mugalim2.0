@@ -173,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     sizedBoxHeight16(),
                     InfoListTileWidget(
                       text: 'Про проект Мugalim',
-                      leading_img: 'assets/icons/mugalim_logo_for_profile.svg',
+                      leadingImg: 'assets/icons/mugalim_logo_for_profile.svg',
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pushNamed(AboutProjectRoute);
                       },
@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     sizedBoxHeight16(),
                     InfoListTileWidget(
                       text: 'Написать отзыв',
-                      leading_img: 'assets/icons/feedback_for_profile.svg',
+                      leadingImg: 'assets/icons/feedback_for_profile.svg',
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pushNamed(WriteReviewRoute);
                       },
@@ -194,14 +194,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     sizedBoxHeight16(),
                     InfoListTileWidget(
                       text: 'О приложении',
-                      leading_img: 'assets/icons/about_for_profile.svg',
+                      leadingImg: 'assets/icons/about_for_profile.svg',
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pushNamed(AboutAppRoute);
                       },
                     ),
                     sizedBoxHeight16(),
                     BtnWidget(
-                      Color: null,
+                      color: null,
                       onPressed: () async {
                         Navigator.of(context, rootNavigator: true).pushReplacementNamed(AuthRoute);
                         await tokensBox.clear();

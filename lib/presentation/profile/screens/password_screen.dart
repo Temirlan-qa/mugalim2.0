@@ -8,7 +8,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/injection_container.dart';
 import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
-import 'package:mugalim/presentation/profile/widgets/glass_effect_with_success.dart';
+import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
 import 'package:mugalim/presentation/profile/widgets/text_field_widget.dart';
 
 class PasswordScreen extends StatefulWidget {
@@ -122,7 +122,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   textColor: onChanged
                       ? Colors.white
                       : ColorStyles.neutralsTextPrimaryColor,
-                  Color: onChanged
+                  color: onChanged
                       ? ColorStyles.primaryBorderColor
                       : ColorStyles.neutralsTextPrimaryDisabledColor,
                   onPressed: () async {
@@ -143,11 +143,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                           });
                         }
                         else {
-                          print('Something is wrong');
                         }
                       }
                     } else {
-                      print('Something is wrong');
                       SnackBarAction(
                         label: 'Error ',
                         onPressed: () {
