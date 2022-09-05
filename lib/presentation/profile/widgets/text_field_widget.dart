@@ -1,18 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 
 class TextFieldForChangePassword extends StatefulWidget {
   final TextEditingController nameEditingController;
-  const TextFieldForChangePassword({Key? key, required this.nameEditingController}) : super(key: key);
+  const TextFieldForChangePassword(
+      {Key? key, required this.nameEditingController})
+      : super(key: key);
 
   @override
   State<TextFieldForChangePassword> createState() =>
       _TextFieldForChangePasswordState();
 }
 
-class _TextFieldForChangePasswordState extends State<TextFieldForChangePassword> {
-
+class _TextFieldForChangePasswordState
+    extends State<TextFieldForChangePassword> {
   bool onChanged = false;
   bool obscureText = true;
   @override
@@ -38,9 +41,15 @@ class _TextFieldForChangePasswordState extends State<TextFieldForChangePassword>
             obscureText = !obscureText;
           });
         },
-        child: SvgPicture.asset(
-          'assets/icons/eye_icon.svg',
-        ),
+        child: obscureText
+            ? SvgPicture.asset(
+                'assets/icons/eye_icon.svg',
+              )
+            : Icon(
+                CupertinoIcons.eye_slash,
+                color: ColorStyles.primaryBorderColor,
+                size: 24,
+              ),
       ),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),

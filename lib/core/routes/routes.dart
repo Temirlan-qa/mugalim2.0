@@ -103,6 +103,13 @@ class InnLabRouter {
               infoProfile: routeSettings.arguments
           ),
         );
+      // case EditInfoUserRoute:
+      //   return CupertinoPageRoute(
+      //     settings: routeSettings,
+      //     builder: (_) => EditInfoUserScreen(
+      //         infoProfile: routeSettings.arguments
+      //     ),
+      //   );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,

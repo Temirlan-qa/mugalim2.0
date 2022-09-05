@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
@@ -50,17 +53,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(
-                            context, rootNavigator: true
-                        ).pushNamed(
+                        Navigator.of(context, rootNavigator: true).pushNamed(
                           SettingsRoute,
-                            arguments: {
-                              'nameAndSurname':'${state.profileModel.firstName} ${state.profileModel.lastName}',
-                              'role': state.profileModel.user!['roles'],
-                              'image': state.profileModel.avatar,
-                              'gender': state.profileModel.gender,
-                              'user': state.profileModel.user,
-                            },
+                          arguments: {
+                            'nameAndSurname':
+                                '${state.profileModel.firstName} ${state.profileModel.lastName}',
+                            'role': state.profileModel.user!['roles'],
+                            'image': state.profileModel.avatar,
+                            'gender': state.profileModel.gender,
+                            'user': state.profileModel.user,
+                          },
                         );
                       },
                       child: Container(
@@ -74,24 +76,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         child: Row(
                           children: [
-                            Image.asset(
-                              state.profileModel.avatar == null && state.profileModel.gender == "MAN"
-                                  ?'assets/images/male.png'
-                                  : state.profileModel.avatar == null
-                                  ? 'assets/images/female.png'
-                                  : state.profileModel.avatar.toString(),
-                              width: 56,
-                              height: 56,
-                              fit: BoxFit.fill,
+                            CircleAvatar(
+                              radius: 56,
+                              child: CachedNetworkImage(
+                                imageUrl: state is ProfileSuccess
+                                    ? '${EnvironmentConfig.url}/file/image/${state.profileModel.avatar}?size=xs'
+                                    : '',
+                                width: 56,
+                                height: 56,
+                                fit: BoxFit.fill,
+                                httpHeaders: {
+                                  'Content-Type': 'application/json',
+                                  'Accept': 'application/json',
+                                  "Authorization": "Bearer ${tokensBox.get('access')}"
+                                },
+                                placeholder: (context, url) => Image.asset(
+                                  state.profileModel.gender == "MAN"
+                                      ? 'assets/images/male.png'
+                                      : 'assets/images/female.png',
+                                  width: 56,
+                                  height: 56,
+                                  fit: BoxFit.fill,
+                                ),
+                                errorWidget: (context, str, url) =>
+                                    Lottie.asset(
+                                        'assets/LottieLogo1.json',
+                                      width: 56,
+                                      height: 56,
+                                      fit: BoxFit.fill,
+                                    ),
+                              ),
                             ),
-                            // Lottie.asset(
-                            //   // mloader.json
-                            //   //repeat: false,
-                            //   'assets/animations/Loader.json',
-                            //   width: 56,
-                            //   height: 56,
-                            //   fit: BoxFit.fill,
-                            // ),
                             sizedBoxWidth16(),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,7 +190,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'Про проект Мugalim',
                       leadingImg: 'assets/icons/mugalim_logo_for_profile.svg',
                       onPressed: () {
-                        Navigator.of(context, rootNavigator: true).pushNamed(AboutProjectRoute);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamed(AboutProjectRoute);
                       },
                     ),
                     //AboutProjectRoute
@@ -188,7 +204,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'Написать отзыв',
                       leadingImg: 'assets/icons/feedback_for_profile.svg',
                       onPressed: () {
-                        Navigator.of(context, rootNavigator: true).pushNamed(WriteReviewRoute);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamed(WriteReviewRoute);
                       },
                     ),
                     sizedBoxHeight16(),
@@ -196,14 +213,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'О приложении',
                       leadingImg: 'assets/icons/about_for_profile.svg',
                       onPressed: () {
-                        Navigator.of(context, rootNavigator: true).pushNamed(AboutAppRoute);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamed(AboutAppRoute);
                       },
                     ),
                     sizedBoxHeight16(),
                     BtnWidget(
                       color: null,
                       onPressed: () async {
-                        Navigator.of(context, rootNavigator: true).pushReplacementNamed(AuthRoute);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushReplacementNamed(AuthRoute);
                         await tokensBox.clear();
                       },
                       text: 'Выйти',
@@ -212,10 +231,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 );
-              }else if(state is ProfileFailure){
+              } else if (state is ProfileFailure) {
                 return const Text('ProfileFailure');
-              }
-              else if(state is ProfileLoading){
+              } else if (state is ProfileLoading) {
                 return const Text('ProfileLoading');
               }
               return const Text("Post don't loaded");

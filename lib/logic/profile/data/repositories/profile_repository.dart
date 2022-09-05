@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/logic/profile/data/models/profile_model.dart';
-import 'package:mugalim/logic/profile/data/models/user_model.dart';
 
 abstract class ProfileRepository {
   Future<ProfileModel> getProfileData();

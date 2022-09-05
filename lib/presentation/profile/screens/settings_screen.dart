@@ -1,16 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/presentation/profile/screens/editInfoUser_screen.dart';
 import 'package:mugalim/presentation/profile/screens/password_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
   final infoProfile;
-  const SettingsScreen({Key? key, this.infoProfile}) : super(key: key);
-
+  SettingsScreen({Key? key, this.infoProfile}) : super(key: key);
+  Box tokensBox = Hive.box('tokens');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,16 +51,34 @@ class SettingsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    infoProfile['image'] == null && infoProfile['gender'] == "MAN"
-                        ?'assets/images/male.png'
-                        : infoProfile['image'] == null
-                        ? 'assets/images/female.png'
-                        : infoProfile['image'].toString(),
-                    // 'assets/images/female.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.fill,
+                  CircleAvatar(
+                    radius: 56,
+                    child: CachedNetworkImage(
+                      imageUrl: '${EnvironmentConfig.url}/file/image/${infoProfile['image']}?size=xs',
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.fill,
+                      httpHeaders: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "Authorization": "Bearer ${tokensBox.get('access')}"
+                      },
+                      placeholder: (context, url) => Image.asset(
+                        infoProfile['gender'] == "MAN"
+                            ? 'assets/images/male.png'
+                            : 'assets/images/female.png',
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.fill,
+                      ),
+                      errorWidget: (context, str, url) =>
+                          Lottie.asset(
+                            'assets/LottieLogo1.json',
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.fill,
+                          ),
+                    ),
                   ),
                   sizedBoxHeight16(),
                   Text(

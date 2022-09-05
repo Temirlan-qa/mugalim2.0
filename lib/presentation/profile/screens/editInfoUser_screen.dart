@@ -1,35 +1,67 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/injection_container.dart';
+import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
+import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
+import 'package:mugalim/presentation/profile/widgets/change_avatar_widget.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
-  final Map<String ,dynamic>? user;
+  final Map<String, dynamic>? user;
   final String? image;
   final String? gender;
-  const EditInfoUserScreen({Key? key,required this.user,required this.gender,required this.image}) : super(key: key);
+  const EditInfoUserScreen(
+      {Key? key, required this.user, required this.gender, required this.image})
+      : super(key: key);
 
   @override
   State<EditInfoUserScreen> createState() => _EditInfoUserScreenState();
 }
 
 class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
-  late TextEditingController emailController = TextEditingController(text: widget.user!['email']);
-  late TextEditingController phoneController = TextEditingController(text: widget.user!['phone']);
+  late TextEditingController emailController =
+      TextEditingController(text: widget.user!['email']);
+  late TextEditingController phoneController =
+      TextEditingController(text: widget.user!['phone']);
 
+  var avatarId = null;
+
+  bool nameIsEmpty = true;
+
+  XFile? profilePic;
+  void refreshState(XFile image, String id) {
+    setState(() {
+      avatarId = id;
+      profilePic = image;
+      print(profilePic!.path);
+    });
+  }
+
+  var maskFormatter = MaskTextInputFormatter(
+      mask: '+7 ### ### ## ##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
   bool successChange = false;
   int start = 0;
   bool wait = true;
   late Timer timer;
   void startTimer() {
     start = 3;
-    if(wait == true) wait = false;
+    if (wait == true) wait = false;
     const onsec = Duration(seconds: 1);
     timer = Timer.periodic(onsec, (timer) {
       if (start <= 0) {
@@ -45,6 +77,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
       }
     });
   }
+  Box tokensBox = Hive.box('tokens');
   bool onChanged = false;
   @override
   Widget build(BuildContext context) {
@@ -84,26 +117,56 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   children: [
                     Stack(
                       children: [
-                        Image.asset(
-                          widget.image == null && widget.gender == "MAN"
-                              ?'assets/images/male.png'
-                              : widget.image == null
-                              ? 'assets/images/female.png'
-                              : widget.image.toString(),
-                          // 'assets/images/female.png',
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.fill,
+                        CircleAvatar(
+                          radius: 56,
+                          child: CachedNetworkImage(
+                            imageUrl: '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.fill,
+                            httpHeaders: {
+                              'Content-Type': 'application/json',
+                              'Accept': 'application/json',
+                              "Authorization": "Bearer ${tokensBox.get('access')}"
+                            },
+                            placeholder: (context, url) => Image.asset(
+                              widget.gender == "MAN"
+                                  ? 'assets/images/male.png'
+                                  : 'assets/images/female.png',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.fill,
+                            ),
+                            errorWidget: (context, str, url) =>
+                                Lottie.asset(
+                                  'assets/LottieLogo1.json',
+                                  width: 80,
+                                  height: 80,
+                                  fit: BoxFit.fill,
+                                ),
+                          ),
                         ),
-                        Container(
-                          color: Colors.white.withOpacity(0.35),
-                          width: 80,
-                          height: 80,
-                          child: Center(
-                            child: SvgPicture.asset(
-                              'assets/icons/camera.svg',
-                              // width: 24,
-                              // height: 24,
+                        GestureDetector(
+                          onTap: () {
+                            showCupertinoModalBottomSheet(
+                              useRootNavigator: true,
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  BottomModalSheet(
+                                notifyParent: refreshState,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            color: Colors.white.withOpacity(0.35),
+                            width: 80,
+                            height: 80,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                'assets/icons/camera.svg',
+                                // width: 24,
+                                // height: 24,
+                              ),
                             ),
                           ),
                         ),
@@ -140,6 +203,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                       onChanged = true;
                     });
                   },
+                  style: TextStyles.mediumStyle.copyWith(
+                      fontSize: 16,
+                      color: ColorStyles.neutralsTextPrimaryColor),
                   controller: emailController,
                   decoration: textFieldStyleForEdit(emailController),
                 ),
@@ -153,30 +219,61 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 ),
                 sizedBoxHeight8(),
                 TextField(
+                  inputFormatters: [maskFormatter],
+                  keyboardType: TextInputType.phone,
                   onChanged: (text) {
                     setState(() {
                       onChanged = true;
                     });
                   },
+                  style: TextStyles.mediumStyle.copyWith(
+                      fontSize: 16,
+                      color: ColorStyles.neutralsTextPrimaryColor),
                   controller: phoneController,
                   decoration: textFieldStyleForEdit(phoneController),
                 ),
                 sizedBoxHeight16(),
                 BtnWidget(
                   fontSize: 16,
-                  onPressed: () {
-                    startTimer();
-                    successChange = !successChange;
+                  onPressed: () async {
+                    ProfileDatasource profile = sl();
+                    Response response = await profile.editUserInfo(
+                      emailController.text,
+                      phoneController.text,
+                    );
+                    if (response.statusCode == 200 &&
+                        response.data['status'] == 1) {
+                      setState(() {
+                        startTimer();
+                        successChange = !successChange;
+                      });
+                    } else {
+                      print(
+                          'Tima u have to check ${response.statusCode} ${response.data['status']}');
+                      SnackBarAction(
+                        label: 'Error ',
+                        onPressed: () {
+                          // Some code to undo the change.
+                        },
+                      );
+                    }
                   },
-                  textColor: onChanged ? Colors.white :ColorStyles.neutralsTextPrimaryColor,
+                  textColor: onChanged
+                      ? Colors.white
+                      : ColorStyles.neutralsTextPrimaryColor,
                   text: 'Готово',
-                  color:  onChanged ? ColorStyles.primaryBorderColor :ColorStyles.neutralsTextPrimaryDisabledColor,
+                  color: onChanged
+                      ? ColorStyles.primaryBorderColor
+                      : ColorStyles.neutralsTextPrimaryDisabledColor,
                 ),
               ],
             ),
           ),
         ),
-        GlassEffectWithSuccess(successChange:successChange,editedThing: 'e-mail',),
+        GlassEffectWithSuccess(
+          successChange: successChange,
+          editedThing: 'e-mail',
+        ),
       ],
     );
   }
@@ -206,6 +303,11 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           width: 1.0,
           color: ColorStyles.primarySurfaceHoverColor,
         ),
+      ),
+      hintText: controller == phoneController ? '+7' : '',
+      hintStyle: TextStyles.mediumStyle.copyWith(
+        fontSize: 16,
+        color: ColorStyles.neutralsTextPrimaryColor,
       ),
     );
   }
