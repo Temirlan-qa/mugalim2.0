@@ -56,12 +56,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.of(context, rootNavigator: true).pushNamed(
                           SettingsRoute,
                           arguments: {
-                            'nameAndSurname':
-                                '${state.profileModel.firstName} ${state.profileModel.lastName}',
+                            'nameAndSurname': '${state.profileModel.firstName} ${state.profileModel.lastName}',
                             'role': state.profileModel.user!['roles'],
                             'image': state.profileModel.avatar,
                             'gender': state.profileModel.gender,
                             'user': state.profileModel.user,
+                            'bloc': context.read<ProfileBloc>(),
                           },
                         );
                       },
@@ -76,35 +76,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         child: Row(
                           children: [
-                            CircleAvatar(
-                              radius: 56,
-                              child: CachedNetworkImage(
-                                imageUrl: state is ProfileSuccess
-                                    ? '${EnvironmentConfig.url}/file/image/${state.profileModel.avatar}?size=xs'
-                                    : '',
+                            CachedNetworkImage(
+                              imageUrl: state is ProfileSuccess
+                                  ? '${EnvironmentConfig.url}/file/image/${state.profileModel.avatar}?size=xs'
+                                  : '',
+                              width: 56,
+                              height: 56,
+                              fit: BoxFit.fill,
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                width: 56,
+                                height: 56,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              httpHeaders: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                "Authorization":
+                                    "Bearer ${tokensBox.get('access')}"
+                              },
+                              placeholder: (context, url) => Image.asset(
+                                state.profileModel.gender == "MAN"
+                                    ? 'assets/images/male.png'
+                                    : 'assets/images/female.png',
                                 width: 56,
                                 height: 56,
                                 fit: BoxFit.fill,
-                                httpHeaders: {
-                                  'Content-Type': 'application/json',
-                                  'Accept': 'application/json',
-                                  "Authorization": "Bearer ${tokensBox.get('access')}"
-                                },
-                                placeholder: (context, url) => Image.asset(
-                                  state.profileModel.gender == "MAN"
-                                      ? 'assets/images/male.png'
-                                      : 'assets/images/female.png',
-                                  width: 56,
-                                  height: 56,
-                                  fit: BoxFit.fill,
-                                ),
-                                errorWidget: (context, str, url) =>
-                                    Lottie.asset(
-                                        'assets/LottieLogo1.json',
-                                      width: 56,
-                                      height: 56,
-                                      fit: BoxFit.fill,
-                                    ),
+                              ),
+                              errorWidget: (context, str, url) => Lottie.asset(
+                                'assets/animations/Loader.json',
+                                width: 56,
+                                height: 56,
+                                fit: BoxFit.fill,
                               ),
                             ),
                             sizedBoxWidth16(),

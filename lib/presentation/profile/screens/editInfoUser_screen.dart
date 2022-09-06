@@ -21,11 +21,12 @@ import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
 import 'package:mugalim/presentation/profile/widgets/change_avatar_widget.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
+  final bloc;
   final Map<String, dynamic>? user;
   final String? image;
   final String? gender;
   const EditInfoUserScreen(
-      {Key? key, required this.user, required this.gender, required this.image})
+      {Key? key, required this.user, required this.gender, required this.image, this.bloc})
       : super(key: key);
 
   @override
@@ -39,9 +40,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
       TextEditingController(text: widget.user!['phone']);
 
   var avatarId = null;
-
   bool nameIsEmpty = true;
-
   XFile? profilePic;
   void refreshState(XFile image, String id) {
     setState(() {
@@ -79,6 +78,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
   }
   Box tokensBox = Hive.box('tokens');
   bool onChanged = false;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -117,33 +117,41 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   children: [
                     Stack(
                       children: [
-                        CircleAvatar(
-                          radius: 56,
-                          child: CachedNetworkImage(
-                            imageUrl: '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
+                        CachedNetworkImage(
+                          imageUrl:
+                              '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
+                          width: 80,
+                          height: 80,
+                          fit: BoxFit.fill,
+                          imageBuilder: (context, imageProvider) => Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          httpHeaders: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            "Authorization": "Bearer ${tokensBox.get('access')}"
+                          },
+                          placeholder: (context, url) => Image.asset(
+                            widget.gender == "MAN"
+                                ? 'assets/images/male.png'
+                                : 'assets/images/female.png',
                             width: 80,
                             height: 80,
                             fit: BoxFit.fill,
-                            httpHeaders: {
-                              'Content-Type': 'application/json',
-                              'Accept': 'application/json',
-                              "Authorization": "Bearer ${tokensBox.get('access')}"
-                            },
-                            placeholder: (context, url) => Image.asset(
-                              widget.gender == "MAN"
-                                  ? 'assets/images/male.png'
-                                  : 'assets/images/female.png',
-                              width: 80,
-                              height: 80,
-                              fit: BoxFit.fill,
-                            ),
-                            errorWidget: (context, str, url) =>
-                                Lottie.asset(
-                                  'assets/LottieLogo1.json',
-                                  width: 80,
-                                  height: 80,
-                                  fit: BoxFit.fill,
-                                ),
+                          ),
+                          errorWidget: (context, str, url) => Lottie.asset(
+                            'assets/animations/Loader.json',
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.fill,
                           ),
                         ),
                         GestureDetector(
@@ -153,6 +161,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                               context: context,
                               builder: (BuildContext context) =>
                                   BottomModalSheet(
+                                    bloc: widget.bloc,
                                 notifyParent: refreshState,
                               ),
                             );
@@ -270,6 +279,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
             ),
           ),
         ),
+
         GlassEffectWithSuccess(
           successChange: successChange,
           editedThing: 'e-mail',

@@ -1,11 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
-import 'package:mugalim/presentation/main/widgets/main_screen.dart';
-import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/injection_container.dart';
 import 'core/utils/hive/hive_init.dart';
 import 'core/routes/routes.dart';

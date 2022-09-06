@@ -51,33 +51,42 @@ class SettingsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 56,
-                    child: CachedNetworkImage(
-                      imageUrl: '${EnvironmentConfig.url}/file/image/${infoProfile['image']}?size=xs',
+                  CachedNetworkImage(
+                    imageUrl: '${EnvironmentConfig.url}/file/image/${infoProfile['image']}?size=xs',
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.fill,
+                    imageBuilder: (context, imageProvider) =>
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                    httpHeaders: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json',
+                      "Authorization":
+                      "Bearer ${tokensBox.get('access')}"
+                    },
+                    placeholder: (context, url) => Image.asset(
+                      infoProfile['gender'] == "MAN"
+                          ? 'assets/images/male.png'
+                          : 'assets/images/female.png',
                       width: 80,
                       height: 80,
                       fit: BoxFit.fill,
-                      httpHeaders: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        "Authorization": "Bearer ${tokensBox.get('access')}"
-                      },
-                      placeholder: (context, url) => Image.asset(
-                        infoProfile['gender'] == "MAN"
-                            ? 'assets/images/male.png'
-                            : 'assets/images/female.png',
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.fill,
-                      ),
-                      errorWidget: (context, str, url) =>
-                          Lottie.asset(
-                            'assets/LottieLogo1.json',
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.fill,
-                          ),
+                    ),
+                    errorWidget: (context, str, url) => Lottie.asset(
+                      'assets/animations/Loader.json',
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   sizedBoxHeight16(),
@@ -121,7 +130,7 @@ class SettingsScreen extends StatelessWidget {
                             user: infoProfile['user'],
                             image: infoProfile['image'],
                             gender: infoProfile['gender'],
-
+                            bloc: infoProfile["bloc"],
                           ),
                         ),
                       );
