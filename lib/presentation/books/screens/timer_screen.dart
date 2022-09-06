@@ -269,8 +269,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
               padding: const EdgeInsets.all(16.0),
               child: TextButton(
                   style: TextButton.styleFrom(
-                primary: Color(0xFFE0E0E0),
-                backgroundColor: Color(0xff3D3DD8),
+                primary: const Color(0xFFE0E0E0),
+                backgroundColor: const Color(0xff3D3DD8),
                 elevation: 3,
                 minimumSize: Size(343, 48),
                 shape: RoundedRectangleBorder(
