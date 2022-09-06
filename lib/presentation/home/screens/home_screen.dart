@@ -55,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // List savedCount = [];
 
   int dropDownindex = 0;
-  bool hasVote = false;
   int votePPL1 = 45;
   int votePPL2 = 45;
   int voteProcent1 = 90;
@@ -288,7 +287,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context2, index) {
                                     DateTime now = DateTime.parse(state.posts[index].createdAt!);
                                     String formattedDate = DateFormat('d MMM в hh:mm').format(now);
-                                    hasVote = index % 2 != 0 ? true : false;
                                     return Column(
                                       children: [
                                         index == 0 ? SizedBox(height: 16,) : SizedBox(),
@@ -303,14 +301,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             content: state.posts[index].content ?? '',
                                             liked: state.posts[index].liked ?? false,
                                             cityId: state.posts[index].cityId ?? '',
-                                            commeted: state.posts[index].commeted ?? false,
+                                            commented: state.posts[index].commented ?? false,
                                             regionId : state.posts[index].regionId ?? '',
                                             type: state.posts[index].type ?? '',
                                             userId: state.posts[index].userId ?? '',
                                             updatedAt : state.posts[index].updatedAt ?? '',
-                                            img: state.posts[index].imgs ?? [],
+                                            images: state.posts[index].images,
                                             index: index,
-                                            fio: state.posts[index].user?.fio ?? 'Mugalim Global',
+                                            fio: state.posts[index].userName ?? ' ',
+                                            avatarId: state.posts[index].userAvatarId,
                                             bloc: context.read<HomeBloc>(),
                                         ),
                                         Container(
@@ -403,9 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 pplShow: state
                                                                     .posts[index]
                                                                     .viewNumber!,
-                                                                hasImg: hasVote,
-                                                                hasVote: hasVote,
-                                                                image: 'assets/images/space.png',
+                                                                images: state.posts[index].images,
                                                                 postPublicationDate: formattedDate,
                                                                 votePPL1: votePPL1,
                                                                 votePPL2: votePPL2,
@@ -417,11 +414,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 title: state
                                                                     .posts[index]
                                                                     .content!,
-                                                                imageAuthor: 'assets/icons/mugalim_logo.png',
+                                                                imageAuthor: state.posts[index].userAvatarId!,
                                                                 postAuthor: state
                                                                     .posts[index]
-                                                                    .user
-                                                                    ?.fio ?? '',
+                                                                    .userName ?? '',
                                                                 parentId: state
                                                                     .posts[index]
                                                                     .id!,

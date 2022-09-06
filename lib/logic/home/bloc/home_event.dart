@@ -36,3 +36,36 @@ class DeletePostStudents extends HomeEvent {
   final String id;
   DeletePostStudents(this.id);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@immutable
+abstract class ZhassulanEvent {}
+
+class ZhassulanGoingToReadBook extends ZhassulanEvent {}
+
+class ZhassulanGoingToCook extends ZhassulanEvent {}
+
+class ZhassulanGoingToSleep extends ZhassulanEvent {}
+
+class ZhassulanGoingToEat extends ZhassulanEvent {}

@@ -48,4 +48,6 @@ void initGetIt() async {
   sl.registerFactory<HomeBloc>(
         () => HomeBloc(sl()),
   );
+
+  
 }

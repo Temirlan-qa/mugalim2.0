@@ -1,10 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
@@ -23,14 +27,12 @@ class HomeCommentsPage extends StatefulWidget {
   final String postPublicationDate;
 
   final String title;
-  final String imageAuthor;
+  final String? imageAuthor;
 
   // All info about image
-  final bool hasImg;
-  final String image;
+  final List<String?>? images;
   final bloc;
   // All info about Vote
-  final bool hasVote;
   final bool liked;
   final bool saved;
   final String votetitle;
@@ -56,11 +58,9 @@ class HomeCommentsPage extends StatefulWidget {
     required this.imageAuthor,
 
     // All info about image
-    required this.hasImg,
-    required this.image,
+    required this.images,
 
     // All info about Vote
-    required this.hasVote,
     required this.voteAnswer1,
     required this.voteAnswer2,
     required this.votePPL1,
@@ -94,6 +94,11 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
   late bool isSaved;
   late int likedNumber;
   late int savedNumber;
+
+  Box tokensBox = Hive.box('tokens');
+
+  CarouselController carouselController = CarouselController();
+  int currentImage = 0;
 
   @override
   void initState() {
@@ -150,123 +155,200 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
                       top: 16,
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              child: Image.asset(
-                                widget.imageAuthor,
-                                width: 44,
-                                height: 44,
-                              ),
-                            ),
-                            sizedBoxWidth16(),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.postAuthor,
-                                  style: TextStyles.mediumStyle.copyWith(
-                                    color: const Color(0xFF1A1A1A),
-                                    fontSize: 14,
-                                    height: 1.4,
-                                  ),
-                                ),
-                                Text(
-                                  widget.postPublicationDate,
-                                  style: TextStyles.regularStyle.copyWith(
-                                    color: const Color(0xff767676),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              onPressed: () async {
-                                setState(() {
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: widget.imageAuthor != null ? CachedNetworkImage(
+                                    imageUrl: '${EnvironmentConfig.url}/file/image/${widget.imageAuthor}?size=sm',
+                                    width: 44,
+                                    height: 44,
+                                    fit: BoxFit.cover,
+                                    httpHeaders: {
+                                      'Content-Type': 'application/json',
+                                      'Accept': 'application/json',
+                                      "Authorization": "Bearer ${tokensBox.get('access')}"
+                                    },
+                                    placeholder: (context, url) => CupertinoActivityIndicator(),
 
-                                });
-
-                              },
-                              icon: const Icon(
-                                Icons.more_horiz,
-                                size: 28,
-                                color: Color(0xFF767676),
+                                  ) : Image.asset('assets/icons/mugalim_logo.png', width: 44, height: 44)
                               ),
-                            ),
-                          ],
+                              sizedBoxWidth16(),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.postAuthor,
+                                    style: TextStyles.mediumStyle.copyWith(
+                                      color: const Color(0xFF1A1A1A),
+                                      fontSize: 14,
+                                      height: 1.4,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.postPublicationDate,
+                                    style: TextStyles.regularStyle.copyWith(
+                                      color: const Color(0xff767676),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () async {
+                                  setState(() {
+
+                                  });
+
+                                },
+                                icon: const Icon(
+                                  Icons.more_horiz,
+                                  size: 28,
+                                  color: Color(0xFF767676),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         sizedBoxHeight16(),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            widget.title,
-                            style: TextStyles.regularStyle.copyWith(
-                              color: const Color(0xFF1A1A1A),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              widget.title,
+                              style: TextStyles.regularStyle.copyWith(
+                                color: const Color(0xFF1A1A1A),
+                              ),
+                              maxLines: isExpanded ? 11 : 4,
+                              softWrap: true,
+                              // overflow: TextOverflow.fade,
                             ),
-                            maxLines: isExpanded ? 11 : 4,
-                            softWrap: true,
-                            // overflow: TextOverflow.fade,
                           ),
                         ),
                         const SizedBox(
                           height: 4,
                         ),
-                        widget.title.length < 197
-                            ? SizedBox()
-                            : InkWell(
-                          onTap: () {
-                            setState(() {
-                              isExpanded = !isExpanded;
-                            });
-                          },
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              isExpanded == false
-                                  ? 'Показать полностью...'
-                                  : 'Show less',
-                              style: TextStyles.mediumStyle.copyWith(
-                                fontSize: 14,
-                                color: const Color(0xff3D3DD8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: widget.title.length < 197
+                              ? SizedBox()
+                              : InkWell(
+                            onTap: () {
+                              setState(() {
+                                isExpanded = !isExpanded;
+                              });
+                            },
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                isExpanded == false
+                                    ? 'Показать полностью...'
+                                    : 'Show less',
+                                style: TextStyles.mediumStyle.copyWith(
+                                  fontSize: 14,
+                                  color: const Color(0xff3D3DD8),
+                                ),
+                                maxLines: 1,
                               ),
-                              maxLines: 1,
                             ),
                           ),
                         ),
                         sizedBoxHeight8(),
                         Visibility(
-                          visible: widget.hasVote,
-                          child: Column(
+                          visible: widget.images!.isNotEmpty ? true : false,
+                          child: Stack(
+                            alignment: Alignment.center,
                             children: [
-                              VoteWidget(
-                                votetitle: widget.votetitle,
-                                voteAnswer1: widget.voteAnswer1,
-                                voteAnswer2: widget.voteAnswer2,
-                                voteProcent1: widget.voteProcent1,
-                                voteProcent2: widget.voteProcent2,
-                                votePPL1: widget.votePPL1,
-                                votePPL2: widget.votePPL2,
+                              Column(
+                                children: [
+                                  widget.images!.isNotEmpty ? CarouselSlider(
+                                    carouselController: carouselController,
+                                    options: CarouselOptions(
+                                      height: 210.0,
+                                      enableInfiniteScroll: false,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          currentImage = index;
+                                        });
+                                      },
+                                      enlargeCenterPage: true,
+                                    ),
+                                    items: widget.images!.map((i) {
+                                      return CachedNetworkImage(
+                                        imageUrl: '${EnvironmentConfig.url}/file/image/$i',
+                                        height: 210,
+                                        width: MediaQuery.of(context).size.width,
+                                        fit: BoxFit.fitHeight,
+                                        httpHeaders: {
+                                          'Content-Type': 'application/json',
+                                          'Accept': 'application/json',
+                                          "Authorization": "Bearer ${tokensBox.get('access')}"
+                                        },
+                                        placeholder: (context, url) => CupertinoActivityIndicator(),
+                                      );
+                                    }).toList(),
+                                  ) : Offstage(),
+                                  sizedBoxHeight8(),
+                                  const LineWidget(),
+                                  sizedBoxHeight8(),
+                                ],
                               ),
-                              sizedBoxHeight8(),
+                              Positioned(
+                                bottom: 24,
+                                child: Container(
+                                  width: 16 + widget.images!.length * 8 - 4,
+                                  height: 20,
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: Colors.white
+                                  ),
+                                  child: ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      // physics: NeverScrollableScrollPhysics(),
+                                      // shrinkWrap: true,
+                                      itemBuilder: (context, index) => Container(
+                                        height: 4,
+                                        width: 4,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(4),
+                                            color: currentImage == index
+                                                ? ColorStyles.primaryBorderColor
+                                                : ColorStyles.primarySurfaceHoverColor
+                                        ),
+                                      ),
+                                      separatorBuilder: (context, index) => const SizedBox(width: 4),
+                                      itemCount : widget.images!.length
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
+                        // sizedBoxHeight8(),
+                        // Column(
+                        //   children: [
+                        //     VoteWidget(
+                        //       votetitle: widget.votetitle,
+                        //       voteAnswer1: widget.voteAnswer1,
+                        //       voteAnswer2: widget.voteAnswer2,
+                        //       voteProcent1: widget.voteProcent1,
+                        //       voteProcent2: widget.voteProcent2,
+                        //       votePPL1: widget.votePPL1,
+                        //       votePPL2: widget.votePPL2,
+                        //     ),
+                        //     sizedBoxHeight8(),
+                        //   ],
+                        // ),
                       ],
-                    ),
-                  ),
-                  Visibility(
-                    visible: widget.hasImg,
-                    child: Image.asset(
-                      widget.image,
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width,
                     ),
                   ),
                   Container(
@@ -488,11 +570,21 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(
-                                  radius: 22,
-                                  child: ClipOval(
-                                    child: Image.asset(widget.imageAuthor),
-                                  ),
+                                ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: widget.imageAuthor != null ? CachedNetworkImage(
+                                      imageUrl: '${EnvironmentConfig.url}/file/image/${widget.imageAuthor}?size=sm',
+                                      width: 44,
+                                      height: 44,
+                                      fit: BoxFit.cover,
+                                      httpHeaders: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                        "Authorization": "Bearer ${tokensBox.get('access')}"
+                                      },
+                                      placeholder: (context, url) => CupertinoActivityIndicator(),
+
+                                    ) : Image.asset('assets/icons/mugalim_logo.png', width: 44, height: 44)
                                 ),
                                 const SizedBox(
                                   width: 8,
@@ -502,7 +594,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      state.comments[index].userName ?? "abc",
+                                      state.comments[index].userName ?? " ",
                                       style: TextStyle(
                                         fontSize: 14,
                                         decoration: TextDecoration.none,
@@ -526,14 +618,10 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width - 84,
                                       child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                            Text(
                                             formattedDate,

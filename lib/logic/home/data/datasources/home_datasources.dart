@@ -4,7 +4,6 @@ import '../../../../core/routes/environment_config.dart';
 import '../../../../core/utils/dio/dio_wrapper.dart';
 
 abstract class HomeDatasource {
-
   Future<Response> getPostList();
   Future<Response> getPost(String postId);
   Future<Response> likedPost(String postId,String likeType);
@@ -28,12 +27,13 @@ class HomeDataSourceImpl implements HomeDatasource {
     print(response);
     return response;
   }
+
   @override
   Future<Response> getPostList() async {
     Response response = await dioWrapper!.get('/posts/post/list/pageable?page=1&size=20');
-    print(response);
     return response;
   }
+
   @override
   Future<Response> likedPost(String postId,String likeType) async {
     Response response = await dioWrapper!.post('/posts/likes/like',

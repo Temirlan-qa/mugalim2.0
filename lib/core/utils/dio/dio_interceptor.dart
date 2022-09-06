@@ -19,16 +19,16 @@ class DioInterceptor extends Interceptor {
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    print(options.uri);
+    // print(options.uri);
     String? accessToken = Hive.box('tokens').get('access');
     // print(accessToken);
     if (accessToken != null) {
       if (!options.path.contains('oauth/token') &&
           !options.uri.toString().contains('auth/refresh')) {
         options.headers['Authorization'] = 'Bearer $accessToken';
-        dio!.post('/uaa/status/set-online',
-            options:
-                Options(headers: {"Authorization": 'Bearer $accessToken'}));
+        // dio!.post('/uaa/status/set-online',
+        //     options:
+        //         Options(headers: {"Authorization": 'Bearer $accessToken'}));
       }
     }
     return handler.next(options);
