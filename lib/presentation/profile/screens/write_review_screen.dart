@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:ui';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 
 class WriteReviewScreen extends StatefulWidget {
@@ -15,240 +18,363 @@ class WriteReviewScreen extends StatefulWidget {
 }
 
 class _WriteReviewScreenState extends State<WriteReviewScreen> {
-  bool dropdownValue = false;
+  var items = [
+    'Предложение',
+    'Посты',
+    'Книги',
+    'Курсы',
+    'Статистика',
+    'M passport',
+  ];
+  TextEditingController commentController = TextEditingController();
+  bool buttonDown = false;
+  String dropDownValue = 'Предложение';
+  bool onChanged = false;
+  bool addImg = false;
 
+
+  bool successChange = false;
+  int start = 0;
+  bool wait = true;
+  late Timer timer;
+  void startTimer() {
+    start = 3;
+    if (wait == true) wait = false;
+    const onsec = Duration(seconds: 1);
+    timer = Timer.periodic(onsec, (timer) {
+      if (start <= 0) {
+        setState(() {
+          wait = true;
+          timer.cancel();
+          Navigator.pop(context);
+        });
+      } else {
+        setState(() {
+          start--;
+        });
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 1,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Оставить отзыв',
-          style: TextStyles.boldStyle.copyWith(
-            fontSize: 23,
-            color: ColorStyles.neutralsTextPrimaryColor,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            elevation: 1,
+            backgroundColor: Colors.white,
+            title: Text(
+              'Оставить отзыв',
+              style: TextStyles.boldStyle.copyWith(
+                fontSize: 23,
+                color: ColorStyles.neutralsTextPrimaryColor,
+              ),
+            ),
+            centerTitle: true,
+            leading: CupertinoButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                CupertinoIcons.back,
+                color: ColorStyles.primaryBorderColor,
+                size: 24,
+              ),
+            ),
           ),
-        ),
-        centerTitle: true,
-        leading: CupertinoButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            CupertinoIcons.back,
-            color: ColorStyles.primaryBorderColor,
-            size: 24,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  //color: const Color(0xFF767676),
-                ),
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Text(
-                      'Поделитесь обратной связью и мы отработаем ваш запрос!',
-                      textAlign: TextAlign.start,
-                      style: TextStyles.regularStyle.copyWith(
-                        fontSize: 14,
-                        color: ColorStyles.neutralsTextPrimaryColor,
-                      ),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      //color: const Color(0xFF767676),
                     ),
-                    sizedBoxHeight16(),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Тема',
-                        style: TextStyles.mediumStyle.copyWith(
-                          fontSize: 16,
-                          color: ColorStyles.neutralsTextPrimaryColor,
-                        ),
-                      ),
-                    ),
-                    sizedBoxHeight8(),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          dropdownValue = !dropdownValue;
-                        });
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width - 32,
-                        height: 48,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: ColorStyles.primarySurfaceHoverColor,
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Поделитесь обратной связью и мы отработаем ваш запрос!',
+                          textAlign: TextAlign.start,
+                          style: TextStyles.regularStyle.copyWith(
+                            fontSize: 14,
+                            color: ColorStyles.neutralsTextPrimaryColor,
                           ),
-                          //color: const Color(0xFF767676),
                         ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Предложение',
-                              style: TextStyles.mediumStyle.copyWith(
-                                color: ColorStyles.neutralsTextPrimaryColor,
-                                fontSize: 16,
-                              ),
+                        sizedBoxHeight16(),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Тема',
+                            style: TextStyles.mediumStyle.copyWith(
+                              fontSize: 16,
+                              color: ColorStyles.neutralsTextPrimaryColor,
                             ),
-                            const Spacer(),
-                            Icon(
-                              dropdownValue
-                                  ? CupertinoIcons.chevron_up
-                                  : CupertinoIcons.chevron_down,
-                              color: ColorStyles.primarySurfaceHoverColor,
-                              size: 24,
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    sizedBoxHeight16(),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Комментарий',
-                        textAlign: TextAlign.start,
-                        style: TextStyles.mediumStyle.copyWith(
-                          fontSize: 16,
-                          color: ColorStyles.neutralsTextPrimaryColor,
-                        ),
-                      ),
-                    ),
-                    sizedBoxHeight8(),
-                    // SizedBox(
-                    //   width: MediaQuery.of(context).size.width - 32,
-                    //   height: 150,
-                    //   child: TextField(
-                    //     minLines: 1,
-                    //     maxLines: 50,
-                    //     decoration: InputDecoration(
-                    //       hintText: 'Не работает кнопка...',
-                    //       hintStyle: TextStyles.mediumStyle.copyWith(
-                    //         color: ColorStyles.primarySurfaceHoverColor,
-                    //         fontSize: 16,
-                    //       ),
-                    //     ),
-                    //     style: TextStyles.mediumStyle.copyWith(
-                    //       fontSize: 16,
-                    //       height: 1.5,
-                    //       color: ColorStyles.neutralsTextPrimaryColor,
-                    //     ),
-                    //   ),
-                    // ),
-                    Container(
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 163,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: ColorStyles.primarySurfaceHoverColor,
-                        ),
-                        //color: const Color(0xFF767676),
-                      ),
-                      child: Text(
-                        'Не работает кнопка...',
-                        style: TextStyles.mediumStyle.copyWith(
-                          color: ColorStyles.primarySurfaceHoverColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    sizedBoxHeight16(),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Медиафайлы',
-                        textAlign: TextAlign.start,
-                        style: TextStyles.mediumStyle.copyWith(
-                          fontSize: 16,
-                          color: ColorStyles.neutralsTextPrimaryColor,
-                        ),
-                      ),
-                    ),
-                    sizedBoxHeight8(),
-                    GestureDetector(
-                      onTap: () {
-                      },
-                      child: DottedBorder(
-                        borderType: BorderType.RRect,
-                        radius: const Radius.circular(12),
-                        color: ColorStyles.primarySurfaceHoverColor,
-                        strokeWidth: 1.5,
-                        dashPattern: const [
-                          5,
-                          5,
-                        ],
-                        child: Container(
+                        sizedBoxHeight8(),
+                        Container(
+                          width: MediaQuery.of(context).size.width - 32,
+                          height: 48,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 16),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: ColorStyles.primarySurfaceHoverColor,
+                            ),
+                            //color: const Color(0xFF767676),
                           ),
-                          width: MediaQuery.of(context).size.width - 32,
-                          height: 45,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 16,
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              value: dropDownValue,
+                              icon: Icon(
+                                CupertinoIcons.chevron_down,
+                                color: ColorStyles.primarySurfaceHoverColor,
+                                size: 24,
+                              ),
+                              items: items.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  buttonDown = !buttonDown;
+                                  dropDownValue = newValue!;
+                                });
+                              },
+                            ),
                           ),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset('assets/icons/paperclip.svg'),
-                              sizedBoxWidth8(),
-                              Text(
-                                'Добавь скриншот или видео',
-                                style: TextStyles.mediumStyle.copyWith(
-                                  color: ColorStyles.primaryBorderColor,
-                                  fontSize: 16,
+                        ),
+                        sizedBoxHeight16(),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Комментарий',
+                            textAlign: TextAlign.start,
+                            style: TextStyles.mediumStyle.copyWith(
+                              fontSize: 16,
+                              color: ColorStyles.neutralsTextPrimaryColor,
+                            ),
+                          ),
+                        ),
+                        sizedBoxHeight8(),
+                        SizedBox(
+                          height: 150,
+                          child: TextField(
+                            onChanged: (text) {
+                              if(commentController.text.isNotEmpty){
+                                setState(() {
+                                  onChanged = !onChanged;
+                                });
+                              }else{
+                                setState(() {
+                                  onChanged = false;
+                                });
+                              }
+                            },
+                            maxLines: 50,
+                            controller: commentController,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 16,
+                              ),
+                              hintText: 'Не работает кнопка...',
+                              hintStyle: TextStyles.mediumStyle.copyWith(
+                                color: ColorStyles.primarySurfaceHoverColor,
+                                fontSize: 16,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  width: 1.0,
+                                  color: ColorStyles.primarySurfaceHoverColor,
                                 ),
                               ),
-                            ],
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  width: 1.0,
+                                  color: ColorStyles.primarySurfaceHoverColor,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    sizedBoxHeight8(),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Максисмум 5 фото или 1 видео',
-                        textAlign: TextAlign.start,
-                        style: TextStyles.mediumStyle.copyWith(
-                          fontSize: 13,
-                          color: ColorStyles.neutralsTextPrimaryColor,
+                        sizedBoxHeight16(),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Медиафайлы',
+                            textAlign: TextAlign.start,
+                            style: TextStyles.mediumStyle.copyWith(
+                              fontSize: 16,
+                              color: ColorStyles.neutralsTextPrimaryColor,
+                            ),
+                          ),
                         ),
-                      ),
+                        sizedBoxHeight8(),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              addImg = true;
+                            });
+                            print('tima bro check it');
+                            // showCupertinoModalBottomSheet(
+                            //   useRootNavigator: true,
+                            //   context: context,
+                            //   builder: (BuildContext context) =>
+                            //       const AddScreenShotVideoWidget(),
+                            // );
+                          },
+                          child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(12),
+                            color: ColorStyles.primarySurfaceHoverColor,
+                            strokeWidth: 1.5,
+                            dashPattern: const [
+                              5,
+                              5,
+                            ],
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              width: MediaQuery.of(context).size.width - 32,
+                              height: 45,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 16,
+                              ),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                      'assets/icons/paperclip.svg'),
+                                  sizedBoxWidth8(),
+                                  Text(
+                                    'Добавь скриншот или видео',
+                                    style: TextStyles.mediumStyle.copyWith(
+                                      color: ColorStyles.primaryBorderColor,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        sizedBoxHeight8(),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Максисмум 5 фото или 1 видео',
+                            textAlign: TextAlign.start,
+                            style: TextStyles.mediumStyle.copyWith(
+                              fontSize: 13,
+                              color: ColorStyles.neutralsTextPrimaryColor,
+                            ),
+                          ),
+                        ),
+                        sizedBoxHeight16(),
+                        BtnWidget(
+                          color: onChanged
+                              ? ColorStyles.primaryBorderColor
+                              : const Color(0xFFE0E0E0),
+                          textColor: onChanged
+                              ? Colors.white
+                              : ColorStyles.neutralsTextPrimaryColor,
+                          text: 'Отправить',
+                          onPressed: () {
+                            if (onChanged){
+                              setState(() {
+                                startTimer();
+                                successChange = !successChange;
+                              });
+                            }
+
+                          },
+                          fontSize: 16,
+                        ),
+                      ],
                     ),
-                    sizedBoxHeight16(),
-                    BtnWidget(
-                      color: const Color(0xFFE0E0E0),
-                      textColor: ColorStyles.neutralsTextPrimaryColor,
-                      text: 'Отправить',
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      fontSize: 16,
-                    ),
-                  ],
-                ),
+                  ),
+                  //const Spacer(),
+                ],
               ),
-              //const Spacer(),
-            ],
+            ),
           ),
         ),
-      ),
+        Visibility(
+          visible: addImg,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              color: Colors.black.withOpacity(0.2),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  CupertinoButton(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    pressedOpacity: 0.8,
+                    color: Colors.white,
+                    padding: EdgeInsets.zero,
+                    onPressed: () async {},
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width - 16,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/upload.svg',
+                            width: 16,
+                          ),
+                          sizedBoxWidth4(),
+                          Text(
+                            'Выбрать из галерии',
+                            style: TextStyles.mediumStyle.copyWith(
+                              color: ColorStyles.primaryBorderColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  sizedBoxHeight8(),
+                  BtnWidget(
+                    onPressed: () {
+                      setState(() {
+                        addImg = false;
+                      });
+
+                      // Navigator.of(context).pop();
+                    },
+                    text: 'Отмена',
+                    fontSize: 16,
+                    textColor: ColorStyles.primaryBorderColor,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        GlassEffectWithSuccess(successChange: successChange, editedThing: 'отзыв'),
+      ],
     );
   }
 }
