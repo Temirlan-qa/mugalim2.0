@@ -44,8 +44,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: BlocBuilder<ProfileBloc, ProfileState>(
-            builder: (context, state) {
+          child: BlocConsumer<ProfileBloc, ProfileState>(
+            listener: (context2, state) {
+              print(state);
+            },
+            builder: (context2, state) {
               if (state is ProfileSuccess) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context, rootNavigator: true).pushNamed(
+                        Navigator.of(context2, rootNavigator: true).pushNamed(
                           SettingsRoute,
                           arguments: {
                             'nameAndSurname': '${state.profileModel.firstName} ${state.profileModel.lastName}',

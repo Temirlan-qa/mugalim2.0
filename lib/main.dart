@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomeBloc>(
           create: (_) => sl(),
         ),
-        BlocProvider<ProfileBloc>(
-          create: (_) => sl(),
-        ),
+        // BlocProvider<ProfileBloc>(
+        //   create: (_) => sl(),
+        // ),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

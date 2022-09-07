@@ -15,6 +15,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/injection_container.dart';
 import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
+import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
@@ -256,6 +257,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                         startTimer();
                         successChange = !successChange;
                       });
+                      widget.bloc.add((ProfileLoad()));
                     } else {
                       print(
                           'Tima u have to check ${response.statusCode} ${response.data['status']}');
