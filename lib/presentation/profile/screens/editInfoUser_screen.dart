@@ -40,15 +40,14 @@ class EditInfoUserScreen extends StatefulWidget {
 
 class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
   var maskFormatter = MaskTextInputFormatter(
-      mask: '+7 (###) ###-##-##',
+      mask: '+7 ### ### ## ##',
       filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
+  );
 
   late TextEditingController emailController =
       TextEditingController(text: widget.user!['email']);
-  late TextEditingController phoneController =
-      TextEditingController(text: widget.user!['phone']);
-
+  late TextEditingController phoneController = TextEditingController(text: widget.user!['phone']);
+//maskFormatter.getMaskedText()
   var avatarId = null;
   bool nameIsEmpty = true;
   XFile? profilePic;
@@ -56,7 +55,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
     setState(() {
       avatarId = id;
       profilePic = image;
-      print(profilePic!.path);
     });
   }
 
@@ -105,7 +103,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
             centerTitle: true,
             leading: CupertinoButton(
               onPressed: () {
-                print('tima help' + widget.user!['phone']);
                 Navigator.pop(context);
               },
               child: Icon(
@@ -236,6 +233,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 ),
                 sizedBoxHeight8(),
                 TextField(
+                  maxLength: 16,
                   controller: phoneController,
                   onChanged: (text) {
                     setState(() {
@@ -266,8 +264,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                       });
                       widget.bloc.add((ProfileLoad()));
                     } else {
-                      print(
-                          'Tima u have to check ${response.statusCode} ${response.data['status']}');
                       SnackBarAction(
                         label: 'Error ',
                         onPressed: () {
@@ -298,6 +294,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
 
   InputDecoration textFieldStyleForEdit(controller) {
     return InputDecoration(
+      counterText: "",
       contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       suffix: GestureDetector(
         onTap: () {

@@ -351,7 +351,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
           ),
         ),
         Visibility(
-          visible: addImg,
+          visible: addImg && _imageFileListPath.isEmpty || addImg && _imageFileListPath == '',
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
