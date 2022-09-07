@@ -20,6 +20,7 @@ class BtnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
+      borderRadius : const BorderRadius.all(Radius.circular(12)),
       pressedOpacity: 0.8,
       color: color,
       padding: EdgeInsets.zero,
