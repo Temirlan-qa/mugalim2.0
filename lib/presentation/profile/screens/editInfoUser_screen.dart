@@ -26,7 +26,11 @@ class EditInfoUserScreen extends StatefulWidget {
   final String? image;
   final String? gender;
   const EditInfoUserScreen(
-      {Key? key, required this.user, required this.gender, required this.image, this.bloc})
+      {Key? key,
+      required this.user,
+      required this.gender,
+      required this.image,
+      this.bloc})
       : super(key: key);
 
   @override
@@ -34,6 +38,11 @@ class EditInfoUserScreen extends StatefulWidget {
 }
 
 class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
+  var maskFormatter = MaskTextInputFormatter(
+      mask: '+7 (###) ###-##-##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
+
   late TextEditingController emailController =
       TextEditingController(text: widget.user!['email']);
   late TextEditingController phoneController =
@@ -50,10 +59,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
     });
   }
 
-  var maskFormatter = MaskTextInputFormatter(
-      mask: '+7 ### ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
   bool successChange = false;
   int start = 0;
   bool wait = true;
@@ -76,6 +81,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
       }
     });
   }
+
   Box tokensBox = Hive.box('tokens');
   bool onChanged = false;
 
@@ -98,6 +104,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
             centerTitle: true,
             leading: CupertinoButton(
               onPressed: () {
+                print('tima help' + widget.user!['phone']);
                 Navigator.pop(context);
               },
               child: Icon(
@@ -161,7 +168,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                               context: context,
                               builder: (BuildContext context) =>
                                   BottomModalSheet(
-                                    bloc: widget.bloc,
+                                bloc: widget.bloc,
                                 notifyParent: refreshState,
                               ),
                             );
@@ -228,8 +235,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 ),
                 sizedBoxHeight8(),
                 TextField(
-                  inputFormatters: [maskFormatter],
-                  keyboardType: TextInputType.phone,
+                  controller: phoneController,
                   onChanged: (text) {
                     setState(() {
                       onChanged = true;
@@ -238,8 +244,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   style: TextStyles.mediumStyle.copyWith(
                       fontSize: 16,
                       color: ColorStyles.neutralsTextPrimaryColor),
-                  controller: phoneController,
                   decoration: textFieldStyleForEdit(phoneController),
+                  inputFormatters: [maskFormatter],
+                  keyboardType: TextInputType.phone,
                 ),
                 sizedBoxHeight16(),
                 BtnWidget(
@@ -279,7 +286,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
             ),
           ),
         ),
-
         GlassEffectWithSuccess(
           successChange: successChange,
           editedThing: 'e-mail',
@@ -290,6 +296,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
 
   InputDecoration textFieldStyleForEdit(controller) {
     return InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       suffix: GestureDetector(
         onTap: () {
           controller.clear();
@@ -311,7 +318,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         borderSide: BorderSide(
           width: 1.0,
-          color: ColorStyles.primarySurfaceHoverColor,
+          color: onChanged ? ColorStyles.primaryBorderColor :ColorStyles.primarySurfaceHoverColor,
         ),
       ),
       hintText: controller == phoneController ? '+7' : '',
