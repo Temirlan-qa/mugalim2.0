@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/main.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/books/screens/myChoice.dart';
-import 'package:mugalim/presentation/books/screens/select_book.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
-import 'package:mugalim/presentation/home/screens/home_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutApplication_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutProject_screen.dart';
 import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
@@ -49,14 +46,6 @@ class InnLabRouter {
             //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
             // ),
           ], child: MainScreen()),
-        );
-      case MainRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => JenreScreen(
-            index_month: (0),
-            list: list,
-          ),
         );
       case JenreRoute:
         return CupertinoPageRoute(
