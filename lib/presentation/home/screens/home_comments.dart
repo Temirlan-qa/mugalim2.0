@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,9 +10,6 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
-import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
-import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
-import 'package:dio/src/response.dart';
 import "package:intl/intl.dart";
 
 
@@ -175,7 +171,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                       'Accept': 'application/json',
                                       "Authorization": "Bearer ${tokensBox.get('access')}"
                                     },
-                                    placeholder: (context, url) => CupertinoActivityIndicator(),
+                                    placeholder: (context, url) => const CupertinoActivityIndicator(),
 
                                   ) : Image.asset('assets/icons/mugalim_logo.png', width: 44, height: 44)
                               ),
@@ -239,7 +235,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: widget.title.length < 197
-                              ? SizedBox()
+                              ? const SizedBox()
                               : InkWell(
                             onTap: () {
                               setState(() {
@@ -292,12 +288,12 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                           'Accept': 'application/json',
                                           "Authorization": "Bearer ${tokensBox.get('access')}"
                                         },
-                                        placeholder: (context, url) => CupertinoActivityIndicator(),
+                                        placeholder: (context, url) => const CupertinoActivityIndicator(),
                                       );
                                     }).toList(),
-                                  ) : Offstage(),
+                                  ) : const Offstage(),
                                   sizedBoxHeight8(),
-                                  const LineWidget(),
+                                  LineWidget(width: MediaQuery.of(context).size.width - 32),
                                   sizedBoxHeight8(),
                                 ],
                               ),
@@ -538,7 +534,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                         ],
                       ),
                         sizedBoxHeight16(),
-                        const LineWidget(),
+                        LineWidget(width: MediaQuery.of(context).size.width - 32),
                       ],
                     ),
                   ),
@@ -582,7 +578,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                         'Accept': 'application/json',
                                         "Authorization": "Bearer ${tokensBox.get('access')}"
                                       },
-                                      placeholder: (context, url) => CupertinoActivityIndicator(),
+                                      placeholder: (context, url) => const CupertinoActivityIndicator(),
 
                                     ) : Image.asset('assets/icons/mugalim_logo.png', width: 44, height: 44)
                                 ),
@@ -595,7 +591,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                   children: [
                                     Text(
                                       state.comments[index].userName ?? " ",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         decoration: TextDecoration.none,
                                         color: Colors.black,
@@ -603,7 +599,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                         fontFamily: 'CeraPro',
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     SizedBox(
@@ -625,7 +621,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                         children: [
                                            Text(
                                             formattedDate,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Color(0xFF767676),
                                               fontSize: 13,
                                               fontWeight: FontWeight.w400,
@@ -807,12 +803,12 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                 }
                 else if(state is HomeFailure){
                   print(state);
-                  return Text('ошибка');
+                  return const Text('ошибка');
                 }
                 else if(state is HomeLoading){
-                  return Text('loading');
+                  return const Text('loading');
                 }
-                return Text('ошибка2');
+                return const Text('ошибка2');
               },
               listener: (context, state) async {
                 print(state);

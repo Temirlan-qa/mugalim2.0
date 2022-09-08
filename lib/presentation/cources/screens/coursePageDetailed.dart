@@ -116,7 +116,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
             elevation: 1,
-            title: Container(
+            title: const SizedBox(
               width: double.maxFinite,
               child: TextFormFieldWidget(),
             ),
@@ -334,7 +334,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                       ),
                     ),
                   ),
-                  CourseCardWidget(),
+                  const CourseCardWidget(),
                 ],
               ),
             )

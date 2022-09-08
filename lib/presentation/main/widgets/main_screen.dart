@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes.dart';
 import 'package:mugalim/logic/home/bloc/home_bloc.dart';
+import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
 import 'package:mugalim/presentation/main/widgets/nav_bar_item_widget.dart';
+import 'package:mugalim/presentation/profile/screens/profile_screen.dart';
 import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
 import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
 
@@ -74,8 +76,9 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => HomeScreen(
-                    bloc: context.read<HomeBloc>(),
+                  builder: (_) => BlocProvider(
+                    create: (context) => sl<ProfileBloc>()..add(ProfileLoad()),
+                    child: ProfileScreen(),
                   ),
                 )
               ],

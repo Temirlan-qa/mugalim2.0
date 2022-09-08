@@ -23,7 +23,11 @@ class StatisticScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const InProcessWidget(),
+      body: InProcessWidget(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

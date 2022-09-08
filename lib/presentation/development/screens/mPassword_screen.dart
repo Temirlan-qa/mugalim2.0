@@ -38,7 +38,11 @@ class MPasswordScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const InProcessWidget(),
+      body: InProcessWidget(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

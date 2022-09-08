@@ -24,7 +24,9 @@ class RatingScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const InProcessWidget(),
+      body: InProcessWidget(
+        onPressed: (){},
+      ),
     );
   }
 }

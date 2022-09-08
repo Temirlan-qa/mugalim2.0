@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
 import '../../../core/const/const_color.dart';
@@ -16,15 +17,22 @@ class ChoosenPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 182),
-                    Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4)),
-                        child: const ImageIcon(
-                          AssetImage("assets/icons/Icon.png"),
-                          color: Color(0xff3C8505),
-                        )),
+                    Lottie.asset(
+                      repeat: false,
+                      'assets/animations/success.json',
+                      width: 72,
+                      height: 72,
+                      fit: BoxFit.fill,
+                    ),
+                    // Container(
+                    //     height: 60,
+                    //     width: 60,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(4)),
+                    //     child: const ImageIcon(
+                    //       AssetImage("assets/icons/Icon.png"),
+                    //       color: Color(0xff3C8505),
+                    //     )),
                     const SizedBox(height: 22),
                     const Text(
                       'Книги выбраны',

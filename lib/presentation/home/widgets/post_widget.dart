@@ -12,9 +12,6 @@ import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/home/screens/home_comments.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
-import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
-import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
-
 import '../../../core/injection_container.dart';
 import '../../../logic/home/bloc/home_bloc.dart';
 
@@ -241,7 +238,7 @@ class _PostWidgetState extends State<PostWidget> {
                               }).toList(),
                             ) : Offstage(),
                             sizedBoxHeight8(),
-                            const LineWidget(),
+                            LineWidget(width: MediaQuery.of(context).size.width - 32),
                             sizedBoxHeight8(),
                           ],
                         ),
