@@ -20,6 +20,7 @@ import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
+import 'package:mugalim/presentation/profile/widgets/text_field_for_edit_info_user_widget.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
   final bloc;
@@ -40,9 +41,8 @@ class EditInfoUserScreen extends StatefulWidget {
 
 class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
   var maskFormatter = MaskTextInputFormatter(
-      mask: '+7 ### ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
+      //mask: '+7 ### ### ## ##',
+      filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
 
   late TextEditingController emailController =
       TextEditingController(text: widget.user!['email']);
@@ -237,29 +237,33 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   ),
                 ),
                 sizedBoxHeight8(),
-                Container(
-                  decoration: onChanged
-                      ? BoxDecoration(
-                          border: Border.all(
-                            color: const Color(0xFFD5D7F6),
-                            width: 4,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        )
-                      : null,
-                  child: TextField(
-                    onChanged: (text) {
-                      setState(() {
-                        onChanged = true;
-                      });
-                    },
-                    style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
-                        color: ColorStyles.neutralsTextPrimaryColor),
+                TextFieldForEditInfoWidget(
                     controller: emailController,
-                    decoration: textFieldStyleForEdit(emailController),
-                  ),
+                    phoneController : phoneController,
                 ),
+                // Container(
+                //   decoration: onChanged
+                //       ? BoxDecoration(
+                //           border: Border.all(
+                //             color: const Color(0xFFD5D7F6),
+                //             width: 4,
+                //           ),
+                //           borderRadius: BorderRadius.circular(18),
+                //         )
+                //       : null,
+                //   child: TextField(
+                //     onChanged: (text) {
+                //       setState(() {
+                //         onChanged = true;
+                //       });
+                //     },
+                //     style: TextStyles.mediumStyle.copyWith(
+                //         fontSize: 16,
+                //         color: ColorStyles.neutralsTextPrimaryColor),
+                //     controller: emailController,
+                //     decoration: textFieldStyleForEdit(emailController),
+                //   ),
+                // ),
                 sizedBoxHeight16(),
                 Text(
                   'Телефон',
@@ -269,31 +273,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   ),
                 ),
                 sizedBoxHeight8(),
-                Container(
-                  decoration: onChanged
-                      ? BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFFD5D7F6),
-                      width: 4,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  )
-                      : null,
-                  child: TextField(
-                    maxLength: 16,
-                    controller: phoneController,
-                    onChanged: (text) {
-                      setState(() {
-                        onChanged = true;
-                      });
-                    },
-                    style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
-                        color: ColorStyles.neutralsTextPrimaryColor),
-                    decoration: textFieldStyleForEdit(phoneController),
-                    inputFormatters: [maskFormatter],
-                    keyboardType: TextInputType.phone,
-                  ),
+                TextFieldForEditInfoWidget(
+                  controller: phoneController,
+                  phoneController : phoneController,
                 ),
                 sizedBoxHeight16(),
                 BtnWidget(
@@ -443,44 +425,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           editedThing: 'e-mail',
         ),
       ],
-    );
-  }
-
-  InputDecoration textFieldStyleForEdit(controller) {
-    return InputDecoration(
-      counterText: "",
-      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      suffix: GestureDetector(
-        onTap: () {
-          controller.clear();
-        },
-        child: Icon(
-          CupertinoIcons.clear,
-          color: ColorStyles.primaryBorderColor,
-          size: 24,
-        ),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        borderSide: BorderSide(
-          width: 1.0,
-          color: ColorStyles.primarySurfaceHoverColor,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        borderSide: BorderSide(
-          width: 1.0,
-          color: onChanged
-              ? ColorStyles.primaryBorderColor
-              : ColorStyles.primarySurfaceHoverColor,
-        ),
-      ),
-      hintText: controller == phoneController ? '+7' : '',
-      hintStyle: TextStyles.mediumStyle.copyWith(
-        fontSize: 16,
-        color: ColorStyles.neutralsTextPrimaryColor,
-      ),
     );
   }
 }
