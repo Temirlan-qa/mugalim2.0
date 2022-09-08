@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'package:mugalim/presentation/books/screens/timer_screen.dart';
 import 'package:mugalim/presentation/main/widgets/main_screen.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
           create: (_) => sl(),
         ),
         BlocProvider<HomeBloc>(
+          create: (_) => sl(),
+        ),
+        BlocProvider<ProfileBloc>(
           create: (_) => sl(),
         ),
       ],

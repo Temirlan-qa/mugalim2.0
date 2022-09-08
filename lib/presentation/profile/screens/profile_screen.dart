@@ -59,7 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.of(context2, rootNavigator: true).pushNamed(
                           SettingsRoute,
                           arguments: {
-                            'nameAndSurname': '${state.profileModel.firstName} ${state.profileModel.lastName}',
+                            'nameAndSurname':
+                                '${state.profileModel.firstName} ${state.profileModel.lastName}',
                             'role': state.profileModel.user!['roles'],
                             'image': state.profileModel.avatar,
                             'gender': state.profileModel.gender,
