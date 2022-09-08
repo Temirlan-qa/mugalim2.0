@@ -56,7 +56,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
     setState(() {
       avatarId = id;
       profilePic = image;
-      print(profilePic!.path);
     });
   }
 
@@ -147,7 +146,8 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     Stack(
                       children: [
                         CachedNetworkImage(
-                          imageUrl: '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
+                          imageUrl:
+                              '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
                           width: 80,
                           height: 80,
                           fit: BoxFit.fill,
@@ -237,17 +237,28 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   ),
                 ),
                 sizedBoxHeight8(),
-                TextField(
-                  onChanged: (text) {
-                    setState(() {
-                      onChanged = true;
-                    });
-                  },
-                  style: TextStyles.mediumStyle.copyWith(
-                      fontSize: 16,
-                      color: ColorStyles.neutralsTextPrimaryColor),
-                  controller: emailController,
-                  decoration: textFieldStyleForEdit(emailController),
+                Container(
+                  decoration: onChanged
+                      ? BoxDecoration(
+                          border: Border.all(
+                            color: const Color(0xFFD5D7F6),
+                            width: 4,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        )
+                      : null,
+                  child: TextField(
+                    onChanged: (text) {
+                      setState(() {
+                        onChanged = true;
+                      });
+                    },
+                    style: TextStyles.mediumStyle.copyWith(
+                        fontSize: 16,
+                        color: ColorStyles.neutralsTextPrimaryColor),
+                    controller: emailController,
+                    decoration: textFieldStyleForEdit(emailController),
+                  ),
                 ),
                 sizedBoxHeight16(),
                 Text(
@@ -258,20 +269,31 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                   ),
                 ),
                 sizedBoxHeight8(),
-                TextField(
-                  maxLength: 16,
-                  controller: phoneController,
-                  onChanged: (text) {
-                    setState(() {
-                      onChanged = true;
-                    });
-                  },
-                  style: TextStyles.mediumStyle.copyWith(
-                      fontSize: 16,
-                      color: ColorStyles.neutralsTextPrimaryColor),
-                  decoration: textFieldStyleForEdit(phoneController),
-                  inputFormatters: [maskFormatter],
-                  keyboardType: TextInputType.phone,
+                Container(
+                  decoration: onChanged
+                      ? BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xFFD5D7F6),
+                      width: 4,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  )
+                      : null,
+                  child: TextField(
+                    maxLength: 16,
+                    controller: phoneController,
+                    onChanged: (text) {
+                      setState(() {
+                        onChanged = true;
+                      });
+                    },
+                    style: TextStyles.mediumStyle.copyWith(
+                        fontSize: 16,
+                        color: ColorStyles.neutralsTextPrimaryColor),
+                    decoration: textFieldStyleForEdit(phoneController),
+                    inputFormatters: [maskFormatter],
+                    keyboardType: TextInputType.phone,
+                  ),
                 ),
                 sizedBoxHeight16(),
                 BtnWidget(
@@ -290,8 +312,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                       });
                       widget.bloc.add((ProfileLoad()));
                     } else {
-                      print(
-                          'Tima u have to check ${response.statusCode} ${response.data['status']}');
                       SnackBarAction(
                         label: 'Error ',
                         onPressed: () {
@@ -313,7 +333,8 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           ),
         ),
         Visibility(
-          visible: addImg && _imageFileList == null || addImg && _imageFileList == [],
+          visible: addImg && _imageFileList == null ||
+              addImg && _imageFileList == [],
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
