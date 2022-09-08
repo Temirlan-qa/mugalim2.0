@@ -4,9 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/utils/dio/dio_interceptor.dart';
 import 'package:mugalim/core/utils/dio/dio_wrapper.dart';
-import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
-import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
-import 'package:mugalim/logic/profile/data/repositories/profile_repository.dart';
 
 import '../logic/auth/bloc/auth_bloc.dart';
 import '../logic/auth/data/datasources/auth_datasources.dart';
@@ -52,18 +49,5 @@ void initGetIt() async {
         () => HomeBloc(sl()),
   );
 
-
-
-  // Profile
-  sl.registerLazySingleton<ProfileDatasource>(
-        () => ProfileDatasourceImpl(dioWrapper: sl()),
-  );
-
-  sl.registerLazySingleton<ProfileRepository>(
-        () => ProfileRepositoryImpl(sl()),
-  );
-
-  sl.registerFactory<ProfileBloc>(
-        () => ProfileBloc(sl()),
-  );
+  
 }

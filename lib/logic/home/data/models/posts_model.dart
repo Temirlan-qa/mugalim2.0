@@ -9,26 +9,26 @@ class PostModel {
   final String? id;
   final String? title;
   final String? content;
-  final List? imgs;
+  final List<String?> images;
   final String? userId;
   final String? cityId;
   final String? regionId;
   final int? likeNumber;
   final String? type;
-  final UserModel? user;
   final int? viewNumber;
   final int? commentNumber;
   final int? savedNumber;
   final bool? liked;
-  final bool? commeted;
+  final bool? commented;
   final bool? saved;
   final String? createdAt;
   final String? updatedAt;
-
+  final String? userName;
+  final String? userAvatarId;
 
   factory PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
 
-  PostModel(this.id, this.title, this.content, this.userId,  this.likeNumber, this.liked, this.createdAt,  this.cityId, this.regionId, this.type, this.viewNumber, this.commentNumber, this.savedNumber, this.commeted, this.saved, this.updatedAt, this.imgs, this.user);
+  PostModel(this.id, this.title, this.content, this.images, this.userId, this.cityId, this.regionId, this.likeNumber, this.type, this.viewNumber, this.commentNumber, this.savedNumber, this.liked, this.commented, this.saved, this.createdAt, this.updatedAt, this.userName, this.userAvatarId);
 
   Map<String, dynamic> toJson() => _$PostModelToJson(this);
 }

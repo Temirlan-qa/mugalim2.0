@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
+import 'package:mugalim/presentation/books/screens/timer_screen.dart';
+import 'package:mugalim/presentation/main/widgets/main_screen.dart';
+import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/injection_container.dart';
 import 'core/utils/hive/hive_init.dart';
 import 'core/routes/routes.dart';
@@ -15,7 +17,6 @@ Future<void> main() async {
   await initHiveBoxes();
   initGetIt();
   runApp(MyApp());
-
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -33,9 +34,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomeBloc>(
           create: (_) => sl(),
         ),
-        // BlocProvider<ProfileBloc>(
-        //   create: (_) => sl(),
-        // ),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

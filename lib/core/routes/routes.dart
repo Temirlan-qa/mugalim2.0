@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
+import 'package:mugalim/main.dart';
 import 'package:mugalim/presentation/books/screens/myChoice.dart';
+import 'package:mugalim/presentation/books/screens/select_book.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
-import 'package:mugalim/presentation/profile/screens/aboutApplication_screen.dart';
-import 'package:mugalim/presentation/profile/screens/aboutProject_screen.dart';
-import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
-import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
+import 'package:mugalim/presentation/home/screens/home_screen.dart';
+
 import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/select_jenre.dart';
 import '../../presentation/cources/screens/coursePage.dart';
@@ -46,8 +45,17 @@ class InnLabRouter {
                 //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
                 // ),
               ],
-              child: const MainScreen()
+              child: MainScreen()
           ),
+        );
+      case MainRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => JenreScreen(
+            index_month: (0),
+            list: list,
+          ),
+
         );
       case JenreRoute:
         return CupertinoPageRoute(
@@ -60,54 +68,25 @@ class InnLabRouter {
       case CourseRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => const CoursePage(),
+          builder: (_) => CoursePage(),
         );
       case DevelopmentRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => const DevelopmentScreen(),
+          builder: (_) => DevelopmentScreen(),
         );
       case ChoiceRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => const MyChoiceScreen(),
+          builder: (_) => MyChoiceScreen(),
         );
-      case AboutAppRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => const AboutApplicationScreen(),
-        );
-      case AuthRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => const VerifyScreen(
-          ),
-        );
-      case AboutProjectRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => const AboutProjectScreen(
-          ),
-        );
-      case WriteReviewRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => const WriteReviewScreen(
-          ),
-        );
-      //  SettingsRoute
-      case SettingsRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => SettingsScreen(
-              infoProfile: routeSettings.arguments
-          ),
-        );
-      // case EditInfoUserRoute:
+      // case BookRoute:
       //   return CupertinoPageRoute(
       //     settings: routeSettings,
-      //     builder: (_) => EditInfoUserScreen(
-      //         infoProfile: routeSettings.arguments
+      //     builder: (_) => BookScreen(
+      //       index_month: (routeSettings.arguments as Map),
+      //       select_index: (routeSettings.arguments as Map),
+      //       list: (routeSettings.arguments as Map),
       //     ),
       //   );
       default:
