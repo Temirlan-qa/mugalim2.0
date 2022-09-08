@@ -10,7 +10,6 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:mugalim/presentation/profile/widgets/display_screens_and_videos._widget.dart';
 
 class WriteReviewScreen extends StatefulWidget {
@@ -34,26 +33,24 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
   String dropDownValue = 'Предложение';
   bool onChanged = false;
   bool addImg = false;
-  String _imageFileListPath = '';
-  final picker = ImagePicker();
-  final ImagePickerPlatform _picker = ImagePickerPlatform.instance;
-  XFile? _imageFileList;
 
-  chooseImage(ImageSource source) async {
-    try {
-      final XFile? pickedFileList = await _picker.getImage(source: source);
-      print('pickedFile TIIIIMMMMMAAAAA $pickedFileList');
-      setState(() {
-        _imageFileList = pickedFileList;
-        _imageFileListPath = _imageFileList!.path;
-      });
-      print('_imageFileListPath TTTTTIIIIIIMMMMMMMAAAAA $_imageFileListPath');
-    } catch (e) {
-      print(e.toString());
+
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile>? imageFileList = [];
+  String videoPath = '';
+  void selectImages() async {
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+
+    final XFile? video = await imagePicker.pickVideo(source: ImageSource.gallery);
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+    }else if(video == null){
+      videoPath = video!.path;
     }
+    setState((){});
   }
 
-  bool mediaImg = false;
+
   bool successChange = false;
   int start = 0;
   bool wait = true;
@@ -190,7 +187,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                         onChanged: (text) {
                           if (commentController.text.isNotEmpty) {
                             setState(() {
-                              onChanged = !onChanged;
+                              onChanged = true;
                             });
                           } else {
                             setState(() {
@@ -243,24 +240,23 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                     ),
                     sizedBoxHeight8(),
                     Visibility(
-                      visible: _imageFileListPath.isNotEmpty,
+                      visible: imageFileList!.isNotEmpty,
                       child: SizedBox(
                         height: 100,
                         width: double.infinity,
                         child: DisplayScreensAndPhotosWidget(
-                          imageFileListPath: _imageFileListPath,
+                            imageFileList :imageFileList,
+                            videoPath: videoPath,
                         ),
                       ),
                     ),
                     Visibility(
-                      visible: _imageFileListPath.isEmpty,
+                      visible: imageFileList!.isEmpty || imageFileList == [],
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
                             addImg = true;
-                            mediaImg = true;
                           });
-                          print('tima bro check it');
                           // showCupertinoModalBottomSheet(
                           //   useRootNavigator: true,
                           //   context: context,
@@ -307,7 +303,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                       ),
                     ),
                     Visibility(
-                      visible: _imageFileListPath.isEmpty,
+                      visible: imageFileList!.isEmpty || imageFileList == [],
                       child: Column(
                         children: [
                           sizedBoxHeight8(),
@@ -351,7 +347,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
           ),
         ),
         Visibility(
-          visible: addImg && _imageFileListPath.isEmpty || addImg && _imageFileListPath == '',
+          visible: addImg && imageFileList!.isEmpty || addImg && imageFileList == [],
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
@@ -368,7 +364,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                     color: Colors.white,
                     padding: EdgeInsets.zero,
                     onPressed: () async {
-                      chooseImage(ImageSource.gallery);
+                      selectImages();
                     },
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width - 16,

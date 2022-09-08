@@ -2,27 +2,34 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mugalim/core/const/const_color.dart';
 
-class DisplayScreensAndPhotosWidget extends StatelessWidget {
-  final String imageFileListPath;
-  const DisplayScreensAndPhotosWidget(
-      {Key? key, required this.imageFileListPath})
+class DisplayScreensAndPhotosWidget extends StatefulWidget {
+  final List<XFile>? imageFileList;
+  final String videoPath;
+   const DisplayScreensAndPhotosWidget(
+      {Key? key, this.imageFileList, required this.videoPath, })
       : super(key: key);
 
+  @override
+  State<DisplayScreensAndPhotosWidget> createState() => _DisplayScreensAndPhotosWidgetState();
+}
+
+class _DisplayScreensAndPhotosWidgetState extends State<DisplayScreensAndPhotosWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: 5,
+      itemCount: widget.imageFileList!.length,
       itemBuilder: (BuildContext context, int index) {
         return Stack(
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: Image.file(
-                File(imageFileListPath),
+                File(widget.imageFileList![index].path),
                 height: 100,
                 width: 100,
                 fit: BoxFit.fill,
@@ -40,7 +47,11 @@ class DisplayScreensAndPhotosWidget extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    widget.imageFileList!.removeAt(index);
+                    setState(() {});
+                    print('dispose');
+                  },
                   child: SvgPicture.asset(
                     'assets/icons/x.svg',
                     color: Colors.white,

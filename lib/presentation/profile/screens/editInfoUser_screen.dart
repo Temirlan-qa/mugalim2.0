@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -19,7 +19,7 @@ import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
-import 'package:mugalim/presentation/profile/widgets/change_avatar_widget.dart';
+import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
   final bloc;
@@ -46,9 +46,10 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
 
   late TextEditingController emailController =
       TextEditingController(text: widget.user!['email']);
-  late TextEditingController phoneController = TextEditingController(text: widget.user!['phone']);
+  late TextEditingController phoneController =
+      TextEditingController(text: widget.user!['phone']);
 //maskFormatter.getMaskedText()
-  var avatarId = null;
+  String avatarId = '';
   bool nameIsEmpty = true;
   XFile? profilePic;
   void refreshState(XFile image, String id) {
@@ -85,6 +86,28 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
   Box tokensBox = Hive.box('tokens');
   bool onChanged = false;
 
+  final picker = ImagePicker();
+  final ImagePickerPlatform _picker = ImagePickerPlatform.instance;
+  XFile? _imageFileList;
+  bool addImg = false;
+  chooseImage(ImageSource source, bloc, notifyParent) async {
+    try {
+      ProfileDatasource profileDatasource = sl();
+      final XFile? pickedFileList = await _picker.getImage(source: source);
+      _imageFileList = pickedFileList;
+      Response response =
+          await profileDatasource.changeAvatar(_imageFileList!.path);
+      Response response1 =
+          await profileDatasource.uploadAvatar(response.data['value']);
+      print(response1.data);
+
+      bloc.add((ProfileLoad()));
+      notifyParent(_imageFileList!, response.data['value']);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -104,7 +127,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
             centerTitle: true,
             leading: CupertinoButton(
               onPressed: () {
-                print('tima help' + widget.user!['phone']);
                 Navigator.pop(context);
               },
               child: Icon(
@@ -125,8 +147,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     Stack(
                       children: [
                         CachedNetworkImage(
-                          imageUrl:
-                              '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
+                          imageUrl: '${EnvironmentConfig.url}/file/image/${widget.image}?size=xs',
                           width: 80,
                           height: 80,
                           fit: BoxFit.fill,
@@ -163,15 +184,18 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            showCupertinoModalBottomSheet(
-                              useRootNavigator: true,
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  BottomModalSheet(
-                                bloc: widget.bloc,
-                                notifyParent: refreshState,
-                              ),
-                            );
+                            setState(() {
+                              addImg = true;
+                            });
+                            // showCupertinoModalBottomSheet(
+                            //   useRootNavigator: true,
+                            //   context: context,
+                            //   builder: (BuildContext context) =>
+                            //       BottomModalSheet(
+                            //     bloc: widget.bloc,
+                            //     notifyParent: refreshState,
+                            //   ),
+                            // );
                           },
                           child: Container(
                             color: Colors.white.withOpacity(0.35),
@@ -288,6 +312,111 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
             ),
           ),
         ),
+        Visibility(
+          visible: addImg && _imageFileList == null || addImg && _imageFileList == [],
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              color: Colors.black.withOpacity(0.2),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  CupertinoButton(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    ),
+                    pressedOpacity: 0.8,
+                    color: Colors.white,
+                    padding: EdgeInsets.zero,
+                    onPressed: () async {
+                      chooseImage(
+                        ImageSource.gallery,
+                        widget.bloc,
+                        refreshState,
+                      );
+                      // Navigator.pop(context, true);
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width - 16,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/upload.svg',
+                            width: 16,
+                          ),
+                          sizedBoxWidth4(),
+                          Text(
+                            'Выбрать из галерии',
+                            style: TextStyles.mediumStyle.copyWith(
+                              color: ColorStyles.primaryBorderColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  LineWidget(width: MediaQuery.of(context).size.width - 32),
+                  CupertinoButton(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                    pressedOpacity: 0.8,
+                    color: Colors.white,
+                    padding: EdgeInsets.zero,
+                    onPressed: () async {
+                      chooseImage(
+                        ImageSource.camera,
+                        widget.bloc,
+                        refreshState,
+                      );
+                      Navigator.pop(context, true);
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width - 16,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/camera.svg',
+                            width: 16,
+                          ),
+                          sizedBoxWidth4(),
+                          Text(
+                            'Сделать фото',
+                            style: TextStyles.mediumStyle.copyWith(
+                              color: ColorStyles.primaryBorderColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  sizedBoxHeight8(),
+                  BtnWidget(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    text: 'Отмена',
+                    fontSize: 16,
+                    textColor: ColorStyles.primaryBorderColor,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
         GlassEffectWithSuccess(
           successChange: successChange,
           editedThing: 'e-mail',
@@ -321,7 +450,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         borderSide: BorderSide(
           width: 1.0,
-          color: onChanged ? ColorStyles.primaryBorderColor :ColorStyles.primarySurfaceHoverColor,
+          color: onChanged
+              ? ColorStyles.primaryBorderColor
+              : ColorStyles.primarySurfaceHoverColor,
         ),
       ),
       hintText: controller == phoneController ? '+7' : '',
