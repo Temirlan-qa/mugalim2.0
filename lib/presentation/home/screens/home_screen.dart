@@ -600,26 +600,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           return Column(
                             children: [
                               index == 0 ? SizedBox(height: 16,) : SizedBox(),
-                              Text('Trend'),
+                              Text('Тренды'),
                               // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
                             ],
                           );
                         }),
                   ),
                 ),
-                Center(child: AnimatedDrawing.svg(
-                  "assets/icons/check-circle.svg",
-                  run: run,
-                  duration: const Duration(milliseconds: 1000),
-                  lineAnimation: LineAnimation.allAtOnce,
-                  animationCurve: Curves.fastOutSlowIn,
-                  animationOrder: PathOrders.leftToRight,
-                  onFinish: () => setState(() {
-                    run  = false;
-                  }),
-                  width: 100,
-                  height: 100,
-                )),
+                SingleChildScrollView(
+                  child: Container(
+                    color: ColorStyles.neutralsPageBackgroundColor,
+                    child: ListView.builder(
+                        itemCount: 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              index == 0 ? SizedBox(height: 16,) : SizedBox(),
+                              Text('Сохраненные'),
+                              // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                            ],
+                          );
+                        }),
+                  ),
+                ),
               ],
             ),
           ),
