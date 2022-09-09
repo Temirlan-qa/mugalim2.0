@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mugalim/presentation/books/screens/select_jenre.dart';
+import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 
-import '../../../core/const/const_color.dart';
+import '../../../../core/const/const_color.dart';
 
 class ChoosenPage extends StatelessWidget {
   const ChoosenPage({Key? key}) : super(key: key);
@@ -55,25 +55,17 @@ class ChoosenPage extends StatelessWidget {
             ),
             Positioned(
               bottom: 56,
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Center(
                   child: Column(
                     children: [
                       TextButton(
-                        child: Text(
-                          "На главную",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'CeraPro',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         style: TextButton.styleFrom(
-                          primary: Color(0xFFE0E0E0),
-                          backgroundColor: Color(0xff3D3DD8),
+                          primary: const Color(0xFFE0E0E0),
+                          backgroundColor: const Color(0xff3D3DD8),
                           elevation: 3,
-                          minimumSize: Size(343, 48),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -86,24 +78,24 @@ class ChoosenPage extends StatelessWidget {
                           //   ),
                           // );
                         },
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      TextButton(
-                        child: Text(
-                          "Изменить",
+                        child: const Text(
+                          "На главную",
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'CeraPro',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextButton(
                         style: TextButton.styleFrom(
-                          primary: Color(0xff3D3DD8),
+                          primary: const Color(0xff3D3DD8),
                           backgroundColor:
                               ColorStyles.neutralsPageBackgroundColor,
-                          minimumSize: Size(343, 48),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -113,8 +105,8 @@ class ChoosenPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => JenreScreen(
-                                      index_month: 0,
-                                      list: [
+                                      indexMonth: 0,
+                                      list: const [
                                         'Бизнес',
                                         'Классика',
                                         'Развитие',
@@ -123,6 +115,14 @@ class ChoosenPage extends StatelessWidget {
                                     )),
                           );
                         },
+                        child: const Text(
+                          "Изменить",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'CeraPro',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ],
                   ),

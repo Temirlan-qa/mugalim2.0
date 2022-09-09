@@ -4,14 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
-import '../../../core/injection_container.dart';
-import '../../../core/utils/dio/dio_interceptor.dart';
 import '../../../logic/auth/bloc/auth_bloc.dart';
-import '../../books/screens/select_jenre.dart';
 
 class AuthGmailScreen extends StatefulWidget {
   const AuthGmailScreen({Key? key}) : super(key: key);
@@ -39,37 +35,20 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
         .of(context)
         .size
         .width;
-    double height = MediaQuery
-        .of(context)
-        .size
-        .height;
 
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) async {
         if(state is GetTokensSuccess){
-          print(state.authTokensModel);
           if(state.authTokensModel.access!.isNotEmpty) {
             accessToken.put('refresh', state.authTokensModel.refreshToken);
             accessToken.put('access', state.authTokensModel.access);
-            // DioInterceptor(tokens: accessToken, dio: sl());
             Navigator.of(context).pushNamedAndRemoveUntil(MainRoute, (Route<dynamic> route) => false);
-            // Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) =>
-            //             JenreScreen(
-            //               index_month: 0,
-            //               list: list,
-            //             ),
-            //       ),
-            // );
           }
         }
         if(state is AuthFailure) {
           setState(() {
             validation = true;
           });
-          print(state.message);
         }
         if(state is AuthLoading) {
           setState((){
@@ -86,8 +65,8 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
           body: Stack(
             children: [
               Container(
-                decoration: BoxDecoration(
-                  image: new DecorationImage(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
                     image: AssetImage('assets/images/home-2.png'),
                     fit: BoxFit.cover,),
                 ),
@@ -114,7 +93,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               Navigator.pop(context);
                             },
                             child: Row(
-                              children: [
+                              children: const [
                                 Icon(Icons.arrow_back_ios_new),
                                 SizedBox(width: 28,),
                                 Text(
@@ -129,10 +108,10 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             'E-mail',
                             style: TextStyle(
                               decoration: TextDecoration.none,
@@ -142,7 +121,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               fontFamily: 'CeraPro',
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           TextFormField(
@@ -162,7 +141,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                             decoration: InputDecoration(
                               hintText: 'example@mugalim.kz',
                               hintStyle: TextStyles.mediumStyle.copyWith(fontSize: 16,
-                                  color: Color(0xff767676)),
+                                  color: const Color(0xff767676)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
@@ -180,16 +159,16 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                       : ColorStyles.primaryBorderColor,
                                 ),
                               ),
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                   maxHeight: 48
                               ),
                               // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
-                          Text(
+                          const Text(
                             'Пароль',
                             style: TextStyle(
                               decoration: TextDecoration.none,
@@ -199,7 +178,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               fontFamily: 'CeraPro',
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           TextFormField(
@@ -233,7 +212,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                     obscureText ? Icons.visibility_off_outlined :
                                     Icons.visibility_outlined,
                                     size: 24,
-                                    color: Color(0xff3D3DD8),
+                                    color: const Color(0xff3D3DD8),
                                   ) :
                                   SvgPicture.asset('assets/icons/errorIcon.svg'),
                                 ),
@@ -254,12 +233,12 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                         : ColorStyles.primaryBorderColor,
                                   ),
                                 ),
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                     maxHeight: 48
                                 ),
                               )
                           ),
-                          validation ? SizedBox(height: 8,) : Offstage(),
+                          validation ? const SizedBox(height: 8,) : const Offstage(),
                           validation ?
                           Text(
                             "Қате E-mail немесе Пароль",
@@ -270,23 +249,15 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                               color: ColorStyles.errorBorderColor,
                             ),
                           )
-                              : Offstage(),
-                          SizedBox(height: 20,),
+                              : const Offstage(),
+                          const SizedBox(height: 20,),
                           TextButton(
-                            child: !loading ? Text(
-                              "Кіру",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'CeraPro',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ) : CupertinoActivityIndicator(color: Colors.white,),
                             style: TextButton.styleFrom(
                               primary: loginEditingController.text == '' || passwordEditingController.text == ''
                                   ? Colors.black
-                                  : Color(0xFFE0E0E0),
-                              backgroundColor: loginEditingController.text == '' || passwordEditingController.text == '' ? Color(0xFFE0E0E0) : Color(0xff3D3DD8),
-                              minimumSize: Size(343, 48),
+                                  : const Color(0xFFE0E0E0),
+                              backgroundColor: loginEditingController.text == '' || passwordEditingController.text == '' ? const Color(0xFFE0E0E0) : const Color(0xff3D3DD8),
+                              minimumSize: const Size(343, 48),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
@@ -305,6 +276,14 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
                                 });
                               }
                             },
+                            child: !loading ? const Text(
+                              "Кіру",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'CeraPro',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ) : const CupertinoActivityIndicator(color: Colors.white,),
                           ),
                         ],
                       ),

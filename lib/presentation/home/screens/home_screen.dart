@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/src/response.dart';
 import 'package:intl/intl.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
@@ -19,7 +19,7 @@ import '../../../logic/home/data/datasources/home_datasources.dart';
 import 'home_comments.dart';
 
 class HomeScreen extends StatefulWidget {
-  final bloc;
+  final Bloc bloc;
   const HomeScreen({Key? key, required this.bloc}) : super(key: key);
 
   @override
@@ -338,7 +338,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       final HomeDatasource homeDatasource = sl();
                                                       // if(liked[index]){
                                                         Response response = (await homeDatasource.likedPost(state.posts[index].id!,'POSTLIKE'));
-                                                        await widget.bloc.add(GetPostsList());
                                                     },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),
@@ -491,7 +490,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       });
                                                       final HomeDatasource homeDatasource = sl();
                                                       Response response = saved[index] ? (await homeDatasource.savedPost(state.posts[index].id!)) : (await homeDatasource.deletePost(state.posts[index].id!));
-                                                      await widget.bloc.add(GetPostsList());
                                                       },
                                                     child: Container(
                                                       padding: const EdgeInsets.all(8),

@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
-import 'package:mugalim/main.dart';
-import 'package:mugalim/presentation/books/screens/myChoice.dart';
-import 'package:mugalim/presentation/books/screens/select_book.dart';
+import 'package:mugalim/presentation/books/screens/selectBook/myChoice.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
-import 'package:mugalim/presentation/home/screens/home_screen.dart';
-
+import '../../logic/book/bloc/book_bloc.dart';
 import '../../logic/home/bloc/home_bloc.dart';
-import '../../presentation/books/screens/select_jenre.dart';
+import '../../presentation/books/screens/bookMain/main_book_screen.dart';
+import '../../presentation/books/screens/selectBook/select_book.dart';
+import '../../presentation/books/screens/selectBook/select_jenre.dart';
 import '../../presentation/cources/screens/coursePage.dart';
 import '../../presentation/main/widgets/main_screen.dart';
 import '../injection_container.dart';
@@ -17,78 +16,56 @@ class InnLabRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     final parts = routeSettings.name!.split('?');
-
     switch (parts[0]) {
       case MainRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => MultiBlocProvider(
               providers: [
-                // HomeScreen(),
-                // DevelopmentScreen(),
-                // HomeScreen(),
-                // HomeScreen(),
-                // HomeScreen(),
                 BlocProvider<HomeBloc>(
                   create: (_) => sl<HomeBloc>()..add(GetPostsList()),
                 ),
-                // BlocProvider<HomeBloc>(
-                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                // ),
-                // BlocProvider<HomeBloc>(
-                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                // ),
-                // BlocProvider<HomeBloc>(
-                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                // ),
-                // BlocProvider<HomeBloc>(
-                //   create: (_) => sl<HomeBloc>()..add(HomeLoad()),
-                // ),
               ],
-              child: MainScreen()
+              child: const MainScreen()
           ),
-        );
-      case MainRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => JenreScreen(
-            index_month: (0),
-            list: list,
-          ),
-
         );
       case JenreRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => JenreScreen(
-            index_month: (0),
+            indexMonth: (0),
             list: list,
           ),
         );
       case CourseRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => CoursePage(),
+          builder: (_) => const CoursePage(),
         );
       case DevelopmentRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => DevelopmentScreen(),
+          builder: (_) => const DevelopmentScreen(),
         );
       case ChoiceRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => MyChoiceScreen(),
+          builder: (_) => const MyChoiceScreen(),
         );
-      // case BookRoute:
-      //   return CupertinoPageRoute(
-      //     settings: routeSettings,
-      //     builder: (_) => BookScreen(
-      //       index_month: (routeSettings.arguments as Map),
-      //       select_index: (routeSettings.arguments as Map),
-      //       list: (routeSettings.arguments as Map),
-      //     ),
-      //   );
+      case MainBookRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => const BookScreen(),
+        );
+      case SelectBookRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) =>
+              BlocProvider(
+                create: (context) => sl<BookBloc>()..add(GetBookList((routeSettings.arguments as Map)['id'])),
+                child: SelectBookScreen(indexMonth: 0,list: const [], selectIndex: '',selectId: '',),
+              ),
+        );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,

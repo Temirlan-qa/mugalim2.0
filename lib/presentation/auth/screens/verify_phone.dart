@@ -27,7 +27,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
   bool emptyText = true;
   bool otp = false;
 
-  var maskFormatter = new MaskTextInputFormatter(
+  var maskFormatter = MaskTextInputFormatter(
       mask: '+7 ### ### ## ##',
       filter: { "#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy
@@ -66,7 +66,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Қош келдіңіздер!',
                         style: TextStyle(
                           fontSize: 23,
@@ -75,10 +75,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           fontFamily: 'CeraPro',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Text(
+                      const Text(
                         'Телефон нөмірін енгізіңіз',
                         style: TextStyle(
                           decoration: TextDecoration.none,
@@ -88,10 +88,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           fontFamily: 'CeraPro',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Телефон нөмірі',
                         style: TextStyle(
                           decoration: TextDecoration.none,
@@ -101,7 +101,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           fontFamily: 'CeraPro',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       TextFormField(

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/textform_widget.dart';
@@ -116,7 +116,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
             automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
             elevation: 1,
-            title: Container(
+            title: const SizedBox(
               width: double.maxFinite,
               child: TextFormFieldWidget(),
             ),

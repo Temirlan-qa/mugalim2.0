@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import '../../../../core/routes/environment_config.dart';
 import '../../../../core/utils/dio/dio_wrapper.dart';
 
 abstract class HomeDatasource {
@@ -25,13 +23,11 @@ class HomeDataSourceImpl implements HomeDatasource {
   @override
   Future<Response> getPost(String postId) async {
     Response response = await dioWrapper!.get('/posts/post/$postId');
-    print(response);
     return response;
   }
   @override
   Future<Response> getPostList() async {
     Response response = await dioWrapper!.get('/posts/post/list/pageable?page=1&size=20');
-    print(response);
     return response;
   }
   @override
@@ -62,7 +58,6 @@ class HomeDataSourceImpl implements HomeDatasource {
   @override
   Future<Response> getPostComment(String parentId) async {
     Response response = await dioWrapper!.get('/posts/post/$parentId');
-    print(response);
     return response;
   }
   @override

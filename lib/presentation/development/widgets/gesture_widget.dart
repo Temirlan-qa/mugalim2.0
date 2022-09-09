@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/const/SizedBox.dart';
+import '../../../core/const/sizedBox.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
 

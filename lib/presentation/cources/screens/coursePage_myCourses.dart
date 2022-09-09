@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
@@ -141,7 +141,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-              elevation: 0.3,
+              elevation: 1,
               centerTitle: true,
               title: Text(
                 'Курсы',
@@ -195,7 +195,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     text: 'Завершённые',
                   )
                 ],
-              )),
+              ),
+          ),
           body: TabBarView(
             children: [CurrentPage(), FinishedPage()],
           ),
@@ -240,7 +241,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     ),
                   ),
                   sizedBoxHeight8(),
-                  Padding(
+                  const Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),

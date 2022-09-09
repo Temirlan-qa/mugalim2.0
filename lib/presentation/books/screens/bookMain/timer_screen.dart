@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../core/const/const_color.dart';
-import '../../../core/const/text_style_const.dart';
-import '../../../core/routes/routes_const.dart';
-import '../../development/screens/development_screen.dart';
+import '../../../../core/const/const_color.dart';
+import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/routes_const.dart';
+import '../../../development/screens/development_screen.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({Key? key}) : super(key: key);
@@ -152,6 +152,15 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
           //   },
           // ),
         ],
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.black12,
+              ),
+              height: 1.0,
+            )
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),

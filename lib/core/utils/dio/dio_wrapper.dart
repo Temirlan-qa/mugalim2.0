@@ -11,7 +11,7 @@ class DioWrapper {
 
   String _path = '';
 
-  set path(String value) => this._path = value;
+  set path(String value) => _path = value;
 
   Future<Response> get(
     String path, {

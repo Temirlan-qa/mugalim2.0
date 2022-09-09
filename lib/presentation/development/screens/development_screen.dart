@@ -1,13 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/development/screens/mPassword_screen.dart';
 import 'package:mugalim/presentation/development/screens/statistic_screen.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
-import '../../books/screens/select_jenre.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -102,8 +101,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                     const Spacer(),
                                     GestureWidget(
                                       onTap: () {
-                                        Navigator.of(context).pushNamed(ChoiceRoute);
-
+                                        Navigator.of(context, rootNavigator: true).pushNamed(JenreRoute);
                                       }, title: 'Книги', path: 'assets/images/newBookIcon.png',
                                     ),
                                     const Spacer(),

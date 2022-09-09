@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
-import 'package:mugalim/presentation/books/screens/timer_screen.dart';
-import 'package:mugalim/presentation/main/widgets/main_screen.dart';
-import 'package:mugalim/presentation/welcome_screen/screens/info_screen.dart';
 import 'core/injection_container.dart';
 import 'core/utils/hive/hive_init.dart';
 import 'core/routes/routes.dart';
 import 'logic/auth/bloc/auth_bloc.dart';
+import 'logic/book/bloc/book_bloc.dart';
 import 'logic/home/bloc/home_bloc.dart';
 
 Future<void> main() async {
@@ -21,6 +19,7 @@ Future<void> main() async {
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   var onBoarding = Hive.box('onBoarding');
@@ -34,6 +33,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomeBloc>(
           create: (_) => sl(),
         ),
+        BlocProvider<BookBloc>(
+          create: (_) => sl(),
+        ),
+        BlocProvider<BookBloc>(
+          create: (_) => sl<BookBloc>()..add(BookVoteList()),
+        ),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: (settings) => InnLabRouter.generateRoute(settings),
-        home: VerifyScreen(),
+        home: const VerifyScreen(),
         // home: MainScreen(),
         // home: onBoarding.containsKey('show')
         //     ? VerifyScreen() : IntroScreen(),
