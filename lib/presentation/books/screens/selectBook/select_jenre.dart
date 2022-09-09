@@ -196,13 +196,17 @@ class _JenreScreenState extends State<JenreScreen> {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  selectList[index],
-                  style: TextStyles.mediumStyle.copyWith(
-                    fontSize: 16,
-                    color: Colors.white,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width/2-100,
+                  height: 80,
+                  child: Text(
+                    state.votes[0].bookVotes![index].name!,
+                    style: TextStyles.mediumStyle.copyWith(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                    // overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
                 const Spacer(),
                 array.contains(widget.list[index])
