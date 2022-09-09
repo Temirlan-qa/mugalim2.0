@@ -22,10 +22,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
   Duration getDuration() {
     final dateTimeResumed = DateTime.now().millisecondsSinceEpoch;
     final startingDateTime = DateTime.parse(startingTime).millisecondsSinceEpoch;
-    print('$dateTimeResumed date Time Resumed');
-    print('$startingDateTime starting Date time');
+
     var difference = startingDateTime - dateTimeResumed;
-    print(difference);
 
     final hours = difference ~/ (60 * 60 * 1000);
     difference = difference - hours.toInt() * (60 * 60 * 1000);
@@ -118,13 +116,12 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) =>
-              //       const DevelopmentScreen()),
-              // );
-              Navigator.of(context).pushNamed(DevelopmentRoute);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                    const DevelopmentScreen()),
+              );
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -278,22 +275,16 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
               padding: const EdgeInsets.all(16.0),
               child: TextButton(
                   style: TextButton.styleFrom(
-                primary: Color(0xFFE0E0E0),
-                backgroundColor: Color(0xff3D3DD8),
+                primary: const Color(0xFFE0E0E0),
+                backgroundColor: const Color(0xff3D3DD8),
                 elevation: 3,
-                minimumSize: Size(343, 48),
+                minimumSize: const Size(343, 48),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) =>
-                  //       const DevelopmentScreen()),
-                  // );
-                  Navigator.of(context).pushNamed(DevelopmentRoute);
+                  Navigator.of(context, rootNavigator: true).pushNamed(MainBookRoute);
                 },
                   child: Text(
                     "На главную",

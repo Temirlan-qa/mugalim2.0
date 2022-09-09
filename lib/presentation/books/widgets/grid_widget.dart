@@ -84,7 +84,7 @@ class _GridWidgetState extends State<GridWidget> {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
-                      const SizedBox(height: 8,)
+                      const SizedBox(height: 4,),
                     ],
                   ),
                 )

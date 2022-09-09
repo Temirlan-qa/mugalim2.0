@@ -94,7 +94,6 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                   children: [
                                     GestureWidget(
                                       onTap: () {
-
                                         Navigator.of(context, rootNavigator: true).pushNamed(CourseRoute);
                                       }, title: 'Курсы', path: 'assets/images/courseIcon.png',
                                     ),

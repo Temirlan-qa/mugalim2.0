@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mugalim/presentation/books/screens/bookMain/timer_screen.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 
 import '../../../../core/const/const_color.dart';
@@ -71,12 +72,11 @@ class ChoosenPage extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => JenreScreen(index_month: 0,list: ['Сентября', 'Октября', 'Ноября','Декабря'],)
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TimerScreen()),
+                          );
                         },
                         child: const Text(
                           "На главную",

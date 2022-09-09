@@ -63,7 +63,7 @@ class InnLabRouter {
           builder: (_) =>
               BlocProvider(
                 create: (context) => sl<BookBloc>()..add(GetBookList((routeSettings.arguments as Map)['id'])),
-                child: SelectBookScreen(indexMonth: 0,list: const [], selectIndex: '',selectId: '',),
+                child: SelectBookScreen(indexMonth: (routeSettings.arguments as Map)['indexMonth'],list: (routeSettings.arguments as Map)['list'], selectIndex: (routeSettings.arguments as Map)['selectIndex'],selectId: (routeSettings.arguments as Map)['selectId'],),
               ),
         );
       default:

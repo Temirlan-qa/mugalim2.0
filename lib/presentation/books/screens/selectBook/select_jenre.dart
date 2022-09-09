@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
@@ -97,29 +98,27 @@ class _JenreScreenState extends State<JenreScreen> {
                       ),
                       onPressed: () {
                         if (array.isNotEmpty) {
-                          int index = indexGrid;
-                          String selectIndex = widget.list[index];
-                          if (widget.indexMonth.toInt() >= 4) {
+                          String selectIndex = widget.list[indexGrid];
+                          int index = 0;
+                          if(selectIndex == 'Бизнес') {
+                            index = 0;
+                          } else if(selectIndex == 'Классика') {
+                            index = 1;
+                          } else if(selectIndex == 'Развитие') {
+                            index = 2;
+                          } else if(selectIndex == 'Бизнес') {
+                            index = 3;
+                          }
+                            if (widget.indexMonth.toInt() >= 4) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const ChoosenPage()),
                             );
                           } else {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (BuildContext context) => SelectBookScreen(
-                            //       indexMonth: widget.indexMonth,
-                            //       selectIndex: selectIndex,
-                            //       list: widget.list,
-                            //       selectId: state.votes[0].bookVotes![index].voteId!
-                            //     ),
-                            //   ),
-                            // );
                             Navigator.of(context).pushNamed(SelectBookRoute, arguments: {
-                              "indexMonth": 0,
-                              "id": state.votes[0].bookVotes![widget.indexMonth].voteId,
+                              "indexMonth": widget.indexMonth,
+                              "id": state.votes[0].bookVotes![index].voteId,
                               "list": widget.list,
                               "selectIndex" : selectIndex,
                               "selectId": state.votes[0].bookVotes![widget.indexMonth].voteId
@@ -144,7 +143,7 @@ class _JenreScreenState extends State<JenreScreen> {
             );
           }
           else if(state is BookLoading){
-            return const Center(child: Text('loading'));
+            return const Center(child: CupertinoActivityIndicator(color: Colors.grey,));
           }
           else if(state is BookFailure){
             return const Center(child: Text('error'));
@@ -198,9 +197,9 @@ class _JenreScreenState extends State<JenreScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  state.votes[0].bookVotes![index].name!,
+                  selectList[index],
                   style: TextStyles.mediumStyle.copyWith(
-                    fontSize: 9,
+                    fontSize: 16,
                     color: Colors.white,
                   ),
                   overflow: TextOverflow.ellipsis,

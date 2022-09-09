@@ -29,6 +29,7 @@ class _AuthGmailScreenState extends State<AuthGmailScreen> {
   bool emptyText = true;
   bool emptyText2 = true;
 
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery

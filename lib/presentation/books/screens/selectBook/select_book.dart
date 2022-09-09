@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -7,6 +10,7 @@ import 'package:mugalim/presentation/books/screens/selectBook/book_detailed_scre
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 import 'package:dio/dio.dart';
 import '../../../../core/injection_container.dart';
+import '../../../../core/routes/environment_config.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 import '../../../../logic/book/data/datasources/book_datasources.dart';
 import 'done.dart';
@@ -33,6 +37,7 @@ class SelectBookScreen extends StatefulWidget {
 class _SelectBookScreenState extends State<SelectBookScreen> {
   List list = [];
   late String resultOptionId;
+  Box tokensBox = Hive.box('tokens');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +50,10 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   child: SafeArea(
                     child: Container(
                       color: ColorStyles.neutralsPageBackgroundColor,
+                      constraints: BoxConstraints(
+                        minHeight: MediaQuery.of(context).size.height,
+                        minWidth: MediaQuery.of(context).size.width,
+                      ),
                       child: Column(
                         children: [
                           Center(
@@ -77,7 +86,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                           ),
                           ListView.builder(
                               shrinkWrap: true,
-                              itemCount: 5,
+                              itemCount: state.votes.length,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return GestureDetector(
@@ -113,12 +122,31 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                           children: [
-                                            ClipRRect(
+                                            state.votes[index].avatarId != null ? ClipRRect(
+                                              borderRadius: BorderRadius.circular(6),
+                                              child: CachedNetworkImage(
+                                                  imageUrl:'${EnvironmentConfig.url}/file/image/${state.votes[index].avatarId}',
+                                                  height: 134,
+                                                  width: 88,
+                                                  fit: BoxFit.cover,
+                                                  httpHeaders: {
+                                                    'Content-Type': 'application/json',
+                                                    'Accept': 'application/json',
+                                                    "Authorization": "Bearer ${tokensBox
+                                                        .get('access')}"
+                                                  },
+                                                  placeholder: (context,
+                                                      url) =>
+                                                      const Offstage(),
+                                                  errorWidget: (context, str, url) =>
+                                                      const Offstage()
+                                              ),
+                                            ) : ClipRRect(
                                                 borderRadius:
                                                 BorderRadius.circular(6.0),
                                                 child:
                                                 Image.asset(
-                                                  'assets/images/bookImage1.png',
+                                                  'assets/images/skeletonBookImage.png',
                                                   width: 88,
                                                   height: 134,
                                                 )
@@ -251,7 +279,6 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                           ),
                         ),
                         onPressed: () async{
-                          // print(list[0]);
                           if (list.isNotEmpty) {
                             if (widget.indexMonth.toInt() >= 3) {
                               Navigator.push(
@@ -261,6 +288,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                               );
                             }
                             if (list.isNotEmpty && widget.indexMonth.toInt() < 3)  {
+
                               widget.list.remove(widget.selectIndex);
                               final BookDatasource bookDatasource = sl();
                               Response response = await bookDatasource.postVote(widget.selectId,state.votes[list[0]].id!);
@@ -328,6 +356,9 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                 ),
               ],
             );
+          }
+          else if(state is BookLoading){
+            return const Center(child: CupertinoActivityIndicator(color: Colors.grey,));
           }
           return const Center(child : Text('no loaded'));
         },
