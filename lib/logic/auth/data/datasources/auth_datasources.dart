@@ -21,7 +21,7 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
     String password = '';
 
     var basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username1:$password'));
+        'Basic ${base64Encode(utf8.encode('$username1:$password'))}';
 
     Response response = await Dio().post(
       '${EnvironmentConfig.url}/uaa/oauth/token',
@@ -35,7 +35,6 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
           headers: {"authorization": basicAuth}),
     );
 
-    print(response);
 
     return response;
   }

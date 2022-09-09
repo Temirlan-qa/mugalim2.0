@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/src/response.dart';
 import 'package:intl/intl.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
@@ -19,7 +19,7 @@ import '../../../logic/home/data/datasources/home_datasources.dart';
 import 'home_comments.dart';
 
 class HomeScreen extends StatefulWidget {
-  final bloc;
+  final Bloc bloc;
   const HomeScreen({Key? key, required this.bloc}) : super(key: key);
 
   @override
@@ -600,26 +600,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           return Column(
                             children: [
                               index == 0 ? SizedBox(height: 16,) : SizedBox(),
-                              Text('Trend'),
+                              Text('Тренды'),
                               // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
                             ],
                           );
                         }),
                   ),
                 ),
-                Center(child: AnimatedDrawing.svg(
-                  "assets/icons/check-circle.svg",
-                  run: run,
-                  duration: const Duration(milliseconds: 1000),
-                  lineAnimation: LineAnimation.allAtOnce,
-                  animationCurve: Curves.fastOutSlowIn,
-                  animationOrder: PathOrders.leftToRight,
-                  onFinish: () => setState(() {
-                    run  = false;
-                  }),
-                  width: 100,
-                  height: 100,
-                )),
+                SingleChildScrollView(
+                  child: Container(
+                    color: ColorStyles.neutralsPageBackgroundColor,
+                    child: ListView.builder(
+                        itemCount: 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              index == 0 ? SizedBox(height: 16,) : SizedBox(),
+                              Text('Сохраненные'),
+                              // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                            ],
+                          );
+                        }),
+                  ),
+                ),
               ],
             ),
           ),

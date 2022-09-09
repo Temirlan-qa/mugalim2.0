@@ -55,21 +55,21 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => DevelopmentScreen(),
+                  builder: (_) => const DevelopmentScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(2),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => TimetableScreen(),
+                  builder: (_) => const TimetableScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(3),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => RatingScreen(),
+                  builder: (_) => const RatingScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(4),

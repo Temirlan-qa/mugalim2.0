@@ -11,7 +11,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/home/screens/home_comments.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import '../../../core/injection_container.dart';
 import '../../../logic/home/bloc/home_bloc.dart';
 

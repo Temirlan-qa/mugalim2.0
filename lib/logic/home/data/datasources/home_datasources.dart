@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import '../../../../core/routes/environment_config.dart';
 import '../../../../core/utils/dio/dio_wrapper.dart';
 
 abstract class HomeDatasource {
@@ -24,7 +22,6 @@ class HomeDataSourceImpl implements HomeDatasource {
   @override
   Future<Response> getPost(String postId) async {
     Response response = await dioWrapper!.get('/posts/post/$postId');
-    print(response);
     return response;
   }
 

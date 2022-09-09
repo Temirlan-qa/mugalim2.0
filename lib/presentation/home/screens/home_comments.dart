@@ -10,10 +10,10 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
+import 'package:dio/src/response.dart';
 import "package:intl/intl.dart";
 import 'package:mugalim/logic/home/data/models/post_comment.dart';
-import 'package:mugalim/presentation/profile/widgets/text_field_for_edit_info_user_widget.dart';
 
 
 import '../../../core/injection_container.dart';
@@ -651,7 +651,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(left: comments[index].relativeId != null ? 48.0 : 0),
+                                    padding: EdgeInsets.only(left: comments[index].parentId != widget.id ? 48.0 : 0),
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -705,7 +705,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                               width: MediaQuery
                                                   .of(context)
                                                   .size
-                                                  .width - 92 - (comments[index].relativeId != null ? 48.0 : 0),
+                                                  .width - 92 - (comments[index].parentId != widget.id ? 48.0 : 0),
                                               child: Text(
                                                 comments[index].content ?? "",
                                                 style: const TextStyle(
@@ -720,7 +720,7 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
                                               width: MediaQuery
                                                   .of(context)
                                                   .size
-                                                  .width - 84 - (comments[index].relativeId != null ? 48.0 : 0),
+                                                  .width - 84 - (comments[index].parentId != widget.id ? 48.0 : 0),
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment
                                                     .spaceBetween,
