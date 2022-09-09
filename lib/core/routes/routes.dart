@@ -5,7 +5,6 @@ import 'package:mugalim/presentation/books/screens/selectBook/myChoice.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import '../../logic/book/bloc/book_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
-import 'package:mugalim/presentation/books/screens/myChoice.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutApplication_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutProject_screen.dart';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/books/screens/bookMain/timer_screen.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mugalim/presentation/books/screens/select_jenre.dart';
 
 import '../../../../core/const/const_color.dart';
 

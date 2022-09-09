@@ -64,8 +64,9 @@ void initGetIt() async {
 
   sl.registerFactory<BookBloc>(
         () => BookBloc(sl()),
-
+  );
   // Profile
+
   sl.registerLazySingleton<ProfileDatasource>(
         () => ProfileDatasourceImpl(dioWrapper: sl()),
   );
