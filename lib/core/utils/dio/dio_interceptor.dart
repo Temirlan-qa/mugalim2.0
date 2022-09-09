@@ -24,9 +24,9 @@ class DioInterceptor extends Interceptor {
       if (!options.path.contains('oauth/token') &&
           !options.uri.toString().contains('auth/refresh')) {
         options.headers['Authorization'] = 'Bearer $accessToken';
-        dio!.post('/uaa/status/set-online',
-            options:
-                Options(headers: {"Authorization": 'Bearer $accessToken'}));
+        // dio!.post('/uaa/status/set-online',
+        //     options:
+        //         Options(headers: {"Authorization": 'Bearer $accessToken'}));
       }
     }
     return handler.next(options);

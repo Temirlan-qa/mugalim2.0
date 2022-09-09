@@ -53,9 +53,9 @@ class ColorStyles {
   //error
   static Color errorSurfaceColor = const Color(0xFFFFE5E8);
   static Color errorSurfaceHoverColor = const Color(0xFFFFB1B9);
-  static Color errorBorderColor = const Color(0xFFEE1E34);
+  static Color errorBorderColor = const Color(0xFFE71D36);
   static Color errorBorderHoverColor = const Color(0xFFE8132A);
-  static Color errorShapeColor = const Color(0xFFE8132A);
+  static Color errorShapeColor = const Color(0xFFE71D36);
   static Color errorShapeHoverColor = const Color(0xFFD20319);
   static Color errorShapeActiveColor = const Color(0xFF9C0010);
   static Color errorTextColor = const Color(0xFFD20319);
@@ -105,7 +105,7 @@ class ColorStyles {
   static Color neutralsTextSecondaryColor = const Color(0xFF333E5A);
   static Color neutralsTextSecondaryDisabledColor = const Color(0xFFB9C4D9);
   static Color neutralsTextPrimaryColor = const Color(0xFF1A1A1A);
-  static Color neutralsTextPrimaryDisabledColor = const Color(0xFFB9C4D9);
+  static Color neutralsTextPrimaryDisabledColor = const Color(0xFFE0E0E0);
   // dark theme
   static Color darkthemePageBackgroundColor = const Color(0xFF272831);
   static Color neutralsdarkthemePageBackgroundColor = const Color(0xFF292A32);

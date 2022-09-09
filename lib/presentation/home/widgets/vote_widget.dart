@@ -30,7 +30,7 @@ class _VoteWidgetState extends State<VoteWidget> {
   bool clickToShow = false;
   String gonna = "";
 
-  final GlobalKey<FormState> _textWidgetKey = GlobalKey<FormState>();
+  //final GlobalKey<FormState> _textWidgetKey = GlobalKey<FormState>();
   // double _textWidgetSize = 100;
 
   // void _getSize() {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
-import 'package:mugalim/core/const/text_style_const.dart';
 
 class SearchWidget extends StatelessWidget {
   final String hintText;

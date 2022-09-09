@@ -10,7 +10,7 @@ class PostByIdModel {
   final String? id;
   final String? title;
   final String? content;
-  final List? imgs;
+  final List? images;
   final String? userId;
   final String? cityId;
   final String? regionId;
@@ -21,7 +21,7 @@ class PostByIdModel {
   final int? commentNumber;
   final int? savedNumber;
   final bool? liked;
-  final bool? commeted;
+  final bool? commented;
   final bool? saved;
   final String? createdAt;
   final String? updatedAt;
@@ -29,7 +29,7 @@ class PostByIdModel {
 
   factory PostByIdModel.fromJson(Map<String, dynamic> json) => _$PostByIdModelFromJson(json);
 
-  PostByIdModel(this.id, this.title, this.content, this.userId,  this.likeNumber, this.liked, this.createdAt,  this.cityId, this.regionId, this.type, this.viewNumber, this.commentNumber, this.savedNumber, this.commeted, this.saved, this.updatedAt, this.imgs, this.user);
+  PostByIdModel(this.id, this.title, this.content, this.userId,  this.likeNumber, this.liked, this.createdAt,  this.cityId, this.regionId, this.type, this.viewNumber, this.commentNumber, this.savedNumber, this.commented, this.saved, this.updatedAt, this.images, this.user);
 
   Map<String, dynamic> toJson() => _$PostByIdModelToJson(this);
 }

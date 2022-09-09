@@ -27,7 +27,9 @@ class HomeRepositoryImpl extends HomeRepository {
     Response response = await homeDatasource.getPostList();
     // print(response.data['content'][0]['content']);
 
-    return (response.data['content'] as List).map((data) => PostModel.fromJson(data)).toList();
+    print(response.data);
+
+    return (response.data['content'] as List).map((jasik) => PostModel.fromJson(jasik)).toList();
   }
   @override
   Future<List<PostByIdModel>> getPosts(String postId) async {

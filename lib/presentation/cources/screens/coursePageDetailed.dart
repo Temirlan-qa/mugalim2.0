@@ -334,7 +334,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
                       ),
                     ),
                   ),
-                  CourseCardWidget(),
+                  const CourseCardWidget(),
                 ],
               ),
             )

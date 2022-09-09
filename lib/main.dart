@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 import 'core/injection_container.dart';
 import 'core/utils/hive/hive_init.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<BookBloc>(
           create: (_) => sl<BookBloc>()..add(BookVoteList()),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (_) => sl(),
         ),
       ],
       child: MaterialApp(

@@ -52,6 +52,12 @@ dependencies:
   drawing_animation: ^1.0.1
   webview_flutter: ^3.0.4
   svgator_player_flutter: ^1.0.3
+  carousel_slider: ^4.1.1
+  lottie: ^1.4.2
+  dotted_border: ^2.0.0+2
+  image_picker: ^0.8.5+3
+  modal_bottom_sheet: ^2.1.2
+  page_transition: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -86,7 +92,7 @@ flutter:
   assets:
      - assets/images/
      - assets/icons/
-
+     - assets/animations/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

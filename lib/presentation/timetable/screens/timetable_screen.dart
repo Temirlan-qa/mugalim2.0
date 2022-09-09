@@ -4,6 +4,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/inProcess_widget.dart';
 
 class TimetableScreen extends StatelessWidget {
+
   const TimetableScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +24,9 @@ class TimetableScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const InProcessWidget(),
+      body: InProcessWidget(
+        onPressed: (){},
+      ),
     );
   }
 }
