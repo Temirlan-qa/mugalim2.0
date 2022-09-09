@@ -6,7 +6,7 @@ import 'package:mugalim/core/const/text_style_const.dart';
 class TextFieldForEditInfoWidget extends StatefulWidget {
   final TextEditingController controller;
   final TextEditingController phoneController;
-  TextFieldForEditInfoWidget(
+  const TextFieldForEditInfoWidget(
       {Key? key, required this.controller, required this.phoneController})
       : super(key: key);
 
@@ -26,14 +26,13 @@ class _TextFieldForEditInfoWidgetState
           onChanged = true;
         });
       },
-      style: TextStyles.mediumStyle
-          .copyWith(fontSize: 16, color: ColorStyles.neutralsTextPrimaryColor),
+      style: TextStyles.mediumStyle.copyWith(fontSize: 16, color: ColorStyles.neutralsTextPrimaryColor),
       controller: widget.controller,
       decoration: InputDecoration(
         counterText: "",
         contentPadding:
             const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        suffix: onChanged
+        suffixIcon: onChanged
             ? GestureDetector(
                 onTap: () {
                   widget.controller.clear();
@@ -45,6 +44,18 @@ class _TextFieldForEditInfoWidgetState
                 ),
               )
             : null,
+        // suffix: onChanged
+        //     ? GestureDetector(
+        //         onTap: () {
+        //           widget.controller.clear();
+        //         },
+        //         child: Icon(
+        //           CupertinoIcons.clear,
+        //           color: ColorStyles.primaryBorderColor,
+        //           size: 24,
+        //         ),
+        //       )
+        //     : null,
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           borderSide: BorderSide(
