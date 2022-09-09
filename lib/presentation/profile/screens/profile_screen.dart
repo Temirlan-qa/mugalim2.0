@@ -249,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               } else if (state is ProfileLoading) {
                 return const Text('ProfileLoading');
               }
-              return const Text("Post don't loaded");
+              return const Text(" ");
             },
           ),
         ),

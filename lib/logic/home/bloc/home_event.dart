@@ -13,8 +13,9 @@ class GetPostsList extends HomeEvent{
 
 class GetPostCommentList extends HomeEvent{
   final String parentId;
+  final bool? loadingState;
 
-  GetPostCommentList(this.parentId);
+  GetPostCommentList({required this.parentId, this.loadingState});
 }
 
 class GetPostByIdList extends HomeEvent{

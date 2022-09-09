@@ -106,7 +106,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                     GestureWidget(
                                       onTap: () {
                                         Navigator.of(context)
-                                            .pushNamed(ChoiceRoute);
+                                            .pushNamed(JenreRoute);
                                       },
                                       title: 'Книги',
                                       path: 'assets/images/newBookIcon.png',

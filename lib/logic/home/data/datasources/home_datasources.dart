@@ -62,7 +62,6 @@ class HomeDataSourceImpl implements HomeDatasource {
   @override
   Future<Response> getPostComment(String parentId) async {
     Response response = await dioWrapper!.get('/posts/comments/list/pageable/$parentId');
-    print(response);
     return response;
   }
   @override

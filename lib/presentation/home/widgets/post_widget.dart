@@ -70,7 +70,7 @@ class _PostWidgetState extends State<PostWidget> {
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => sl<HomeBloc>()..add(GetPostCommentList(widget.id!)),
+              create: (context) => sl<HomeBloc>()..add(GetPostCommentList(parentId: widget.id!)),
               child: HomeCommentsPage(
               pplLike: widget.likeNumber!,
               pplCommented: widget.commentNumber!,
@@ -86,7 +86,8 @@ class _PostWidgetState extends State<PostWidget> {
               voteAnswer2: voteAnswer2,
               votetitle: votetitle, title: widget.content!,
               imageAuthor: widget.avatarId,
-              postAuthor: widget.fio!, parentId: widget.id!,
+              postAuthor: widget.fio!,
+              id: widget.id!,
               liked: widget.liked!,
               saved : widget.saved!,
               bloc: widget.bloc,

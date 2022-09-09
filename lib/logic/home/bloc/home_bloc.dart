@@ -28,7 +28,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     });
     on<GetPostCommentList>((event, emit) async {
-      emit(HomeLoading());
+      if(event.loadingState != null && event.loadingState!) {
+        emit(HomeLoading());
+      }
       try {
         final List<PostCommentModel> list = await homeRepository.getPostComment(event.parentId);
         emit(PostCommentListSuccess(list));

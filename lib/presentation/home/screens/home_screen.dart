@@ -388,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         MaterialPageRoute(
                                                           builder: (context2) =>
                                                               BlocProvider(
-                                                                create: (context) => sl<HomeBloc>()..add(GetPostCommentList(state.posts[index].id!)),
+                                                                create: (context) => sl<HomeBloc>()..add(GetPostCommentList(parentId: state.posts[index].id!)),
                                                                 child: HomeCommentsPage(
                                                                 pplLike: state
                                                                     .posts[index]
@@ -418,7 +418,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 postAuthor: state
                                                                     .posts[index]
                                                                     .userName ?? '',
-                                                                parentId: state
+                                                                id: state
                                                                     .posts[index]
                                                                     .id!,
                                                                 saved: state
@@ -581,7 +581,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               );
                             }
-                            return Text("Post don't loaded");
+                            return Text(" ");
                             },
                           ),
                         ),
