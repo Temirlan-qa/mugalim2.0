@@ -64,4 +64,5 @@ void initGetIt() async {
   sl.registerFactory<ProfileBloc>(
         () => ProfileBloc(sl()),
   );
+
 }

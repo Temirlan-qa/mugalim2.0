@@ -19,18 +19,18 @@ class ProfileSuccess extends ProfileState {
   ProfileSuccess(this.profileModel);
 }
 
-// class ProfileInfoEditing extends ProfileState {
-// }
-//
-// class ProfileInfoEditFailure extends ProfileState {
-//   final String message;
-//   ProfileInfoEditFailure(this.message);
-// }
-//
-// class ProfileInfoEditSuccess extends ProfileState {
-//   final UserModel userModel;
-//   ProfileInfoEditSuccess(this.userModel);
-// }
+class ProfileInfoEditing extends ProfileState {
+}
+
+class ProfileInfoEditFailure extends ProfileState {
+  final String message;
+  ProfileInfoEditFailure(this.message);
+}
+
+class ProfileInfoEditSuccess extends ProfileState {
+  final ProfileModel profileModel;
+  ProfileInfoEditSuccess(this.profileModel);
+}
 // class ProfileChangePasswordFailure extends ProfileState {
 //   final String message;
 //   ProfileChangePasswordFailure(this.message);

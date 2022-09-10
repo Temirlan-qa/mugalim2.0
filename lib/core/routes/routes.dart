@@ -84,7 +84,7 @@ class InnLabRouter {
       case SettingsRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => SettingsScreen(infoProfile: routeSettings.arguments),
+          builder: (_) => SettingsScreen(),
         );
       case AboutAppRoute:
         return CupertinoPageRoute(

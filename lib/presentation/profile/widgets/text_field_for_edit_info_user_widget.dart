@@ -26,7 +26,8 @@ class _TextFieldForEditInfoWidgetState
           onChanged = true;
         });
       },
-      style: TextStyles.mediumStyle.copyWith(fontSize: 16, color: ColorStyles.neutralsTextPrimaryColor),
+      style: TextStyles.mediumStyle
+          .copyWith(fontSize: 16, color: ColorStyles.neutralsTextPrimaryColor),
       controller: widget.controller,
       decoration: InputDecoration(
         counterText: "",
@@ -44,18 +45,6 @@ class _TextFieldForEditInfoWidgetState
                 ),
               )
             : null,
-        // suffix: onChanged
-        //     ? GestureDetector(
-        //         onTap: () {
-        //           widget.controller.clear();
-        //         },
-        //         child: Icon(
-        //           CupertinoIcons.clear,
-        //           color: ColorStyles.primaryBorderColor,
-        //           size: 24,
-        //         ),
-        //       )
-        //     : null,
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           borderSide: BorderSide(
