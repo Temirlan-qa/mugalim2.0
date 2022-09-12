@@ -1,16 +1,18 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import '../../../../core/routes/environment_config.dart';
 import '../../../../core/utils/dio/dio_wrapper.dart';
 
 abstract class HomeDatasource {
   Future<Response> getPostList();
+  Future<Response> getTrendingPostList();
+  Future<Response> getSavedPostList();
   Future<Response> getPost(String postId);
   Future<Response> likedPost(String postId,String likeType);
   Future<Response> deletePost(String postId);
   Future<Response> savedPost(String postId);
   Future<Response> getPostComment(String parentId);
   Future<Response> createPostComment(String parentId,String content);
+  Future<Response> deletePostComment(String commentId);
+  Future<Response> viewPost(String postId);
 }
 
 class HomeDataSourceImpl implements HomeDatasource {
@@ -24,13 +26,24 @@ class HomeDataSourceImpl implements HomeDatasource {
   @override
   Future<Response> getPost(String postId) async {
     Response response = await dioWrapper!.get('/posts/post/$postId');
-    print(response);
     return response;
   }
 
   @override
   Future<Response> getPostList() async {
     Response response = await dioWrapper!.get('/posts/post/list/pageable?page=1&size=20');
+    return response;
+  }
+
+  @override
+  Future<Response> getTrendingPostList() async {
+    Response response = await dioWrapper!.get('/posts/post/trending/pageable?page=1&size=20');
+    return response;
+  }
+
+  @override
+  Future<Response> getSavedPostList() async {
+    Response response = await dioWrapper!.get('/posts/post/my-saved/list/pageable?page=1&size=20');
     return response;
   }
 
@@ -62,7 +75,6 @@ class HomeDataSourceImpl implements HomeDatasource {
   @override
   Future<Response> getPostComment(String parentId) async {
     Response response = await dioWrapper!.get('/posts/comments/list/pageable/$parentId');
-    print(response);
     return response;
   }
   @override
@@ -73,6 +85,20 @@ class HomeDataSourceImpl implements HomeDatasource {
           'content' : content,
         }
     );
+    return response;
+  }
+
+  @override
+  Future<Response> deletePostComment(String commentId) async {
+    Response response = await dioWrapper!.delete('/posts/comments/delete/$commentId');
+    return response;
+  }
+
+  @override
+  Future<Response> viewPost(String postId) async {
+    Response response = await dioWrapper!.post('/posts/post-view/create', data: {
+      "postId": postId
+    });
     return response;
   }
 }

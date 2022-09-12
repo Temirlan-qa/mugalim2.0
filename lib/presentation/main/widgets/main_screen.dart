@@ -43,33 +43,28 @@ class _MainScreenState extends State<MainScreen> {
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
                   // builder: (_) => HomeScreen(),
-                  builder: (_) => BlocProvider(
-                    create: (context) => sl<HomeBloc>()..add(GetPostsList()),
-                    child: HomeScreen(
-                        bloc: context.read<HomeBloc>()
-                    ),
-                  ),
+                  builder: (_) => HomeScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => DevelopmentScreen(),
+                  builder: (_) => const DevelopmentScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(2),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => TimetableScreen(),
+                  builder: (_) => const TimetableScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(3),
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => RatingScreen(),
+                  builder: (_) => const RatingScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(4),

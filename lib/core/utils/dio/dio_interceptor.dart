@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 
-import '../../../main.dart';
 import '../../injection_container.dart';
 import 'dio_wrapper.dart';
 
@@ -19,8 +18,8 @@ class DioInterceptor extends Interceptor {
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    // print(options.uri);
     String? accessToken = Hive.box('tokens').get('access');
+    // print(options.uri);
     // print(accessToken);
     if (accessToken != null) {
       if (!options.path.contains('oauth/token') &&
@@ -36,9 +35,7 @@ class DioInterceptor extends Interceptor {
 
   @override
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    print(err);
     if (err.response!.statusCode == 401) {
-      print('auth error');
       if (tokens!.containsKey('refresh')) {
         await refreshToken();
         return handler.resolve(await _retry(err.requestOptions));
@@ -62,11 +59,11 @@ class DioInterceptor extends Interceptor {
     String password = '';
 
     var basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username1:$password'));
+        'Basic ${base64Encode(utf8.encode('$username1:$password'))}';
 
     final refreshToken = tokens!.get('refresh');
     Response response = await Dio().post(
-      'https://demo.mugalim.academy/bcspc/uaa/oauth/token',
+      'https://portal.mugalim.academy/bcspc/uaa/oauth/token',
       data: {
         'refresh_token': refreshToken,
         'grant_type': 'refresh_token',
@@ -76,7 +73,6 @@ class DioInterceptor extends Interceptor {
           headers: {"authorization": basicAuth}),
     );
 
-    print(response);
 
     if (response.statusCode == 200) {
       tokens!.put('access', response.data['access_token']);

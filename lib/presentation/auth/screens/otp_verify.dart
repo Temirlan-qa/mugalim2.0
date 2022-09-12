@@ -53,10 +53,8 @@ class _OTPScreenState extends State<OTPScreen> {
   String pinCode = "";
   @override
   Widget build(BuildContext context) {
-    var random = new Random();
+    var random = Random();
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     String randomNum(){
       count++;
       String pinCode1 = "";
@@ -73,8 +71,8 @@ class _OTPScreenState extends State<OTPScreen> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: new DecorationImage(image: AssetImage('assets/images/home-2.png'),fit: BoxFit.cover,),
+            decoration: const BoxDecoration(
+              image:  DecorationImage(image: AssetImage('assets/images/home-2.png'),fit: BoxFit.cover,),
             ),
           ),
           Positioned(
@@ -100,7 +98,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           Navigator.pop(context);
                         },
                         child: Row(
-                          children: [
+                          children: const [
                             Icon(Icons.arrow_back_ios_new),
                             SizedBox(width: 28,),
                             Text(
@@ -115,12 +113,12 @@ class _OTPScreenState extends State<OTPScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Text(
                         'Телефон нөмірі, pinCode = $pinCode',
-                        style: TextStyle(
+                        style: const TextStyle(
                           decoration: TextDecoration.none,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -128,7 +126,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           fontFamily: 'CeraPro',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       TextFormField(
@@ -148,8 +146,8 @@ class _OTPScreenState extends State<OTPScreen> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: '${widget.loginEditingControllerText}',
-                          hintStyle: TextStyles.mediumStyle.copyWith(fontSize: 16, color: Color(0xff767676)),
+                          hintText: widget.loginEditingControllerText,
+                          hintStyle: TextStyles.mediumStyle.copyWith(fontSize: 16, color: const Color(0xff767676)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                             borderSide: BorderSide(
@@ -164,14 +162,14 @@ class _OTPScreenState extends State<OTPScreen> {
                               color: ColorStyles.primaryBorderColor,
                             ),
                           ),
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                               maxHeight: 48
                           ),
                           // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                         ),
                       ),
-                      SizedBox(height: 20,),
-                      Text(
+                      const SizedBox(height: 20,),
+                      const Text(
                         'SMS-код',
                         style: TextStyle(
                           decoration: TextDecoration.none,
@@ -181,7 +179,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           fontFamily: 'CeraPro',
                         ),
                       ),
-                      SizedBox(height: 8,),
+                      const SizedBox(height: 8,),
                       TextFormField(
 
                         controller: loginEditingController,
@@ -222,7 +220,7 @@ class _OTPScreenState extends State<OTPScreen> {
                               color: validation ? ColorStyles.errorBorderColor : ColorStyles.primaryBorderColor,
                             ),
                           ),
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                               maxHeight: 48
                           ),
                           suffixIcon: CupertinoButton(
@@ -237,14 +235,14 @@ class _OTPScreenState extends State<OTPScreen> {
                               obscureText ? Icons.visibility_off_outlined :
                               Icons.visibility_outlined,
                               size: 24,
-                              color: Color(0xff3D3DD8),
+                              color: const Color(0xff3D3DD8),
                             ) :
                             SvgPicture.asset('assets/icons/errorIcon.svg'),
                           ),
                           // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                         ),
                       ),
-                      validation ? SizedBox(height: 8,) : Offstage(),
+                      validation ? const SizedBox(height: 8,) : const Offstage(),
                       validation ?
                       Text(
                         "Қате SMS-коды",
@@ -255,21 +253,13 @@ class _OTPScreenState extends State<OTPScreen> {
                           color: ColorStyles.errorBorderColor,
                         ),
                       )
-                      : Offstage(),
-                      SizedBox(height: 20,),
+                      : const Offstage(),
+                      const SizedBox(height: 20,),
                       TextButton(
-                        child: Text(
-                          "Кіру",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'CeraPro',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         style: TextButton.styleFrom(
                           primary: loginEditingController.text == '' ?  Color(0xff1A1A1A) : Colors.white,
                           backgroundColor: loginEditingController.text == '' ? Color(0xffE0E0E0) : Color(0xff3D3DD8),
-                          minimumSize: Size(343, 48),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -294,22 +284,21 @@ class _OTPScreenState extends State<OTPScreen> {
                             });
                           }
                         },
-                      ),
-                      SizedBox(height: 8,),
-                      start != 0 ? TextButton(
-                        child: Text(
-                          start != null ?
-                          "SMS-кодты қайта жіберу ${start}" : "SMS-кодты қайта жіберу",
+                        child: const Text(
+                          "Кіру",
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'CeraPro',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ),
+                      const SizedBox(height: 8,),
+                      start != 0 ? TextButton(
                         style: TextButton.styleFrom(
                           primary: Colors.black,
-                          backgroundColor: Color(0xffE0E0E0),
-                          minimumSize: Size(343, 48),
+                          backgroundColor: const Color(0xffE0E0E0),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -317,19 +306,20 @@ class _OTPScreenState extends State<OTPScreen> {
                         onPressed: () {
 
                         },
-                      ) :
-                      TextButton(
                         child: Text(
-                          "SMS-кодты қайта жіберу",
-                          style: TextStyle(
+                          start != null ?
+                          "SMS-кодты қайта жіберу $start" : "SMS-кодты қайта жіберу",
+                          style: const TextStyle(
                             fontSize: 16,
                             fontFamily: 'CeraPro',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ) :
+                      TextButton(
                         style: TextButton.styleFrom(
-                          primary: Color(0xff3D3DD8),
-                          minimumSize: Size(343, 48),
+                          primary: const Color(0xff3D3DD8),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -338,9 +328,16 @@ class _OTPScreenState extends State<OTPScreen> {
                           startTimer();
                           setState(() {
                             pinCode = randomNum();
-                            print(pinCode);
                           });
                         },
+                        child: const Text(
+                          "SMS-кодты қайта жіберу",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'CeraPro',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ],
                   ),

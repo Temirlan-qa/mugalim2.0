@@ -7,14 +7,12 @@ import '../const/text_style_const.dart';
 class ButtonWidget extends StatefulWidget {
   final Function() onPressed;
   final String title;
-  final color;
-  final textColor;
+  final Color color;
+  final Color textColor;
   const ButtonWidget(
       {Key? key,
       required this.onPressed,
-      required this.title,
-      this.color,
-      this.textColor})
+      required this.title, required this.color, required this.textColor})
       : super(key: key);
 
   @override
@@ -31,10 +29,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         child: Container(
           width: MediaQuery.of(context).size.width - 64,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(6)),
-              color: widget.color != null
-                  ? widget.color
-                  : ColorStyles.primaryShapeColor),
+              borderRadius: const BorderRadius.all(Radius.circular(6)),
+              color: widget.color),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 9.0),
             child: Center(
@@ -42,9 +38,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 widget.title,
                 style: TextStyles.boldStyle.copyWith(
                     fontSize: 14,
-                    color: widget.textColor != null
-                        ? widget.textColor
-                        : Colors.white),
+                    color: widget.textColor),
               ),
             ),
           ),

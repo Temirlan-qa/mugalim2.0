@@ -11,10 +11,23 @@ class GetPostsList extends HomeEvent{
   GetPostsList({this.loadingState});
 }
 
+class GetTrendingPostsList extends HomeEvent{
+  final bool? loadingState;
+
+  GetTrendingPostsList({this.loadingState});
+}
+
+class GetSavedPostsList extends HomeEvent{
+  final bool? loadingState;
+
+  GetSavedPostsList({this.loadingState});
+}
+
 class GetPostCommentList extends HomeEvent{
   final String parentId;
+  final bool? loadingState;
 
-  GetPostCommentList(this.parentId);
+  GetPostCommentList({required this.parentId, this.loadingState});
 }
 
 class GetPostByIdList extends HomeEvent{
