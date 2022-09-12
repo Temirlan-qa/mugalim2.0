@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/src/response.dart';
 import 'package:intl/intl.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/presentation/home/widgets/post_widget.dart';
 import 'package:mugalim/presentation/home/widgets/search_widget.dart';
 import '../../../core/const/const_color.dart';
@@ -19,7 +19,7 @@ import '../../../logic/home/data/datasources/home_datasources.dart';
 import 'home_comments.dart';
 
 class HomeScreen extends StatefulWidget {
-  final bloc;
+  final Bloc bloc;
   const HomeScreen({Key? key, required this.bloc}) : super(key: key);
 
   @override
@@ -55,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // List savedCount = [];
 
   int dropDownindex = 0;
-  bool hasVote = false;
   int votePPL1 = 45;
   int votePPL2 = 45;
   int voteProcent1 = 90;
@@ -288,7 +287,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context2, index) {
                                     DateTime now = DateTime.parse(state.posts[index].createdAt!);
                                     String formattedDate = DateFormat('d MMM в hh:mm').format(now);
-                                    hasVote = index % 2 != 0 ? true : false;
                                     return Column(
                                       children: [
                                         index == 0 ? SizedBox(height: 16,) : SizedBox(),
@@ -303,14 +301,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             content: state.posts[index].content ?? '',
                                             liked: state.posts[index].liked ?? false,
                                             cityId: state.posts[index].cityId ?? '',
-                                            commeted: state.posts[index].commeted ?? false,
+                                            commented: state.posts[index].commented ?? false,
                                             regionId : state.posts[index].regionId ?? '',
                                             type: state.posts[index].type ?? '',
                                             userId: state.posts[index].userId ?? '',
                                             updatedAt : state.posts[index].updatedAt ?? '',
-                                            img: state.posts[index].imgs ?? [],
+                                            images: state.posts[index].images,
                                             index: index,
-                                            fio: state.posts[index].user?.fio ?? 'Mugalim Global',
+                                            fio: state.posts[index].userName ?? ' ',
+                                            avatarId: state.posts[index].userAvatarId,
                                             bloc: context.read<HomeBloc>(),
                                         ),
                                         Container(
@@ -389,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         MaterialPageRoute(
                                                           builder: (context2) =>
                                                               BlocProvider(
-                                                                create: (context) => sl<HomeBloc>()..add(GetPostCommentList(state.posts[index].id!)),
+                                                                create: (context) => sl<HomeBloc>()..add(GetPostCommentList(parentId: state.posts[index].id!)),
                                                                 child: HomeCommentsPage(
                                                                 pplLike: state
                                                                     .posts[index]
@@ -403,9 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 pplShow: state
                                                                     .posts[index]
                                                                     .viewNumber!,
-                                                                hasImg: hasVote,
-                                                                hasVote: hasVote,
-                                                                image: 'assets/images/space.png',
+                                                                images: state.posts[index].images,
                                                                 postPublicationDate: formattedDate,
                                                                 votePPL1: votePPL1,
                                                                 votePPL2: votePPL2,
@@ -417,12 +414,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 title: state
                                                                     .posts[index]
                                                                     .content!,
-                                                                imageAuthor: 'assets/icons/mugalim_logo.png',
+                                                                imageAuthor: state.posts[index].userAvatarId!,
                                                                 postAuthor: state
                                                                     .posts[index]
-                                                                    .user
-                                                                    ?.fio ?? '',
-                                                                parentId: state
+                                                                    .userName ?? '',
+                                                                id: state
                                                                     .posts[index]
                                                                     .id!,
                                                                 saved: state
@@ -585,7 +581,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               );
                             }
-                            return Text("Post don't loaded");
+                            return Text(" ");
                             },
                           ),
                         ),
@@ -604,26 +600,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           return Column(
                             children: [
                               index == 0 ? SizedBox(height: 16,) : SizedBox(),
-                              Text('Trend'),
+                              Text('Тренды'),
                               // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
                             ],
                           );
                         }),
                   ),
                 ),
-                Center(child: AnimatedDrawing.svg(
-                  "assets/icons/check-circle.svg",
-                  run: run,
-                  duration: const Duration(milliseconds: 1000),
-                  lineAnimation: LineAnimation.allAtOnce,
-                  animationCurve: Curves.fastOutSlowIn,
-                  animationOrder: PathOrders.leftToRight,
-                  onFinish: () => setState(() {
-                    run  = false;
-                  }),
-                  width: 100,
-                  height: 100,
-                )),
+                SingleChildScrollView(
+                  child: Container(
+                    color: ColorStyles.neutralsPageBackgroundColor,
+                    child: ListView.builder(
+                        itemCount: 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              index == 0 ? SizedBox(height: 16,) : SizedBox(),
+                              Text('Сохраненные'),
+                              // index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                            ],
+                          );
+                        }),
+                  ),
+                ),
               ],
             ),
           ),

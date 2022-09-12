@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../core/const/const_color.dart';
-import '../../../core/const/text_style_const.dart';
-import '../../../core/routes/routes_const.dart';
-import '../../development/screens/development_screen.dart';
+import '../../../../core/const/const_color.dart';
+import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/routes_const.dart';
+import '../../../development/screens/development_screen.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({Key? key}) : super(key: key);
@@ -22,10 +22,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
   Duration getDuration() {
     final dateTimeResumed = DateTime.now().millisecondsSinceEpoch;
     final startingDateTime = DateTime.parse(startingTime).millisecondsSinceEpoch;
-    print('$dateTimeResumed date Time Resumed');
-    print('$startingDateTime starting Date time');
+
     var difference = startingDateTime - dateTimeResumed;
-    print(difference);
 
     final hours = difference ~/ (60 * 60 * 1000);
     difference = difference - hours.toInt() * (60 * 60 * 1000);
@@ -118,13 +116,12 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) =>
-              //       const DevelopmentScreen()),
-              // );
-              Navigator.of(context).pushNamed(DevelopmentRoute);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                    const DevelopmentScreen()),
+              );
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -152,6 +149,15 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
           //   },
           // ),
         ],
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.black12,
+              ),
+              height: 1.0,
+            )
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -272,19 +278,13 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                 primary: const Color(0xFFE0E0E0),
                 backgroundColor: const Color(0xff3D3DD8),
                 elevation: 3,
-                minimumSize: Size(343, 48),
+                minimumSize: const Size(343, 48),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) =>
-                  //       const DevelopmentScreen()),
-                  // );
-                  Navigator.of(context).pushNamed(DevelopmentRoute);
+                  Navigator.of(context, rootNavigator: true).pushNamed(MainBookRoute);
                 },
                   child: Text(
                     "На главную",

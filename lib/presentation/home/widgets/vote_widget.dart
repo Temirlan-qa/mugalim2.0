@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
+import 'package:mugalim/core/const/sizedBox.dart';
 
 class VoteWidget extends StatefulWidget {
   final String votetitle;
@@ -30,7 +30,7 @@ class _VoteWidgetState extends State<VoteWidget> {
   bool clickToShow = false;
   String gonna = "";
 
-  final GlobalKey<FormState> _textWidgetKey = GlobalKey<FormState>();
+  //final GlobalKey<FormState> _textWidgetKey = GlobalKey<FormState>();
   // double _textWidgetSize = 100;
 
   // void _getSize() {

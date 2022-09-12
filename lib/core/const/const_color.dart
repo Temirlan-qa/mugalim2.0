@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 class ColorStyles {
   //primary
+  //#FFFFFF
+  static Color backgroundColor = const Color(0xffFFFFFF);
   static Color primarySurfaceColor = const Color(0xffF9F9F9);
   static Color primarySurfaceHoverColor = const Color(0xff767676);
   static Color primaryBorderColor = const Color(0xff3D3DD8);
@@ -36,6 +38,7 @@ class ColorStyles {
   static Color warningTextColor = const Color(0xFFEE5800);
   static Color warningTextHoverColor = const Color(0xFFC74900);
   static Color warningTextActiveColor = const Color(0xFFA43C00);
+
   // //
   // static Color SurfaceColor = const Color(0xFF);
   // static Color SurfaceHoverColor = const Color(0xFF);
@@ -50,9 +53,9 @@ class ColorStyles {
   //error
   static Color errorSurfaceColor = const Color(0xFFFFE5E8);
   static Color errorSurfaceHoverColor = const Color(0xFFFFB1B9);
-  static Color errorBorderColor = const Color(0xFFEE1E34);
+  static Color errorBorderColor = const Color(0xFFE71D36);
   static Color errorBorderHoverColor = const Color(0xFFE8132A);
-  static Color errorShapeColor = const Color(0xFFE8132A);
+  static Color errorShapeColor = const Color(0xFFE71D36);
   static Color errorShapeHoverColor = const Color(0xFFD20319);
   static Color errorShapeActiveColor = const Color(0xFF9C0010);
   static Color errorTextColor = const Color(0xFFD20319);
@@ -60,7 +63,7 @@ class ColorStyles {
   static Color errorTextActiveColor = const Color(0xFF72000C);
   //info
   static Color infoSurfaceColor = const Color(0xFFE8F1FF);
-  static Color infoSurfaceHoverColor = const Color(0xFFD0E2FF);
+  static Color infoSurfaceHoverColor = const Color(0xFFD3F8F4);
   static Color infoBorderColor = const Color(0xFF1C6BFF);
   static Color infoBorderHoverColor = const Color(0xFF1062FF);
   static Color infoShapeColor = const Color(0xFF1062FF);
@@ -71,13 +74,14 @@ class ColorStyles {
   static Color infoTextActiveColor = const Color(0xFF003AAD);
   //HUE246
   static Color hue246SurfaceColor = const Color(0xFFEEEDFF);
-  static Color hue246SurfaceHoverColor = const Color(0xFFDDD9FF);
+  static Color hue246SurfaceHoverColor = const Color(0xffD5D7F6);
   static Color hue246BorderColor = const Color(0xFF6F5CDC);
   static Color hue246BorderHoverColor = const Color(0xFF4B35B5);
   static Color hue246ShapeColor = const Color(0xFF4B35B5);
   static Color hue246ShapeHoverColor = const Color(0xFF392494);
   static Color hue246ShapeActiveColor = const Color(0xFF2A1770);
   static Color hue246TextColor = const Color(0xFF392494);
+
   static Color hue246TextHoverColor = const Color(0xFF2A1770);
   static Color hue246TextActiveColor = const Color(0xFF100740);
   //neutrals
@@ -101,7 +105,7 @@ class ColorStyles {
   static Color neutralsTextSecondaryColor = const Color(0xFF333E5A);
   static Color neutralsTextSecondaryDisabledColor = const Color(0xFFB9C4D9);
   static Color neutralsTextPrimaryColor = const Color(0xFF1A1A1A);
-  static Color neutralsTextPrimaryDisabledColor = const Color(0xFFB9C4D9);
+  static Color neutralsTextPrimaryDisabledColor = const Color(0xFFE0E0E0);
   // dark theme
   static Color darkthemePageBackgroundColor = const Color(0xFF272831);
   static Color neutralsdarkthemePageBackgroundColor = const Color(0xFF292A32);

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/const/SizedBox.dart';
+import '../../../core/const/sizedBox.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
 
@@ -47,25 +47,25 @@ class CourseCardWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         sizedBoxHeight16(),
         Padding(
-          padding: const EdgeInsets.only(right: 16, left: 16, top: 8,bottom: 16),
+          padding:
+              const EdgeInsets.only(right: 16, left: 16, top: 8, bottom: 16),
           child: GridView.count(
             childAspectRatio: 167 / 211,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             crossAxisCount: 2,
             children: List.generate(
               listsofCourses.length,
-                  (index) => Container(
+              (index) => Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.white,
-                    border: Border.all(
-                        color: const Color(0xffD5D7F6), width: 1)),
+                    border:
+                        Border.all(color: const Color(0xffD5D7F6), width: 1)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -92,8 +92,7 @@ class CourseCardWidget extends StatelessWidget {
                             style: TextStyles.regularStyle.copyWith(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
-                                color: ColorStyles
-                                    .neutralsTextPrimaryColor),
+                                color: ColorStyles.neutralsTextPrimaryColor),
                           ),
                         ),
                         sizedBoxWidth4(),
@@ -102,8 +101,7 @@ class CourseCardWidget extends StatelessWidget {
                           style: TextStyles.mediumStyle.copyWith(
                             fontStyle: FontStyle.normal,
                             fontSize: 14,
-                            color:
-                            ColorStyles.neutralsTextPrimaryColor,
+                            color: ColorStyles.neutralsTextPrimaryColor,
                           ),
                         ),
                         sizedBoxWidth4(),
@@ -112,8 +110,7 @@ class CourseCardWidget extends StatelessWidget {
                           style: TextStyles.regularStyle.copyWith(
                             fontStyle: FontStyle.normal,
                             fontSize: 13,
-                            color:
-                            ColorStyles.neutralsTextPrimaryColor,
+                            color: ColorStyles.neutralsTextPrimaryColor,
                           ),
                         ),
                       ],
@@ -155,8 +152,7 @@ class CourseCardWidget extends StatelessWidget {
                             'Начать',
                             style: TextStyles.mediumStyle.copyWith(
                                 fontSize: 13,
-                                color:
-                                ColorStyles.primaryBorderColor),
+                                color: ColorStyles.primaryBorderColor),
                           ),
                         ),
                       ),

@@ -13,8 +13,9 @@ class GetPostsList extends HomeEvent{
 
 class GetPostCommentList extends HomeEvent{
   final String parentId;
+  final bool? loadingState;
 
-  GetPostCommentList(this.parentId);
+  GetPostCommentList({required this.parentId, this.loadingState});
 }
 
 class GetPostByIdList extends HomeEvent{
@@ -36,3 +37,36 @@ class DeletePostStudents extends HomeEvent {
   final String id;
   DeletePostStudents(this.id);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@immutable
+abstract class ZhassulanEvent {}
+
+class ZhassulanGoingToReadBook extends ZhassulanEvent {}
+
+class ZhassulanGoingToCook extends ZhassulanEvent {}
+
+class ZhassulanGoingToSleep extends ZhassulanEvent {}
+
+class ZhassulanGoingToEat extends ZhassulanEvent {}

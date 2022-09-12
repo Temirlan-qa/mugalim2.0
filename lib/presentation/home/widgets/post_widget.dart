@@ -1,15 +1,17 @@
 //import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/routes/environment_config.dart';
 import 'package:mugalim/core/widgets/line_widget.dart';
 import 'package:mugalim/presentation/home/screens/home_comments.dart';
-import 'package:mugalim/core/const/SizedBox.dart';
-import 'package:mugalim/presentation/home/widgets/post_actions_row_widget.dart';
-import 'package:mugalim/presentation/home/widgets/vote_widget.dart';
-
+import 'package:mugalim/core/const/sizedBox.dart';
 import '../../../core/injection_container.dart';
 import '../../../logic/home/bloc/home_bloc.dart';
 
@@ -25,19 +27,19 @@ class PostWidget extends StatefulWidget {
   final String? content;
   final bool? liked;
   final String? cityId;
-  final bool? commeted;
-  final List? img;
+  final bool? commented;
   final String? regionId;
   final String? type;
   final String? userId;
   final String? updatedAt;
-  final List? imgs;
+  final List<String?>? images;
   final int? index;
   final String? fio;
+  final String? avatarId;
   final bloc;
   const PostWidget( {
     Key? key,
-    this.viewNumber, this.savedNumber, this.saved, this.commentNumber, this.likeNumber, this.createdAt, this.title, this.id, this.content, this.liked, this.cityId, this.commeted, this.img, this.regionId, this.type, this.userId, this.updatedAt,this.imgs, this.index , this.fio,
+    this.viewNumber, this.savedNumber, this.saved, this.commentNumber, this.likeNumber, this.createdAt, this.title, this.id, this.content, this.liked, this.cityId, this.commented, this.regionId, this.type, this.userId, this.updatedAt, this.images, this.index, this.fio, this.avatarId,
     this.bloc
   }) : super(key: key);
 
@@ -56,25 +58,25 @@ class _PostWidgetState extends State<PostWidget> {
   String voteAnswer1 = 'Да, пойду truyytyit guyvuiiio ihihuig78tf';
   String voteAnswer2 =  'Нет, не пойду';
   String votetitle =  'Пойдете ли в горы вместе с группой?';
+  Box tokensBox = Hive.box('tokens');
+  CarouselController carouselController = CarouselController();
+  int currentImage = 0;
 
   @override
   Widget build(BuildContext context) {
-    bool hasVote = widget.index! % 2 != 0 ? true : false;
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => sl<HomeBloc>()..add(GetPostCommentList(widget.id!)),
+              create: (context) => sl<HomeBloc>()..add(GetPostCommentList(parentId: widget.id!)),
               child: HomeCommentsPage(
               pplLike: widget.likeNumber!,
               pplCommented: widget.commentNumber!,
               pplSaved: widget.savedNumber!,
               pplShow: widget.viewNumber!,
-              hasImg: hasVote,
-              hasVote: hasVote,
-              image: 'assets/icons/space.png',
+              images: widget.images,
               postPublicationDate: widget.createdAt!,
               votePPL1: votePPL1,
               votePPL2: votePPL2,
@@ -83,8 +85,9 @@ class _PostWidgetState extends State<PostWidget> {
               voteAnswer1: voteAnswer1,
               voteAnswer2: voteAnswer2,
               votetitle: votetitle, title: widget.content!,
-              imageAuthor: 'assets/icons/mugalim_logo.png',
-              postAuthor: widget.fio!, parentId: widget.id!,
+              imageAuthor: widget.avatarId,
+              postAuthor: widget.fio!,
+              id: widget.id!,
               liked: widget.liked!,
               saved : widget.saved!,
               bloc: widget.bloc,
@@ -110,12 +113,21 @@ class _PostWidgetState extends State<PostWidget> {
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(
-                        child: Image.asset(
-                          'assets/icons/mugalim_logo.png',
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: widget.avatarId != null ? CachedNetworkImage(
+                          imageUrl: '${EnvironmentConfig.url}/file/image/${widget.avatarId}?size=sm',
                           width: 44,
                           height: 44,
-                        ),
+                          fit: BoxFit.cover,
+                          httpHeaders: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            "Authorization": "Bearer ${tokensBox.get('access')}"
+                          },
+                          placeholder: (context, url) => CupertinoActivityIndicator(),
+
+                        ) : Image.asset('assets/icons/mugalim_logo.png', width: 44, height: 44)
                       ),
                       sizedBoxWidth16(),
                       Column(
@@ -193,57 +205,113 @@ class _PostWidgetState extends State<PostWidget> {
                     ),
                   ),
                   Visibility(
-                    visible: widget.img!.isNotEmpty ? true : false,
-                    child: Column(
+                    visible: widget.images!.isNotEmpty ? true : false,
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/space.png',
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        sizedBoxHeight8(),
-                        const LineWidget(),
-                        sizedBoxHeight8(),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      // top: 16,
-                    ),
-                    child: Column(
-                      children: [
-                        Visibility(
-                          visible: widget.index! % 2 != 0 ? true : false,
-                          child: Column(
-                            children: [
-                              VoteWidget(
-                                votetitle: votetitle,
-                                voteAnswer1: voteAnswer1,
-                                voteAnswer2: voteAnswer2,
-                                voteProcent1: voteProcent1,
-                                voteProcent2: voteProcent2,
-                                votePPL1: votePPL1,
-                                votePPL2: votePPL2,
+                        Column(
+                          children: [
+                            widget.images!.isNotEmpty ? CarouselSlider(
+                              carouselController: carouselController,
+                              options: CarouselOptions(
+                                height: MediaQuery.of(context).size.width * 9 / 16,
+                                enableInfiniteScroll: false,
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    currentImage = index;
+                                  });
+                                },
+                                enlargeCenterPage: true,
                               ),
-                              sizedBoxHeight8(),
-                              const LineWidget(),
-                            ],
-                          ),
+                              items: widget.images!.map((i) {
+                                return CachedNetworkImage(
+                                  imageUrl: '${EnvironmentConfig.url}/file/image/$i',
+                                  height: 210,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.fitHeight,
+                                  httpHeaders: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "Authorization": "Bearer ${tokensBox.get('access')}"
+                                  },
+                                  placeholder: (context, url) => CupertinoActivityIndicator(),
+                                );
+                              }).toList(),
+                            ) : Offstage(),
+                            sizedBoxHeight8(),
+                            LineWidget(width: MediaQuery.of(context).size.width - 32),
+                            sizedBoxHeight8(),
+                          ],
                         ),
-                        sizedBoxHeight8(),
-                        // ActionsRowWidget(
-                        //   pplLike: widget.likeNumber!,
-                        //   pplCommented: widget.commentNumber!,
-                        //   pplSaved: widget.savedNumber!,
-                        //   pplShow: widget.viewNumber!,
-                        // ),
-                        // sizedBoxHeight16(),
+                        Positioned(
+                          bottom: 24,
+                          child: Container(
+                            width: 16 + widget.images!.length * 8 - 4,
+                            height: 20,
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.white
+                            ),
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              // physics: NeverScrollableScrollPhysics(),
+                              // shrinkWrap: true,
+                              itemBuilder: (context, index) => Container(
+                                height: 4,
+                                width: 4,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: currentImage == index
+                                      ? ColorStyles.primaryBorderColor
+                                      : ColorStyles.primarySurfaceHoverColor
+                                ),
+                              ),
+                              separatorBuilder: (context, index) => const SizedBox(width: 4),
+                              itemCount : widget.images!.length
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
+                  // Container(
+                  //   padding: const EdgeInsets.only(
+                  //     left: 16,
+                  //     right: 16,
+                  //     // top: 16,
+                  //   ),
+                  //   child: Column(
+                  //     children: [
+                  //       Visibility(
+                  //         visible: widget.index! % 2 != 0 ? true : false,
+                  //         child: Column(
+                  //           children: [
+                  //             VoteWidget(
+                  //               votetitle: votetitle,
+                  //               voteAnswer1: voteAnswer1,
+                  //               voteAnswer2: voteAnswer2,
+                  //               voteProcent1: voteProcent1,
+                  //               voteProcent2: voteProcent2,
+                  //               votePPL1: votePPL1,
+                  //               votePPL2: votePPL2,
+                  //             ),
+                  //             sizedBoxHeight8(),
+                  //             const LineWidget(),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       sizedBoxHeight8(),
+                  //       // ActionsRowWidget(
+                  //       //   pplLike: widget.likeNumber!,
+                  //       //   pplCommented: widget.commentNumber!,
+                  //       //   pplSaved: widget.savedNumber!,
+                  //       //   pplShow: widget.viewNumber!,
+                  //       // ),
+                  //       // sizedBoxHeight16(),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             )

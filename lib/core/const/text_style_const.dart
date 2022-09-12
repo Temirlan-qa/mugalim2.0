@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'const_color.dart';
 
 class TextStyles {
   static TextStyle boldStyle = const TextStyle(
