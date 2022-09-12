@@ -19,6 +19,7 @@ class DioInterceptor extends Interceptor {
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     String? accessToken = Hive.box('tokens').get('access');
+    // print(options.uri);
     // print(accessToken);
     if (accessToken != null) {
       if (!options.path.contains('oauth/token') &&
@@ -62,7 +63,7 @@ class DioInterceptor extends Interceptor {
 
     final refreshToken = tokens!.get('refresh');
     Response response = await Dio().post(
-      'https://demo.mugalim.academy/bcspc/uaa/oauth/token',
+      'https://portal.mugalim.academy/bcspc/uaa/oauth/token',
       data: {
         'refresh_token': refreshToken,
         'grant_type': 'refresh_token',

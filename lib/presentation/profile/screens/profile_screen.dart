@@ -24,7 +24,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
   Box tokensBox = Hive.box('tokens');
+  Box userBox = Hive.box('user');
+  Box viewedBox = Hive.box('viewedBox');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +50,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: BlocConsumer<ProfileBloc, ProfileState>(
             listener: (context2, state) {
-              print(state);
+              if(state is ProfileSuccess) {
+                userBox.put('id', state.profileModel.id);
+                userBox.put('avatarId', state.profileModel.avatar);
+                userBox.put('userName', state.profileModel.fio);
+              }
             },
             builder: (context2, state) {
               if (state is ProfileSuccess) {
@@ -236,7 +244,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () async {
                         Navigator.of(context, rootNavigator: true)
                             .pushReplacementNamed(AuthRoute);
-                        await tokensBox.clear();
+                        tokensBox.clear();
+                        userBox.clear();
+                        viewedBox.clear();
                       },
                       text: 'Выйти',
                       fontSize: 16,

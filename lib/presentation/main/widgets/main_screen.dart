@@ -43,12 +43,7 @@ class _MainScreenState extends State<MainScreen> {
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
                   // builder: (_) => HomeScreen(),
-                  builder: (_) => BlocProvider(
-                    create: (context) => sl<HomeBloc>()..add(GetPostsList()),
-                    child: HomeScreen(
-                        bloc: context.read<HomeBloc>()
-                    ),
-                  ),
+                  builder: (_) => HomeScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),
