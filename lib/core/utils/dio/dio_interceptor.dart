@@ -66,7 +66,7 @@ class DioInterceptor extends Interceptor {
 
     final refreshToken = tokens!.get('refresh');
     Response response = await Dio().post(
-      'https://demo.mugalim.academy/bcspc/uaa/oauth/token',
+      'https://portal.mugalim.academy/bcspc/uaa/oauth/token',
       data: {
         'refresh_token': refreshToken,
         'grant_type': 'refresh_token',

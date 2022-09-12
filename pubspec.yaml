@@ -54,6 +54,7 @@ dependencies:
   svgator_player_flutter: ^1.0.3
   lottie: ^1.4.2
   page_transition: ^2.0.9
+  share_plus: ^4.0.10+1
 
 dev_dependencies:
   flutter_test:

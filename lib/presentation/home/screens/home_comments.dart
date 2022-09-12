@@ -16,6 +16,7 @@ import "package:intl/intl.dart";
 import '../../../core/injection_container.dart';
 import '../../../logic/home/bloc/home_bloc.dart';
 import '../../../logic/home/data/datasources/home_datasources.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeCommentsPage extends StatefulWidget {
   // post data
@@ -104,6 +105,29 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
     super.initState();
   }
 
+  // String _launchUrl = 'https://flutterlinkdeep.page.link/start';
+  // android manifestka intent kosu kerek
+
+  // Future<Null> urlFileShare() async {
+  //   final RenderObject? box = context.findRenderObject();
+  //   if (Platform.isAndroid) {
+  //     var url = 'https://i.ytimg.com/vi/fq4N0hgOWzU/maxresdefault.jpg';
+  //     var response = await get(Uri.parse(url));
+  //     final documentDirectory = (await getExternalStorageDirectory())?.path;
+  //     File imgFile = new File('$documentDirectory/flutter.png');
+  //     imgFile.writeAsBytesSync(response.bodyBytes);
+  //     Share.shareFiles(['$documentDirectory/flutter.png'],
+  //         subject: 'Mugalim project>',
+  //         text: _launchUrl,
+  //         sharePositionOrigin: (Offset(1.0, 2.0) & Size(3, 4)));
+  //
+  //
+  //   } else {
+  //     Share.share('Hello, check your share files!',
+  //       subject: 'URL File Share',);
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +147,9 @@ class _HomeCommentsPageState extends State<HomeCommentsPage> {
         actions: [
           IconButton(
             color: const Color(0xFF3D3DD8),
-            onPressed: () {},
+            onPressed: () async {
+              await Share.share(widget.title);
+            },
             icon: SvgPicture.asset('assets/icons/ios_share.svg',width: 18.67,height: 23.33,),
           ),
         ],
