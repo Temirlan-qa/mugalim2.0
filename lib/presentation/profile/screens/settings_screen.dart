@@ -135,7 +135,7 @@ class SettingsScreen extends StatelessWidget {
                                   user: state.profileModel.user,
                                   image: state.profileModel.avatar,
                                   gender: state.profileModel.gender,
-                                  bloc: context.read<ProfileBloc>(),
+                                  //bloc: context.read<ProfileBloc>(),
                                 ),
                               ),
                             );

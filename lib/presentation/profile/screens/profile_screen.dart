@@ -24,7 +24,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   Box tokensBox = Hive.box('tokens');
   Box userBox = Hive.box('user');
   Box viewedBox = Hive.box('viewedBox');
@@ -50,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: BlocConsumer<ProfileBloc, ProfileState>(
             listener: (context2, state) {
-              if(state is ProfileSuccess) {
+              if (state is ProfileSuccess) {
                 userBox.put('id', state.profileModel.id);
                 userBox.put('avatarId', state.profileModel.avatar);
                 userBox.put('userName', state.profileModel.fio);
@@ -66,15 +65,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () {
                         Navigator.of(context2, rootNavigator: true).pushNamed(
                           SettingsRoute,
-                          arguments: {
-                            'nameAndSurname':
-                                '${state.profileModel.firstName} ${state.profileModel.lastName}',
-                            'role': state.profileModel.user!['roles'],
-                            'image': state.profileModel.avatar,
-                            'gender': state.profileModel.gender,
-                            'user': state.profileModel.user,
-                            'bloc': context.read<ProfileBloc>(),
-                          },
                         );
                       },
                       child: Container(
@@ -159,9 +149,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     sizedBoxHeight16(),
-                    // TextButton(onPressed: (){
-                    //   print(state.profileModel.user!['roles'].join(", ").runtimeType);
-                    // }, child: Text('Test Data')),
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),

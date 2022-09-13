@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,7 +23,7 @@ import 'package:image_picker_platform_interface/image_picker_platform_interface.
 import 'package:mugalim/presentation/profile/widgets/text_field_for_edit_info_user_widget.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
-  final bloc;
+  //final bloc;
   final Map<String, dynamic>? user;
   final String? image;
   final String? gender;
@@ -30,8 +31,7 @@ class EditInfoUserScreen extends StatefulWidget {
       {Key? key,
       required this.user,
       required this.gender,
-      required this.image,
-      this.bloc})
+      required this.image,})
       : super(key: key);
 
   @override
@@ -69,6 +69,8 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           wait = true;
           timer.cancel();
           Navigator.pop(context);
+          context.read<ProfileBloc>().add((ProfileInfoEdit()));
+          context.read<ProfileBloc>().add((ProfileLoad()));
         });
       } else {
         setState(() {
@@ -85,20 +87,13 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
   final ImagePickerPlatform _picker = ImagePickerPlatform.instance;
   XFile? _imageFileList;
   bool addImg = false;
-  chooseImage(ImageSource source, bloc, notifyParent) async {
+  chooseImage(ImageSource source, notifyParent) async {
     try {
-      ProfileDatasource profileDatasource = sl();
       final XFile? pickedFileList = await _picker.getImage(source: source);
       _imageFileList = pickedFileList;
-      Response response =
-          await profileDatasource.changeAvatar(_imageFileList!.path);
-      Response response1 =
-          await profileDatasource.uploadAvatar(response.data['value']);
-      print(response1.data);
-
-      bloc.add((ProfileInfoEdit()));
-      bloc.add((ProfileLoad()));
-      notifyParent(_imageFileList!, response.data['value']);
+      setState(() {
+        addImg != addImg;
+      });
     } catch (e) {
       print(e.toString());
     }
@@ -269,8 +264,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                           startTimer();
                           successChange = !successChange;
                         });
-                        widget.bloc.add((ProfileInfoEdit()));
-                        widget.bloc.add((ProfileLoad()));
                       } else {
                         SnackBarAction(
                           label: 'Error ',
@@ -279,8 +272,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                           },
                         );
                       }
-                    }
-                    else if (phoneController.text != widget.user!['phone']) {
+                    } else if (phoneController.text != widget.user!['phone']) {
                       editedThing = 'телефон';
                       ProfileDatasource profile = sl();
                       Response response = await profile.editUserInfo(
@@ -294,8 +286,6 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                           startTimer();
                           successChange = !successChange;
                         });
-                        widget.bloc.add((ProfileInfoEdit()));
-                        widget.bloc.add((ProfileLoad()));
                       } else {
                         SnackBarAction(
                           label: 'Error ',
@@ -304,32 +294,20 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                           },
                         );
                       }
-                    }
-                    else if (_imageFileList!.path != widget.image) {
+                    } else if (_imageFileList!.path != widget.image) {
                       editedThing = ' аватар';
-                      ProfileDatasource profile = sl();
-                      Response response = await profile.editUserInfo(
-                        emailController.text,
-                        phoneController.text,
-                        widget.image.toString(),
-                      );
-                      if (response.statusCode == 200 &&
-                          response.data['status'] == 1) {
-                        setState(() {
-                          startTimer();
-                          successChange = !successChange;
-                        });
+                      ProfileDatasource profileDatasource = sl();
 
-                        widget.bloc.add((ProfileInfoEdit()));
-                        widget.bloc.add((ProfileLoad()));
-                      } else {
-                        SnackBarAction(
-                          label: 'Error ',
-                          onPressed: () {
-                            // Some code to undo the change.
-                          },
-                        );
-                      }
+                      Response response = await profileDatasource
+                          .changeAvatar(_imageFileList!.path);
+                      Response response1 = await profileDatasource
+                          .uploadAvatar(response.data['value']);
+                      print(response1.data);
+                      refreshState(_imageFileList!, response.data['value']);
+                      setState(() {
+                        startTimer();
+                        successChange = !successChange;
+                      });
                     }
                   },
                   textColor: onChanged
@@ -368,7 +346,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     onPressed: () async {
                       chooseImage(
                         ImageSource.gallery,
-                        widget.bloc,
+                        //widget.bloc,
                         refreshState,
                       );
                       // Navigator.pop(context, true);
@@ -406,7 +384,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     onPressed: () async {
                       chooseImage(
                         ImageSource.camera,
-                        widget.bloc,
+                        //widget.bloc,
                         refreshState,
                       );
                       Navigator.pop(context, true);
