@@ -12,3 +12,4 @@ const String AboutProjectRoute = '/AboutProjectRoute';
 const String WriteReviewRoute = '/WriteReviewRoute';
 const String SettingsRoute = '/SettingsRoute';
 const String EditInfoUserRoute = '/EditInfoUserRoute';
+const String TimerRoute = '/timer';

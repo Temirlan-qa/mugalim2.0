@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/books/screens/bookMain/timer_screen.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../core/routes/routes_const.dart';
 
 import '../../../../core/const/const_color.dart';
 
@@ -80,11 +81,13 @@ class ChoosenPage extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TimerScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const TimerScreen()),
+                          // );
+                          Navigator.of(context, rootNavigator: true)
+                              .pushNamed(TimerRoute);
                         },
                         child: const Text(
                           "На главную",
