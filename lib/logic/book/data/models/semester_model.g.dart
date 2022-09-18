@@ -10,7 +10,6 @@ SemesterModel _$SemesterModelFromJson(Map<String, dynamic> json) =>
     SemesterModel(
       json['createdAt'] as String?,
       json['updatedAt'] as String?,
-      json['deletedAt'] as String?,
       json['eventLog'] as List<dynamic>?,
       json['id'] as String?,
       json['cityId'] as String?,
@@ -24,7 +23,6 @@ Map<String, dynamic> _$SemesterModelToJson(SemesterModel instance) =>
     <String, dynamic>{
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'deletedAt': instance.deletedAt,
       'eventLog': instance.eventLog,
       'id': instance.id,
       'cityId': instance.cityId,

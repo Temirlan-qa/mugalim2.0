@@ -16,6 +16,7 @@ BookVotesModel _$BookVotesModelFromJson(Map<String, dynamic> json) =>
       json['name'] as String?,
       json['orderNumber'] as int?,
       json['eventLog'] as List<dynamic>?,
+      json['voted'] as bool?,
     );
 
 Map<String, dynamic> _$BookVotesModelToJson(BookVotesModel instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$BookVotesModelToJson(BookVotesModel instance) =>
       'voteId': instance.voteId,
       'name': instance.name,
       'orderNumber': instance.orderNumber,
+      'voted': instance.voted,
     };

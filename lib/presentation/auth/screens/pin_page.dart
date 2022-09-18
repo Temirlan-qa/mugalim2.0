@@ -189,7 +189,7 @@ class _PinPageState extends State<PinPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => JenreScreen(
+                          builder: (context) => GenreScreen(
                             indexMonth: 0,
                             list: const [
                               'Бизнес',

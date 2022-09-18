@@ -1,12 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+// ignore: depend_on_referenced_packages
+import 'package:intl/intl.dart';
+import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/presentation/development/screens/mPassword_screen.dart';
-import 'package:mugalim/presentation/development/screens/statistic_screen.dart';
+import 'package:mugalim/presentation/books/screens/book_screen.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
+import '../../../logic/book/bloc/book_bloc.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -17,6 +20,7 @@ class DevelopmentScreen extends StatefulWidget {
 }
 
 class _DevelopmentScreenState extends State<DevelopmentScreen> {
+  Box genres = Hive.box('genres');
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -103,10 +107,15 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                     ),
                                     const Spacer(),
                                     GestureWidget(
-                                      onTap: () {
-
-                                        Navigator.of(context)
-                                            .pushNamed(JenreRoute);
+                                      onTap: (){
+                                        // Navigator.of(context)
+                                        //     .pushNamed(JenreRoute);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const BookPage()
+                                          ),
+                                        );
                                       },
                                       title: 'Книги',
                                       path: 'assets/images/newBookIcon.png',
@@ -307,7 +316,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                         child: ClipOval(
                                                           child: CircleAvatar(
                                                             backgroundColor:
-                                                                Color(
+                                                               const Color(
                                                                     0xff3D3DD8),
                                                             radius: 12,
                                                             child: Text(

@@ -260,7 +260,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 106,
+                  bottom: 72,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Center(
@@ -279,6 +279,18 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                           ),
                         ),
                         onPressed: () async{
+                          if(list.isEmpty){
+                            widget.list.remove(widget.selectIndex);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GenreScreen(
+                                  indexMonth: widget.indexMonth.toInt() + 1,
+                                  list: widget.list,
+                                ),
+                              ),
+                            );
+                          }
                           if (list.isNotEmpty) {
                             if (widget.indexMonth.toInt() >= 3) {
                               Navigator.push(
@@ -288,7 +300,6 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                               );
                             }
                             if (list.isNotEmpty && widget.indexMonth.toInt() < 3)  {
-
                               widget.list.remove(widget.selectIndex);
                               final BookDatasource bookDatasource = sl();
                               Response response = await bookDatasource.postVote(widget.selectId,state.votes[list[0]].id!);
@@ -296,7 +307,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => JenreScreen(
+                                  builder: (context) => GenreScreen(
                                     indexMonth: widget.indexMonth.toInt() + 1,
                                     list: widget.list,
                                   ),
@@ -319,7 +330,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 50,
+                  bottom: 16,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Center(
@@ -346,14 +357,14 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                     ),
                   ),
                 ),
-                Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 34,
-                      color: ColorStyles.backgroundColor,
-                    )
-                ),
+                // Positioned(
+                //     bottom: 0,
+                //     child: Container(
+                //       width: MediaQuery.of(context).size.width,
+                //       height: 34,
+                //       color: ColorStyles.backgroundColor,
+                //     )
+                // ),
               ],
             );
           }

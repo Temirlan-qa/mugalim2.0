@@ -4,7 +4,7 @@ import '../../../../core/utils/dio/dio_wrapper.dart';
 abstract class BookDatasource {
   Future<Response> getVoteList();
   Future<Response> getVoteById(String id);
-  Future<Response> getDeadlineSemester(int id);
+  Future<Response> getDeadlineSemester(String id);
   Future<Response> postVote(String voteId,String resultOptionId);
 }
 
@@ -18,7 +18,7 @@ class BookDataSourceImpl implements BookDatasource {
 
   @override
   Future<Response> getVoteList() async {
-    Response response = await dioWrapper!.get('/books/voting/book-vote-group/my-list');
+    Response response = await dioWrapper!.get('/books/voting/my-list');
     return response;
   }
   @override
@@ -27,8 +27,9 @@ class BookDataSourceImpl implements BookDatasource {
     return response;
   }
   @override
-  Future<Response> getDeadlineSemester(int id) async {
+  Future<Response> getDeadlineSemester(String id) async {
     Response response = await dioWrapper!.get('/books/deadline/my/semester/$id');
+    print(response);
     return response;
   }
   @override

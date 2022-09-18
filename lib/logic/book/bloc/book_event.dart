@@ -6,7 +6,8 @@ abstract class BookEvent {}
 class BookLoad extends BookEvent {}
 
 class BookVoteList extends BookEvent{
-
+  final String semesterId;
+  BookVoteList(this.semesterId);
 }
 
 class GetBookList extends BookEvent{
@@ -23,4 +24,8 @@ class PostVoteEvent extends BookEvent{
 class GetSemesterDeadline extends BookEvent{
   final int semester;
   GetSemesterDeadline(this.semester);
+ }
+class BookSemesterDeadlineList extends BookEvent{
+  final String semesterId;
+  BookSemesterDeadlineList(this.semesterId);
 }
