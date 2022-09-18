@@ -27,7 +27,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     on<BookSemesterDeadlineList>((event, emit) async {
       emit(BookLoading());
       try {
-        final List<SemesterModel> list = await bookRepository.getSemesterDeadline(event.semesterId);
+        final SemesterModel list = await bookRepository.getSemesterDeadline(event.semesterId);
         emit(BookSemesterDeadlineSuccess(list));
       } catch (e) {
         emit(BookFailure(e.toString()));

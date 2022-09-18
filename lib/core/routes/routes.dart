@@ -87,7 +87,7 @@ class InnLabRouter {
             settings: routeSettings,
             builder: (_) => BlocProvider(
                   create: (context) =>
-                      sl<BookBloc>()..add(GetSemesterDeadline(1)),
+                      sl<BookBloc>()..add(GetSemesterDeadline('1')),
                   child: TimerScreen(),
                 ));
       case AboutProjectRoute:
