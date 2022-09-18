@@ -247,7 +247,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                         height: 100,
                         width: double.infinity,
                         child: DisplayScreensAndPhotosWidget(
-                            imageFileList :imageFileList!.take(3).toList(),
+                            imageFileList :imageFileList!.take(5).toList(),
                             videoPath: videoPath,
                         ),
                       ),
