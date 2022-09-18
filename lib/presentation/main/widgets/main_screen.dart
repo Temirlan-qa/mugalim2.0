@@ -73,7 +73,8 @@ class _MainScreenState extends State<MainScreen> {
                       InnLabRouter.generateRoute(settings),
                   builder: (_) => BlocProvider(
                     create: (context) => sl<ProfileBloc>()..add(ProfileLoad()),
-                    child: ProfileScreen(),
+                    child: ProfileScreen(
+                    ),
                   ),
                 )
               ],

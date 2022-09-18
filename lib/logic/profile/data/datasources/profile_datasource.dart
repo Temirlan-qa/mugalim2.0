@@ -5,7 +5,7 @@ abstract class ProfileDatasource {
   Future<Response> getProfileData();
 
   Future<Response> changePassword(String oldPass, String newPass);
-  Future<Response> editUserInfo(String email, String phone);
+  Future<Response> editUserInfo(String email, String phone, String avatar);
   Future<Response> uploadAvatar(String avatar);
   Future<Response> changeAvatar(String path);
 }
@@ -31,10 +31,11 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   }
 
   @override
-  Future<Response> editUserInfo(String email, String phone) async {
+  Future<Response> editUserInfo(String email, String phone, String avatar) async {
     Response response = await dioWrapper!.put('/users/my-info/update', data: {
       "email": email,
       "phone": phone,
+      "avatar": avatar,
     });
     return response;
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
@@ -20,35 +19,48 @@ class _TextFieldForChangePasswordState
   bool obscureText = true;
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (text) {
-        setState(() {
-          onChanged = true;
-        });
-      },
-      obscuringCharacter: '•',
-      obscureText: obscureText,
-      controller: widget.nameEditingController,
-      decoration: textFieldStyleForChangePassword(),
+    return SizedBox(
+      height: 48,
+      child: TextField(
+        onChanged: (text) {
+          setState(() {
+            onChanged = true;
+          });
+        },
+        obscuringCharacter: '•',
+        obscureText: obscureText,
+        controller: widget.nameEditingController,
+        decoration: textFieldStyleForChangePassword(),
+      ),
     );
   }
 
   InputDecoration textFieldStyleForChangePassword() {
     return InputDecoration(
-      suffix: GestureDetector(
+      suffixIcon: GestureDetector(
         onTap: () {
           setState(() {
             obscureText = !obscureText;
           });
         },
         child: obscureText
-            ? SvgPicture.asset(
-                'assets/icons/eye_icon.svg',
+            ? Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SvgPicture.asset(
+                  'assets/icons/eye_icon.svg',
+                  color: ColorStyles.primaryBorderColor,
+                  height: 24,
+                  width: 24,
+                ),
               )
-            : Icon(
-                CupertinoIcons.eye_slash,
-                color: ColorStyles.primaryBorderColor,
-                size: 24,
+            : Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SvgPicture.asset(
+                  'assets/icons/eye-off.svg',
+                  color: ColorStyles.primaryBorderColor,
+                  height: 24,
+                  width: 24,
+                ),
               ),
       ),
       border: OutlineInputBorder(
