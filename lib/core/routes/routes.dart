@@ -88,7 +88,8 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => BlocProvider(
             create: (context) => sl<ProfileBloc>()..add(ProfileInfoEdit()),
-            child: SettingsScreen(),
+            child: SettingsScreen(
+            ),
           ),
         );
       case AboutAppRoute:

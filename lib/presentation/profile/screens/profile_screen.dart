@@ -18,7 +18,6 @@ import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -79,9 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Row(
                           children: [
                             CachedNetworkImage(
-                              imageUrl: state is ProfileSuccess
-                                  ? '${EnvironmentConfig.url}/file/image/${state.profileModel.avatar}?size=xs'
-                                  : '',
+                              imageUrl: '${EnvironmentConfig.url}/file/image/${state.profileModel.avatar}?size=xs',
                               width: 56,
                               height: 56,
                               fit: BoxFit.fill,

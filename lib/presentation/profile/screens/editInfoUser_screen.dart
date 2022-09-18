@@ -23,7 +23,7 @@ import 'package:image_picker_platform_interface/image_picker_platform_interface.
 import 'package:mugalim/presentation/profile/widgets/text_field_for_edit_info_user_widget.dart';
 
 class EditInfoUserScreen extends StatefulWidget {
-  //final bloc;
+  final bloc;
   final Map<String, dynamic>? user;
   final String? image;
   final String? gender;
@@ -31,7 +31,7 @@ class EditInfoUserScreen extends StatefulWidget {
       {Key? key,
       required this.user,
       required this.gender,
-      required this.image,})
+      required this.image, this.bloc,})
       : super(key: key);
 
   @override
@@ -69,8 +69,11 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           wait = true;
           timer.cancel();
           Navigator.pop(context);
-          context.read<ProfileBloc>().add((ProfileInfoEdit()));
-          context.read<ProfileBloc>().add((ProfileLoad()));
+          widget.bloc.add((ProfileInfoEdit()));
+          widget.bloc.add((ProfileLoad()));
+
+          // context.read<ProfileBloc>().add((ProfileInfoEdit()));
+          // context.read<ProfileBloc>().add((ProfileLoad()));
         });
       } else {
         setState(() {

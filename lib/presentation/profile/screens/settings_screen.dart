@@ -14,7 +14,7 @@ import 'package:mugalim/presentation/profile/screens/password_screen.dart';
 import 'package:mugalim/presentation/profile/widgets/info_listtile_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
-  SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({Key? key,}) : super(key: key);
   Box tokensBox = Hive.box('tokens');
 
   @override
@@ -135,7 +135,7 @@ class SettingsScreen extends StatelessWidget {
                                   user: state.profileModel.user,
                                   image: state.profileModel.avatar,
                                   gender: state.profileModel.gender,
-                                  //bloc: context.read<ProfileBloc>(),
+                                  bloc: context.read<ProfileBloc>(),
                                 ),
                               ),
                             );

@@ -74,7 +74,6 @@ class _MainScreenState extends State<MainScreen> {
                   builder: (_) => BlocProvider(
                     create: (context) => sl<ProfileBloc>()..add(ProfileLoad()),
                     child: ProfileScreen(
-
                     ),
                   ),
                 )
