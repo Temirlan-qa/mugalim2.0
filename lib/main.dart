@@ -43,6 +43,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProfileBloc>(
           create: (_) => sl(),
         ),
+        BlocProvider<BookBloc>(
+          create: (_) => sl<BookBloc>()..add(GetSemesterDeadline(1)),
+        ),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

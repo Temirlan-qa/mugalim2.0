@@ -8,6 +8,8 @@ import '../models/post_comment.dart';
 
 abstract class HomeRepository {
   Future<List<PostModel>> getPostsList();
+  Future<List<PostModel>> getTrendingPostsList();
+  Future<List<PostModel>> getSavedPostsList();
   Future<List<PostByIdModel>> getPosts(String postId);
   Future<Response> likedPost(String postId,String likeType);
   Future<Response> savedPost(String postId);
@@ -29,8 +31,29 @@ class HomeRepositoryImpl extends HomeRepository {
 
     print(response.data);
 
-    return (response.data['content'] as List).map((jasik) => PostModel.fromJson(jasik)).toList();
+    return (response.data['content'] as List).map((post) => PostModel.fromJson(post)).toList();
   }
+
+  @override
+  Future<List<PostModel>> getTrendingPostsList() async {
+    Response response = await homeDatasource.getTrendingPostList();
+    // print(response.data['content'][0]['content']);
+
+    print(response.data);
+
+    return (response.data['content'] as List).map((post) => PostModel.fromJson(post)).toList();
+  }
+
+  @override
+  Future<List<PostModel>> getSavedPostsList() async {
+    Response response = await homeDatasource.getSavedPostList();
+    // print(response.data['content'][0]['content']);
+
+    print(response.data);
+
+    return (response.data['content'] as List).map((post) => PostModel.fromJson(post)).toList();
+  }
+
   @override
   Future<List<PostByIdModel>> getPosts(String postId) async {
     Response response = await homeDatasource.getPost(postId);

@@ -8,5 +8,7 @@ initHiveBoxes() async {
   await Hive.openBox('onBoarding');
   await Hive.openBox('pinCode');
   await Hive.openBox('tokens');
+  await Hive.openBox('user');
+  await Hive.openBox('viewedBox');
   await Hive.openBox('genres');
 }

@@ -35,8 +35,7 @@ class BookRepositoryImpl extends BookRepository {
   @override
   Future<List<SemesterModel>> getSemesterDeadline(String semester) async {
     Response response = await homeDatasource.getDeadlineSemester(semester);
-
-    return (response.data as List).map((data) => SemesterModel.fromJson(data)).toList();
+    return SemesterModel.fromJson(response.data);
   }
   @override
   Future<Response> postVote(String voteId,String resultOptionId) async {

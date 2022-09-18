@@ -26,6 +26,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeFailure(e.toString()));
       }
     });
+    on<GetTrendingPostsList>((event, emit) async {
+      if(event.loadingState != null && event.loadingState!) {
+        emit(HomeLoading());
+      }
+      try {
+        final List<PostModel> list = await homeRepository.getTrendingPostsList();
+        emit(PostListSuccess(list));
+      } catch (e) {
+        emit(HomeFailure(e.toString()));
+      }
+    });
+    on<GetSavedPostsList>((event, emit) async {
+      if(event.loadingState != null && event.loadingState!) {
+        emit(HomeLoading());
+      }
+      try {
+        final List<PostModel> list = await homeRepository.getSavedPostsList();
+        emit(PostListSuccess(list));
+      } catch (e) {
+        emit(HomeFailure(e.toString()));
+      }
+    });
     on<GetPostCommentList>((event, emit) async {
       if(event.loadingState != null && event.loadingState!) {
         emit(HomeLoading());

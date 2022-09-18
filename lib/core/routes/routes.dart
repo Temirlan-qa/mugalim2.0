@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
+import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/myChoice.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import '../../logic/book/bloc/book_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
-import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutApplication_screen.dart';
 import 'package:mugalim/presentation/profile/screens/aboutProject_screen.dart';
 import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
 import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
 import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/bookMain/main_book_screen.dart';
+import '../../presentation/books/screens/bookMain/timer_screen.dart';
 import '../../presentation/books/screens/selectBook/select_book.dart';
 import '../../presentation/books/screens/selectBook/select_jenre.dart';
 import '../../presentation/cources/screens/coursePage.dart';
@@ -26,14 +27,17 @@ class InnLabRouter {
       case MainRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => MultiBlocProvider(
-              providers: [
-                BlocProvider<HomeBloc>(
-                  create: (_) => sl<HomeBloc>()..add(GetPostsList()),
-                ),
-              ],
-              child: const MainScreen()
-          ),
+          builder: (_) =>
+              MultiBlocProvider(
+                  providers: [
+                    BlocProvider<HomeBloc>(
+                      create: (_) =>
+                      sl<HomeBloc>()
+                        ..add(GetPostsList()),
+                    ),
+                  ],
+                  child: const MainScreen()
+              ),
         );
       case JenreRoute:
         return CupertinoPageRoute(
@@ -68,10 +72,24 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) =>
               BlocProvider(
-                create: (context) => sl<BookBloc>()..add(GetBookList((routeSettings.arguments as Map)['id'])),
-                child: SelectBookScreen(indexMonth: (routeSettings.arguments as Map)['indexMonth'],list: (routeSettings.arguments as Map)['list'], selectIndex: (routeSettings.arguments as Map)['selectIndex'],selectId: (routeSettings.arguments as Map)['selectId'],),
+                create: (context) =>
+                sl<BookBloc>()
+                  ..add(GetBookList((routeSettings.arguments as Map)['id'])),
+                child: SelectBookScreen(
+                  indexMonth: (routeSettings.arguments as Map)['indexMonth'],
+                  list: (routeSettings.arguments as Map)['list'],
+                  selectIndex: (routeSettings.arguments as Map)['selectIndex'],
+                  selectId: (routeSettings.arguments as Map)['selectId'],),
               ),
         );
+      case TimerRoute:
+        return CupertinoPageRoute(
+            settings: routeSettings,
+            builder: (_) => BlocProvider(
+                  create: (context) =>
+                      sl<BookBloc>()..add(GetSemesterDeadline(1)),
+                  child: TimerScreen(),
+                ));
       case AboutProjectRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
@@ -82,11 +100,15 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => const WriteReviewScreen(),
         );
-      //  SettingsRoute
+    //  SettingsRoute
       case SettingsRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => SettingsScreen(infoProfile: routeSettings.arguments),
+          builder: (_) => BlocProvider(
+            create: (context) => sl<ProfileBloc>()..add(ProfileInfoEdit()),
+            child: SettingsScreen(
+            ),
+          ),
         );
       case AboutAppRoute:
         return CupertinoPageRoute(
@@ -98,26 +120,28 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => const VerifyScreen(),
         );
-      // case BookRoute:
-      //   return CupertinoPageRoute(
-      //     settings: routeSettings,
-      //     builder: (_) => BookScreen(
-      //       index_month: (routeSettings.arguments as Map),
-      //       select_index: (routeSettings.arguments as Map),
-      //       list: (routeSettings.arguments as Map),
-      //     ),
-      //   );
+
+    // case BookRoute:
+    //   return CupertinoPageRoute(
+    //     settings: routeSettings,
+    //     builder: (_) => BookScreen(
+    //       index_month: (routeSettings.arguments as Map),
+    //       select_index: (routeSettings.arguments as Map),
+    //       list: (routeSettings.arguments as Map),
+    //     ),
+    //   );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => CupertinoPageScaffold(
-            child: Center(
-              child: Text(
-                'Ошибка, роут для ${routeSettings.name} не найден',
-                textAlign: TextAlign.center,
+          builder: (_) =>
+              CupertinoPageScaffold(
+                child: Center(
+                  child: Text(
+                    'Ошибка, роут для ${routeSettings.name} не найден',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
-            ),
-          ),
         );
     }
   }

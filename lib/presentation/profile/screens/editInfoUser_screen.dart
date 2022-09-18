@@ -4,11 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -31,8 +31,7 @@ class EditInfoUserScreen extends StatefulWidget {
       {Key? key,
       required this.user,
       required this.gender,
-      required this.image,
-      this.bloc})
+      required this.image, this.bloc,})
       : super(key: key);
 
   @override
@@ -40,18 +39,15 @@ class EditInfoUserScreen extends StatefulWidget {
 }
 
 class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
-  var maskFormatter = MaskTextInputFormatter(
-      //mask: '+7 ### ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
-
   late TextEditingController emailController =
       TextEditingController(text: widget.user!['email']);
   late TextEditingController phoneController =
       TextEditingController(text: widget.user!['phone']);
-//maskFormatter.getMaskedText()
+
   String avatarId = '';
   bool nameIsEmpty = true;
   XFile? profilePic;
+  String editedThing = '';
   void refreshState(XFile image, String id) {
     setState(() {
       avatarId = id;
@@ -73,6 +69,11 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           wait = true;
           timer.cancel();
           Navigator.pop(context);
+          widget.bloc.add((ProfileInfoEdit()));
+          widget.bloc.add((ProfileLoad()));
+
+          // context.read<ProfileBloc>().add((ProfileInfoEdit()));
+          // context.read<ProfileBloc>().add((ProfileLoad()));
         });
       } else {
         setState(() {
@@ -89,19 +90,13 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
   final ImagePickerPlatform _picker = ImagePickerPlatform.instance;
   XFile? _imageFileList;
   bool addImg = false;
-  chooseImage(ImageSource source, bloc, notifyParent) async {
+  chooseImage(ImageSource source, notifyParent) async {
     try {
-      ProfileDatasource profileDatasource = sl();
       final XFile? pickedFileList = await _picker.getImage(source: source);
       _imageFileList = pickedFileList;
-      Response response =
-          await profileDatasource.changeAvatar(_imageFileList!.path);
-      Response response1 =
-          await profileDatasource.uploadAvatar(response.data['value']);
-      print(response1.data);
-
-      bloc.add((ProfileLoad()));
-      notifyParent(_imageFileList!, response.data['value']);
+      setState(() {
+        addImg != addImg;
+      });
     } catch (e) {
       print(e.toString());
     }
@@ -238,32 +233,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 ),
                 sizedBoxHeight8(),
                 TextFieldForEditInfoWidget(
-                    controller: emailController,
-                    phoneController : phoneController,
+                  controller: emailController,
+                  phoneController: phoneController,
                 ),
-                // Container(
-                //   decoration: onChanged
-                //       ? BoxDecoration(
-                //           border: Border.all(
-                //             color: const Color(0xFFD5D7F6),
-                //             width: 4,
-                //           ),
-                //           borderRadius: BorderRadius.circular(18),
-                //         )
-                //       : null,
-                //   child: TextField(
-                //     onChanged: (text) {
-                //       setState(() {
-                //         onChanged = true;
-                //       });
-                //     },
-                //     style: TextStyles.mediumStyle.copyWith(
-                //         fontSize: 16,
-                //         color: ColorStyles.neutralsTextPrimaryColor),
-                //     controller: emailController,
-                //     decoration: textFieldStyleForEdit(emailController),
-                //   ),
-                // ),
                 sizedBoxHeight16(),
                 Text(
                   'Телефон',
@@ -275,31 +247,70 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                 sizedBoxHeight8(),
                 TextFieldForEditInfoWidget(
                   controller: phoneController,
-                  phoneController : phoneController,
+                  phoneController: phoneController,
                 ),
                 sizedBoxHeight16(),
                 BtnWidget(
                   fontSize: 16,
                   onPressed: () async {
-                    ProfileDatasource profile = sl();
-                    Response response = await profile.editUserInfo(
-                      emailController.text,
-                      phoneController.text,
-                    );
-                    if (response.statusCode == 200 &&
-                        response.data['status'] == 1) {
+                    if (emailController.text != widget.user!['email']) {
+                      editedThing = '        e-mail';
+                      ProfileDatasource profile = sl();
+                      Response response = await profile.editUserInfo(
+                        emailController.text,
+                        phoneController.text,
+                        widget.image.toString(),
+                      );
+                      if (response.statusCode == 200 &&
+                          response.data['status'] == 1) {
+                        setState(() {
+                          startTimer();
+                          successChange = !successChange;
+                        });
+                      } else {
+                        SnackBarAction(
+                          label: 'Error ',
+                          onPressed: () {
+                            // Some code to undo the change.
+                          },
+                        );
+                      }
+                    } else if (phoneController.text != widget.user!['phone']) {
+                      editedThing = 'телефон';
+                      ProfileDatasource profile = sl();
+                      Response response = await profile.editUserInfo(
+                        emailController.text,
+                        phoneController.text,
+                        widget.image.toString(),
+                      );
+                      if (response.statusCode == 200 &&
+                          response.data['status'] == 1) {
+                        setState(() {
+                          startTimer();
+                          successChange = !successChange;
+                        });
+                      } else {
+                        SnackBarAction(
+                          label: 'Error ',
+                          onPressed: () {
+                            // Some code to undo the change.
+                          },
+                        );
+                      }
+                    } else if (_imageFileList!.path != widget.image) {
+                      editedThing = ' аватар';
+                      ProfileDatasource profileDatasource = sl();
+
+                      Response response = await profileDatasource
+                          .changeAvatar(_imageFileList!.path);
+                      Response response1 = await profileDatasource
+                          .uploadAvatar(response.data['value']);
+                      print(response1.data);
+                      refreshState(_imageFileList!, response.data['value']);
                       setState(() {
                         startTimer();
                         successChange = !successChange;
                       });
-                      widget.bloc.add((ProfileLoad()));
-                    } else {
-                      SnackBarAction(
-                        label: 'Error ',
-                        onPressed: () {
-                          // Some code to undo the change.
-                        },
-                      );
                     }
                   },
                   textColor: onChanged
@@ -338,7 +349,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     onPressed: () async {
                       chooseImage(
                         ImageSource.gallery,
-                        widget.bloc,
+                        //widget.bloc,
                         refreshState,
                       );
                       // Navigator.pop(context, true);
@@ -376,7 +387,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                     onPressed: () async {
                       chooseImage(
                         ImageSource.camera,
-                        widget.bloc,
+                        //widget.bloc,
                         refreshState,
                       );
                       Navigator.pop(context, true);
@@ -422,7 +433,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
         ),
         GlassEffectWithSuccess(
           successChange: successChange,
-          editedThing: 'e-mail',
+          editedThing: editedThing,
         ),
       ],
     );

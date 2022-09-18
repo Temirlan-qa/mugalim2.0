@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
 import 'package:mugalim/logic/book/data/models/semester_model.dart';
 import '../data/models/book_list_model.dart';
+import '../data/models/semester_model.dart';
 import '../data/models/voteList_model.dart';
 import '../data/repositories/book_repository.dart';
 
@@ -47,6 +48,15 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         final Response response = await bookRepository.postVote(event.voteId,event.resultOptionId);
         emit(PostVoteSuccess());
       } catch (e) {
+        emit(BookFailure(e.toString()));
+      }
+    });
+    on<GetSemesterDeadline>((event, emit) async {
+      emit(BookLoading());
+      try{
+        final SemesterModel deadlineModel = (await bookRepository.getSemesterDeadline(event.semester));
+        emit(SemesterDeadlineSuccess(deadlineModel));
+      } catch(e) {
         emit(BookFailure(e.toString()));
       }
     });

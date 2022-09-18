@@ -39,7 +39,9 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
   List<XFile>? imageFileList = [];
   String videoPath = '';
   void selectImages() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage(
+
+    );
 
     final XFile? video = await imagePicker.pickVideo(source: ImageSource.gallery);
     if (selectedImages!.isNotEmpty) {
@@ -245,7 +247,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                         height: 100,
                         width: double.infinity,
                         child: DisplayScreensAndPhotosWidget(
-                            imageFileList :imageFileList,
+                            imageFileList :imageFileList!.take(5).toList(),
                             videoPath: videoPath,
                         ),
                       ),

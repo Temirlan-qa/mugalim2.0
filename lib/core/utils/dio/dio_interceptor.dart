@@ -19,6 +19,7 @@ class DioInterceptor extends Interceptor {
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     String? accessToken = Hive.box('tokens').get('access');
+    // print(options.uri);
     // print(accessToken);
     if (accessToken != null) {
       if (!options.path.contains('oauth/token') &&
