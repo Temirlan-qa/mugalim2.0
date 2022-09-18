@@ -10,7 +10,7 @@ import '../models/voteList_model.dart';
 abstract class BookRepository {
   Future<List<BookListModel>> getVoteById(String id);
   Future<List<VoteListModel>> getVoteList();
-  Future<List<SemesterModel>> getSemesterDeadline(int semester);
+  Future<List<SemesterModel>> getSemesterDeadline(String semester);
   Future<Response> postVote(String voteId,String resultOptionId);
 }
 
@@ -30,11 +30,10 @@ class BookRepositoryImpl extends BookRepository {
   @override
   Future<List<VoteListModel>> getVoteList() async {
     Response response = await homeDatasource.getVoteList();
-    print(response.data);
     return (response.data as List).map((data) => VoteListModel.fromJson(data)).toList();
   }
   @override
-  Future<List<SemesterModel>> getSemesterDeadline(int semester) async {
+  Future<List<SemesterModel>> getSemesterDeadline(String semester) async {
     Response response = await homeDatasource.getDeadlineSemester(semester);
 
     return (response.data as List).map((data) => SemesterModel.fromJson(data)).toList();

@@ -2,13 +2,13 @@ import 'package:another_transformer_page_view/another_transformer_page_view.dart
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:mugalim/presentation/welcome_screen/widgets/transformer.dart';
 
 class IntroScreen extends StatefulWidget {
+  const IntroScreen({Key? key}) : super(key: key);
+
   @override
   _IntroPageState createState() => _IntroPageState();
 }
@@ -22,7 +22,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     indexController = IndexController();
-    _duration = Duration(milliseconds: 600);
+    _duration = const Duration(milliseconds: 600);
     super.initState();
   }
 
@@ -81,7 +81,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         alignment: Alignment.center,
                         child: Column(
                           children: [
-                            Container(
+                            SizedBox(
                               height: screenHeight / 2,
                               child: Align(
                                 alignment: Alignment.bottomCenter,
@@ -104,12 +104,12 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                   children: <Widget>[
                     IgnorePointer(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: Text(
                             splashData[currentPage]['text'],
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20,
                                 height: 1.2,
                                 fontFamily: 'CeraPro',
@@ -121,15 +121,15 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     IgnorePointer(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: Text(
                             splashData[currentPage]['subtext'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               height: 1.5,
                               fontFamily: 'CeraPro',
@@ -142,7 +142,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(height: 70),
+                    const SizedBox(height: 70),
                     SizedBox(
                       height: 12,
                       child: Row(
@@ -153,7 +153,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 32,
                       height: 56,
@@ -178,19 +178,26 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                             onBoarding.put('show', true);
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => VerifyScreen(),
+                                MaterialPageRoute(builder: (context) => const VerifyScreen(),
                                 ));
                           }
                         },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(343, 48),
+                          primary: const Color(0xFF3D3DD8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                          ),
+                        ),
                         child: AnimatedSwitcher(
-                          duration: Duration(milliseconds: 250),
+                          duration: const Duration(milliseconds: 250),
                           transitionBuilder:
                               (Widget child, Animation<double> animation) {
                             return FadeTransition(
                               opacity: animation.drive(
                                 Tween<double>(begin: 0.0, end: 1.0).chain(
                                   CurveTween(
-                                    curve: Interval(0.0, 0.5,
+                                    curve: const Interval(0.0, 0.5,
                                         curve: Curves.easeIn),
                                   ),
                                 ),
@@ -199,7 +206,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                                 opacity: animation.drive(
                                   Tween<double>(begin: 0.0, end: 1.0).chain(
                                     CurveTween(
-                                      curve: Interval(0.5, 1.0,
+                                      curve: const Interval(0.5, 1.0,
                                           curve: Curves.easeIn),
                                     ),
                                   ),
@@ -210,23 +217,16 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                           },
                           child: Text(
                             currentPage == 3 ? 'Алға!' : 'Әрі қарай >',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontFamily: 'CeraPro',
                             ),
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(343, 48),
-                          primary: Color(0xFF3D3DD8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12), // <-- Radius
-                          ),
-                        ),
                       ),
                     ),
-                    SafeArea(
+                    const SafeArea(
                       bottom: false,
                       top: false,
                       child: SizedBox(
@@ -241,7 +241,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                    child: Text(
+                    child: const Text(
                       'Өткізу',
                       style: TextStyle(
                         color: Color(0xFF3D3DD8),
@@ -255,7 +255,7 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
                       Navigator.push(
                           context,
 
-                          MaterialPageRoute(builder: (context) => VerifyScreen(),),
+                          MaterialPageRoute(builder: (context) => const VerifyScreen(),),
                       );
                     },
                   ),
@@ -270,12 +270,12 @@ class _IntroPageState extends State<IntroScreen> with TickerProviderStateMixin {
 
   AnimatedContainer buildDot({int? index}) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 500),
-      margin: EdgeInsets.only(right: 4),
+      duration: const Duration(milliseconds: 500),
+      margin: const EdgeInsets.only(right: 4),
       height: 2,
       width: currentPage == index ? 40 : 6,
       decoration: BoxDecoration(
-        color: currentPage == index ? Color(0xFF1A1A1A) : Color(0xFF767676),
+        color: currentPage == index ? const Color(0xFF1A1A1A) : const Color(0xFF767676),
         borderRadius: BorderRadius.circular(4),
       ),
     );

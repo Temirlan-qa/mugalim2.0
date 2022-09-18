@@ -38,7 +38,7 @@ class InnLabRouter {
       case JenreRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => JenreScreen(
+          builder: (_) => GenreScreen(
             indexMonth: (0),
             list: list,
           ),

@@ -112,7 +112,7 @@ class ChoosenPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => JenreScreen(
+                                builder: (context) => GenreScreen(
                                       indexMonth: 0,
                                       list: const [
                                         'Бизнес',

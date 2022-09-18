@@ -191,7 +191,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
             ),
           ),
           Positioned(
-            bottom: 50,
+            bottom: 16,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -222,7 +222,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => JenreScreen(
+                            builder: (context) => GenreScreen(
                               indexMonth: widget.indexMonth.toInt() + 1,
                               list: widget.list,
                             ),

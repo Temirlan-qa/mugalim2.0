@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           create: (_) => sl(),
         ),
         BlocProvider<BookBloc>(
-          create: (_) => sl<BookBloc>()..add(BookVoteList()),
+          create: (_) => sl<BookBloc>()..add(BookVoteList('1')),
         ),
         BlocProvider<ProfileBloc>(
           create: (_) => sl(),

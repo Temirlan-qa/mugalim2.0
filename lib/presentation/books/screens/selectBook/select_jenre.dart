@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/done.dart';
@@ -10,8 +11,8 @@ import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 
 // ignore: must_be_immutable
-class JenreScreen extends StatefulWidget {
-  JenreScreen({
+class GenreScreen extends StatefulWidget {
+  GenreScreen({
     Key? key,
     required this.indexMonth,
     required this.list,
@@ -20,14 +21,15 @@ class JenreScreen extends StatefulWidget {
   List list;
 
   @override
-  State<JenreScreen> createState() => _JenreScreenState();
+  State<GenreScreen> createState() => _GenreScreenState();
 }
 
-class _JenreScreenState extends State<JenreScreen> {
+class _GenreScreenState extends State<GenreScreen> {
   List list = ['Первая', 'Вторая', 'Третья', 'Четвертая'];
   List selectList = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
   List array = [];
   int indexGrid = 0;
+  Box genres = Hive.box('genres');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +108,7 @@ class _JenreScreenState extends State<JenreScreen> {
                             index = 1;
                           } else if(selectIndex == 'Развитие') {
                             index = 2;
-                          } else if(selectIndex == 'Бизнес') {
+                          } else if(selectIndex == 'Фантастика') {
                             index = 3;
                           }
                             if (widget.indexMonth.toInt() >= 4) {
@@ -165,77 +167,83 @@ class _JenreScreenState extends State<JenreScreen> {
           mainAxisSpacing: 4),
       itemCount: widget.list.length,
       itemBuilder: (BuildContext ctx, index) {
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              if (!array.contains(widget.list[index])) {
-                array.clear();
-                array.add(widget.list[index]);
-              } else if (array.contains(widget.list[index])) {
-                array.clear();
-              }
-              indexGrid = index;
-            });
-          },
-          child: Container(
-            // height: 120,
-            // width: (MediaQuery.of(context).size.width -40 )/2,
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(
-                color: array.contains(widget.list[index])
-                    ? ColorStyles.primaryBorderColor
-                    : ColorStyles.neutralsPageBackgroundColor,
-                width: 2,
+        // if (state.votes[0].bookVotes![index].voted == false) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                if (!array.contains(widget.list[index])) {
+                  array.clear();
+                  array.add(widget.list[index]);
+                } else if (array.contains(widget.list[index])) {
+                  array.clear();
+                }
+                indexGrid = index;
+              });
+            },
+            child: Container(
+              // height: 120,
+              // width: (MediaQuery.of(context).size.width -40 )/2,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: Border.all(
+                  color: array.contains(widget.list[index])
+                      ? ColorStyles.primaryBorderColor
+                      : ColorStyles.neutralsPageBackgroundColor,
+                  width: 2,
+                ),
               ),
-            ),
 
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width/2-100,
-                  height: 80,
-                  child: Text(
-                    state.votes[0].bookVotes![index].name!,
-                    style: TextStyles.mediumStyle.copyWith(
-                      fontSize: 16,
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width / 2 - 100,
+                    height: 80,
+                    child: Text(
+                      state.votes[0].bookVotes![index].name!,
+                      style: TextStyles.mediumStyle.copyWith(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                      // overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const Spacer(),
+                  array.contains(widget.list[index])
+                      ? Container(
+                    height: 24,
+                    width: 24,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorStyles.primaryBorderColor,
+                    ),
+                    child: const Icon(
+                      Icons.done,
+                      size: 16,
                       color: Colors.white,
                     ),
-                    // overflow: TextOverflow.ellipsis,
+                  )
+                      : Container(
+                    height: 24,
+                    width: 24,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                array.contains(widget.list[index])
-                    ? Container(
-                        height: 24,
-                        width: 24,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorStyles.primaryBorderColor,
-                        ),
-                        child: const Icon(
-                          Icons.done,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Container(
-                        height: 24,
-                        width: 24,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                      ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        // }
+        return const Offstage();
+      }
     );
   }
 }
