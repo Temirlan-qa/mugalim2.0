@@ -3,6 +3,7 @@ import 'package:mugalim/logic/book/data/models/semester_model.dart';
 
 import '../datasources/book_datasources.dart';
 import '../models/book_list_model.dart';
+import '../models/semesterDeadline_model.dart';
 import '../models/voteList_model.dart';
 
 
@@ -12,6 +13,7 @@ abstract class BookRepository {
   Future<List<VoteListModel>> getVoteList();
   Future<SemesterModel> getSemesterDeadline(String semester);
   Future<Response> postVote(String voteId,String resultOptionId);
+  Future<SemesterDeadlineModel> getDeadline();
 }
 
 class BookRepositoryImpl extends BookRepository {
@@ -41,5 +43,11 @@ class BookRepositoryImpl extends BookRepository {
   Future<Response> postVote(String voteId,String resultOptionId) async {
     Response response = await homeDatasource.postVote(voteId,resultOptionId);
     return response;
+  }
+
+  @override
+  Future<SemesterDeadlineModel> getDeadline() async {
+    Response response = await homeDatasource.getDeadline();
+    return SemesterDeadlineModel.fromJson(response.data);
   }
 }

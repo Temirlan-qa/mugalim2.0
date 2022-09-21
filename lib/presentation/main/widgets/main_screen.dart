@@ -14,6 +14,7 @@ import 'package:mugalim/presentation/rating/screens/rating_screen.dart';
 import 'package:mugalim/presentation/timetable/screens/timetable_screen.dart';
 
 import '../../../core/injection_container.dart';
+import '../../../logic/book/bloc/book_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -50,7 +51,10 @@ class _MainScreenState extends State<MainScreen> {
                   navigatorObservers: [GetObserver((_) {}, Get.routing)],
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
-                  builder: (_) => const DevelopmentScreen(),
+                  builder: (_) => BlocProvider(
+                    create: (context) => sl<BookBloc>()..add(GetDeadline()),
+                    child: const DevelopmentScreen(),
+                  ),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(2),

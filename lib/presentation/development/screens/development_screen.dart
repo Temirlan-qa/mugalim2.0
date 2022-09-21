@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
@@ -10,6 +11,7 @@ import 'package:mugalim/presentation/books/screens/book_screen.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
+import '../../books/screens/bookMain/voteNotStartedScreen.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -29,464 +31,501 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Container(
-                color: ColorStyles.neutralsPageBackgroundColor,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Image.asset('assets/images/devImg3.png'),
-                    ),
-                    Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset('assets/images/devImg2.png')),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Image.asset('assets/images/devImg1.png'),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 56,
-                child: Column(
-                  children: [
-                    Container(
-                      width: width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.white.withOpacity(0.4),
-                            Colors.white.withOpacity(0),
-                          ],
+          child: BlocBuilder<BookBloc, BookState>(builder: (context, state) {
+            if (state is DeadlineSuccess) {
+              return Stack(
+                children: [
+                  Container(
+                    color: ColorStyles.neutralsPageBackgroundColor,
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Image.asset('assets/images/devImg3.png'),
                         ),
-                        border: Border.all(
-                            color: Colors.white.withOpacity(0.7), width: 4),
-                      ),
-                      child: ClipRRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              children: [
-                                sizedBoxHeight24(),
-                                Text(
-                                  'Добрый день, Мухаммед!',
-                                  style: TextStyles.boldStyle.copyWith(
-                                    fontSize: 23,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                sizedBoxWidth8(),
-                                Text(
-                                  'Сегодня прекрасный день для развития',
-                                  style: TextStyles.mediumStyle.copyWith(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                sizedBoxHeight24(),
-                                Row(
-                                  children: [
-                                    GestureWidget(
-                                      onTap: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pushNamed(CourseRoute);
-                                      },
-                                      title: 'Курсы',
-                                      path: 'assets/images/courseIcon.png',
-                                    ),
-                                    const Spacer(),
-                                    GestureWidget(
-                                      onTap: (){
-                                        // Navigator.of(context)
-                                        //     .pushNamed(JenreRoute);
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => const BookPage()
-                                          ),
-                                        );
-                                      },
-                                      title: 'Книги',
-                                      path: 'assets/images/newBookIcon.png',
-                                    ),
-                                    const Spacer(),
-                                    GestureWidget(
-                                      onTap: () {},
-                                      title: 'M Passport',
-                                      path: 'assets/images/passportIcon.png',
-                                    ),
-                                    const Spacer(),
-                                    GestureWidget(
-                                      onTap: () {},
-                                      title: 'Статистика',
-                                      path: 'assets/images/statisticsIcon.png',
-                                    ),
-                                  ],
-                                ),
-                                sizedBoxHeight24(),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 80,
-                                      height: 80,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            '57',
-                                            style:
-                                                TextStyles.boldStyle.copyWith(
-                                              fontSize: 24,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          sizedBoxHeight8(),
-                                          Text(
-                                            'КУРСОВ',
-                                            style:
-                                                TextStyles.boldStyle.copyWith(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    SizedBox(
-                                      width: 80,
-                                      height: 80,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            '207',
-                                            style:
-                                                TextStyles.boldStyle.copyWith(
-                                              fontSize: 24,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          sizedBoxHeight8(),
-                                          Text(
-                                            'КНИГ',
-                                            style:
-                                                TextStyles.boldStyle.copyWith(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    SizedBox(
-                                      width: 80,
-                                      height: 80,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            '93',
-                                            style:
-                                                TextStyles.boldStyle.copyWith(
-                                              fontSize: 24,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          sizedBoxHeight8(),
-                                          Text(
-                                            'ЗАДАНИЙ',
-                                            style:
-                                                TextStyles.boldStyle.copyWith(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                sizedBoxHeight24(),
-                              ],
-                            ),
-                          ),
+                        Align(
+                            alignment: Alignment.topCenter,
+                            child: Image.asset('assets/images/devImg2.png')),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Image.asset('assets/images/devImg1.png'),
                         ),
-                      ),
+                      ],
                     ),
-                    sizedBoxHeight8(),
-                    Container(
-                      width: width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          gradient: LinearGradient(
+                  ),
+                  Positioned(
+                    top: 56,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomCenter,
                               colors: [
                                 Colors.white.withOpacity(0.4),
                                 Colors.white.withOpacity(0),
-                              ]),
-                          border: Border.all(
-                              color: Colors.white.withOpacity(0.7), width: 4)),
-                      child: ClipRRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Продолжите задания',
-                                  style: TextStyles.mediumStyle.copyWith(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                sizedBoxHeight8(),
-                                Container(
-                                  height: 68,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: Colors.white,
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(12, 8, 16, 8),
-                                    child: Row(
+                              ],
+                            ),
+                            border: Border.all(
+                                color: Colors.white.withOpacity(0.7), width: 4),
+                          ),
+                          child: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: Column(
+                                  children: [
+                                    sizedBoxHeight24(),
+                                    Text(
+                                      'Добрый день, Мухаммед!',
+                                      style: TextStyles.boldStyle.copyWith(
+                                        fontSize: 23,
+                                        color: Colors.black,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    sizedBoxWidth8(),
+                                    Text(
+                                      'Сегодня прекрасный день для развития',
+                                      style: TextStyles.mediumStyle.copyWith(
+                                        fontSize: 13,
+                                        color: Colors.black,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    sizedBoxHeight24(),
+                                    Row(
                                       children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Жүзу',
-                                              style: TextStyles.mediumStyle
-                                                  .copyWith(
-                                                fontSize: 16,
-                                                color: Colors.black,
+                                        GestureWidget(
+                                          onTap: () {
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pushNamed(CourseRoute);
+                                          },
+                                          title: 'Курсы',
+                                          path: 'assets/images/courseIcon.png',
+                                        ),
+                                        const Spacer(),
+                                        GestureWidget(
+                                          onTap: (){
+                                            if (state.deadlineModel.status ==
+                                                        null ||
+                                                    (DateTime.now().compareTo(
+                                                            DateTime.parse(state
+                                                                .deadlineModel
+                                                                .startDate!)) <
+                                                        0)
+                                                // (DateTime.now().compareTo(DateTime.parse('2022-09-30 21:00:00')) < 0)
+                                                ) {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const VoteNotStartedScreen()),
+                                              );
+                                            } else if (state
+                                                        .deadlineModel.status ==
+                                                    'CONFLICT' ||
+                                                state.deadlineModel.status ==
+                                                    'TAKING_PLACE') {
+                                              Navigator.of(context,
+                                                      rootNavigator: true)
+                                                  .pushNamed(BookPageRoute);
+                                            } else if (state
+                                                    .deadlineModel.status ==
+                                                'COMPLETED') {
+                                              Navigator.of(context,
+                                                      rootNavigator: true)
+                                                  .pushNamed(MainBookRoute);
+                                            }
+
+                                            // Navigator.of(context, rootNavigator: true)
+                                            //     .pushNamed(TimerRoute);
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) => const BookPage()
+                                            //   ),
+                                            // );
+                                          },
+                                          title: 'Книги',
+                                          path: 'assets/images/newBookIcon.png',
+                                        ),
+                                        const Spacer(),
+                                        GestureWidget(
+                                          onTap: () {},
+                                          title: 'M Passport',
+                                          path:'assets/images/passportIcon.png',
+                                        ),
+                                        const Spacer(),
+                                        GestureWidget(
+                                          onTap: () {},
+                                          title: 'Статистика',
+                                          path:'assets/images/statisticsIcon.png',
+                                        ),
+                                      ],
+                                    ),
+                                    sizedBoxHeight24(),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 80,
+                                          height: 80,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '57',
+                                                style: TextStyles.boldStyle.copyWith(
+                                                  fontSize: 24,
+                                                  color: Colors.black,
+                                                ),
+                                                textAlign: TextAlign.center,
                                               ),
-                                            ),
-                                            sizedBoxHeight4(),
-                                            Row(
+                                              sizedBoxHeight8(),
+                                              Text(
+                                                'КУРСОВ',
+                                                style: TextStyles.boldStyle.copyWith(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: 80,
+                                          height: 80,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                '207',
+                                                style: TextStyles.boldStyle.copyWith(
+                                                  fontSize: 24,
+                                                  color: Colors.black,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              sizedBoxHeight8(),
+                                              Text(
+                                                'КНИГ',
+                                                style: TextStyles.boldStyle.copyWith(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: 80,
+                                          height: 80,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                '93',
+                                                style: TextStyles.boldStyle.copyWith(
+                                                  fontSize: 24,
+                                                  color: Colors.black,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              sizedBoxHeight8(),
+                                              Text(
+                                                'ЗАДАНИЙ',
+                                                style: TextStyles.boldStyle.copyWith(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    sizedBoxHeight24(),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        sizedBoxHeight8(),
+                        Container(
+                          width: width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.white.withOpacity(0.4),
+                                    Colors.white.withOpacity(0),
+                                  ]),
+                              border: Border.all(
+                                  color: Colors.white.withOpacity(0.7), width: 4)),
+                          child: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Продолжите задания',
+                                      style: TextStyles.mediumStyle.copyWith(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    sizedBoxHeight8(),
+                                    Container(
+                                      height: 68,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
-                                                SizedBox(
-                                                  width: 70,
-                                                  child: Stack(
-                                                    children: [
-                                                      ClipOval(
-                                                        child: CircleAvatar(
-                                                            radius: 12,
-                                                            child: Image.asset(
-                                                              'assets/images/avataricon1.png',
-                                                              // color: Colors.red,
-                                                            )),
+                                                Text(
+                                                  'Жүзу',
+                                                  style: TextStyles.mediumStyle
+                                                      .copyWith(
+                                                    fontSize: 16,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                sizedBoxHeight4(),
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 70,
+                                                      child: Stack(
+                                                        children: [
+                                                          ClipOval(
+                                                            child: CircleAvatar(
+                                                                radius: 12,
+                                                                child: Image.asset(
+                                                                  'assets/images/avataricon1.png',
+                                                                  // color: Colors.red,
+                                                                )),
+                                                          ),
+                                                          Positioned(
+                                                            left: 18,
+                                                            child: ClipOval(
+                                                              child: CircleAvatar(
+                                                                  radius: 12,
+                                                                  child: Image.asset(
+                                                                          'assets/images/avataricon2.png')),
+                                                            ),
+                                                          ),
+                                                          Positioned(
+                                                            left: 36,
+                                                            child: ClipOval(
+                                                              child: CircleAvatar(
+                                                                backgroundColor:
+                                                                    const Color(
+                                                                        0xff3D3DD8),
+                                                                radius: 12,
+                                                                child: Text(
+                                                                  '+21',
+                                                                  style: TextStyles
+                                                                      .regularStyle
+                                                                      .copyWith(
+                                                                    fontSize: 13,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Positioned(
-                                                        left: 18,
-                                                        child: ClipOval(
-                                                          child: CircleAvatar(
-                                                              radius: 12,
-                                                              child: Image.asset(
-                                                                  'assets/images/avataricon2.png')),
+                                                    ),
+                                                    Text(
+                                                      '120 человек выполнили!',
+                                                      style: TextStyles.regularStyle
+                                                          .copyWith(
+                                                        fontSize: 13,
+                                                        color: const Color(0xFF767676),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            const Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 18,
+                                              color: Color(0xff3D3DD8),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        sizedBoxHeight8(),
+                        Container(
+                          width: width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.white.withOpacity(0.4),
+                                    Colors.white.withOpacity(0),
+                                  ]),
+                              border: Border.all(
+                                  color: Colors.white.withOpacity(0.7), width: 4)),
+                          child: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Продолжите курс',
+                                      style: TextStyles.mediumStyle.copyWith(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    sizedBoxHeight8(),
+                                    Container(
+                                      height: 68,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      'assets/images/courseImage.png',
+                                                      fit: BoxFit.cover,
+                                                      width: 92,
+                                                      height: 52,
+                                                    ),
+                                                    sizedBoxWidth8(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Figma: начало работы',
+                                                          style: TextStyles
+                                                              .mediumStyle
+                                                              .copyWith(
+                                                            fontSize: 13,
+                                                            color: Colors.black,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Positioned(
-                                                        left: 36,
-                                                        child: ClipOval(
-                                                          child: CircleAvatar(
-                                                            backgroundColor:
-                                                               const Color(
-                                                                    0xff3D3DD8),
-                                                            radius: 12,
-                                                            child: Text(
-                                                              '+21',
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            const Icon(
+                                                              Icons.access_time,
+                                                              size: 15,
+                                                              color: Color(0xff767676),
+                                                            ),
+                                                            sizedBoxWidth4(),
+                                                            Text(
+                                                              '1 ч 21 м',
                                                               style: TextStyles
                                                                   .regularStyle
                                                                   .copyWith(
                                                                 fontSize: 13,
-                                                                color: Colors
-                                                                    .white,
+                                                                color: const Color(
+                                                                    0xFF767676),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '120 человек выполнили!',
-                                                  style: TextStyles.regularStyle
-                                                      .copyWith(
-                                                    fontSize: 13,
-                                                    color:
-                                                        const Color(0xFF767676),
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        const Spacer(),
-                                        const Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 18,
-                                          color: Color(0xff3D3DD8),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    sizedBoxHeight8(),
-                    Container(
-                      width: width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.white.withOpacity(0.4),
-                                Colors.white.withOpacity(0),
-                              ]),
-                          border: Border.all(
-                              color: Colors.white.withOpacity(0.7), width: 4)),
-                      child: ClipRRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Продолжите курс',
-                                  style: TextStyles.mediumStyle.copyWith(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                sizedBoxHeight8(),
-                                Container(
-                                  height: 68,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: Colors.white,
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(12, 8, 16, 8),
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  'assets/images/courseImage.png',
-                                                  fit: BoxFit.cover,
-                                                  width: 92,
-                                                  height: 52,
-                                                ),
-                                                sizedBoxWidth8(),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Figma: начало работы',
-                                                      style: TextStyles
-                                                          .mediumStyle
-                                                          .copyWith(
-                                                        fontSize: 13,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons.access_time,
-                                                          size: 15,
-                                                          color:
-                                                              Color(0xff767676),
-                                                        ),
-                                                        sizedBoxWidth4(),
-                                                        Text(
-                                                          '1 ч 21 м',
-                                                          style: TextStyles
-                                                              .regularStyle
-                                                              .copyWith(
-                                                            fontSize: 13,
-                                                            color: const Color(
-                                                                0xFF767676),
-                                                          ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
                                                   ],
-                                                ),
+                                                )
                                               ],
-                                            )
+                                            ),
+                                            const Spacer(),
+                                            const Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 18,
+                                              color: Color(0xff3D3DD8),
+                                            ),
                                           ],
                                         ),
-                                        const Spacer(),
-                                        const Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 18,
-                                          color: Color(0xff3D3DD8),
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+                  ),
+                ],
+              );
+            }
+            if (state is BookLoading) {
+              return const Center(
+                  child: CupertinoActivityIndicator(
+                color: Colors.grey,
+              ));
+            }
+
+            if (state is BookFailure) {
+              print("Timer Failure owibka");
+              return Text('Timer Failure owibka');
+            }
+            return Text(" No loaded");
+          }),
         ),
       ),
     );

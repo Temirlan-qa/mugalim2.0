@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/books/screens/bookMain/timerDetail.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
-import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 import '../../../development/screens/development_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -120,8 +119,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.of(context)
-                  .pushNamed(DevelopmentRoute);
+              Navigator.pop(context);
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -160,7 +158,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
-          if(state is SemesterDeadlineSuccess) {
+          if(state is DeadlineSuccess) {
            // duration = getDuration(state.deadlineModel.endDate!);
 
             return Container(
@@ -186,7 +184,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     //   const EdgeInsets.symmetric(vertical: 16, horizontal: 1.5),
                     //   child: TimerDetail(startingDate: state.deadlineModel.endDate!,),
                     // ),
-                    TimerDetail(startingDate: state.deadlineModel.endDate!,),
+                    TimerDetail(startingDate: state.deadlineModel.endDate!, status: state.deadlineModel.status!,),
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 47, horizontal: 55),
@@ -282,8 +280,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context, rootNavigator: true)
-                                .pushNamed(DevelopmentRoute);
+                            Navigator.pop(context);
                           },
                           child: Text("На главную",
                               style: TextStyles.mediumStyle
