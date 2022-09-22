@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => sl<BookBloc>()..add(PostVoteEvent([])),
         // ),
         BlocProvider<BookBloc>(
-          create: (_) => sl<BookBloc>()..add(GetSemesterDeadline(1)),
+          create: (_) => sl<BookBloc>()..add(GetSemesterDeadline('1')),
         ),
         BlocProvider<BookBloc>(
           create: (_) => sl<BookBloc>()..add(BookVoteList()),
