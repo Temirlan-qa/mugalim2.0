@@ -8,6 +8,8 @@ abstract class ProfileDatasource {
   Future<Response> editUserInfo(String email, String phone, String avatar);
   Future<Response> uploadAvatar(String avatar);
   Future<Response> changeAvatar(String path);
+  Future<Response> uploadReview(String title, String comment, List<String> files);
+  Future<List<String>> uploadVideoAndImages(List<String> file);
 }
 
 class ProfileDatasourceImpl implements ProfileDatasource {
@@ -31,7 +33,8 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   }
 
   @override
-  Future<Response> editUserInfo(String email, String phone, String avatar) async {
+  Future<Response> editUserInfo(
+      String email, String phone, String avatar) async {
     Response response = await dioWrapper!.put('/users/my-info/update', data: {
       "email": email,
       "phone": phone,
@@ -58,4 +61,31 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         .put('/users/my-info/update', data: {"avatar": avatar});
     return response;
   }
+
+  @override
+  Future<Response> uploadReview(String title, String comment, List<String> files) async {
+    Response response = await dioWrapper!.post('/data/comment/create', data: {
+      "title": title,
+      "comment": comment,
+      "files": files,
+    });
+    return response;
+  }
+
+  @override
+  Future<List<String>> uploadVideoAndImages(List<String> file) async {
+    List<String> formData1 = [];
+    for (int i = 0; i < file.length.toInt(); i++){
+      FormData formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(file[i]),
+      });
+      Response response = await dioWrapper!.post(
+        '/file/image/upload',
+        data: formData
+      );
+      formData1.add(response.data['value']);
+    }
+    return formData1;
+  }
+
 }

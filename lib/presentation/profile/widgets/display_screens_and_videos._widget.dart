@@ -7,7 +7,7 @@ import 'package:mugalim/core/const/const_color.dart';
 
 class DisplayScreensAndPhotosWidget extends StatefulWidget {
   final List<XFile>? imageFileList;
-  final String videoPath;
+  final String? videoPath;
    const DisplayScreensAndPhotosWidget(
       {Key? key, this.imageFileList, required this.videoPath, })
       : super(key: key);
@@ -50,7 +50,6 @@ class _DisplayScreensAndPhotosWidgetState extends State<DisplayScreensAndPhotosW
                   onTap: () {
                     widget.imageFileList!.removeAt(index);
                     setState(() {});
-                    print('dispose');
                   },
                   child: SvgPicture.asset(
                     'assets/icons/x.svg',
