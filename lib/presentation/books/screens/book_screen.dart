@@ -22,10 +22,10 @@ class _BookPageState extends State<BookPage> {
     BlocBuilder<BookBloc,BookState>(
       builder: (context, state) {
         if(state is BookSemesterDeadlineSuccess){
-          DateTime createdAt = DateTime.parse(state.list[0].createdAt!);
+          DateTime createdAt = DateTime.parse(state.list.createdAt!);
           String createdAtDate = DateFormat('d MMM в hh:mm').format(createdAt);
           String nowDate = DateFormat('d MMM в hh:mm').format(DateTime.now());
-          DateTime endAt = DateTime.parse(state.list[0].endDate!);
+          DateTime endAt = DateTime.parse(state.list.endDate!);
           String endAtDate = DateFormat('d MMM в hh:mm').format(endAt);
           bool isFalse = true;
           if(double.parse(nowDate) > double.parse(createdAtDate) && double.parse(nowDate) < double.parse(endAtDate)) {

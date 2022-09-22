@@ -22,10 +22,12 @@ class PostVoteEvent extends BookEvent{
 }
 
 class GetSemesterDeadline extends BookEvent{
-  final int semester;
+  final String semester;
   GetSemesterDeadline(this.semester);
  }
 class BookSemesterDeadlineList extends BookEvent{
   final String semesterId;
   BookSemesterDeadlineList(this.semesterId);
 }
+
+class GetDeadline extends BookEvent {}

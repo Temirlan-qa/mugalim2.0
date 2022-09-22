@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
+import 'package:mugalim/presentation/books/screens/book_screen.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/myChoice.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import '../../logic/book/bloc/book_bloc.dart';
@@ -55,8 +56,12 @@ class InnLabRouter {
       case DevelopmentRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => const DevelopmentScreen(),
-        );
+          builder: (_) => BlocProvider(
+            create: (context) =>
+            sl<BookBloc>()
+              ..add(GetDeadline()),
+            child: const DevelopmentScreen(),
+        ));
       case ChoiceRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
@@ -87,8 +92,8 @@ class InnLabRouter {
             settings: routeSettings,
             builder: (_) => BlocProvider(
                   create: (context) =>
-                      sl<BookBloc>()..add(GetSemesterDeadline(1)),
-                  child: TimerScreen(),
+                      sl<BookBloc>()..add(GetDeadline()),
+                  child: const TimerScreen(),
                 ));
       case AboutProjectRoute:
         return CupertinoPageRoute(
@@ -119,6 +124,11 @@ class InnLabRouter {
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => const VerifyScreen(),
+        );
+      case BookPageRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => const BookPage(),
         );
 
     // case BookRoute:
