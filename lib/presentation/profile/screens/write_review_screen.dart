@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +9,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
+import 'package:mugalim/core/injection_container.dart';
 import 'package:mugalim/core/widgets/glass_effect_with_success.dart';
+import 'package:mugalim/logic/profile/data/datasources/profile_datasource.dart';
 import 'package:mugalim/presentation/profile/widgets/btn_widget.dart';
 import 'package:mugalim/presentation/profile/widgets/display_screens_and_videos._widget.dart';
 
@@ -28,30 +31,35 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
     'Статистика',
     'M passport',
   ];
+  late String chosen;
   TextEditingController commentController = TextEditingController();
   bool buttonDown = false;
   String dropDownValue = 'Предложение';
   bool onChanged = false;
   bool addImg = false;
 
-
   final ImagePicker imagePicker = ImagePicker();
   List<XFile>? imageFileList = [];
   String videoPath = '';
+  List<String> imagesVideoFileList = [];
   void selectImages() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage(
-
-    );
-
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     final XFile? video = await imagePicker.pickVideo(source: ImageSource.gallery);
-    if (selectedImages!.isNotEmpty) {
-      imageFileList!.addAll(selectedImages);
-    }else if(video == null){
-      videoPath = video!.path;
-    }
-    setState((){});
-  }
 
+    setState(() {
+      imageFileList!.addAll(selectedImages!);
+      videoPath = video!.path;
+    });
+    for (int i = 0; i == imageFileList!.length; i++){
+      setState(() {
+        imagesVideoFileList.add(imageFileList![i].path);
+      });
+    }
+
+    setState(() {
+      imagesVideoFileList.add(videoPath);
+    });
+  }
 
   bool successChange = false;
   int start = 0;
@@ -247,8 +255,8 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                         height: 100,
                         width: double.infinity,
                         child: DisplayScreensAndPhotosWidget(
-                            imageFileList :imageFileList!.take(5).toList(),
-                            videoPath: videoPath,
+                          imageFileList: imageFileList!.take(5).toList(),
+                          videoPath: videoPath,
                         ),
                       ),
                     ),
@@ -324,6 +332,14 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                       ),
                     ),
                     sizedBoxHeight16(),
+                    TextButton(
+                      onPressed: () {
+                        print(
+                            imagesVideoFileList
+                        );
+                      },
+                      child: Text('show data'),
+                    ),
                     BtnWidget(
                       color: onChanged
                           ? ColorStyles.primaryBorderColor
@@ -332,8 +348,52 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                           ? Colors.white
                           : ColorStyles.neutralsTextPrimaryColor,
                       text: 'Отправить',
-                      onPressed: () {
+                      onPressed: () async {
+                        if (dropDownValue == 'Предложение'){
+                          setState(() {
+                            chosen = 'OFFER';
+                          });
+                        }
+                        else if(dropDownValue == 'Посты'){
+                          setState(() {
+                            chosen = 'POSTS';
+                          });
+                        }
+                        else if(dropDownValue == 'Книги'){
+                          setState(() {
+                            chosen = 'BOOKS';
+                          });
+                        }
+                        else if(dropDownValue == 'Курсы'){
+                          setState(() {
+                            chosen = 'COURSES';
+                          });
+                        }
+                        else if(dropDownValue == 'Статистика'){
+                          setState(() {
+                            chosen = 'STATISTICS';
+                          });
+                        }
+                        else if(dropDownValue == 'M passport'){
+                          setState(() {
+                            chosen = 'MPASSPORT';
+                          });
+                        }
+                        print(chosen);
                         if (onChanged) {
+
+                          ProfileDatasource profileDatasource = sl();
+                          List<String> responseVideoAndImages = await profileDatasource.uploadVideoAndImages(imagesVideoFileList.toList());
+                          Response response1 =
+                              await profileDatasource.uploadReview(
+                                  chosen,
+                                  commentController.text,
+                                  //["8e36ee65-3968-416e-a51b-0f83bff78714", "8e36ee65-3968-416e-a51b-0f83bff78714"]);
+                                  responseVideoAndImages
+                              );
+                            //);
+                          print('$chosen ${commentController.text} ');
+                          print('${response1.data} ${response1.statusMessage} ${response1.statusCode}');
                           setState(() {
                             startTimer();
                             successChange = !successChange;
@@ -349,7 +409,8 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
           ),
         ),
         Visibility(
-          visible: addImg && imageFileList!.isEmpty || addImg && imageFileList == [],
+          visible:
+              addImg && imageFileList!.isEmpty || addImg && imageFileList == [],
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
