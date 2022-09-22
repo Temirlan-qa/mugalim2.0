@@ -29,3 +29,5 @@ class BookSemesterDeadlineList extends BookEvent{
   final String semesterId;
   BookSemesterDeadlineList(this.semesterId);
 }
+
+class GetDeadline extends BookEvent {}
