@@ -75,7 +75,7 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   @override
   Future<List<String>> uploadVideoAndImages(List<String> file) async {
     List<String> formData1 = [];
-    for (int i = 0; i == file.length; i++){
+    for (int i = 0; i < file.length.toInt(); i++){
       FormData formData = FormData.fromMap({
         'file': await MultipartFile.fromFile(file[i]),
       });
@@ -84,7 +84,6 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         data: formData
       );
       formData1.add(response.data['value']);
-      print(response);
     }
     return formData1;
   }

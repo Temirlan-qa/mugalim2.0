@@ -44,23 +44,23 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
   List<String> imagesVideoFileList = [];
   void selectImages() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-    final XFile? video = await imagePicker.pickVideo(source: ImageSource.gallery);
+    final XFile? video =
+        await imagePicker.pickVideo(source: ImageSource.gallery);
 
     setState(() {
-      imageFileList!.addAll(selectedImages!);
+      imageFileList = selectedImages;
       videoPath = video!.path;
+      imagesVideoFileList.add(videoPath);
     });
-    for (int i = 0; i == imageFileList!.length; i++){
+
+    for (int i = 0; i < imageFileList!.length; i++) {
       setState(() {
         imagesVideoFileList.add(imageFileList![i].path);
       });
     }
-
-    setState(() {
-      imagesVideoFileList.add(videoPath);
-    });
   }
 
+  bool isSendLoading = false;
   bool successChange = false;
   int start = 0;
   bool wait = true;
@@ -267,12 +267,6 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                           setState(() {
                             addImg = true;
                           });
-                          // showCupertinoModalBottomSheet(
-                          //   useRootNavigator: true,
-                          //   context: context,
-                          //   builder: (BuildContext context) =>
-                          //       const AddScreenShotVideoWidget(),
-                          // );
                         },
                         child: DottedBorder(
                           borderType: BorderType.RRect,
@@ -332,75 +326,80 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                       ),
                     ),
                     sizedBoxHeight16(),
-                    TextButton(
-                      onPressed: () {
-                        print(
-                            imagesVideoFileList
-                        );
-                      },
-                      child: Text('show data'),
-                    ),
-                    BtnWidget(
+                    CupertinoButton(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      pressedOpacity: 0.8,
                       color: onChanged
                           ? ColorStyles.primaryBorderColor
                           : const Color(0xFFE0E0E0),
-                      textColor: onChanged
-                          ? Colors.white
-                          : ColorStyles.neutralsTextPrimaryColor,
-                      text: 'Отправить',
+                      padding: EdgeInsets.zero,
                       onPressed: () async {
-                        if (dropDownValue == 'Предложение'){
+                        if (dropDownValue == 'Предложение') {
                           setState(() {
                             chosen = 'OFFER';
                           });
-                        }
-                        else if(dropDownValue == 'Посты'){
+                        } else if (dropDownValue == 'Посты') {
                           setState(() {
                             chosen = 'POSTS';
                           });
-                        }
-                        else if(dropDownValue == 'Книги'){
+                        } else if (dropDownValue == 'Книги') {
                           setState(() {
                             chosen = 'BOOKS';
                           });
-                        }
-                        else if(dropDownValue == 'Курсы'){
+                        } else if (dropDownValue == 'Курсы') {
                           setState(() {
                             chosen = 'COURSES';
                           });
-                        }
-                        else if(dropDownValue == 'Статистика'){
+                        } else if (dropDownValue == 'Статистика') {
                           setState(() {
                             chosen = 'STATISTICS';
                           });
-                        }
-                        else if(dropDownValue == 'M passport'){
+                        } else if (dropDownValue == 'M passport') {
                           setState(() {
                             chosen = 'MPASSPORT';
                           });
                         }
-                        print(chosen);
                         if (onChanged) {
-
-                          ProfileDatasource profileDatasource = sl();
-                          List<String> responseVideoAndImages = await profileDatasource.uploadVideoAndImages(imagesVideoFileList.toList());
-                          Response response1 =
-                              await profileDatasource.uploadReview(
-                                  chosen,
-                                  commentController.text,
-                                  //["8e36ee65-3968-416e-a51b-0f83bff78714", "8e36ee65-3968-416e-a51b-0f83bff78714"]);
-                                  responseVideoAndImages
-                              );
-                            //);
-                          print('$chosen ${commentController.text} ');
-                          print('${response1.data} ${response1.statusMessage} ${response1.statusCode}');
                           setState(() {
-                            startTimer();
-                            successChange = !successChange;
+                            isSendLoading = true;
                           });
+                          if(isSendLoading){
+                            ProfileDatasource profileDatasource = sl();
+                            List<String> responseVideoAndImages =
+                            await profileDatasource
+                                .uploadVideoAndImages(imagesVideoFileList);
+                            Response response1 =
+                            await profileDatasource.uploadReview(
+                                chosen,
+                                commentController.text,
+                                responseVideoAndImages);
+                            print(response1);
+                            isSendLoading = false;
+                            setState(() {
+                              startTimer();
+                              successChange = !successChange;
+                            });
+                          }
                         }
                       },
-                      fontSize: 16,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width - 16,
+                        child: Center(
+                          child: isSendLoading
+                              ? const CupertinoActivityIndicator(
+                                  color: Colors.white,
+                                )
+                              : Text(
+                                  'Отправить',
+                                  style: TextStyles.mediumStyle.copyWith(
+                                    fontSize: 16,
+                                    color: onChanged
+                                        ? Colors.white
+                                        : ColorStyles.neutralsTextPrimaryColor,
+                                  ),
+                                ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
