@@ -6,6 +6,7 @@ abstract class BookDatasource {
   Future<Response> getVoteById(String id);
   Future<Response> getDeadlineSemester(String id);
   Future<Response> postVote(String voteId,String resultOptionId);
+  Future<Response> getDeadline();
 }
 
 class BookDataSourceImpl implements BookDatasource {
@@ -29,7 +30,6 @@ class BookDataSourceImpl implements BookDatasource {
   @override
   Future<Response> getDeadlineSemester(String id) async {
     Response response = await dioWrapper!.get('/books/deadline/my/semester/$id');
-    print(response);
     return response;
   }
   @override
@@ -40,6 +40,12 @@ class BookDataSourceImpl implements BookDatasource {
           'resultOptionId' : resultOptionId,
         }
     );
+    return response;
+  }
+
+  @override
+  Future<Response> getDeadline() async {
+    Response response = await dioWrapper!.get('/books/voting/my-list/exists');
     return response;
   }
 }

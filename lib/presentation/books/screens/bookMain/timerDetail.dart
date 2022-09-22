@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/routes_const.dart';
 
 class TimerDetail extends StatefulWidget {
   final String startingDate;
-  const TimerDetail({Key? key, required this.startingDate}) : super(key: key);
+  final String status;
+  const TimerDetail({Key? key, required this.startingDate, required this.status}) : super(key: key);
 
   @override
   State<TimerDetail> createState() => _TimerDetailState();
@@ -23,6 +25,15 @@ class _TimerDetailState extends State<TimerDetail> {
     final startingDateTime = DateTime.parse(widget.startingDate).millisecondsSinceEpoch;
     var difference = startingDateTime - dateTimeResumed;
     if(difference < 0) {
+      if(widget.status == 'CONFLICT') {
+        difference = 0;
+      } else {
+        Navigator.of(context,
+            rootNavigator: true)
+            .popAndPushNamed(MainBookRoute);
+
+            }
+
       difference = 0;
     }
 

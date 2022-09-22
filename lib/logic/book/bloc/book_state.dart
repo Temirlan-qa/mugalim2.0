@@ -35,3 +35,9 @@ class SemesterDeadlineSuccess extends BookState {
 
   SemesterDeadlineSuccess(this.deadlineModel);
 }
+
+class DeadlineSuccess extends BookState {
+  final SemesterDeadlineModel deadlineModel;
+
+  DeadlineSuccess(this.deadlineModel);
+}
