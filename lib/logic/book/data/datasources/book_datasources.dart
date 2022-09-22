@@ -5,7 +5,8 @@ abstract class BookDatasource {
   Future<Response> getVoteList();
   Future<Response> getVoteById(String id);
   Future<Response> getDeadlineSemester(String id);
-  Future<Response> postVote(String voteId,String resultOptionId);
+  Future<Response> getDeadlineSemester2(int id);
+  Future<Response> postVote(List<Map<String, String>> choiceList);
 }
 
 class BookDataSourceImpl implements BookDatasource {
@@ -19,6 +20,7 @@ class BookDataSourceImpl implements BookDatasource {
   @override
   Future<Response> getVoteList() async {
     Response response = await dioWrapper!.get('/books/voting/my-list');
+    // print(response);
     return response;
   }
   @override
@@ -29,17 +31,17 @@ class BookDataSourceImpl implements BookDatasource {
   @override
   Future<Response> getDeadlineSemester(String id) async {
     Response response = await dioWrapper!.get('/books/deadline/my/semester/$id');
-    print(response);
     return response;
   }
   @override
-  Future<Response> postVote(String voteId,String resultOptionId) async {
-    Response response = await dioWrapper!.post('/books/voting/vote',
-        data: {
-          'voteId' : voteId,
-          'resultOptionId' : resultOptionId,
-        }
+  Future<Response> postVote(List<Map<String, String>> choiceList) async {
+    Response response = await dioWrapper!.post('/books/voting/vote', data: choiceList
     );
+    return response;
+  }
+  @override
+  Future<Response> getDeadlineSemester2(int id) async{
+    Response response = await dioWrapper!.get('/books/deadline/my/semester/$id');
     return response;
   }
 }

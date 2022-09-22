@@ -37,14 +37,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<BookBloc>(
           create: (_) => sl(),
         ),
-        BlocProvider<BookBloc>(
-          create: (_) => sl<BookBloc>()..add(BookVoteList('1')),
-        ),
         BlocProvider<ProfileBloc>(
           create: (_) => sl(),
         ),
+        // BlocProvider<BookBloc>(
+        //   create: (_) => sl<BookBloc>()..add(PostVoteEvent([])),
+        // ),
         BlocProvider<BookBloc>(
           create: (_) => sl<BookBloc>()..add(GetSemesterDeadline(1)),
+        ),
+        BlocProvider<BookBloc>(
+          create: (_) => sl<BookBloc>()..add(BookVoteList()),
         ),
       ],
       child: MaterialApp(

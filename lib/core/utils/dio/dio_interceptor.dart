@@ -35,7 +35,7 @@ class DioInterceptor extends Interceptor {
 
   @override
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    if (err.response!.statusCode == 401) {
+    if (err.response != null && err.response!.statusCode == 401) {
       if (tokens!.containsKey('refresh')) {
         await refreshToken();
         return handler.resolve(await _retry(err.requestOptions));

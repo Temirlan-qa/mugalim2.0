@@ -45,6 +45,8 @@ class InnLabRouter {
           builder: (_) => GenreScreen(
             indexMonth: (0),
             list: list,
+            addList:  [0,1,2,3],
+            choiceList:  [],
           ),
         );
       case CourseRoute:
@@ -76,10 +78,13 @@ class InnLabRouter {
                 sl<BookBloc>()
                   ..add(GetBookList((routeSettings.arguments as Map)['id'])),
                 child: SelectBookScreen(
+                  choiceList: (routeSettings.arguments as Map)['choiceList'],
                   indexMonth: (routeSettings.arguments as Map)['indexMonth'],
                   list: (routeSettings.arguments as Map)['list'],
+                  addList: (routeSettings.arguments as Map)['addList'],
+                  id: (routeSettings.arguments as Map)['id'],
                   selectIndex: (routeSettings.arguments as Map)['selectIndex'],
-                  selectId: (routeSettings.arguments as Map)['selectId'],),
+                ),
               ),
         );
       case TimerRoute:
@@ -88,7 +93,7 @@ class InnLabRouter {
             builder: (_) => BlocProvider(
                   create: (context) =>
                       sl<BookBloc>()..add(GetSemesterDeadline(1)),
-                  child: TimerScreen(),
+                  child: const TimerScreen(),
                 ));
       case AboutProjectRoute:
         return CupertinoPageRoute(

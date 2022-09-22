@@ -7,17 +7,14 @@ part 'bookVotes_model.g.dart';
 @JsonSerializable()
 class BookVotesModel {
   final String? id;
-  final String? createdAt;
-  final String? updatedAt;
-  final List? eventLog;
-  final String? bookVoteGroupId;
-  final String? voteId;
+  final List? options;
+  final List? voterDetails;
   final String? name;
-  final int? orderNumber;
+  final int? voteNumber;
   final bool? voted;
 
   factory BookVotesModel.fromJson(Map<String, dynamic> json) => _$BookVotesModelFromJson(json);
 
-  BookVotesModel(this.id, this.createdAt, this.updatedAt,  this.bookVoteGroupId, this.voteId, this.name, this.orderNumber, this.eventLog, this.voted);
+  BookVotesModel(this.id, this.voterDetails, this.options,  this.voteNumber, this.name,this.voted);
   Map<String, dynamic> toJson() => _$BookVotesModelToJson(this);
 }

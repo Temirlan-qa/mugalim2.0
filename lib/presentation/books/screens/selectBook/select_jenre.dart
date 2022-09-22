@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/done.dart';
@@ -16,9 +15,13 @@ class GenreScreen extends StatefulWidget {
     Key? key,
     required this.indexMonth,
     required this.list,
+    required this.addList,
+    required this.choiceList,
   }) : super(key: key);
   int indexMonth;
   List list;
+  List addList;
+  List<Map<String, String>> choiceList;
 
   @override
   State<GenreScreen> createState() => _GenreScreenState();
@@ -28,13 +31,15 @@ class _GenreScreenState extends State<GenreScreen> {
   List list = ['Первая', 'Вторая', 'Третья', 'Четвертая'];
   List selectList = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
   List array = [];
+  List addList = [];
   int indexGrid = 0;
-  Box genres = Hive.box('genres');
+  int selectIndexGenre = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
+          addList = widget.addList;
           if(state is VoteListSuccess){
             return SafeArea(
               child: SizedBox(
@@ -115,15 +120,16 @@ class _GenreScreenState extends State<GenreScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ChoosenPage()),
+                                  builder: (context) => ChoosenPage(choiceList: widget.choiceList,)),
                             );
                           } else {
                             Navigator.of(context).pushNamed(SelectBookRoute, arguments: {
                               "indexMonth": widget.indexMonth,
-                              "id": state.votes[0].bookVotes![index].voteId,
+                              "id": state.votes[widget.addList[index]].id!,
                               "list": widget.list,
-                              "selectIndex" : selectIndex,
-                              "selectId": state.votes[0].bookVotes![widget.indexMonth].voteId
+                              "addList": addList,
+                              "choiceList": widget.choiceList,
+                              "selectIndex": selectIndexGenre
                             });
                           }
                         }
@@ -165,84 +171,82 @@ class _GenreScreenState extends State<GenreScreen> {
           crossAxisCount: 2,
           crossAxisSpacing: 4,
           mainAxisSpacing: 4),
-      itemCount: widget.list.length,
+      itemCount: widget.addList.length,
       itemBuilder: (BuildContext ctx, index) {
-        // if (state.votes[0].bookVotes![index].voted == false) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                if (!array.contains(widget.list[index])) {
-                  array.clear();
-                  array.add(widget.list[index]);
-                } else if (array.contains(widget.list[index])) {
-                  array.clear();
-                }
-                indexGrid = index;
-              });
-            },
-            child: Container(
-              // height: 120,
-              // width: (MediaQuery.of(context).size.width -40 )/2,
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                border: Border.all(
-                  color: array.contains(widget.list[index])
-                      ? ColorStyles.primaryBorderColor
-                      : ColorStyles.neutralsPageBackgroundColor,
-                  width: 2,
-                ),
-              ),
-
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width / 2 - 100,
-                    height: 80,
-                    child: Text(
-                      state.votes[0].bookVotes![index].name!,
-                      style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      // overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  const Spacer(),
-                  array.contains(widget.list[index])
-                      ? Container(
-                    height: 24,
-                    width: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorStyles.primaryBorderColor,
-                    ),
-                    child: const Icon(
-                      Icons.done,
-                      size: 16,
-                      color: Colors.white,
-                    ),
-                  )
-                      : Container(
-                    height: 24,
-                    width: 24,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+        return GestureDetector(
+          onTap: () {
+            selectIndexGenre = widget.addList[index];
+            setState(() {
+              if (!array.contains(widget.list[index])) {
+                array.clear();
+                array.add(widget.list[index]);
+              } else if (array.contains(widget.list[index])) {
+                array.clear();
+              }
+              indexGrid = index;
+            });
+          },
+          child: Container(
+            // height: 120,
+            // width: (MediaQuery.of(context).size.width -40 )/2,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(
+                color: array.contains(widget.list[index])
+                    ? ColorStyles.primaryBorderColor
+                    : ColorStyles.neutralsPageBackgroundColor,
+                width: 2,
               ),
             ),
-          );
-        // }
-        return const Offstage();
+
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width / 2 - 100,
+                  height: 80,
+                  child: Text(
+                    state.votes[widget.addList[index]].name!,
+                    style: TextStyles.mediumStyle.copyWith(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                    // overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const Spacer(),
+                array.contains(widget.list[index])
+                    ? Container(
+                  height: 24,
+                  width: 24,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: ColorStyles.primaryBorderColor,
+                  ),
+                  child: const Icon(
+                    Icons.done,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                )
+                    : Container(
+                  height: 24,
+                  width: 24,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       }
     );
   }

@@ -6,10 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/presentation/books/screens/book_screen.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
+import '../../books/screens/bookMain/main_book_screen.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -110,12 +110,40 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                       onTap: (){
                                         // Navigator.of(context)
                                         //     .pushNamed(JenreRoute);
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => const BookPage()
-                                          ),
+                                        bool isTrue = false;
+                                        BlocBuilder<BookBloc,BookState>(
+                                          builder: (context, state) {
+                                            if(state is BookSemesterDeadlineSuccess){
+                                              DateTime createdAt = DateTime.parse(state.list[0].startDate!);
+                                              String startAtDate = DateFormat('d MMM в hh:mm').format(createdAt);
+                                              String nowDate = DateFormat('d MMM в hh:mm').format(DateTime.now());
+                                              DateTime endAt = DateTime.parse(state.list[0].endDate!);
+                                              String endAtDate = DateFormat('d MMM в hh:mm').format(endAt);
+                                              if(double.parse(nowDate) > double.parse(startAtDate) && double.parse(nowDate) < double.parse(endAtDate)) {
+                                                isTrue = true;
+                                              }
+
+                                            }
+                                            return const Offstage();
+                                          },
                                         );
+                                        bool allIsTrue = false;
+                                        BlocBuilder<BookBloc,BookState>(
+                                          builder: (context, state) {
+                                            if(state is VoteListSuccess){
+                                              for(int i = 0; i < state.votes.length;i ++){
+                                                if(state.votes[0].voted == false){
+                                                  allIsTrue = false;
+                                                }
+                                              }
+                                            }
+                                            return const Offstage();
+                                          },
+                                        );
+                                        !isTrue && !allIsTrue ? Navigator.of(context,)
+                                            .pushNamed(TimerRoute) :
+                                        Navigator.of(context)
+                                            .pushNamed(JenreRoute);
                                       },
                                       title: 'Книги',
                                       path: 'assets/images/newBookIcon.png',

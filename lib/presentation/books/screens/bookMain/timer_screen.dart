@@ -9,6 +9,8 @@ import '../../../../logic/book/bloc/book_bloc.dart';
 import '../../../development/screens/development_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../widgets/grid_widget.dart';
+
 class TimerScreen extends StatefulWidget {
   const TimerScreen({Key? key}) : super(key: key);
 
@@ -257,7 +259,14 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const GridWidget()
+                            ),
+                          );
+                        },
                         child: Text(
                           ('Посмотреть мой выбор'),
                           style: TextStyles.mediumStyle.copyWith(
@@ -282,7 +291,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context, rootNavigator: true)
+                            Navigator.of(context)
                                 .pushNamed(DevelopmentRoute);
                           },
                           child: Text("На главную",

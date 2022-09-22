@@ -8,10 +8,10 @@ part of 'semester_model.dart';
 
 SemesterModel _$SemesterModelFromJson(Map<String, dynamic> json) =>
     SemesterModel(
+      json['id'] as String?,
       json['createdAt'] as String?,
       json['updatedAt'] as String?,
       json['eventLog'] as List<dynamic>?,
-      json['id'] as String?,
       json['cityId'] as String?,
       json['startDate'] as String?,
       json['endDate'] as String?,
