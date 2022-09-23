@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -373,7 +374,9 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                                 chosen,
                                 commentController.text,
                                 responseVideoAndImages);
-                            print(response1);
+                            if (kDebugMode) {
+                              print(response1);
+                            }
                             isSendLoading = false;
                             setState(() {
                               startTimer();

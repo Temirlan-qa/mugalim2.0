@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import '../../../core/const/SizedBox.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
+
 class SucessReview extends StatefulWidget {
   const SucessReview({Key? key}) : super(key: key);
 
@@ -16,7 +18,7 @@ class _SucessReviewState extends State<SucessReview> {
   Timer? timer;
   @override
   void initState() {
-    timer = Timer.periodic(Duration(seconds: 3), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       Navigator.pop(context);
     });
 
@@ -28,6 +30,7 @@ class _SucessReviewState extends State<SucessReview> {
     timer?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(

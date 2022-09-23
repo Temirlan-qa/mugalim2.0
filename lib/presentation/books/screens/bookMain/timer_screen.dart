@@ -1,3 +1,4 @@
+// ignore_for_file: depend_on_referenced_packages
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/books/screens/bookMain/timerDetail.dart';

@@ -1,7 +1,8 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/const/text_style_const.dart';
 import '../../../../core/routes/routes_const.dart';
 
@@ -42,7 +43,9 @@ class _TimerDetailState extends State<TimerDetail> {
     final minutes = difference ~/ (60 * 1000);
     difference = difference - minutes.toInt() * (60*1000);
     final seconds = difference ~/ 1000;
-    print('$hours : $minutes : $seconds');
+    if (kDebugMode) {
+      print('$hours : $minutes : $seconds');
+    }
 
     // buildTime(Duration(hours: hours, minutes: minutes, seconds: seconds));
     return Duration(hours: hours, minutes: minutes, seconds: seconds);

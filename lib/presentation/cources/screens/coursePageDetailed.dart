@@ -1,14 +1,12 @@
+// ignore_for_file: file_names
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/textform_widget.dart';
-
-import '../../../core/routes/routes_const.dart';
 import '../widgets/card_widget.dart';
 
 class CoursePageDetailed extends StatefulWidget {
@@ -20,7 +18,8 @@ class CoursePageDetailed extends StatefulWidget {
 }
 
 class _CoursePageDetailedState extends State<CoursePageDetailed> {
-  final Search = TextEditingController();
+
+  final search = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -29,7 +28,7 @@ class _CoursePageDetailedState extends State<CoursePageDetailed> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    Search.dispose();
+    search.dispose();
   }
 
   List<Map<String, dynamic>> listsofCourses = [

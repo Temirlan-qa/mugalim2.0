@@ -1,13 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:mugalim/logic/book/data/models/semesterDeadline_model.dart';
-import 'package:mugalim/logic/book/data/models/semester_model.dart';
-
 import '../datasources/book_datasources.dart';
 import '../models/bookVotes_model.dart';
 import '../models/book_list_model.dart';
-import '../models/voteList_model.dart';
-
-
 
 abstract class BookRepository {
   Future<List<BookListModel>> getVoteById(String id);

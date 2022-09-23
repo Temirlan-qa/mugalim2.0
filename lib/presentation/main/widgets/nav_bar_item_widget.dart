@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
@@ -8,7 +7,7 @@ class NavBarItemWidget extends StatelessWidget {
   final String title;
   final int _currentView;
 
-  NavBarItemWidget(
+  const NavBarItemWidget(
     this.imgUrl,
     this._currentView,
     this.title, {

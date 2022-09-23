@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -11,7 +12,7 @@ class SelectGenreShimmer extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [

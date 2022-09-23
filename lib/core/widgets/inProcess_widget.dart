@@ -1,10 +1,11 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 
 class InProcessWidget extends StatelessWidget {
-  final onPressed;
+  final Function() onPressed;
   const InProcessWidget({Key? key,required this.onPressed }) : super(key: key);
 
   @override

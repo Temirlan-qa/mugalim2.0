@@ -8,7 +8,6 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
-import '../../books/screens/bookMain/voteNotStartedScreen.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -22,11 +21,6 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
   Box genres = Hive.box('genres');
   @override
   Widget build(BuildContext context) {
-    bool isNotVotedAny = false;
-    bool isNotVotedButDeadlineCome = false;
-    bool isVoted = false;
-    bool isCompleted = false;
-    bool isGenreVoted = false;
     // BlocBuilder<BookBloc,BookState>(
     //     builder: (context,state){
     //       print(state);
@@ -76,13 +70,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
     //     }
     // );
     double width = MediaQuery.of(context).size.width;
-    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocBuilder<BookBloc,BookState>(
             builder: (context, state) {
-              print(state);
               if(state is DeadlineSuccess){
                 return Stack(
                   children: [
@@ -173,7 +165,6 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               // (DateTime.now().compareTo(DateTime.parse('2022-09-30 21:00:00')) < 0)
                                               )
                                               {
-                                                isNotVotedAny = true;
                                               }
                                               else if (state
                                                   .deadlineModel.status ==
@@ -181,18 +172,14 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   state.deadlineModel.status ==
                                                       'TAKING_PLACE')
                                               {
-                                                isVoted = true;
                                               }
                                               else if (state
                                                   .deadlineModel.status ==
                                                   'COMPLETED') {
-                                                isCompleted = true;
                                               }
-                                              print(state.list);
                                               for (int i = 0; i < 4; i++) {
                                                 if (state.list[i].voted ==
                                                     false) {
-                                                  isGenreVoted = false;
                                                 }
                                               }
                                               // if(isCompleted) {

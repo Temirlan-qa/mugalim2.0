@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 const String MainRoute = '/main';
 const String JenreRoute = '/select_genre';
 const String CourseRoute = '/cources';

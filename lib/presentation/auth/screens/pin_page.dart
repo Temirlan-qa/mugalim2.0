@@ -197,7 +197,7 @@ class _PinPageState extends State<PinPage> {
                               'Развитие',
                               'Фантастика'
                             ],
-                            addList: [], choiceList: [],
+                            addList: const [], choiceList: const [],
                           ),
                         ),
                       );
