@@ -164,7 +164,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                                     state.votes[index].name!,
                                                     style: TextStyles.mediumStyle.copyWith(
                                                         fontSize: 16,
-                                                        color: list.contains(index)
+                                                        color: list.contains(index) || list.isEmpty
                                                             ? ColorStyles
                                                             .neutralsTextPrimaryColor
                                                             : ColorStyles
@@ -179,7 +179,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                                     style: TextStyles.regularStyle
                                                         .copyWith(
                                                       fontSize: 14,
-                                                      color: list.contains(index)
+                                                      color: list.contains(index) || list.isEmpty
                                                           ? ColorStyles
                                                           .neutralsTextPrimaryColor
                                                           : ColorStyles
