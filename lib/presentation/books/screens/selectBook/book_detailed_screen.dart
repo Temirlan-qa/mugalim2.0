@@ -7,10 +7,7 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/logic/book/data/models/book_list_model.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/done.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
-import 'package:dio/dio.dart';
-import '../../../../core/injection_container.dart';
 import '../../../../core/routes/environment_config.dart';
-import '../../../../logic/book/data/datasources/book_datasources.dart';
 
 // ignore: must_be_immutable
 class BookDescriptionScreen extends StatefulWidget {
@@ -18,15 +15,19 @@ class BookDescriptionScreen extends StatefulWidget {
       {Key? key,
       required this.indexMonth,
       required this.list,
-      required this.selectIndex,
-        required this.selectId,
         required this.model,
+        required this.addList,
+        required this.choiceList,
+        required this.id,
+        required this.selectIndex
       }) : super(key: key);
   int indexMonth;
+  String id;
   List list;
+  int selectIndex;
   final BookListModel model;
-  String selectIndex;
-  String selectId;
+  List<Map<String, String>> choiceList;
+  List addList;
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
 }
@@ -111,7 +112,8 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                                 'assets/images/skeletonBookImage.png',
                                 height: 220,
                                 width: 140,
-                              )
+                                  fit: BoxFit.cover
+                              ),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -121,6 +123,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
+                          textAlign: TextAlign.start,
                         ),
                         const SizedBox(height: 4),
                         Text(
@@ -129,39 +132,40 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
+                          textAlign: TextAlign.start,
                         ),
                         const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            const Text(
-                              '4.0',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 7,
-                            ),
-                            SvgPicture.asset('assets/icons/star_full.svg'),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            SvgPicture.asset('assets/icons/star_full.svg'),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            SvgPicture.asset('assets/icons/star_full.svg'),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            SvgPicture.asset('assets/icons/star_full.svg'),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            SvgPicture.asset('assets/icons/star_empty.svg'),
-                          ],
-                        ),
+                        // widget.id == '' && widget.list == [] ? Row(
+                        //   children: [
+                        //     const Text(
+                        //       '4.0',
+                        //       style: TextStyle(
+                        //         fontSize: 18,
+                        //         fontWeight: FontWeight.w500,
+                        //       ),
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 7,
+                        //     ),
+                        //     SvgPicture.asset('assets/icons/star_full.svg'),
+                        //     const SizedBox(
+                        //       width: 8,
+                        //     ),
+                        //     SvgPicture.asset('assets/icons/star_full.svg'),
+                        //     const SizedBox(
+                        //       width: 8,
+                        //     ),
+                        //     SvgPicture.asset('assets/icons/star_full.svg'),
+                        //     const SizedBox(
+                        //       width: 8,
+                        //     ),
+                        //     SvgPicture.asset('assets/icons/star_full.svg'),
+                        //     const SizedBox(
+                        //       width: 8,
+                        //     ),
+                        //     SvgPicture.asset('assets/icons/star_empty.svg'),
+                        //   ],
+                        // ) : const Offstage(),
                         const SizedBox(height: 16),
                         const Text(
                           "Описание",
@@ -190,8 +194,8 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               ],
             ),
           ),
-          Positioned(
-            bottom: 16,
+          widget.id != '' ? Positioned(
+            bottom: 50,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -206,25 +210,29 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                       ),
                     ),
                     onPressed: () async {
+                      widget.addList.remove(widget.selectIndex);
+                      widget.choiceList.add({
+                        "voteId": widget.id,
+                        "resultOptionId": widget.model.id!,
+                      });
                       if (widget.indexMonth.toInt() >= 3) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ChoosenPage()
+                              builder: (context) => ChoosenPage(choiceList: widget.choiceList,)
                           ),
                         );
                       }
                       if (widget.list.isNotEmpty && widget.indexMonth.toInt() < 3) {
-                        widget.list.remove(widget.selectIndex);
-                        final BookDatasource bookDatasource = sl();
-                        Response response = await bookDatasource.postVote(widget.selectId,widget.model.id!);
-                        // ignore: use_build_context_synchronously
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => GenreScreen(
                               indexMonth: widget.indexMonth.toInt() + 1,
                               list: widget.list,
+                              addList: widget.addList,
+                              choiceList: widget.choiceList,
                             ),
                           ),
                         );
@@ -240,7 +248,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                     )),
               ),
             ),
-          ),
+          ) : const Offstage(),
         ],
       ),
     );

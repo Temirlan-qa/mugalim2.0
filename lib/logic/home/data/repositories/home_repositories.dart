@@ -29,7 +29,6 @@ class HomeRepositoryImpl extends HomeRepository {
     Response response = await homeDatasource.getPostList();
     // print(response.data['content'][0]['content']);
 
-    print(response.data);
 
     return (response.data['content'] as List).map((post) => PostModel.fromJson(post)).toList();
   }
@@ -39,7 +38,6 @@ class HomeRepositoryImpl extends HomeRepository {
     Response response = await homeDatasource.getTrendingPostList();
     // print(response.data['content'][0]['content']);
 
-    print(response.data);
 
     return (response.data['content'] as List).map((post) => PostModel.fromJson(post)).toList();
   }
@@ -49,7 +47,6 @@ class HomeRepositoryImpl extends HomeRepository {
     Response response = await homeDatasource.getSavedPostList();
     // print(response.data['content'][0]['content']);
 
-    print(response.data);
 
     return (response.data['content'] as List).map((post) => PostModel.fromJson(post)).toList();
   }

@@ -14,3 +14,4 @@ const String SettingsRoute = '/SettingsRoute';
 const String EditInfoUserRoute = '/EditInfoUserRoute';
 const String TimerRoute = '/timer';
 const String BookPageRoute = '/bookPage';
+const String MyChoiceRoute = '/myChoice';

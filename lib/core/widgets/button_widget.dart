@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-import '../const/const_color.dart';
 import '../const/text_style_const.dart';
 
 class ButtonWidget extends StatefulWidget {

@@ -1,12 +1,13 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mugalim/presentation/books/screens/bookMain/timerDetail.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
-import '../../../development/screens/development_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({Key? key}) : super(key: key);
@@ -99,6 +100,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
   //       )
   //   );
   // }
+  bool timeEnd = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +121,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.pop(context);
+              Navigator.of(context,rootNavigator: true).pushNamed(MainRoute);
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -160,7 +162,19 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         builder: (context, state) {
           if(state is DeadlineSuccess) {
            // duration = getDuration(state.deadlineModel.endDate!);
-
+            if(DateTime.now().compareTo(
+                DateTime.parse(state
+                    .deadlineModel
+                    .startDate!)) <
+                0){
+            }
+            int endDate = ((DateTime.parse(state.deadlineModel.endDate!).millisecondsSinceEpoch)) ~/ 1000;
+            final DateFormat formatter = DateFormat('yyyy-MM-dd');
+            final String formatted = formatter.format(DateTime.now());
+            int now = ((DateTime.parse(formatted).microsecondsSinceEpoch)) ~/ 1000;
+            if(now >= endDate){
+              timeEnd = true;
+            }
             return Container(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -170,7 +184,16 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 1.5),
-                        child: Text('Голосование не закончено\nДо завершения:',
+                        child: timeEnd ? Text('Ваш ментор ещё не выбрал книгу',
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: TextStyles.boldStyle.copyWith(
+                              fontSize: 23,
+                              color: const Color(0xFF4A4A4A),
+                            )
+                          // textAlign: TextAlign.center,
+                        )
+                        :Text('Голосование не закончено\nДо завершения:',
                             maxLines: 2,
                             textAlign: TextAlign.center,
                             style: TextStyles.boldStyle.copyWith(
@@ -184,7 +207,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     //   const EdgeInsets.symmetric(vertical: 16, horizontal: 1.5),
                     //   child: TimerDetail(startingDate: state.deadlineModel.endDate!,),
                     // ),
-                    TimerDetail(startingDate: state.deadlineModel.endDate!, status: state.deadlineModel.status!,),
+                    !timeEnd ? TimerDetail(startingDate: state.deadlineModel.endDate!, status: state.deadlineModel.status!,) : const Offstage(),
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 47, horizontal: 55),
@@ -255,7 +278,10 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          //MyChoiceRoute
+                          Navigator.of(context).pushNamed(MyChoiceRoute);
+                        },
                         child: Text(
                           ('Посмотреть мой выбор'),
                           style: TextStyles.mediumStyle.copyWith(
@@ -280,7 +306,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pop(context);
+                            // Navigator.popUntil(context, ModalRoute.withName(DevelopmentRoute));
+                            Navigator.of(context,rootNavigator: true).pushNamed(MainRoute);
                           },
                           child: Text("На главную",
                               style: TextStyles.mediumStyle
@@ -294,10 +321,9 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
           }
 
           if(state is BookFailure) {
-            print("Timer Failure owibka");
-            return Text('Timer Failure owibka');
+            return const Text('Timer Failure owibka');
           }
-          return Text(" No loaded");
+          return const Text(" No loaded");
         }
       )
     );

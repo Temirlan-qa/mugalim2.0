@@ -17,7 +17,7 @@ class BookFailure extends BookState {
 
 
 class VoteListSuccess extends BookState {
-  final List<VoteListModel> votes;
+  final List<BookVotesModel> votes;
   VoteListSuccess(this.votes);
 }
 class BookListSuccess extends BookState {
@@ -38,6 +38,11 @@ class SemesterDeadlineSuccess extends BookState {
 
 class DeadlineSuccess extends BookState {
   final SemesterDeadlineModel deadlineModel;
+  final List<BookVotesModel> list;
+  DeadlineSuccess(this.deadlineModel,this.list);
+}
 
-  DeadlineSuccess(this.deadlineModel);
+class MyChoiceSuccess extends BookState{
+  final List<BookListModel> list;
+  MyChoiceSuccess(this.list);
 }
