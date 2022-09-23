@@ -195,25 +195,25 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   isGenreVoted = false;
                                                 }
                                               }
-                                              if(isCompleted) {
-                                                Navigator.of(
-                                                    context, rootNavigator: true)
-                                                    .pushNamed(MainBookRoute);
-                                              }
-                                              else if(isGenreVoted || isVoted){
-                                                Navigator.of(context).pushNamed(TimerRoute);
-                                              }
-                                              else if(isNotVotedAny){
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                      const VoteNotStartedScreen()),
-                                                );
-                                              }
-                                              else{
+                                              // if(isCompleted) {
+                                              //   Navigator.of(
+                                              //       context, rootNavigator: true)
+                                              //       .pushNamed(MainBookRoute);
+                                              // }
+                                              // else if(isGenreVoted || isVoted){
+                                              //   Navigator.of(context).pushNamed(TimerRoute);
+                                              // }
+                                              // else if(isNotVotedAny){
+                                              //   Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (context) =>
+                                              //         const VoteNotStartedScreen()),
+                                              //   );
+                                              // }
+                                              // else{
                                                 Navigator.of(context,rootNavigator: true).pushNamed(JenreRoute);
-                                              }
+                                              // }
 
                                             },
                                             title: 'Книги',
