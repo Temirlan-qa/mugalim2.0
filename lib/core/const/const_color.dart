@@ -7,6 +7,7 @@ class ColorStyles {
   //#FFFFFF
   static Color backgroundColor = const Color(0xffFFFFFF);
   static Color primarySurfaceColor = const Color(0xffF9F9F9);
+  static Color primarySurfaceColorForShimmer = const Color(0xb8f9f9f9);
   static Color primarySurfaceHoverColor = const Color(0xff767676);
   static Color primaryBorderColor = const Color(0xff3D3DD8);
   static Color primaryBorderHoverColor = const Color(0xFF0243EC);

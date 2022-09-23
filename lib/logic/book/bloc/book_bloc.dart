@@ -25,15 +25,6 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         emit(BookFailure(e.toString()));
       }
     });
-    on<BookSemesterDeadlineList>((event, emit) async {
-      emit(BookLoading());
-      try {
-        final SemesterModel list = await bookRepository.getSemesterDeadline(event.semesterId);
-        emit(BookSemesterDeadlineSuccess(list));
-      } catch (e) {
-        emit(BookFailure(e.toString()));
-      }
-    });
     on<GetBookList>((event, emit) async {
       emit(BookLoading());
       try {
@@ -52,20 +43,30 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         emit(BookFailure(e.toString()));
       }
     });
-    on<GetSemesterDeadline>((event, emit) async {
-      emit(BookLoading());
-      try{
-        final SemesterModel deadlineModel = (await bookRepository.getSemesterDeadline2(event.semester));
-        emit(SemesterDeadlineSuccess(deadlineModel));
-      } catch(e) {
-        emit(BookFailure(e.toString()));
-      }
-    });
+    // on<GetSemesterDeadline>((event, emit) async {
+    //   emit(BookLoading());
+    //   try{
+    //     final SemesterModel deadlineModel = (await bookRepository.getSemesterDeadline2(event.semester));
+    //     emit(SemesterDeadlineSuccess(deadlineModel));
+    //   } catch(e) {
+    //     emit(BookFailure(e.toString()));
+    //   }
+    // });
     on<GetDeadline>((event, emit) async {
       emit(BookLoading());
       try{
         final SemesterDeadlineModel deadlineModel = (await bookRepository.getDeadline());
-        emit(DeadlineSuccess(deadlineModel));
+        final List<BookVotesModel> list = (await bookRepository.getVoteList());
+        emit(DeadlineSuccess(deadlineModel,list));
+      } catch(e) {
+        emit(BookFailure(e.toString()));
+      }
+    });
+    on<GetMyChoice>((event, emit) async {
+      emit(BookLoading());
+      try{
+        final List<BookListModel> list = await bookRepository.getMyChoiceList();
+        emit(MyChoiceSuccess(list));
       } catch(e) {
         emit(BookFailure(e.toString()));
       }

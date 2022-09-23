@@ -15,6 +15,7 @@ import '../../presentation/books/screens/bookMain/main_book_screen.dart';
 import '../../presentation/books/screens/bookMain/timer_screen.dart';
 import '../../presentation/books/screens/selectBook/select_book.dart';
 import '../../presentation/books/screens/selectBook/select_jenre.dart';
+import '../../presentation/books/widgets/grid_widget_forMychoice.dart';
 import '../../presentation/cources/screens/coursePage.dart';
 import '../../presentation/main/widgets/main_screen.dart';
 import '../injection_container.dart';
@@ -45,6 +46,8 @@ class InnLabRouter {
           builder: (_) => GenreScreen(
             indexMonth: (0),
             list: list,
+            choiceList: [],
+            addList: [0,1,2,3],
           ),
         );
       case CourseRoute:
@@ -56,11 +59,6 @@ class InnLabRouter {
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => const DevelopmentScreen(),
-        );
-      case ChoiceRoute:
-        return CupertinoPageRoute(
-          settings: routeSettings,
-          builder: (_) => const MyChoiceScreen(),
         );
       case MainBookRoute:
         return CupertinoPageRoute(
@@ -77,9 +75,12 @@ class InnLabRouter {
                   ..add(GetBookList((routeSettings.arguments as Map)['id'])),
                 child: SelectBookScreen(
                   indexMonth: (routeSettings.arguments as Map)['indexMonth'],
-                  list: (routeSettings.arguments as Map)['list'],
+                  choiceList: (routeSettings.arguments as Map)['choiceList'],
+                  addList: (routeSettings.arguments as Map)['addList'],
                   selectIndex: (routeSettings.arguments as Map)['selectIndex'],
-                  selectId: (routeSettings.arguments as Map)['selectId'],),
+                  list: (routeSettings.arguments as Map)['list'],
+                  id: (routeSettings.arguments as Map)['id'],
+                ),
               ),
         );
       case TimerRoute:
@@ -87,13 +88,22 @@ class InnLabRouter {
             settings: routeSettings,
             builder: (_) => BlocProvider(
                   create: (context) =>
-                      sl<BookBloc>()..add(GetSemesterDeadline(1)),
-                  child: TimerScreen(),
+                      sl<BookBloc>()..add(GetDeadline()),
+                  child: const TimerScreen(),
                 ));
       case AboutProjectRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => const AboutProjectScreen(),
+        );
+      case MyChoiceRoute:
+        return CupertinoPageRoute(
+            settings: routeSettings,
+            builder: (_) => BlocProvider(
+              create: (context) =>
+              sl<BookBloc>()..add(GetMyChoice()),
+              child: const GridWidgetMyChoice(),
+            )
         );
       case WriteReviewRoute:
         return CupertinoPageRoute(

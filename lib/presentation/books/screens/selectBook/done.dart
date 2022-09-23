@@ -86,7 +86,7 @@ class _ChoosenPageState extends State<ChoosenPage> {
                         ),
                       ),
                       onPressed: () async {
-
+                        Navigator.popUntil(context, ModalRoute.withName(DevelopmentRoute));
                         Navigator.of(context,)
                             .pushNamed(TimerRoute);
 

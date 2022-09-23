@@ -29,3 +29,5 @@ class BookSemesterDeadlineList extends BookEvent{
 }
 
 class GetDeadline extends BookEvent {}
+
+class GetMyChoice extends BookEvent{}

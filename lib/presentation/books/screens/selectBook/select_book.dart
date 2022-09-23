@@ -10,6 +10,7 @@ import 'package:mugalim/presentation/books/screens/selectBook/book_detailed_scre
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 import '../../../../core/routes/environment_config.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
+import '../../widgets/selectBook_shimmer.dart';
 import 'done.dart';
 
 
@@ -261,7 +262,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 72,
+                  bottom: 106,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Center(
@@ -282,17 +283,17 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                         onPressed: () async{
                           if(list.isEmpty){
                             // widget.list.remove(widget.selectIndex);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GenreScreen(
-                                  indexMonth: widget.indexMonth.toInt() + 1,
-                                  list: widget.list,
-                                  addList: widget.addList,
-                                  choiceList: widget.choiceList,
-                                ),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => GenreScreen(
+                            //       indexMonth: widget.indexMonth.toInt() + 1,
+                            //       list: widget.list,
+                            //       addList: widget.addList,
+                            //       choiceList: widget.choiceList,
+                            //     ),
+                            //   ),
+                            // );
                           }
                           if (list.isNotEmpty) {
                             // List addListAfterRemove = widget.addList;
@@ -308,7 +309,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                     builder: (context) => ChoosenPage(choiceList: widget.choiceList,)),
                               );
                             }
-                            if (list.isNotEmpty && widget.indexMonth.toInt() < 3)  {
+                            if (widget.indexMonth.toInt() < 3)  {
 
                               Navigator.push(
                                 context,
@@ -338,7 +339,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 16,
+                  bottom: 50,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Center(
@@ -369,7 +370,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
             );
           }
           else if(state is BookLoading){
-            return const Center(child: CupertinoActivityIndicator(color: Colors.grey,));
+            return const SelectBookShimmer();
           }
           return const Center(child : Text('no loaded'));
         },
@@ -377,3 +378,5 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
     );
   }
 }
+
+

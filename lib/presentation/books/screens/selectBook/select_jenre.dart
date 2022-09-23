@@ -8,6 +8,7 @@ import 'package:mugalim/presentation/books/screens/selectBook/done.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
+import '../../widgets/selectJenre_shimmer.dart';
 
 // ignore: must_be_immutable
 class GenreScreen extends StatefulWidget {
@@ -151,7 +152,7 @@ class _GenreScreenState extends State<GenreScreen> {
             );
           }
           else if(state is BookLoading){
-            return const Center(child: CupertinoActivityIndicator(color: Colors.grey,));
+            return const SelectGenreShimmer();
           }
           else if(state is BookFailure){
             return const Center(child: Text('error'));
