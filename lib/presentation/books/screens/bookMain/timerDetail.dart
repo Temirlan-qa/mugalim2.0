@@ -61,6 +61,7 @@ class _TimerDetailState extends State<TimerDetail> {
 
   @override
   void dispose() {
+    timer!.cancel();
     super.dispose();
   }
 

@@ -26,7 +26,7 @@ class _GridWidgetState extends State<GridWidget> {
     var size = MediaQuery.of(context).size;
 
     /*24 is for notification bar on Android*/
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemHeight = (size.height - 40) / 2;
     final double itemWidth = size.width - 175;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8,16,16,0),
@@ -63,7 +63,7 @@ class _GridWidgetState extends State<GridWidget> {
                           borderRadius: BorderRadius.circular(8),
                           color: ColorStyles.neutralsPageBackgroundColor,
                         ),
-                        child: BookWidget(img: list[index], textMonth: textMonth[index],),
+                        child: BookWidget(img: 'null', textMonth: textMonth[index],),
                       ),
                       const SizedBox(height: 8,),
                       Text(

@@ -9,25 +9,19 @@ part of 'bookVotes_model.dart';
 BookVotesModel _$BookVotesModelFromJson(Map<String, dynamic> json) =>
     BookVotesModel(
       json['id'] as String?,
-      json['createdAt'] as String?,
-      json['updatedAt'] as String?,
-      json['bookVoteGroupId'] as String?,
-      json['voteId'] as String?,
+      json['voterDetails'] as List<dynamic>?,
+      json['options'] as List<dynamic>?,
+      json['voteNumber'] as int?,
       json['name'] as String?,
-      json['orderNumber'] as int?,
-      json['eventLog'] as List<dynamic>?,
       json['voted'] as bool?,
     );
 
 Map<String, dynamic> _$BookVotesModelToJson(BookVotesModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      'eventLog': instance.eventLog,
-      'bookVoteGroupId': instance.bookVoteGroupId,
-      'voteId': instance.voteId,
+      'options': instance.options,
+      'voterDetails': instance.voterDetails,
       'name': instance.name,
-      'orderNumber': instance.orderNumber,
+      'voteNumber': instance.voteNumber,
       'voted': instance.voted,
     };

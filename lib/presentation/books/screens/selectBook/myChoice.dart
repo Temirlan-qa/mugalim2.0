@@ -41,7 +41,7 @@ class _MyChoiceScreenState extends State<MyChoiceScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   //color: Colors.black
-                  color: Color(0xFFF9F9F9),
+                  color: const Color(0xFFF9F9F9),
                 ),
                 child: Icon(
                   CupertinoIcons.clear,
@@ -53,7 +53,7 @@ class _MyChoiceScreenState extends State<MyChoiceScreen> {
 
         ],
       ),
-      body: GridWidget(),
+      body: const GridWidget(),
     );
   }
 }

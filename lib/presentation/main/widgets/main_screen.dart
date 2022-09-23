@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
                   onGenerateRoute: (settings) =>
                       InnLabRouter.generateRoute(settings),
                   // builder: (_) => HomeScreen(),
-                  builder: (_) => HomeScreen(),
+                  builder: (_) => const HomeScreen(),
                 ),
                 CupertinoTabView(
                   navigatorKey: Get.nestedKey(1),

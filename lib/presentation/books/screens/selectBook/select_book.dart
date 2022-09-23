@@ -8,28 +8,29 @@ import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/book_detailed_screen.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
-import 'package:dio/dio.dart';
-import '../../../../core/injection_container.dart';
 import '../../../../core/routes/environment_config.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
-import '../../../../logic/book/data/datasources/book_datasources.dart';
+import '../../widgets/selectBook_shimmer.dart';
 import 'done.dart';
 
 
 // ignore: must_be_immutable
 class SelectBookScreen extends StatefulWidget {
-  SelectBookScreen(
-      {Key? key,
+  SelectBookScreen({Key? key,
       required this.indexMonth,
-      required this.selectIndex,
       required this.list,
-        required this.selectId}
-      )
+        required this.id,
+        required this.addList,
+        required this.choiceList,
+        required this.selectIndex
+      })
       : super(key: key);
   int indexMonth;
-  String selectIndex;
   List list;
-  String selectId;
+  String id;
+  List addList;
+  int selectIndex;
+  List<Map<String, String>> choiceList;
   @override
   State<SelectBookScreen> createState() => _SelectBookScreenState();
 }
@@ -163,7 +164,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                                     state.votes[index].name!,
                                                     style: TextStyles.mediumStyle.copyWith(
                                                         fontSize: 16,
-                                                        color: list.contains(index)
+                                                        color: list.contains(index) || list.isEmpty
                                                             ? ColorStyles
                                                             .neutralsTextPrimaryColor
                                                             : ColorStyles
@@ -178,7 +179,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                                     style: TextStyles.regularStyle
                                                         .copyWith(
                                                       fontSize: 14,
-                                                      color: list.contains(index)
+                                                      color: list.contains(index) || list.isEmpty
                                                           ? ColorStyles
                                                           .neutralsTextPrimaryColor
                                                           : ColorStyles
@@ -201,13 +202,14 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                                                           MaterialPageRoute(
                                                               builder: (context) =>
                                                                   BookDescriptionScreen(
+                                                                    id: widget.id,
                                                                     indexMonth: widget
                                                                         .indexMonth,
                                                                     list: widget.list,
-                                                                    selectIndex: widget
-                                                                        .selectIndex,
-                                                                    selectId: widget.selectId,
                                                                     model: state.votes[index],
+                                                                    addList: widget.addList,
+                                                                      choiceList: widget.choiceList,
+                                                                    selectIndex: widget.selectIndex,
                                                                   )
                                                           ),
                                                         );
@@ -260,7 +262,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 72,
+                  bottom: 106,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Center(
@@ -280,36 +282,43 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                         ),
                         onPressed: () async{
                           if(list.isEmpty){
-                            widget.list.remove(widget.selectIndex);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GenreScreen(
-                                  indexMonth: widget.indexMonth.toInt() + 1,
-                                  list: widget.list,
-                                ),
-                              ),
-                            );
+                            // widget.list.remove(widget.selectIndex);
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => GenreScreen(
+                            //       indexMonth: widget.indexMonth.toInt() + 1,
+                            //       list: widget.list,
+                            //       addList: widget.addList,
+                            //       choiceList: widget.choiceList,
+                            //     ),
+                            //   ),
+                            // );
                           }
                           if (list.isNotEmpty) {
+                            // List addListAfterRemove = widget.addList;
+                            widget.addList.remove(widget.selectIndex);
+                            widget.choiceList.add({
+                              "voteId": widget.id,
+                              "resultOptionId": state.votes[0].id!,
+                            });
                             if (widget.indexMonth.toInt() >= 3) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChoosenPage()),
+                                    builder: (context) => ChoosenPage(choiceList: widget.choiceList,)),
                               );
                             }
-                            if (list.isNotEmpty && widget.indexMonth.toInt() < 3)  {
-                              widget.list.remove(widget.selectIndex);
-                              final BookDatasource bookDatasource = sl();
-                              Response response = await bookDatasource.postVote(widget.selectId,state.votes[list[0]].id!);
-                              // ignore: use_build_context_synchronously
+                            if (widget.indexMonth.toInt() < 3)  {
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => GenreScreen(
                                     indexMonth: widget.indexMonth.toInt() + 1,
                                     list: widget.list,
+                                    addList: widget.addList,
+                                      choiceList: widget.choiceList
                                   ),
                                 ),
                               );
@@ -330,7 +339,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 16,
+                  bottom: 50,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Center(
@@ -357,19 +366,11 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                     ),
                   ),
                 ),
-                // Positioned(
-                //     bottom: 0,
-                //     child: Container(
-                //       width: MediaQuery.of(context).size.width,
-                //       height: 34,
-                //       color: ColorStyles.backgroundColor,
-                //     )
-                // ),
               ],
             );
           }
           else if(state is BookLoading){
-            return const Center(child: CupertinoActivityIndicator(color: Colors.grey,));
+            return const SelectBookShimmer();
           }
           return const Center(child : Text('no loaded'));
         },
@@ -377,3 +378,5 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
     );
   }
 }
+
+
