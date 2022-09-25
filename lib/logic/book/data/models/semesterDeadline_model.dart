@@ -11,10 +11,12 @@ class SemesterDeadlineModel {
   final String? startDate;
   final String? endDate;
   final int? semester;
+  final int? studentCount;
+  final List? images;
 
   factory SemesterDeadlineModel.fromJson(Map<String, dynamic> json) => _$SemesterDeadlineModelFromJson(json);
 
-  SemesterDeadlineModel(this.status, this.cityId, this.startDate, this.endDate, this.semester);
+  SemesterDeadlineModel(this.status, this.cityId, this.startDate, this.endDate, this.semester, this.studentCount, this.images);
 
 
   Map<String, dynamic> toJson() => _$SemesterDeadlineModelToJson(this);
