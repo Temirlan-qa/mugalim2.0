@@ -169,7 +169,8 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                       DateTime.parse(state
                                                           .deadlineModel
                                                           .startDate!)) <
-                                                      0)
+                                                      0) || state.deadlineModel.status ==
+                                                  'TAKING_PLACE'
                                               // (DateTime.now().compareTo(DateTime.parse('2022-09-30 21:00:00')) < 0)
                                               )
                                               {
@@ -177,9 +178,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               }
                                               else if (state
                                                   .deadlineModel.status ==
-                                                  'CONFLICT' ||
-                                                  state.deadlineModel.status ==
-                                                      'TAKING_PLACE')
+                                                  'CONFLICT')
                                               {
                                                 isVoted = true;
                                               }
@@ -189,12 +188,12 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                 isCompleted = true;
                                               }
                                               print(state.list);
-                                              for (int i = 0; i < 4; i++) {
-                                                if (state.list[i].voted ==
-                                                    false) {
-                                                  isGenreVoted = false;
-                                                }
-                                              }
+                                              // for (int i = 0; i < 4; i++) {
+                                              //   if (state.list[i].voted ==
+                                              //       false) {
+                                              //     isGenreVoted = false;
+                                              //   }
+                                              // }
                                               // if(isCompleted) {
                                               //   Navigator.of(
                                               //       context, rootNavigator: true)
@@ -212,7 +211,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               //   );
                                               // }
                                               // else{
-                                                Navigator.of(context,rootNavigator: true).pushNamed(JenreRoute);
+                                                Navigator.of(context,rootNavigator: true).pushNamed(TimerRoute);
                                               // }
 
                                             },
