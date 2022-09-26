@@ -1,8 +1,7 @@
-// ignore_for_file: file_names
-
 import 'dart:async';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
+
 import '../../../../core/const/text_style_const.dart';
 import '../../../../core/routes/routes_const.dart';
 
@@ -28,14 +27,12 @@ class _TimerDetailState extends State<TimerDetail> {
     if(difference < 0) {
       if(widget.status == 'CONFLICT') {
         difference = 0;
-      } else {
+      } else if(widget.status == 'COMPLETED'){
         Navigator.of(context,
             rootNavigator: true)
             .popAndPushNamed(MainBookRoute);
 
             }
-
-      difference = 0;
     }
 
     final hours = difference ~/ (60 * 60 * 1000);
@@ -43,9 +40,6 @@ class _TimerDetailState extends State<TimerDetail> {
     final minutes = difference ~/ (60 * 1000);
     difference = difference - minutes.toInt() * (60*1000);
     final seconds = difference ~/ 1000;
-    if (kDebugMode) {
-      print('$hours : $minutes : $seconds');
-    }
 
     // buildTime(Duration(hours: hours, minutes: minutes, seconds: seconds));
     return Duration(hours: hours, minutes: minutes, seconds: seconds);
@@ -82,12 +76,33 @@ class _TimerDetailState extends State<TimerDetail> {
     });
   }
 
+  bool isEndTime = false;
+  Text textDeadline = const Text('');
   Widget buildTime() {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final hours = twoDigits(duration.inHours);
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return Text(
+    if(duration.inSeconds <= 0) isEndTime = true;
+    textDeadline = isEndTime? Text('Ваш ментор ещё не выбрал книгу',
+        maxLines: 2,
+        textAlign: TextAlign.center,
+        style: TextStyles.boldStyle.copyWith(
+          fontSize: 23,
+          color: const Color(0xFF4A4A4A),
+        )
+      // textAlign: TextAlign.center,
+    ) : Text('Голосование не закончено\nДо завершения:',
+        maxLines: 2,
+        textAlign: TextAlign.center,
+        style: TextStyles.boldStyle.copyWith(
+          fontSize: 23,
+          color: const Color(0xFF4A4A4A),
+        )
+      // textAlign: TextAlign.center,
+    );
+    return isEndTime? const Offstage()
+        : Text(
         '$hours : $minutes : $seconds',
         style: TextStyles.boldStyle.copyWith(
           fontSize: 32,
@@ -101,7 +116,15 @@ class _TimerDetailState extends State<TimerDetail> {
     return Container(
       padding:
       const EdgeInsets.symmetric(vertical: 16, horizontal: 1.5),
-      child: buildTime(),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom:16, right: 1.5, left: 1.5),
+            child: textDeadline!,
+          ),
+          buildTime(),
+        ],
+      ),
     );
   }
 }

@@ -14,6 +14,8 @@ SemesterDeadlineModel _$SemesterDeadlineModelFromJson(
       json['startDate'] as String?,
       json['endDate'] as String?,
       json['semester'] as int?,
+      json['studentCount'] as int?,
+      json['images'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$SemesterDeadlineModelToJson(
@@ -24,4 +26,6 @@ Map<String, dynamic> _$SemesterDeadlineModelToJson(
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'semester': instance.semester,
+      'studentCount': instance.studentCount,
+      'images': instance.images,
     };

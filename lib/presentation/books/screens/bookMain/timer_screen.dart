@@ -1,9 +1,12 @@
-// ignore_for_file: depend_on_referenced_packages
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mugalim/presentation/books/screens/bookMain/timerDetail.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/environment_config.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,6 +105,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
   //   );
   // }
   bool timeEnd = false;
+  Box tokensBox = Hive.box('tokens');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +126,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.of(context,rootNavigator: true).pushNamed(MainRoute);
+              // Navigator.of(context,rootNavigator: true).pushNamed(MainRoute);
+              Navigator.pop(context);
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -169,46 +174,47 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     .startDate!)) <
                 0){
             }
-            int endDate = ((DateTime.parse(state.deadlineModel.endDate!).millisecondsSinceEpoch)) ~/ 1000;
-            final DateFormat formatter = DateFormat('yyyy-MM-dd');
-            final String formatted = formatter.format(DateTime.now());
-            int now = ((DateTime.parse(formatted).microsecondsSinceEpoch)) ~/ 1000;
-            if(now >= endDate){
-              timeEnd = true;
-            }
+            // int endDate = ((DateTime.parse(state.deadlineModel.endDate!).millisecondsSinceEpoch)) ~/ 1000;
+            // final DateFormat formatter = DateFormat('yyyy-MM-dd');
+            // final String formatted = formatter.format(DateTime.now());
+            // int now = ((DateTime.parse(formatted).microsecondsSinceEpoch)) ~/ 1000;
+            // if(now >= endDate){
+            //   timeEnd = true;
+            // }
             return Container(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 1.5),
-                        child: timeEnd ? Text('Ваш ментор ещё не выбрал книгу',
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            style: TextStyles.boldStyle.copyWith(
-                              fontSize: 23,
-                              color: const Color(0xFF4A4A4A),
-                            )
-                          // textAlign: TextAlign.center,
-                        )
-                        :Text('Голосование не закончено\nДо завершения:',
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            style: TextStyles.boldStyle.copyWith(
-                              fontSize: 23,
-                              color: const Color(0xFF4A4A4A),
-                            )
-                          // textAlign: TextAlign.center,
-                        )),
+                    // Container(
+                    //     padding: const EdgeInsets.symmetric(
+                    //         vertical: 16.0, horizontal: 1.5),
+                    //     child: timeEnd ? Text('Ваш ментор ещё не выбрал книгу',
+                    //         maxLines: 2,
+                    //         textAlign: TextAlign.center,
+                    //         style: TextStyles.boldStyle.copyWith(
+                    //           fontSize: 23,
+                    //           color: const Color(0xFF4A4A4A),
+                    //         )
+                    //       // textAlign: TextAlign.center,
+                    //     )
+                    //     :Text('Голосование не закончено\nДо завершения:',
+                    //         maxLines: 2,
+                    //         textAlign: TextAlign.center,
+                    //         style: TextStyles.boldStyle.copyWith(
+                    //           fontSize: 23,
+                    //           color: const Color(0xFF4A4A4A),
+                    //         )
+                    //       // textAlign: TextAlign.center,
+                    //     )),
                     // Container(
                     //   padding:
                     //   const EdgeInsets.symmetric(vertical: 16, horizontal: 1.5),
                     //   child: TimerDetail(startingDate: state.deadlineModel.endDate!,),
                     // ),
-                    !timeEnd ? TimerDetail(startingDate: state.deadlineModel.endDate!, status: state.deadlineModel.status!,) : const Offstage(),
+                    // !timeEnd ? TimerDetail(startingDate: state.deadlineModel.endDate!, status: state.deadlineModel.status!,) : const Offstage(),
+                    TimerDetail(startingDate: state.deadlineModel.endDate!, status: state.deadlineModel.status!,),
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 47, horizontal: 55),
@@ -228,23 +234,86 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                                 width: 70,
                                 child: Stack(
                                   children: [
-                                    ClipOval(
-                                      child: CircleAvatar(
-                                          radius: 12,
-                                          child: Image.asset(
-                                            'assets/images/avataricon1.png',
-                                            // color: Colors.red,
-                                          )),
-                                    ),
+                                    (state.deadlineModel.images![0] != null)?
+                                    CachedNetworkImage(
+                                      imageUrl:
+                                      '${EnvironmentConfig.url}/file/image/${state.deadlineModel.images![0]}?size=xs',
+                                      width: 24,
+                                      height: 24,
+                                      fit: BoxFit.fill,
+                                      imageBuilder: (context, imageProvider) => Container(
+                                        width: 24,
+                                        height: 24,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
+                                      httpHeaders: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                        "Authorization": "Bearer ${tokensBox.get('access')}"
+                                      },
+                                      placeholder: (context,
+                                          url) => const CupertinoActivityIndicator(),
+                                      errorWidget: (context, str, url) => Lottie.asset(
+                                        'assets/animations/Loader.json',
+                                        width: 80,
+                                        height: 80,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    )
+                                        : const CircleAvatar(
+                                        radius: 12,
+                                        child: Text(
+                                            'A'
+                                        )),
                                     Positioned(
                                       left: 18,
                                       child: ClipOval(
-                                        child: CircleAvatar(
+                                        child: state.deadlineModel.images!.length >= 2 ?
+                                      CachedNetworkImage(
+                                      imageUrl:
+                                      '${EnvironmentConfig.url}/file/image/${state.deadlineModel.images![0]}?size=xs',
+                                        width: 24,
+                                        height: 24,
+                                        fit: BoxFit.fill,
+                                        imageBuilder: (context, imageProvider) => Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ),
+                                        httpHeaders: {
+                                          'Content-Type': 'application/json',
+                                          'Accept': 'application/json',
+                                          "Authorization": "Bearer ${tokensBox.get('access')}"
+                                        },
+                                        placeholder: (context,
+                                            url) => const CupertinoActivityIndicator(),
+                                        errorWidget: (context, str, url) => Lottie.asset(
+                                          'assets/animations/Loader.json',
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      )
+                                            : const CircleAvatar(
                                             radius: 12,
-                                            child: Image.asset(
-                                                'assets/images/avataricon2.png')),
+                                            child: Text(
+                                              'A'
+                                            )),
                                       ),
                                     ),
+                                    (state.deadlineModel.studentCount! - 2 != 0) ?
                                     Positioned(
                                       left: 36,
                                       child: ClipOval(
@@ -252,7 +321,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                                           backgroundColor: const Color(0xff3D3DD8),
                                           radius: 12,
                                           child: Text(
-                                            '+21',
+                                            '+${state.deadlineModel.studentCount! - 2}',
                                             style: TextStyles.regularStyle.copyWith(
                                               fontSize: 13,
                                               color: Colors.white,
@@ -260,12 +329,12 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ) : const Offstage(),
                                   ],
                                 ),
                               ),
                               Text(
-                                'Голосуют 23 студента',
+                                'Голосуют ${state.deadlineModel.studentCount} студента',
                                 style: TextStyles.regularStyle.copyWith(
                                   fontSize: 13,
                                   color: const Color(0xFF767676),
@@ -308,7 +377,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                           ),
                           onPressed: () {
                             // Navigator.popUntil(context, ModalRoute.withName(DevelopmentRoute));
-                            Navigator.of(context,rootNavigator: true).pushNamed(MainRoute);
+                            Navigator.of(context,rootNavigator: true).pushNamed(DevelopmentRoute);
                           },
                           child: Text("На главную",
                               style: TextStyles.mediumStyle
