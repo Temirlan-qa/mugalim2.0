@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/inProcess_widget.dart';
-import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 class RatingScreen extends StatelessWidget {
   const RatingScreen({Key? key}) : super(key: key);

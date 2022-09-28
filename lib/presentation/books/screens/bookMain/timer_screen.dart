@@ -337,7 +337,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
   Widget getImage(String img) {
     return CachedNetworkImage(
       imageUrl:
-      '${EnvironmentConfig.url}/file/image/${img}?size=xs',
+      '${EnvironmentConfig.url}/file/image/$img?size=xs',
       width: 24,
       height: 24,
       fit: BoxFit.fill,

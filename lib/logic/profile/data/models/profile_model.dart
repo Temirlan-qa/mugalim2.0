@@ -1,6 +1,6 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:mugalim/logic/profile/data/models/user_model.dart';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'package:json_annotation/json_annotation.dart';
 
 part 'profile_model.g.dart';
 

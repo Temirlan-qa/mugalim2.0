@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,27 +39,20 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchEditingController = TextEditingController();
   bool buttonDown = false;
   int tabIndex = 0;
-  // List liked = [];
-  // List likedCount = [];
-  //
-  // List saved = [];
-  // List savedCount = [];
-
   int dropDownindex = 0;
   int votePPL1 = 45;
   int votePPL2 = 45;
   int voteProcent1 = 90;
   int voteProcent2 = 90;
   String voteAnswer1 = 'Да, пойду truyytyit guyvuiiio ihihuig78tf';
-  String voteAnswer2 =  'Нет, не пойду';
-  String votetitle =  'Пойдете ли в горы вместе с группой?';
+  String voteAnswer2 = 'Нет, не пойду';
+  String votetitle = 'Пойдете ли в горы вместе с группой?';
 
   final HomeDatasource homeDatasource = sl();
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return DefaultTabController(
       initialIndex: tabIndex,
       length: 3,
@@ -73,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
               leading: !search
                   ? const SizedBox()
                   : Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: GestureDetector(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: GestureDetector(
                         onTap: () {
                           setState(() {
                             search = !search;
@@ -86,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: ColorStyles.primaryBorderColor,
                         ),
                       ),
-                  ),
+                    ),
               leadingWidth: !search ? 30 : 50,
               actions: <Widget>[
                 Visibility(
@@ -98,26 +89,35 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                     child: !search
-                        ? SvgPicture.asset('assets/icons/search.svg',width: 21,height: 21,)
+                        ? SvgPicture.asset(
+                            'assets/icons/search.svg',
+                            width: 21,
+                            height: 21,
+                          )
                         : const SizedBox(),
                   ),
                 ),
-                !search ?const SizedBox(width: 24,) : const Offstage(),
+                !search
+                    ? const SizedBox(
+                        width: 24,
+                      )
+                    : const Offstage(),
                 Visibility(
                   visible: !search,
                   child: GestureDetector(
-                      onTap: () {
-
-                  },
-                  child: SvgPicture.asset(
-                    'assets/icons/bell.svg',
-                    color: ColorStyles.primaryBorderColor,
-                    height: 23.33,
-                    width: 21,
-                    )
-                  ),
+                      onTap: () {},
+                      child: SvgPicture.asset(
+                        'assets/icons/bell.svg',
+                        color: ColorStyles.primaryBorderColor,
+                        height: 23.33,
+                        width: 21,
+                      )),
                 ),
-                !search?const SizedBox(width: 16,) : const Offstage(),
+                !search
+                    ? const SizedBox(
+                        width: 16,
+                      )
+                    : const Offstage(),
               ],
               centerTitle: true,
               titleSpacing: 0,
@@ -133,13 +133,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   : Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: SearchWidget(hintText: '123'),
-                  ),
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: SearchWidget(hintText: '123'),
+                    ),
               elevation: 0,
               bottom: TabBar(
-                // ↓ labelPadding Сохраненные ны толык корсету ушин
-                //labelPadding: EdgeInsets.all(0),
                 labelColor: ColorStyles.primaryBorderColor,
                 unselectedLabelColor: ColorStyles.primarySurfaceHoverColor,
                 indicatorColor: ColorStyles.primaryBorderColor,
@@ -148,10 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: ColorStyles.primaryBorderColor, width: 2),
                   insets: const EdgeInsets.symmetric(horizontal: 16),
                 ),
-                onTap: (index){
-                  setState((){
+                onTap: (index) {
+                  setState(() {
                     dropDownindex = index;
-                    if(dropDownindex == 1 || dropDownindex == 2) {
+                    if (dropDownindex == 1 || dropDownindex == 2) {
                       buttonDown = false;
                     }
                   });
@@ -159,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 isScrollable: true,
                 tabs: [
                   SizedBox(
-                    width: width/3-30,
+                    width: width / 3 - 30,
                     child: Tab(
                       child: Row(
                         children: [
@@ -172,7 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Новости',
                             style: TextStyles.mediumStyle.copyWith(
                               fontSize: 16,
-                              color: dropDownindex == 0 ? Colors.black : ColorStyles.primarySurfaceHoverColor,
+                              color: dropDownindex == 0
+                                  ? Colors.black
+                                  : ColorStyles.primarySurfaceHoverColor,
                             ),
                           ),
                           const SizedBox(
@@ -187,7 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Visibility(
                               visible: dropDownindex == 0,
                               child: Icon(
-                                buttonDown ? Icons.keyboard_arrow_up :Icons.keyboard_arrow_down,
+                                buttonDown
+                                    ? Icons.keyboard_arrow_up
+                                    : Icons.keyboard_arrow_down,
                                 //Icons.keyboard_arrow_up,
                                 size: 16,
                                 color: ColorStyles.primaryBorderColor,
@@ -199,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    width: width/3-50,
+                    width: width / 3 - 50,
                     child: Tab(
                       child: Text(
                         maxLines: 1,
@@ -212,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    width: width/3-20,
+                    width: width / 3 - 20,
                     child: Tab(
                       child: Text(
                         maxLines: 1,
@@ -231,108 +233,108 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 dropdownvalue == 'Новости '
                     ? BlocProvider(
-                      create: (context) => sl<HomeBloc>()..add(GetPostsList()),
-                      child: PostListScreen(fromPage: "Новости"),
-                    ) : dropdownvalue == 'Регион '
+                        create: (context) =>
+                            sl<HomeBloc>()..add(GetPostsList()),
+                        child: const PostListScreen(fromPage: "Новости"),
+                      )
+                    : dropdownvalue == 'Регион '
                         ? const Center(child: Text('Регион '))
                         : const Center(child: Text('Город ')),
                 BlocProvider(
-                  create: (context) => sl<HomeBloc>()..add(GetTrendingPostsList()),
-                  child: PostListScreen(fromPage: "Тренды"),
+                  create: (context) =>
+                      sl<HomeBloc>()..add(GetTrendingPostsList()),
+                  child: const PostListScreen(fromPage: "Тренды"),
                 ),
                 BlocProvider(
                   create: (context) => sl<HomeBloc>()..add(GetSavedPostsList()),
-                  child: PostListScreen(fromPage: "Сохраненные"),
+                  child: const PostListScreen(fromPage: "Сохраненные"),
                 ),
               ],
             ),
           ),
           Visibility(
-              visible: buttonDown,
-              child: Positioned(
-                top: 110 + MediaQuery.of(context).padding.top,
-                left: 15,
-                child: AnimatedContainer(
-                  duration: const Duration(seconds: 5),
-                  curve: Curves.easeInQuint,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(8),
+            visible: buttonDown,
+            child: Positioned(
+              top: 110 + MediaQuery.of(context).padding.top,
+              left: 15,
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 5),
+                curve: Curves.easeInQuint,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.16),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.16),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  height: 110,
-                  width: 110,
-                  padding: const EdgeInsets.only(
-                    top: 12,
-                    bottom: 12,
-                    left: 16
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            buttonDown = false;
-                            dropdownvalue = 'Новости ';
-                          });
-                        },
-                        child: Text(
-                          'Общие',
-                          style: TextStyles.mediumStyle.copyWith(
-                            fontSize: 13,
-                            color: const Color(0xFF1A1A1A),
-                            height: 1.2,
-                          ),
-                        ),
-                      ),
-                      sizedBoxHeight16(),
-                      GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            buttonDown = false;
-                            dropdownvalue = 'Регион ';
-                          });
-                        },
-                        child: Text(
-                          'Мой регион',
-                          style: TextStyles.mediumStyle.copyWith(
-                            fontSize: 13,
-                            color: const Color(0xFF1A1A1A),
-                            height: 1.2,
-                          ),
-                        ),
-                      ),
-                      sizedBoxHeight16(),
-                      GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            buttonDown = false;
-                            dropdownvalue = 'Город ';
-                          });
-                        },
-                        child: Text(
-                          'Мой город',
-                          style: TextStyles.mediumStyle.copyWith(
-                            fontSize: 13,
-                            color: const Color(0xFF1A1A1A),
-                            height: 1.2,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
-              )),
+                height: 110,
+                width: 110,
+                padding: const EdgeInsets.only(top: 12, bottom: 12, left: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          buttonDown = false;
+                          dropdownvalue = 'Новости ';
+                        });
+                      },
+                      child: Text(
+                        'Общие',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 13,
+                          color: const Color(0xFF1A1A1A),
+                          height: 1.2,
+                        ),
+                      ),
+                    ),
+                    sizedBoxHeight16(),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          buttonDown = false;
+                          dropdownvalue = 'Регион ';
+                        });
+                      },
+                      child: Text(
+                        'Мой регион',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 13,
+                          color: const Color(0xFF1A1A1A),
+                          height: 1.2,
+                        ),
+                      ),
+                    ),
+                    sizedBoxHeight16(),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          buttonDown = false;
+                          dropdownvalue = 'Город ';
+                        });
+                      },
+                      child: Text(
+                        'Мой город',
+                        style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 13,
+                          color: const Color(0xFF1A1A1A),
+                          height: 1.2,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

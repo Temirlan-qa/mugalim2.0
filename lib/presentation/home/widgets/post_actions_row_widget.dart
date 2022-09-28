@@ -1,10 +1,12 @@
+// ignore_for_file: implementation_imports, depend_on_referenced_packages
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import "package:intl/intl.dart";
-
 import '../../../core/injection_container.dart';
 import '../../../logic/home/data/datasources/home_datasources.dart';
 import 'package:dio/src/response.dart';
@@ -60,10 +62,15 @@ class _ActionsRowWidgetState extends State<ActionsRowWidget> {
                   }
                   count++;
                 });
-                print(isLiked);
+                if (kDebugMode) {
+                  print(isLiked);
+                }
                 final HomeDatasource homeDatasource = sl();
                 // if(liked[index]){
                 Response response = (await homeDatasource.likedPost(widget.id,'POSTLIKE'));
+                if (kDebugMode) {
+                  print(response);
+                }
                 // }
               },
               child: Container(
@@ -160,7 +167,9 @@ class _ActionsRowWidgetState extends State<ActionsRowWidget> {
                 });
                 final HomeDatasource homeDatasource = sl();
                 Response response = isSaved ? (await homeDatasource.savedPost(widget.id)) : (await homeDatasource.deletePost(widget.id));
-
+                if (kDebugMode) {
+                  print(response);
+                }
               },
               child: Container(
                 padding: const EdgeInsets.all(8),

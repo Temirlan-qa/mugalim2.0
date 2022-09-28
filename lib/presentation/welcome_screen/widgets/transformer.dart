@@ -1,9 +1,10 @@
+// ignore_for_file: library_prefixes, constant_identifier_names
+
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:math' as Math;
 
 // ignore: import_of_legacy_library_into_null_safe
-
 
 class CustomTransformer extends PageTransformer {
   static const double MIN_SCALE = 0.6;
@@ -31,9 +32,9 @@ class CustomTransformer extends PageTransformer {
 
     return Opacity(
       opacity: opacity,
-      child: new Transform.translate(
-        offset: new Offset(dx, 0.0),
-        child: new Transform.scale(
+      child: Transform.translate(
+        offset: Offset(dx, 0.0),
+        child: Transform.scale(
           scale: scaleFactor,
           child: child,
         ),

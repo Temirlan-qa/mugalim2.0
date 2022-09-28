@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
@@ -48,7 +47,7 @@ class _MyReviewScreenState extends State<MyReviewScreen>
         ),
         body: Stack(
           children: [
-            SuccessPage(),
+            const SuccessPage(),
             Container(
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -57,7 +56,7 @@ class _MyReviewScreenState extends State<MyReviewScreen>
                         topRight: Radius.circular(16.0))),
                 padding: const EdgeInsets.only(top: 16),
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -121,7 +120,7 @@ class _MyReviewScreenState extends State<MyReviewScreen>
                             // Navigator.push(context, PageTransition(child: SucessReview(), type: PageTransitionType.fade));
                             Navigator.of(context, rootNavigator: true).push(
                                 PageTransition(
-                                    child: SucessReview(),
+                                    child: const SucessReview(),
                                     type: PageTransitionType.fade));
                           },
                           child: Text("Закончить книгу",

@@ -4,8 +4,6 @@ import '../datasources/book_datasources.dart';
 import '../models/bookVotes_model.dart';
 import '../models/book_list_model.dart';
 import '../models/readBookList_model.dart';
-import '../models/voteList_model.dart';
-
 
 
 abstract class BookRepository {

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
-import 'package:mugalim/presentation/books/screens/selectBook/myChoice.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import '../../logic/book/bloc/book_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
@@ -47,8 +46,8 @@ class InnLabRouter {
           builder: (_) => GenreScreen(
             indexMonth: (0),
             list: list,
-            choiceList: [],
-            addList: [0,1,2,3],
+            choiceList: const [],
+            addList: const [0,1,2,3],
           ),
         );
       case CourseRoute:

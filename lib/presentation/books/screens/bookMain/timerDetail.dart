@@ -1,7 +1,7 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import '../../../../core/const/text_style_const.dart';
 import '../../../../core/routes/routes_const.dart';
 
