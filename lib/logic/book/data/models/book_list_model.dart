@@ -9,11 +9,11 @@ part 'book_list_model.g.dart';
 
 @JsonSerializable()
 class BookListModel {
-  final String? id;
   final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
   final List? eventLog;
+  final String? id;
   final String? name;
   final List? authorIds;
   final List<AuthorsModel?> authors;
@@ -26,7 +26,8 @@ class BookListModel {
 
   factory BookListModel.fromJson(Map<String, dynamic> json) => _$BookListModelFromJson(json);
 
-  BookListModel(this.id, this.createdAt, this.updatedAt, this.deletedAt, this.eventLog, this.name, this.authorIds, this.authors, this.genreIds, this.genres, this.description, this.avatarId, this.level);
+  BookListModel(this.createdAt, this.updatedAt, this.deletedAt, this.eventLog, this.id, this.name, this.authorIds, this.authors, this.genreIds, this.genres, this.description, this.avatarId, this.level);
+
 
   Map<String, dynamic> toJson() => _$BookListModelToJson(this);
 }

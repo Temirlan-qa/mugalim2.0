@@ -24,6 +24,13 @@ class _TimerDetailState extends State<TimerDetail> {
     final dateTimeResumed = DateTime.now().millisecondsSinceEpoch;
     final startingDateTime = DateTime.parse(widget.startingDate).millisecondsSinceEpoch;
     var difference = startingDateTime - dateTimeResumed;
+    if(widget.status == 'COMPLETED') {
+      Navigator.of(context,
+          rootNavigator: true)
+          .popAndPushNamed(MainBookRoute);
+    } else if(widget.status == 'CONFLICT') {
+      difference = 0;
+    }
     if(difference < 0) {
       if(widget.status == 'CONFLICT') {
         difference = 0;
@@ -120,7 +127,7 @@ class _TimerDetailState extends State<TimerDetail> {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom:16, right: 1.5, left: 1.5),
-            child: textDeadline!,
+            child: textDeadline,
           ),
           buildTime(),
         ],
