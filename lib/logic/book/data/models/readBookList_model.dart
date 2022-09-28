@@ -13,8 +13,9 @@ class ReadBookListModel {
   final String? deletedAt;
   final List? eventLog;
   final String? id;
-  final String? usedId;
+  final String? userId;
   final String? bookId;
+  @JsonKey(name: "book")
   final BookListModel? bookListModel;
   final String? startedAt;
   final String? completedAt;
@@ -23,7 +24,8 @@ class ReadBookListModel {
 
   factory ReadBookListModel.fromJson(Map<String, dynamic> json) => _$ReadBookListModelFromJson(json);
 
-  ReadBookListModel(this.createdAt, this.updatedAt, this.deletedAt, this.eventLog, this.id, this.usedId, this.bookId, this.bookListModel, this.startedAt, this.completedAt, this.review, this.rating);
+  ReadBookListModel(this.createdAt, this.updatedAt, this.deletedAt, this.eventLog, this.id, this.userId, this.bookId, this.bookListModel, this.startedAt, this.completedAt, this.review, this.rating);
+
 
 
 

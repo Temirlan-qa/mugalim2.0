@@ -1,12 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// ignore: depend_on_referenced_packages
 import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
+import '../../books/screens/bookMain/readBooks_screen.dart';
+import '../../books/screens/bookMain/voteNotStartedScreen.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -20,11 +23,12 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
   Box genres = Hive.box('genres');
   @override
   Widget build(BuildContext context) {
-    bool isNotVotedAny = false;
-    bool isNotVotedButDeadlineCome = false;
-    bool isVoted = false;
+    bool isVotingNotStarted = false;
+    bool isVotedAndShowDeadline = false;
+    bool isNotVotedAndShowGenre = false;
     bool isCompleted = false;
     bool isGenreVoted = false;
+    bool isNotGroup = false;
     // BlocBuilder<BookBloc,BookState>(
     //     builder: (context,state){
     //       print(state);
@@ -74,11 +78,13 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
     //     }
     // );
     double width = MediaQuery.of(context).size.width;
+    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocBuilder<BookBloc,BookState>(
             builder: (context, state) {
+              print(state);
               if(state is DeadlineSuccess){
                 return Stack(
                   children: [
@@ -159,55 +165,72 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           const Spacer(),
                                           GestureWidget(
                                             onTap: (){
-                                              if (state.deadlineModel.status ==
-                                                  null ||
-                                                  (DateTime.now().compareTo(
-                                                      DateTime.parse(state
-                                                          .deadlineModel
-                                                          .startDate!)) <
-                                                      0) || state.deadlineModel.status ==
-                                                  'TAKING_PLACE'
+                                              if(state.list.isEmpty) {
+                                                isGenreVoted = false;
+                                              } else {
+                                                for (int i = 0; i < 4; i++) {
+                                                  if (state.list[i].voted ==
+                                                      true) {
+                                                    isGenreVoted = true;
+                                                  }
+                                                }
+                                              }
+
+
+                                              if(state.deadlineModel.bookGroupId == null) {
+                                                isNotGroup = true;
+                                              }
+                                              if ((state.deadlineModel.status == null ||
+                                                  (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) < 0) ||
+                                                  (state.deadlineModel.status == 'CONFLICT' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) < 0)) ||
+                                                  (state.deadlineModel.status == 'TAKING_PLACE' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) < 0))
                                               // (DateTime.now().compareTo(DateTime.parse('2022-09-30 21:00:00')) < 0)
-                                              )
+                                              ) && !isNotGroup)
                                               {
-                                                isNotVotedAny = true;
+                                                isVotingNotStarted = true;
                                               }
-                                              else if (state
-                                                  .deadlineModel.status ==
-                                                  'CONFLICT')
+                                              else if (((state.deadlineModel.status == 'CONFLICT' && isGenreVoted) ||
+                                                  (state.deadlineModel.status == 'CONFLICT' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) > 0)) ||
+                                                  (state.deadlineModel.status == 'TAKING_PLACE' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) > 0)) ||
+                                                  (state.deadlineModel.status == 'TAKING_PLACE' && isGenreVoted)
+                                              ) && !isNotGroup)
                                               {
-                                                isVoted = true;
+                                                isVotedAndShowDeadline = true;
                                               }
-                                              else if (state
+                                              else if((((state.deadlineModel.status == 'CONFLICT') && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) < 0) && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) > 0) && !isGenreVoted) ||
+                                              ((state.deadlineModel.status == 'TAKING_PLACE') && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) < 0) && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) > 0) && !isGenreVoted)
+                                              ) && !isNotGroup)
+                                              {
+                                                isNotVotedAndShowGenre = true;
+                                              }
+                                              else if ((state
                                                   .deadlineModel.status ==
-                                                  'COMPLETED') {
+                                                  'COMPLETED') && !isNotGroup) {
                                                 isCompleted = true;
                                               }
-                                              // for (int i = 0; i < 4; i++) {
-                                              //   if (state.list[i].voted ==
-                                              //       false) {
-                                              //     isGenreVoted = false;
-                                              //   }
-                                              // }
-                                              // if(isCompleted) {
-                                              //   Navigator.of(
-                                              //       context, rootNavigator: true)
-                                              //       .pushNamed(MainBookRoute);
-                                              // }
-                                              // else if(isGenreVoted || isVoted){
-                                              //   Navigator.of(context).pushNamed(TimerRoute);
-                                              // }
-                                              // else if(isNotVotedAny){
-                                              //   Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (context) =>
-                                              //         const VoteNotStartedScreen()),
-                                              //   );
-                                              // }
-                                              // else{
-                                                Navigator.of(context,rootNavigator: true).pushNamed(TimerRoute);
-                                              // }
+
+                                              if(isCompleted) {
+                                                Navigator.of(
+                                                    context, rootNavigator: true)
+                                                    .pushNamed(MainBookRoute);
+                                              }
+                                              else if(isVotedAndShowDeadline){
+                                                Navigator.of(context, rootNavigator: true).pushNamed(TimerRoute);
+                                              }
+                                              else if(isNotVotedAndShowGenre) {
+                                                Navigator.of(context, rootNavigator: true).pushNamed(JenreRoute);
+                                              }
+                                              else if(isVotingNotStarted){
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                      const VoteNotStartedScreen()),
+                                                );
+                                              }
+                                              else if(isNotGroup){
+                                                Navigator.of(context, rootNavigator: true).pushNamed(ReadBooksRoute);
+                                              }
 
                                             },
                                             title: 'Книги',

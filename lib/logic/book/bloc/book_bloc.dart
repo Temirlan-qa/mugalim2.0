@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mugalim/logic/book/data/models/semester_model.dart';
 import '../data/models/bookVotes_model.dart';
 import '../data/models/book_list_model.dart';
+import '../data/models/readBookList_model.dart';
 import '../data/models/semesterDeadline_model.dart';
 import '../data/models/semester_model.dart';
 import '../data/repositories/book_repository.dart';
@@ -68,6 +69,15 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       try{
         final List<BookListModel> list = await bookRepository.getMyChoiceList();
         emit(MyChoiceSuccess(list));
+      } catch(e) {
+        emit(BookFailure(e.toString()));
+      }
+    });
+    on<GetMyReadBookList>((event, emit) async {
+      emit(BookLoading());
+      try {
+        final List<ReadBookListModel> list = await bookRepository.getMyReadBookList();
+        emit(MyReadBookListSuccess(list));
       } catch(e) {
         emit(BookFailure(e.toString()));
       }

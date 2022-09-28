@@ -13,12 +13,11 @@ ReadBookListModel _$ReadBookListModelFromJson(Map<String, dynamic> json) =>
       json['deletedAt'] as String?,
       json['eventLog'] as List<dynamic>?,
       json['id'] as String?,
-      json['usedId'] as String?,
+      json['userId'] as String?,
       json['bookId'] as String?,
-      json['bookListModel'] == null
+      json['book'] == null
           ? null
-          : BookListModel.fromJson(
-              json['bookListModel'] as Map<String, dynamic>),
+          : BookListModel.fromJson(json['book'] as Map<String, dynamic>),
       json['startedAt'] as String?,
       json['completedAt'] as String?,
       json['review'] as String?,
@@ -32,9 +31,9 @@ Map<String, dynamic> _$ReadBookListModelToJson(ReadBookListModel instance) =>
       'deletedAt': instance.deletedAt,
       'eventLog': instance.eventLog,
       'id': instance.id,
-      'usedId': instance.usedId,
+      'userId': instance.userId,
       'bookId': instance.bookId,
-      'bookListModel': instance.bookListModel,
+      'book': instance.bookListModel,
       'startedAt': instance.startedAt,
       'completedAt': instance.completedAt,
       'review': instance.review,

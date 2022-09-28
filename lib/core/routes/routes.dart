@@ -11,6 +11,7 @@ import 'package:mugalim/presentation/profile/screens/settings_screen.dart';
 import 'package:mugalim/presentation/profile/screens/write_review_screen.dart';
 import '../../logic/home/bloc/home_bloc.dart';
 import '../../presentation/books/screens/bookMain/main_book_screen.dart';
+import '../../presentation/books/screens/bookMain/readBooks_screen.dart';
 import '../../presentation/books/screens/bookMain/timer_screen.dart';
 import '../../presentation/books/screens/selectBook/select_book.dart';
 import '../../presentation/books/screens/selectBook/select_jenre.dart';
@@ -129,7 +130,14 @@ class InnLabRouter {
           settings: routeSettings,
           builder: (_) => const VerifyScreen(),
         );
-
+      case ReadBooksRoute:
+        return CupertinoPageRoute(
+            settings: routeSettings,
+            builder: (_) => BlocProvider(
+              create: (context) =>
+              sl<BookBloc>()..add(GetMyReadBookList()),
+              child: const ReadBooks(),
+            ));
     // case BookRoute:
     //   return CupertinoPageRoute(
     //     settings: routeSettings,
