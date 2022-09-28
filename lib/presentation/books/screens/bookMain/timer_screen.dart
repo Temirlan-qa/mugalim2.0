@@ -10,7 +10,6 @@ import '../../../../core/routes/environment_config.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 
 class TimerScreen extends StatefulWidget {

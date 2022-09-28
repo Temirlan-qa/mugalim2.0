@@ -1,4 +1,5 @@
-// ignore: depend_on_referenced_packages
+// ignore_for_file: file_names, depend_on_referenced_packages
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'book_list_model.dart';

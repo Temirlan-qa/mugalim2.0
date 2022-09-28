@@ -1,14 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: depend_on_referenced_packages
 import 'package:hive/hive.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
-import '../../books/screens/bookMain/voteNotStartedScreen.dart';
 import '../widgets/gesture_widget.dart';
 
 class DevelopmentScreen extends StatefulWidget {
@@ -76,13 +74,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
     //     }
     // );
     double width = MediaQuery.of(context).size.width;
-    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocBuilder<BookBloc,BookState>(
             builder: (context, state) {
-              print(state);
               if(state is DeadlineSuccess){
                 return Stack(
                   children: [
@@ -187,7 +183,6 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   'COMPLETED') {
                                                 isCompleted = true;
                                               }
-                                              print(state.list);
                                               // for (int i = 0; i < 4; i++) {
                                               //   if (state.list[i].voted ==
                                               //       false) {
