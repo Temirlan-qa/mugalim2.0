@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
@@ -8,7 +9,6 @@ import 'package:mugalim/core/const/text_style_const.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes_const.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
-import '../../books/screens/bookMain/readBooks_screen.dart';
 import '../../books/screens/bookMain/voteNotStartedScreen.dart';
 import '../widgets/gesture_widget.dart';
 
@@ -78,13 +78,14 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
     //     }
     // );
     double width = MediaQuery.of(context).size.width;
-    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocBuilder<BookBloc,BookState>(
             builder: (context, state) {
-              print(state);
+              if (kDebugMode) {
+                print(state);
+              }
               if(state is DeadlineSuccess){
                 return Stack(
                   children: [
