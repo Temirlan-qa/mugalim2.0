@@ -7,6 +7,7 @@ abstract class BookDatasource {
   Future<Response> getDeadlineSemester();
   Future<Response> postVote(List<Map<String, String>> choiceList);
   Future<Response> getMyChoiceList();
+  Future<Response> getMyReadBookList();
 }
 
 class BookDataSourceImpl implements BookDatasource {
@@ -43,6 +44,11 @@ class BookDataSourceImpl implements BookDatasource {
     Response response = await dioWrapper!.post('/books/voting/vote',
         data: choiceList
     );
+    return response;
+  }
+  @override
+  Future<Response> getMyReadBookList() async {
+    Response response = await dioWrapper!.get('/books/book-read/list/my');
     return response;
   }
 }

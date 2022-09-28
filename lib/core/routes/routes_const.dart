@@ -15,3 +15,4 @@ const String EditInfoUserRoute = '/EditInfoUserRoute';
 const String TimerRoute = '/timer';
 const String BookPageRoute = '/bookPage';
 const String MyChoiceRoute = '/myChoice';
+const String ReadBooksRoute = 'readBooks';

@@ -10,8 +10,6 @@ import '../../../../core/routes/environment_config.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({Key? key}) : super(key: key);
@@ -174,13 +172,6 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                     .startDate!)) <
                 0){
             }
-            // int endDate = ((DateTime.parse(state.deadlineModel.endDate!).millisecondsSinceEpoch)) ~/ 1000;
-            // final DateFormat formatter = DateFormat('yyyy-MM-dd');
-            // final String formatted = formatter.format(DateTime.now());
-            // int now = ((DateTime.parse(formatted).microsecondsSinceEpoch)) ~/ 1000;
-            // if(now >= endDate){
-            //   timeEnd = true;
-            // }
             return Container(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -234,86 +225,29 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                                 width: 70,
                                 child: Stack(
                                   children: [
-                                    (state.deadlineModel.images![0] != null)?
-                                    CachedNetworkImage(
-                                      imageUrl:
-                                      '${EnvironmentConfig.url}/file/image/${state.deadlineModel.images![0]}?size=xs',
-                                      width: 24,
-                                      height: 24,
-                                      fit: BoxFit.fill,
-                                      imageBuilder: (context, imageProvider) => Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      ),
-                                      httpHeaders: {
-                                        'Content-Type': 'application/json',
-                                        'Accept': 'application/json',
-                                        "Authorization": "Bearer ${tokensBox.get('access')}"
-                                      },
-                                      placeholder: (context,
-                                          url) => const CupertinoActivityIndicator(),
-                                      errorWidget: (context, str, url) => Lottie.asset(
-                                        'assets/animations/Loader.json',
-                                        width: 80,
-                                        height: 80,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    )
-                                        : const CircleAvatar(
+
+                                    (state.deadlineModel.students.isNotEmpty) ?
+                                    ((state.deadlineModel.students[0].avatar) != null ?
+                                    getImage(state.deadlineModel.students[0].avatar!)
+                                        :  CircleAvatar(
                                         radius: 12,
                                         child: Text(
-                                            'A'
-                                        )),
+                                            state.deadlineModel.students[0].fio!.substring(0,1)
+                                        ))) : const Offstage(),
+                                    (state.deadlineModel.students.length >= 2) ?
                                     Positioned(
                                       left: 18,
                                       child: ClipOval(
-                                        child: state.deadlineModel.images!.length >= 2 ?
-                                      CachedNetworkImage(
-                                      imageUrl:
-                                      '${EnvironmentConfig.url}/file/image/${state.deadlineModel.images![0]}?size=xs',
-                                        width: 24,
-                                        height: 24,
-                                        fit: BoxFit.fill,
-                                        imageBuilder: (context, imageProvider) => Container(
-                                          width: 24,
-                                          height: 24,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        ),
-                                        httpHeaders: {
-                                          'Content-Type': 'application/json',
-                                          'Accept': 'application/json',
-                                          "Authorization": "Bearer ${tokensBox.get('access')}"
-                                        },
-                                        placeholder: (context,
-                                            url) => const CupertinoActivityIndicator(),
-                                        errorWidget: (context, str, url) => Lottie.asset(
-                                          'assets/animations/Loader.json',
-                                          width: 80,
-                                          height: 80,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )
-                                            : const CircleAvatar(
+                                        child: (state.deadlineModel.students[1].avatar) != null ?
+                                      getImage(state.deadlineModel.students[1].avatar!)
+                                            : CircleAvatar(
                                             radius: 12,
                                             child: Text(
-                                              'A'
+                                                state.deadlineModel.students[1].fio!.substring(0,1)
                                             )),
                                       ),
-                                    ),
-                                    (state.deadlineModel.studentCount! - 2 != 0) ?
+                                    ) : const Offstage(),
+                                    (state.deadlineModel.studentCount! > 2) ?
                                     Positioned(
                                       left: 36,
                                       child: ClipOval(
@@ -377,7 +311,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                           ),
                           onPressed: () {
                             // Navigator.popUntil(context, ModalRoute.withName(DevelopmentRoute));
-                            Navigator.of(context,rootNavigator: true).pushNamed(DevelopmentRoute);
+                            // Navigator.of(context,rootNavigator: true).pushNamed(DevelopmentRoute);
+                            Navigator.pop(context);
                           },
                           child: Text("На главную",
                               style: TextStyles.mediumStyle
@@ -396,6 +331,40 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
           return const Text(" No loaded");
         }
       )
+    );
+  }
+
+  Widget getImage(String img) {
+    return CachedNetworkImage(
+      imageUrl:
+      '${EnvironmentConfig.url}/file/image/${img}?size=xs',
+      width: 24,
+      height: 24,
+      fit: BoxFit.fill,
+      imageBuilder: (context, imageProvider) => Container(
+        width: 24,
+        height: 24,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+      httpHeaders: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "Bearer ${tokensBox.get('access')}"
+      },
+      placeholder: (context,
+          url) => const CupertinoActivityIndicator(),
+      errorWidget: (context, str, url) => Lottie.asset(
+        'assets/animations/Loader.json',
+        width: 80,
+        height: 80,
+        fit: BoxFit.fill,
+      ),
     );
   }
 }
