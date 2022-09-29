@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:mugalim/logic/book/data/models/semesterDeadline_model.dart';
-import 'package:mugalim/logic/book/data/models/semester_model.dart';
 
 import '../datasources/book_datasources.dart';
 import '../models/bookVotes_model.dart';
 import '../models/book_list_model.dart';
-import '../models/voteList_model.dart';
+import '../models/readBooks_model.dart';
 
 
 
@@ -15,6 +14,7 @@ abstract class BookRepository {
   Future<SemesterDeadlineModel> getDeadline();
   Future<Response> postVote(List<Map<String, String>> choiceList);
   Future<List<BookListModel>> getMyChoiceList();
+  Future<List<ReadBooksModel>> getReadBooksList();
 }
 
 class BookRepositoryImpl extends BookRepository {
@@ -49,5 +49,12 @@ class BookRepositoryImpl extends BookRepository {
   Future<List<BookListModel>> getMyChoiceList() async {
     Response response = await homeDatasource.getMyChoiceList();
     return (response.data as List).map((data) => BookListModel.fromJson(data)).toList();
+  }
+
+  @override
+  Future<List<ReadBooksModel>> getReadBooksList() async {
+    Response response = await homeDatasource.getReadBooks();
+    print(response);
+    return (response.data as List).map((data) => ReadBooksModel.fromJson(data)).toList();
   }
 }

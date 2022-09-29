@@ -46,3 +46,8 @@ class MyChoiceSuccess extends BookState{
   final List<BookListModel> list;
   MyChoiceSuccess(this.list);
 }
+
+class ReadBookListSuccess extends BookState{
+  final List<ReadBooksModel> list;
+  ReadBookListSuccess(this.list);
+}

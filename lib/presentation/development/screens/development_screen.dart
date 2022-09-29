@@ -175,7 +175,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               {
                                                 isNotVotedAny = true;
                                               }
-                                              else if (state
+                                               if (state
                                                   .deadlineModel.status ==
                                                   'CONFLICT' ||
                                                   state.deadlineModel.status ==
@@ -189,31 +189,34 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                 isCompleted = true;
                                               }
                                               print(state.list);
-                                              for (int i = 0; i < 4; i++) {
-                                                if (state.list[i].voted ==
-                                                    false) {
-                                                  isGenreVoted = false;
+                                              if(state.list.isNotEmpty){
+                                                for (int i = 0; i < 4; i++) {
+                                                  if (state.list[i].voted ==
+                                                      false) {
+                                                    isGenreVoted = false;
+                                                  }
                                                 }
                                               }
-                                              // if(isCompleted) {
-                                              //   Navigator.of(
-                                              //       context, rootNavigator: true)
-                                              //       .pushNamed(MainBookRoute);
-                                              // }
-                                              // else if(isGenreVoted || isVoted){
-                                              //   Navigator.of(context).pushNamed(TimerRoute);
-                                              // }
-                                              // else if(isNotVotedAny){
-                                              //   Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (context) =>
-                                              //         const VoteNotStartedScreen()),
-                                              //   );
-                                              // }
-                                              // else{
+
+                                              if(isCompleted) {
+                                                Navigator.of(
+                                                    context, rootNavigator: true)
+                                                    .pushNamed(MainBookRoute);
+                                              }
+                                              else if(isGenreVoted || isVoted){
+                                                Navigator.of(context).pushNamed(TimerRoute);
+                                              }
+                                              else if(isNotVotedAny){
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                      const VoteNotStartedScreen()),
+                                                );
+                                              }
+                                              else{
                                                 Navigator.of(context,rootNavigator: true).pushNamed(JenreRoute);
-                                              // }
+                                              }
 
                                             },
                                             title: 'Книги',
