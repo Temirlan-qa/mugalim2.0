@@ -18,7 +18,8 @@ import '../../../core/injection_container.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final int? currentIndex;
+  const MainScreen({Key? key, this.currentIndex} ) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -26,6 +27,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentView = 0;
+  @override
+  void initState() {
+    super.initState();
+    _currentView = ((widget.currentIndex == null) ? 0 : widget.currentIndex)!;
+  }
 
   @override
   Widget build(BuildContext context) {

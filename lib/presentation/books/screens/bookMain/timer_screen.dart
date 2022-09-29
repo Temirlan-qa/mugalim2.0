@@ -124,8 +124,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              // Navigator.of(context,rootNavigator: true).pushNamed(MainRoute);
-              Navigator.pop(context);
+              Navigator.popAndPushNamed(context, MainRouteFromTimer);
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -311,8 +310,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                           ),
                           onPressed: () {
                             // Navigator.popUntil(context, ModalRoute.withName(DevelopmentRoute));
-                            // Navigator.of(context,rootNavigator: true).pushNamed(DevelopmentRoute);
-                            Navigator.pop(context);
+                            Navigator.popAndPushNamed(context, MainRouteFromTimer);
                           },
                           child: Text("На главную",
                               style: TextStyles.mediumStyle
