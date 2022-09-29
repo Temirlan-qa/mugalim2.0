@@ -1,4 +1,6 @@
 //import 'package:flutter/cupertino.dart';
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -141,7 +143,7 @@ class _PostWidgetState extends State<PostWidget> {
                               'Accept': 'application/json',
                               "Authorization": "Bearer ${tokensBox.get('access')}"
                             },
-                            placeholder: (context, url) => CupertinoActivityIndicator(),
+                            placeholder: (context, url) => const CupertinoActivityIndicator(),
 
                           ) : Image.asset('assets/icons/mugalim_logo.png', width: 44, height: 44)
                         ),
@@ -250,10 +252,10 @@ class _PostWidgetState extends State<PostWidget> {
                                       'Accept': 'application/json',
                                       "Authorization": "Bearer ${tokensBox.get('access')}"
                                     },
-                                    placeholder: (context, url) => CupertinoActivityIndicator(),
+                                    placeholder: (context, url) => const CupertinoActivityIndicator(),
                                   );
                                 }).toList(),
-                              ) : Offstage(),
+                              ) : const Offstage(),
                               sizedBoxHeight8(),
                               LineWidget(width: MediaQuery.of(context).size.width - 32),
                               sizedBoxHeight8(),

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
@@ -22,11 +23,12 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
   Box genres = Hive.box('genres');
   @override
   Widget build(BuildContext context) {
-    bool isNotVotedAny = false;
-    bool isNotVotedButDeadlineCome = false;
-    bool isVoted = false;
+    bool isVotingNotStarted = false;
+    bool isVotedAndShowDeadline = false;
+    bool isNotVotedAndShowGenre = false;
     bool isCompleted = false;
     bool isGenreVoted = false;
+    bool isNotGroup = false;
     // BlocBuilder<BookBloc,BookState>(
     //     builder: (context,state){
     //       print(state);
@@ -76,13 +78,14 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
     //     }
     // );
     double width = MediaQuery.of(context).size.width;
-    List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocBuilder<BookBloc,BookState>(
             builder: (context, state) {
-              print(state);
+              if (kDebugMode) {
+                print(state);
+              }
               if(state is DeadlineSuccess){
                 return Stack(
                   children: [
@@ -163,39 +166,53 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                           const Spacer(),
                                           GestureWidget(
                                             onTap: (){
-                                              if (state.deadlineModel.status ==
-                                                  null ||
-                                                  (DateTime.now().compareTo(
-                                                      DateTime.parse(state
-                                                          .deadlineModel
-                                                          .startDate!)) <
-                                                      0)
-                                              // (DateTime.now().compareTo(DateTime.parse('2022-09-30 21:00:00')) < 0)
-                                              )
-                                              {
-                                                isNotVotedAny = true;
+                                              if(state.list.isEmpty) {
+                                                isGenreVoted = false;
+                                              } else {
+                                                for (int i = 0; i < 4; i++) {
+                                                  if (state.list[i].voted ==
+                                                      true) {
+                                                    isGenreVoted = true;
+                                                  }
+                                                }
                                               }
+
+
+                                              if(state.deadlineModel.bookGroupId == null) {
+                                                isNotGroup = true;
+                                              }
+                                              if ((state.deadlineModel.status == null ||
+                                                  (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) < 0) ||
+                                                  (state.deadlineModel.status == 'CONFLICT' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) < 0)) ||
+                                                  (state.deadlineModel.status == 'TAKING_PLACE' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) < 0))
+                                              // (DateTime.now().compareTo(DateTime.parse('2022-09-30 21:00:00')) < 0)
+                                              ) && !isNotGroup)
+                                              {
+                                                isVotingNotStarted = true;
+                                              }
+                                              else if (((state.deadlineModel.status == 'CONFLICT' && isGenreVoted) ||
+                                                  (state.deadlineModel.status == 'CONFLICT' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) > 0)) ||
+                                                  (state.deadlineModel.status == 'TAKING_PLACE' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) > 0)) ||
+                                                  (state.deadlineModel.status == 'TAKING_PLACE' && isGenreVoted)
+                                              ) && !isNotGroup)
                                                if (state
                                                   .deadlineModel.status ==
                                                   'CONFLICT' ||
                                                   state.deadlineModel.status ==
                                                       'TAKING_PLACE')
                                               {
-                                                isVoted = true;
+                                                isVotedAndShowDeadline = true;
                                               }
-                                              else if (state
+                                              else if((((state.deadlineModel.status == 'CONFLICT') && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) < 0) && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) > 0) && !isGenreVoted) ||
+                                              ((state.deadlineModel.status == 'TAKING_PLACE') && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) < 0) && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.startDate!)) > 0) && !isGenreVoted)
+                                              ) && !isNotGroup)
+                                              {
+                                                isNotVotedAndShowGenre = true;
+                                              }
+                                              else if ((state
                                                   .deadlineModel.status ==
-                                                  'COMPLETED') {
+                                                  'COMPLETED') && !isNotGroup) {
                                                 isCompleted = true;
-                                              }
-                                              print(state.list);
-                                              if(state.list.isNotEmpty){
-                                                for (int i = 0; i < 4; i++) {
-                                                  if (state.list[i].voted ==
-                                                      false) {
-                                                    isGenreVoted = false;
-                                                  }
-                                                }
                                               }
 
                                               if(isCompleted) {
@@ -203,10 +220,13 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                     context, rootNavigator: true)
                                                     .pushNamed(MainBookRoute);
                                               }
-                                              else if(isGenreVoted || isVoted){
-                                                Navigator.of(context).pushNamed(TimerRoute);
+                                              else if(isVotedAndShowDeadline){
+                                                Navigator.of(context, rootNavigator: true).pushNamed(TimerRoute);
                                               }
-                                              else if(isNotVotedAny){
+                                              else if(isNotVotedAndShowGenre) {
+                                                Navigator.of(context, rootNavigator: true).pushNamed(JenreRoute);
+                                              }
+                                              else if(isVotingNotStarted){
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -214,10 +234,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                       const VoteNotStartedScreen()),
                                                 );
                                               }
-                                              else{
-                                                Navigator.of(context,rootNavigator: true).pushNamed(JenreRoute);
+                                              else if(isNotGroup){
+                                                Navigator.of(context, rootNavigator: true).pushNamed(ReadBooksRoute);
                                               }
-
+                                              
                                             },
                                             title: 'Книги',
                                             path: 'assets/images/newBookIcon.png',

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/SizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
@@ -33,37 +35,46 @@ class _ConfirmationBottomWidgetState extends State<ConfirmationBottomWidget> {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 40),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Container(
-              width: MediaQuery.of(context).size.width - 8,
-              height: 44,
-              decoration: BoxDecoration(
-                color: ColorStyles.backgroundColor,
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              child: Center(
-                  child: TextButton(
-                child: Text(widget.topButtonTitle,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width - 8,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: ColorStyles.backgroundColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Center(
+                    child: TextButton(
+                  onPressed: widget.topButtonOnPressed,
+                  child: Text(
+                    widget.topButtonTitle,
                     style: TextStyles.regularStyle.copyWith(
-                        fontSize: 16, color: widget.topButtonTitleColor)),
-                onPressed: widget.topButtonOnPressed,
-              ))),
-          sizedBoxHeight8(),
-          Container(
+                      fontSize: 16,
+                      color: widget.topButtonTitleColor,
+                    ),
+                  ),
+                ))),
+            sizedBoxHeight8(),
+            Container(
               width: MediaQuery.of(context).size.width - 8,
               height: 44,
               decoration: BoxDecoration(
                 color: ColorStyles.backgroundColor,
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
               ),
               child: Center(
-                  child: TextButton(
-                child: Text(widget.bottomButtonTitle,
-                    style: TextStyles.mediumStyle.copyWith(
-                        fontSize: 16, color: widget.bottomButtonTitleColor)),
-                onPressed: widget.bottomButtonOnPressed,
-              )))
-        ]),
+                child: TextButton(
+                  onPressed: widget.bottomButtonOnPressed,
+                  child: Text(widget.bottomButtonTitle,
+                      style: TextStyles.mediumStyle.copyWith(
+                          fontSize: 16, color: widget.bottomButtonTitleColor)),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

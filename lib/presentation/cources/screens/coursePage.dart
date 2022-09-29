@@ -1,9 +1,9 @@
+// ignore_for_file: file_names
 import 'dart:core';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/routes/routes.dart';
 import 'coursePageDetailed.dart';
@@ -74,7 +74,9 @@ class _CoursePageState extends State<CoursePage> {
                   onTap: (int index) {
                     setState(() {
                       currentPage = index;
-                      print(currentPage);
+                      if (kDebugMode) {
+                        print(currentPage);
+                      }
                     });
                   },
                   items: [

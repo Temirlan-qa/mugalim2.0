@@ -1,7 +1,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import '../data/models/post_by_id.dart';
 import '../data/models/post_comment.dart';
 import '../data/models/posts_model.dart';
@@ -72,7 +72,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       try {
         emit(HomeLoading());
         final Response response = await homeRepository.likedPost(event.id,event.likeType);
-
+        if (kDebugMode) {
+          print(response);
+        }
         emit(LikeSuccess());
       } catch (e) {
         emit(HomeFailure(e.toString()));
@@ -82,6 +84,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       try {
         emit(HomeLoading());
         final Response response = await homeRepository.savedPost(event.id);
+        if (kDebugMode) {
+          print(response);
+        }
         emit(SavedSuccess());
       } catch (e) {
         emit(HomeFailure(e.toString()));
@@ -91,6 +96,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       try {
         emit(HomeLoading());
         final Response response = await homeRepository.deletePost(event.id);
+        if (kDebugMode) {
+          print(response);
+        }
         emit(DeletedSuccess());
       } catch (e) {
         emit(HomeFailure(e.toString()));

@@ -1,12 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/select_jenre.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/injection_container.dart';
 import '../../../../core/routes/routes_const.dart';
-import 'package:dio/dio.dart';
 import '../../../../core/const/const_color.dart';
-import '../../../../logic/book/bloc/book_bloc.dart';
 import '../../../../logic/book/data/datasources/book_datasources.dart';
 
 class ChoosenPage extends StatefulWidget {
@@ -126,7 +125,7 @@ class _ChoosenPageState extends State<ChoosenPage> {
                                   'Развитие',
                                   'Фантастика'
                                 ],
-                                addList:  [0,1,2,3], choiceList:  [],
+                                addList:  const [0,1,2,3], choiceList:  const [],
                               )),
                         );
                       },

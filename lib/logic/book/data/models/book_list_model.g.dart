@@ -8,11 +8,11 @@ part of 'book_list_model.dart';
 
 BookListModel _$BookListModelFromJson(Map<String, dynamic> json) =>
     BookListModel(
-      json['id'] as String?,
       json['createdAt'] as String?,
       json['updatedAt'] as String?,
       json['deletedAt'] as String?,
       json['eventLog'] as List<dynamic>?,
+      json['id'] as String?,
       json['name'] as String?,
       json['authorIds'] as List<dynamic>?,
       (json['authors'] as List<dynamic>)
@@ -33,11 +33,11 @@ BookListModel _$BookListModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$BookListModelToJson(BookListModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'deletedAt': instance.deletedAt,
       'eventLog': instance.eventLog,
+      'id': instance.id,
       'name': instance.name,
       'authorIds': instance.authorIds,
       'authors': instance.authors,

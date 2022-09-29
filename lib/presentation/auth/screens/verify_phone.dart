@@ -1,11 +1,7 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
 import 'auth_gmail.dart';
@@ -36,14 +32,13 @@ class _VerifyScreenState extends State<VerifyScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: new DecorationImage(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
                 image: AssetImage('assets/images/home-2.png'),
                 fit: BoxFit.cover,
               ),
@@ -148,26 +143,18 @@ class _VerifyScreenState extends State<VerifyScreen> {
                                   : ColorStyles.primaryBorderColor,
                             ),
                           ),
-                          constraints: BoxConstraints(maxHeight: 48),
+                          constraints: const BoxConstraints(maxHeight: 48),
                           // contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 6),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextButton(
-                        child: Text(
-                          "SMS-кодты жіберу",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'CeraPro',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         style: TextButton.styleFrom(
-                          primary: phoneEditingController.text != ''  ? Colors.white : Color(0xff1A1A1A),
-                          backgroundColor: phoneEditingController.text != '' ? Color(0xff3D3DD8) : Color(0xffE0E0E0),
-                          minimumSize: Size(343, 48),
+                          primary: phoneEditingController.text != ''  ? Colors.white : const Color(0xff1A1A1A),
+                          backgroundColor: phoneEditingController.text != '' ? const Color(0xff3D3DD8) : const Color(0xffE0E0E0),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -186,23 +173,23 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             });
                           }
                         },
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      TextButton(
-                        child: Text(
-                          "Пошта арқылы кіру",
+                        child:  const Text(
+                          "SMS-кодты жіберу",
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'CeraPro',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextButton(
                         style: TextButton.styleFrom(
-                          primary: Color(0xff3D3DD8),
+                          primary: const Color(0xff3D3DD8),
                           // backgroundColor: Colors.white.withOpacity(0.5),
-                          minimumSize: Size(343, 48),
+                          minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -211,9 +198,17 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AuthGmailScreen()),
+                                builder: (context) => const AuthGmailScreen()),
                           );
                         },
+                        child: const Text(
+                          "Пошта арқылы кіру",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'CeraPro',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -231,13 +226,10 @@ class CardFormatter extends TextInputFormatter{
 
   final String separator;
   final String sample;
-  CardFormatter({required this.separator,required this.sample}){
-    assert(sample!=null);
-    assert(separator!=null);
-  }
+  CardFormatter({required this.separator,required this.sample});
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.length > 0) {
+    if (newValue.text.isNotEmpty) {
       if (newValue.text.length > oldValue.text.length) {
         if (newValue.text.length > sample.length) return oldValue;
         if (newValue.text.length < sample.length &&

@@ -22,35 +22,42 @@ class DoneCheckPin extends StatelessWidget {
                         fontStyle: FontStyle.normal,
                         fontFamily: 'font/Cera Pro Black.ttf',
                         color: Color(0xff1A1A1A),
-                      letterSpacing: 0.2
-                    ),
+                        letterSpacing: 0.2),
                   ),
                 ),
-                SizedBox(width: 59),
+                const SizedBox(width: 59),
                 Container(
-                  height: 27, width: 27,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4)),
+                  height: 27,
+                  width: 27,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(4)),
                   child: IconButton(
-                      color: Color(0xff3D3DD8),
+                      color: const Color(0xff3D3DD8),
                       onPressed: () {},
-                      icon: Icon(Icons.cancel_outlined)),
+                      icon: const Icon(Icons.cancel_outlined)),
                 )
               ],
             ),
-            SizedBox(height: 134),
+            const SizedBox(height: 134),
             Container(
-
                 height: 53,
                 width: 53,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(4)),
                 child: const ImageIcon(
                   AssetImage("assets/icons/Icon.png"),
                   color: Color(0xff3C8505),
                 )),
             const SizedBox(height: 13.34),
-            Text('Сәтті аяқталды!', style: TextStyle(fontWeight: FontWeight.w700, fontStyle: FontStyle.normal, fontSize: 23, color: Color(0xff1A1A1A), letterSpacing: 0.2),)
+            const Text(
+              'Сәтті аяқталды!',
+              style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 23,
+                  color: Color(0xff1A1A1A),
+                  letterSpacing: 0.2),
+            )
           ],
         ),
       );

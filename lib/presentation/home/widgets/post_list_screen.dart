@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,7 +78,7 @@ class _PostListScreenState extends State<PostListScreen> {
                     String formattedDate = DateFormat('d MMM в hh:mm').format(now);
                     return Column(
                       children: [
-                        index == 0 ? SizedBox(height: 16,) : SizedBox(),
+                        index == 0 ? const SizedBox(height: 16,) : const SizedBox(),
                         PostWidget(
                           viewNumber : state.posts[index].viewNumber ?? 0,
                           savedNumber : state.posts[index].savedNumber ?? 0,
@@ -113,7 +115,6 @@ class _PostListScreenState extends State<PostListScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () async {
-                                      print(state.posts[index].savedNumber);
                                       // setState(()  {
                                       //   liked[index] = !liked[index];
                                       //   if(liked[index]) {
@@ -204,7 +205,6 @@ class _PostListScreenState extends State<PostListScreen> {
                                   sizedBoxWidth8(),
                                   GestureDetector(
                                     onTap: () async {
-                                      print(state.posts[index].savedNumber);
                                       setState(()  {
                                         // saved[index] = !saved[index];
                                         // if(saved[index]) {
@@ -292,27 +292,26 @@ class _PostListScreenState extends State<PostListScreen> {
                             ],
                           ),
                         ),
-                        index == state.posts.length-1 ? SizedBox(height: 16,) : SizedBox(height: 8,),
+                        index == state.posts.length-1 ? const SizedBox(height: 16,) : const SizedBox(height: 8,),
                       ],
                     );
                   });
             }
             else if(state is HomeFailure){
-              print('oshibka');
-              return Text('ошибка');
+              return const Text('ошибка');
             }
             else if(state is HomeLoading){
-              return Container(
+              return SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Column(
-                  children: [
+                  children: const [
                     SizedBox(height: 150,),
                     Center(child: CupertinoActivityIndicator())
                   ],
                 ),
               );
             }
-            return Text(" ");
+            return const Text(" ");
           },
         ),
       ),

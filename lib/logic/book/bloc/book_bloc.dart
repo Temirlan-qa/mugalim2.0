@@ -1,14 +1,13 @@
-
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mugalim/logic/book/data/models/readBooks_model.dart';
 import 'package:mugalim/logic/book/data/models/semester_model.dart';
 import '../data/models/bookVotes_model.dart';
 import '../data/models/book_list_model.dart';
+import '../data/models/readBookList_model.dart';
 import '../data/models/semesterDeadline_model.dart';
 import '../data/models/semester_model.dart';
-import '../data/models/voteList_model.dart';
 import '../data/repositories/book_repository.dart';
 
 part 'book_event.dart';
@@ -39,6 +38,9 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       emit(BookLoading());
       try {
         final Response response = await bookRepository.postVote(event.choiceList);
+        if (kDebugMode) {
+          print(response);
+        }
         emit(PostVoteSuccess());
       } catch (e) {
         emit(BookFailure(e.toString()));
@@ -63,6 +65,15 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         emit(BookFailure(e.toString()));
       }
     });
+    on<GetMyReadBookList>((event, emit) async {
+      emit(BookLoading());
+      try {
+        final List<ReadBookListModel> list = await bookRepository.getMyReadBookList();
+        emit(MyReadBookListSuccess(list));
+        }catch(e) {
+        emit(BookFailure(e.toString()));
+      }
+     }
     on<GetReadBooks>((event, emit) async {
       emit(BookLoading());
       try{
