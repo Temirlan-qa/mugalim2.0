@@ -138,15 +138,6 @@ class InnLabRouter {
               sl<BookBloc>()..add(GetMyReadBookList()),
               child: const ReadBooks(),
             ));
-    // case BookRoute:
-    //   return CupertinoPageRoute(
-    //     settings: routeSettings,
-    //     builder: (_) => BookScreen(
-    //       index_month: (routeSettings.arguments as Map),
-    //       select_index: (routeSettings.arguments as Map),
-    //       list: (routeSettings.arguments as Map),
-    //     ),
-    //   );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,
