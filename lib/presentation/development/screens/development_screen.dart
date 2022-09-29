@@ -195,6 +195,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   (state.deadlineModel.status == 'TAKING_PLACE' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) > 0)) ||
                                                   (state.deadlineModel.status == 'TAKING_PLACE' && isGenreVoted)
                                               ) && !isNotGroup)
+                                               if (state
+                                                  .deadlineModel.status ==
+                                                  'CONFLICT' ||
+                                                  state.deadlineModel.status ==
+                                                      'TAKING_PLACE')
                                               {
                                                 isVotedAndShowDeadline = true;
                                               }
@@ -232,7 +237,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               else if(isNotGroup){
                                                 Navigator.of(context, rootNavigator: true).pushNamed(ReadBooksRoute);
                                               }
-
+                                              
                                             },
                                             title: 'Книги',
                                             path: 'assets/images/newBookIcon.png',

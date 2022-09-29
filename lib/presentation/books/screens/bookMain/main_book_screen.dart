@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import '../../../../core/const/const_color.dart';
+import '../../../../core/injection_container.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../logic/book/bloc/book_bloc.dart';
 import '../../../books/widgets/book_navBar_widget.dart';
 import 'home_book_screen.dart';
 import 'myBook_screen.dart';
@@ -40,7 +43,10 @@ class _BookScreenState extends State<BookScreen> {
               navigatorObservers: [GetObserver((_) {}, Get.routing)],
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
-              builder: (_) => MyBookScreen(devScreenContext: context,),
+              builder: (_) => BlocProvider(
+                create: (context) => sl<BookBloc>()..add(GetReadBooks()),
+                child: MyBookScreen(devScreenContext: context,),
+              ),
             ),
           ],
         ),

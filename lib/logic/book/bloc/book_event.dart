@@ -33,3 +33,5 @@ class GetDeadline extends BookEvent {}
 class GetMyChoice extends BookEvent{}
 
 class GetMyReadBookList extends BookEvent{}
+
+class GetReadBooks extends BookEvent{}

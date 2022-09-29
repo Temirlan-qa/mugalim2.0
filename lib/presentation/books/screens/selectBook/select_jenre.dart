@@ -190,7 +190,6 @@ class _GenreScreenState extends State<GenreScreen> {
             // width: (MediaQuery.of(context).size.width -40 )/2,
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.grey,
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               border: Border.all(
                 color: array.contains(widget.list[index])
@@ -198,6 +197,13 @@ class _GenreScreenState extends State<GenreScreen> {
                     : ColorStyles.neutralsPageBackgroundColor,
                 width: 2,
               ),
+              image: const DecorationImage(
+                  image:
+                  ExactAssetImage(''),
+                  fit: BoxFit.cover,
+                  opacity: 0.5
+              ),
+              color: Colors.black,
             ),
 
             child: Row(

@@ -5,6 +5,12 @@ import '../models/bookVotes_model.dart';
 import '../models/book_list_model.dart';
 import '../models/readBookList_model.dart';
 
+import '../datasources/book_datasources.dart';
+import '../models/bookVotes_model.dart';
+import '../models/book_list_model.dart';
+import '../models/readBooks_model.dart';
+
+
 
 abstract class BookRepository {
   Future<List<BookListModel>> getVoteById(String id);
@@ -13,6 +19,7 @@ abstract class BookRepository {
   Future<Response> postVote(List<Map<String, String>> choiceList);
   Future<List<BookListModel>> getMyChoiceList();
   Future<List<ReadBookListModel>> getMyReadBookList();
+  Future<List<ReadBooksModel>> getReadBooksList();
 }
 
 class BookRepositoryImpl extends BookRepository {
@@ -52,5 +59,11 @@ class BookRepositoryImpl extends BookRepository {
   Future<List<ReadBookListModel>> getMyReadBookList() async {
     Response response = await homeDatasource.getMyReadBookList();
     return (response.data as List).map((data) => ReadBookListModel.fromJson(data)).toList();
+  }
+  @override
+  Future<List<ReadBooksModel>> getReadBooksList() async {
+    Response response = await homeDatasource.getReadBooks();
+    print(response);
+    return (response.data as List).map((data) => ReadBooksModel.fromJson(data)).toList();
   }
 }
