@@ -73,7 +73,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         }catch(e) {
         emit(BookFailure(e.toString()));
       }
-     }
+     });
     on<GetReadBooks>((event, emit) async {
       emit(BookLoading());
       try{

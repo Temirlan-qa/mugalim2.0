@@ -195,11 +195,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                   (state.deadlineModel.status == 'TAKING_PLACE' && (DateTime.now().compareTo(DateTime.parse(state.deadlineModel.endDate!)) > 0)) ||
                                                   (state.deadlineModel.status == 'TAKING_PLACE' && isGenreVoted)
                                               ) && !isNotGroup)
-                                               if (state
-                                                  .deadlineModel.status ==
-                                                  'CONFLICT' ||
-                                                  state.deadlineModel.status ==
-                                                      'TAKING_PLACE')
+                                              //  if (state
+                                              //     .deadlineModel.status ==
+                                              //     'CONFLICT' ||
+                                              //     state.deadlineModel.status ==
+                                              //         'TAKING_PLACE')
                                               {
                                                 isVotedAndShowDeadline = true;
                                               }
@@ -209,9 +209,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                               {
                                                 isNotVotedAndShowGenre = true;
                                               }
-                                              else if ((state
-                                                  .deadlineModel.status ==
-                                                  'COMPLETED') && !isNotGroup) {
+                                              else if ((state.deadlineModel.status == 'COMPLETED') && !isNotGroup) {
                                                 isCompleted = true;
                                               }
 
