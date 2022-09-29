@@ -7,7 +7,6 @@ import '../data/models/bookVotes_model.dart';
 import '../data/models/book_list_model.dart';
 import '../data/models/readBookList_model.dart';
 import '../data/models/semesterDeadline_model.dart';
-import '../data/models/semester_model.dart';
 import '../data/repositories/book_repository.dart';
 
 part 'book_event.dart';

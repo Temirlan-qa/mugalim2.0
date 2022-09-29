@@ -4,10 +4,6 @@ import '../datasources/book_datasources.dart';
 import '../models/bookVotes_model.dart';
 import '../models/book_list_model.dart';
 import '../models/readBookList_model.dart';
-
-import '../datasources/book_datasources.dart';
-import '../models/bookVotes_model.dart';
-import '../models/book_list_model.dart';
 import '../models/readBooks_model.dart';
 
 
@@ -63,7 +59,6 @@ class BookRepositoryImpl extends BookRepository {
   @override
   Future<List<ReadBooksModel>> getReadBooksList() async {
     Response response = await homeDatasource.getReadBooks();
-    print(response);
     return (response.data as List).map((data) => ReadBooksModel.fromJson(data)).toList();
   }
 }

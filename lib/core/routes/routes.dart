@@ -40,14 +40,29 @@ class InnLabRouter {
                   child: const MainScreen()
               ),
         );
+      case MainRouteFromTimer:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) =>
+              MultiBlocProvider(
+                  providers: [
+                    BlocProvider<HomeBloc>(
+                      create: (_) =>
+                      sl<HomeBloc>()
+                        ..add(GetPostsList()),
+                    ),
+                  ],
+                  child: const MainScreen(currentIndex: 1,)
+              ),
+        );
       case JenreRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => GenreScreen(
             indexMonth: (0),
             list: list,
-            choiceList: const [],
-            addList: const [0,1,2,3],
+            choiceList:  [],
+            addList:  [0,1,2,3],
           ),
         );
       case CourseRoute:
@@ -58,7 +73,10 @@ class InnLabRouter {
       case DevelopmentRoute:
         return CupertinoPageRoute(
           settings: routeSettings,
-          builder: (_) => const DevelopmentScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => sl<BookBloc>()..add(GetDeadline()),
+            child: const DevelopmentScreen(),
+          ),
         );
       case MainBookRoute:
         return CupertinoPageRoute(

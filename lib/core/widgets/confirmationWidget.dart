@@ -47,14 +47,14 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 19, 16, 7),
-              child: Text('Удаление комментария',
+              child: Text(widget.title,
                   style: TextStyles.mediumStyle.copyWith(
                       fontSize: 18,
                       color: ColorStyles.neutralsTextPrimaryColor)),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 19),
-              child: Text('Вы уверены, что хотите удалить свой комментарий?',
+              child: Text(widget.description,
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyles.regularStyle
@@ -72,11 +72,11 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: TextButton(
-                    child: Text('Отмена',
+                    onPressed: widget.leftButtonOnPressed,
+                    child: Text(widget.leftButtonTitle,
                         style: TextStyles.mediumStyle.copyWith(
-                            color: ColorStyles.primaryBorderColor,
+                            color: widget.leftButtonColor,
                             fontSize: 16)),
-                    onPressed: () {},
                   ),
                 ),
                 Container(
@@ -87,10 +87,10 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: TextButton(
-                    child: Text('Удалить',
+                    onPressed: widget.rightButtonOnPressed,
+                    child: Text(widget.rightButtonTitle,
                         style: TextStyles.mediumStyle.copyWith(
-                            color: ColorStyles.errorBorderColor, fontSize: 16)),
-                    onPressed: () {},
+                            color: widget.rightButtonColor, fontSize: 16)),
                   ),
                 ),
               ],

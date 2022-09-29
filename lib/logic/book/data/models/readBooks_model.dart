@@ -1,9 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart';
-
-import 'authors_model.dart';
 import 'book_list_model.dart';
-import 'genres_model.dart';
+
 
 
 part 'readBooks_model.g.dart';
