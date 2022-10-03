@@ -45,6 +45,15 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         emit(BookFailure(e.toString()));
       }
     });
+    on<PostReviewBook>((event, emit) async {
+      try{
+        emit(BookLoading());
+        final Response response = await bookRepository.reviewPost(event.bookId, event.review, event.rating);
+        emit(ReviewSuccess());
+      } catch(e) {
+        emit(BookFailure(e.toString()));
+      }
+    });
     on<GetDeadline>((event, emit) async {
       emit(BookLoading());
       try{
@@ -76,7 +85,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     on<GetReadBooks>((event, emit) async {
       emit(BookLoading());
       try{
-        final List<ReadBooksModel> list = await bookRepository.getReadBooksList();
+        final List<ReadBookListModel> list = await bookRepository.getMyReadBookList();
         emit(ReadBookListSuccess(list));
       } catch(e) {
         emit(BookFailure(e.toString()));

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/successReview.dart';
+import '../../../core/injection_container.dart';
+import '../../../logic/book/data/datasources/book_datasources.dart';
 import '../../auth/screens/success.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MyReviewScreen extends StatefulWidget {
-  const MyReviewScreen({Key? key}) : super(key: key);
+  final String bookId;
+  const MyReviewScreen({Key? key, required this.bookId}) : super(key: key);
 
   @override
   State<MyReviewScreen> createState() => _MyReviewScreenState();
@@ -14,11 +17,12 @@ class MyReviewScreen extends StatefulWidget {
 
 class _MyReviewScreenState extends State<MyReviewScreen>
     with SingleTickerProviderStateMixin {
+  final BookDatasource bookDatasource = sl();
   @override
   void initState() {
     super.initState();
   }
-
+  final textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +83,8 @@ class _MyReviewScreenState extends State<MyReviewScreen>
                                 color: ColorStyles.neutralsTextPrimaryColor,
                                 fontFamily: 'CeraPro',
                               ))),
-                      TextFormField(
+                      TextField(
+                        controller: textEditingController,
                         decoration: InputDecoration(
                           // label: Text('Пару слов о книге...', style: TextStyles.mediumStyle.copyWith(
                           //   color: ColorStyles.primarySurfaceHoverColor,
@@ -101,8 +106,16 @@ class _MyReviewScreenState extends State<MyReviewScreen>
                                 color: ColorStyles.neutralsTextPrimaryColor,
                                 width: 1),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                            borderSide: BorderSide(
+                                color: ColorStyles.neutralsTextPrimaryColor,
+                                width: 1),
+                          ),
                         ),
                         maxLines: 5,
+                        // onChanged: (value) {},
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -116,12 +129,15 @@ class _MyReviewScreenState extends State<MyReviewScreen>
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             // Navigator.push(context, PageTransition(child: SucessReview(), type: PageTransitionType.fade));
-                            Navigator.of(context, rootNavigator: true).push(
+                            print(textEditingController.text);
+                            print(widget.bookId);
+                            Navigator.of(context).push(
                                 PageTransition(
-                                    child: const SucessReview(),
+                                    child: const SuccessReview(),
                                     type: PageTransitionType.fade));
+                            await bookDatasource.reviewPost(widget.bookId, textEditingController.text, 0);
                           },
                           child: Text("Закончить книгу",
                               style: TextStyles.mediumStyle

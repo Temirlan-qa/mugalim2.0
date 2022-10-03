@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/routes/routes_const.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
+import 'package:mugalim/presentation/books/screens/bookMain/book_description.dart';
+import 'package:mugalim/presentation/books/screens/my_review.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import '../../logic/book/bloc/book_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/verify_phone.dart';
@@ -156,6 +158,26 @@ class InnLabRouter {
               sl<BookBloc>()..add(GetMyReadBookList()),
               child: const ReadBooks(),
             ));
+      case MyBookReviewRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) => MyReviewScreen(
+            bookId : (routeSettings.arguments as Map)['bookId'],),
+        );
+      case BookDescriptionRoute:
+        return CupertinoPageRoute(
+          settings: routeSettings,
+          builder: (_) =>
+              BookDescriptionScreen(
+                img: (routeSettings.arguments as Map)['img'],
+                textMonth: (routeSettings.arguments as Map)['textMonth'],
+                name: (routeSettings.arguments as Map)['name'],
+                authors: (routeSettings.arguments as Map)['authors'],
+                haveDay: (routeSettings.arguments as Map)['haveDay'],
+                description: (routeSettings.arguments as Map)['description'],
+                id: (routeSettings.arguments as Map)['id'],
+              ),
+        );
       default:
         return CupertinoPageRoute(
           settings: routeSettings,

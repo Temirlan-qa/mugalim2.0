@@ -27,7 +27,7 @@ class _GridWidgetState extends State<GridWidget> {
     var size = MediaQuery.of(context).size;
 
     /*24 is for notification bar on Android*/
-    final double itemHeight = (size.height - 40) / 2;
+    final double itemHeight = (size.height) / 1.95;
     final double itemWidth = size.width - 175;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8,16,16,0),
@@ -36,7 +36,7 @@ class _GridWidgetState extends State<GridWidget> {
         // physics: NeverScrollableScrollPhysics(),
         childAspectRatio: (itemWidth / itemHeight),
         crossAxisCount: 2,
-        children: List.generate(widget.state.list.length, (index) {
+        children: List.generate(4, (index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8,left: 8),
             child: GestureDetector(
@@ -46,7 +46,17 @@ class _GridWidgetState extends State<GridWidget> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        BookDescriptionScreen(devScreenContext: context,),
+                        BookDescriptionScreen(
+                          img: '${widget.state.list[index].bookListModel?.avatarId}',
+                          textMonth: getMonthName((DateTime.parse(
+                              '${widget.state.list[index].startedAt}')
+                              .month)),
+                          name: '${widget.state.list[index].bookListModel?.name}',
+                          authors: widget.state.list[index].bookListModel!.authors,
+                          haveDay: false,
+                          description: '${widget.state.list[index].bookListModel?.description}',
+                          id: '${widget.state.list[index].bookId}',
+                        ),
                   ),
                 );
               },
@@ -64,11 +74,11 @@ class _GridWidgetState extends State<GridWidget> {
                             borderRadius: BorderRadius.circular(8),
                             color: ColorStyles.neutralsPageBackgroundColor,
                           ),
-                          child: BookWidget(img: 'null', textMonth: textMonth[index],),
+                          child: BookWidget(img: widget.state.list[index].bookListModel?.avatarId, textMonth: textMonth[index],),
                         ),
                         const SizedBox(height: 8,),
                         Text(
-                          widget.state.list[index].book.name!,
+                          widget.state.list[index].bookListModel!.name!,
                           style: TextStyles.mediumStyle.copyWith(
                             fontSize: 14,
                             color: Colors.black,
@@ -77,7 +87,7 @@ class _GridWidgetState extends State<GridWidget> {
                           maxLines: 2,
                         ),
                         Text(
-                          widget.state.list[index].book.authors[0]!.fio!,
+                          widget.state.list[index].bookListModel!.authors[0]!.fio!,
                           style: TextStyles.regularStyle.copyWith(
                             fontSize: 13,
                             color: const Color(0xff767676),
@@ -95,5 +105,50 @@ class _GridWidgetState extends State<GridWidget> {
         }),
       ),
     );
+  }
+
+  String getMonthName(int index) {
+    String month = '';
+    switch (index) {
+      case 1:
+        month = "Январь";
+        break;
+      case 2:
+        month = "Февраль";
+        break;
+      case 3:
+        month = "Март";
+        break;
+      case 4:
+        month = "Апрель";
+        break;
+      case 5:
+        month = "Май";
+        break;
+      case 6:
+        month = "Июнь";
+        break;
+      case 7:
+        month = "Июль";
+        break;
+      case 8:
+        month = "Август";
+        break;
+      case 9:
+        month = "Сентябрь";
+        break;
+      case 10:
+        month = "Октябрь";
+        break;
+      case 11:
+        month = "Ноябрь";
+        break;
+      case 12:
+        month = "Декабрь";
+        break;
+      default:
+        break;
+    }
+    return month;
   }
 }
