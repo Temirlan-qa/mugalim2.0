@@ -24,7 +24,7 @@ class BookListWidget extends StatefulWidget {
 }
 
 class _BookListWidgetState extends State<BookListWidget> {
-  String? author;
+
   int? haveDays;
 
   int daysInMonth(DateTime date) =>  DateTimeRange(
@@ -43,8 +43,9 @@ class _BookListWidgetState extends State<BookListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    String author = '';
     for(var i = 0; i < widget.authors.length; i++) {
-      author =  (author == widget.authors[i]!.initialName) ? author : ('${((author == null) ? '' : author)}${widget.authors[i]!.initialName} ')!;
+      author += '${widget.authors[i]!.initialName!} ';
       // author += widget.authors[i]!.initialName!;
     }
     haveDays = daysInMonth(DateTime.now());
@@ -80,7 +81,7 @@ class _BookListWidgetState extends State<BookListWidget> {
                     maxLines: 2,
                   ),
                   Text(
-                    '$author',
+                    author,
                     style: TextStyles.regularStyle.copyWith(
                       fontSize: 13,
                       color: ColorStyles.primarySurfaceHoverColor,

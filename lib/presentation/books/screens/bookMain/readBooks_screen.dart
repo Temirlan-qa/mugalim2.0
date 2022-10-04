@@ -64,6 +64,10 @@ class _ReadBooksState extends State<ReadBooks> {
               shrinkWrap: true,
               itemCount: state.list.length,
                 itemBuilder: (context, index) {
+                  String authors = '';
+                  for(var i = 0; i < state.list[index].bookListModel!.authors.length; i++) {
+                    authors += '${state.list[i].bookListModel!.authors[i]?.initialName} ';
+                  }
                   var time = DateTime.parse('${state.list[index].startedAt}');
                   String month = getMonthName(time.month);
                   return Padding(
@@ -98,7 +102,7 @@ class _ReadBooksState extends State<ReadBooks> {
                                   maxLines: 2,
                                 ),
                                 Text(
-                                  author,
+                                  authors,
                                   style: TextStyles.regularStyle.copyWith(
                                     fontSize: 13,
                                     color: ColorStyles.primarySurfaceHoverColor,
