@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mugalim/core/injection_container.dart';
+import 'package:mugalim/logic/auth/data/datasources/auth_datasources.dart';
 
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
@@ -26,6 +29,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
   bool wrongPassOrLog = false;
   bool emptyText = true;
   bool otp = false;
+  TokensRemoteDataSource tokensRemoteDataSource = sl();
+  bool isSmsLoading = false;
 
   var maskFormatter = MaskTextInputFormatter(
       mask: '+7 ### ### ## ##',
@@ -156,13 +161,21 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         height: 20,
                       ),
                       TextButton(
-                        child: Text(
-                          "SMS-кодты жіберу",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'CeraPro',
-                            fontWeight: FontWeight.w500,
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            isSmsLoading ? SizedBox(width: 36) : Offstage(),
+                            Text(
+                              "SMS-кодты жіберу",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'CeraPro',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            isSmsLoading ? SizedBox(width: 16) : Offstage(),
+                            isSmsLoading ? CupertinoActivityIndicator(color: Colors.white,) : Offstage()
+                          ],
                         ),
                         style: TextButton.styleFrom(
                           primary: phoneEditingController.text != ''  ? Colors.white : Color(0xff1A1A1A),
@@ -172,14 +185,26 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if(phoneEditingController.text != '' && phoneEditingController.text.length == 16) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OTPScreen(loginEditingControllerText: phoneEditingController.text,)
-                              ),
-                            );
+                            setState(() {
+                              isSmsLoading = true;
+                            });
+                            Response response = await tokensRemoteDataSource.getValueForSms(maskFormatter.unmaskText(phoneEditingController.text));
+                            if(response.data['status'] == 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OTPScreen(
+                                        loginEditingControllerText: maskFormatter.unmaskText(phoneEditingController.text),
+                                        responseValue: response.data['value']
+                                    )
+                                ),
+                              );
+                            }
+                            setState(() {
+                              isSmsLoading = false;
+                            });
                           } else {
                             setState(() {
                               validation = true;

@@ -5,7 +5,7 @@ import '../../../../core/utils/dio/dio_wrapper.dart';
 
 abstract class TokensRemoteDataSource {
   Future<Response> getTokens(String username, String code);
-
+  Future<Response> getValueForSms(String phoneNumber);
 }
 
 class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
@@ -35,6 +35,18 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
           headers: {"authorization": basicAuth}),
     );
 
+
+    return response;
+  }
+
+  @override
+  Future<Response> getValueForSms(String phoneNumber) async {
+    Response response = await Dio().post(
+      '${EnvironmentConfig.url}/users/send-sms',
+      data: {
+        'phone': "+7$phoneNumber"
+      },
+    );
 
     return response;
   }

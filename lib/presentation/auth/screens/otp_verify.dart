@@ -4,15 +4,20 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
+import 'package:mugalim/core/routes/routes_const.dart';
+import 'package:mugalim/logic/auth/bloc/auth_bloc.dart';
 import 'package:mugalim/presentation/auth/screens/pin_page.dart';
 
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({Key? key,required this.loginEditingControllerText,}) : super(key: key);
+  const OTPScreen({Key? key,required this.loginEditingControllerText, required this.responseValue}) : super(key: key);
   final String loginEditingControllerText;
+  final String responseValue;
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
@@ -39,7 +44,7 @@ class _OTPScreenState extends State<OTPScreen> {
     });
   }
 
-
+  Box accessToken = Hive.box('tokens');
   bool obscureText = true;
   List list = ['Бизнес', 'Классика', 'Развитие', 'Фантастика'];
   TextEditingController loginEditingController = TextEditingController();
@@ -68,7 +73,32 @@ class _OTPScreenState extends State<OTPScreen> {
       pinCode = randomNum();
     }
     return Scaffold(
-      body: Stack(
+      body: BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        print(state);
+        if(state is GetTokensSuccess){
+          if(state.authTokensModel.access!.isNotEmpty) {
+            accessToken.put('refresh', state.authTokensModel.refreshToken);
+            accessToken.put('access', state.authTokensModel.access);
+            Navigator.of(context).pushNamedAndRemoveUntil(MainRoute, (Route<dynamic> route) => false);
+          }
+        }
+        if(state is AuthFailure) {
+          setState(() {
+            validation = true;
+          });
+        }
+        if(state is AuthLoading) {
+          setState((){
+            loading = true;
+          });
+        } else {
+          setState((){
+            loading = false;
+          });
+        }
+      },
+      child: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
@@ -270,12 +300,14 @@ class _OTPScreenState extends State<OTPScreen> {
                             start = 0;
                           });
 
-                          if(loginEditingController.text == pinCode && loginEditingController.text != ''){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PinPage()
-                              ),
+                          if(loginEditingController.text.length == 4){
+                            print("+7${widget.loginEditingControllerText}:${widget.responseValue}");
+                            print("${widget.responseValue}:${loginEditingController.text}");
+                            BlocProvider.of<AuthBloc>(context).add(
+                                GetTokens(
+                                    "+7${widget.loginEditingControllerText}:${widget.responseValue}",
+                                    "${widget.responseValue}:${loginEditingController.text}"
+                                )
                             );
                           }
                           else{
@@ -347,6 +379,7 @@ class _OTPScreenState extends State<OTPScreen> {
           ),
         ],
       ),
+),
     );
   }
 }
