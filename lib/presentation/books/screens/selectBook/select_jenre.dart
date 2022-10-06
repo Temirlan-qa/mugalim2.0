@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/done.dart';
-
 import '../../../../core/const/const_color.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
@@ -192,7 +190,6 @@ class _GenreScreenState extends State<GenreScreen> {
             // width: (MediaQuery.of(context).size.width -40 )/2,
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.grey,
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               border: Border.all(
                 color: array.contains(widget.list[index])
@@ -200,6 +197,13 @@ class _GenreScreenState extends State<GenreScreen> {
                     : ColorStyles.neutralsPageBackgroundColor,
                 width: 2,
               ),
+              image: const DecorationImage(
+                  image:
+                  ExactAssetImage(''),
+                  fit: BoxFit.cover,
+                  opacity: 0.5
+              ),
+              color: Colors.black,
             ),
 
             child: Row(

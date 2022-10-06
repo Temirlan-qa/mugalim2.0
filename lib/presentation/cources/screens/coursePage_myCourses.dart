@@ -1,15 +1,11 @@
+// ignore_for_file: file_names, non_constant_identifier_names
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
-import 'package:mugalim/presentation/development/screens/development_screen.dart';
-import 'package:mugalim/presentation/home/screens/home_screen.dart';
-
-import '../../../core/routes/routes_const.dart';
 import '../../../core/widgets/textform_widget.dart';
 
 class CourseMyCourses extends StatefulWidget {
@@ -21,13 +17,13 @@ class CourseMyCourses extends StatefulWidget {
 }
 
 class _CourseMyCoursesState extends State<CourseMyCourses> {
-  final Search = TextEditingController();
+  final search = TextEditingController();
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    Search.dispose();
+    search.dispose();
   }
   @override
   void initState() {
@@ -163,7 +159,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         //color: Colors.black
-                        color: Color(0xFFF9F9F9),
+                        color: const Color(0xFFF9F9F9),
                       ),
                       child: Icon(
                         CupertinoIcons.clear,
@@ -242,7 +238,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                   ),
                   sizedBoxHeight8(),
                   const Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),
                   Container(
@@ -686,7 +682,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
-            SizedBox(height: 76,),
+            const SizedBox(height: 76,),
           ],
         ),
       );
@@ -725,8 +721,8 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     ),
                   ),
                   sizedBoxHeight8(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
                     child: TextFormFieldWidget(),
                   ),
                   sizedBoxHeight8(),
@@ -735,7 +731,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                     child: GridView.count(
                       childAspectRatio: 167 / 190,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
                       crossAxisCount: 2,
@@ -851,7 +847,7 @@ class _CourseMyCoursesState extends State<CourseMyCourses> {
                 ],
               ),
             ),
-            SizedBox(height: 76,),
+            const SizedBox(height: 76,),
           ],
         ),
       );

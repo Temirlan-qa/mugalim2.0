@@ -1,8 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/core/widgets/inProcess_widget.dart';
-import 'package:mugalim/presentation/home/screens/home_screen.dart';
 
 class MPasswordScreen extends StatelessWidget {
   const MPasswordScreen({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class MPasswordScreen extends StatelessWidget {
               ),
             ),
             centerTitle: true,
-            actions: [
+            actions: const [
 
             ],
           ),

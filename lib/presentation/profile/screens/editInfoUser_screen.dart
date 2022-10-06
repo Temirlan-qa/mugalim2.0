@@ -1,10 +1,12 @@
+// ignore_for_file: file_names, depend_on_referenced_packages, prefer_typing_uninitialized_variables, unrelated_type_equality_checks
+
 import 'dart:async';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -98,7 +100,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
         addImg != addImg;
       });
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
@@ -305,7 +309,9 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
                           .changeAvatar(_imageFileList!.path);
                       Response response1 = await profileDatasource
                           .uploadAvatar(response.data['value']);
-                      print(response1.data);
+                      if (kDebugMode) {
+                        print(response1.data);
+                      }
                       refreshState(_imageFileList!, response.data['value']);
                       setState(() {
                         startTimer();
@@ -326,8 +332,7 @@ class _EditInfoUserScreenState extends State<EditInfoUserScreen> {
           ),
         ),
         Visibility(
-          visible: addImg && _imageFileList == null ||
-              addImg && _imageFileList == [],
+          visible: addImg && _imageFileList == null || addImg && _imageFileList == [],
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(

@@ -1,9 +1,9 @@
+// ignore_for_file: file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
-import '../../widgets/grid_widget.dart';
+import '../../widgets/grid_widget_forMychoice.dart';
 
 class MyChoiceScreen extends StatefulWidget {
   const MyChoiceScreen({Key? key}) : super(key: key);
@@ -53,7 +53,7 @@ class _MyChoiceScreenState extends State<MyChoiceScreen> {
 
         ],
       ),
-      body: const GridWidget(),
+      body: const GridWidgetMyChoice(),
     );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:mugalim/presentation/main/done_pin.dart';
@@ -50,7 +52,7 @@ class _PINCodeState extends State<PINCode> {
                 child: IconButton(
                     color: const Color(0xff3D3DD8),
                     onPressed: () {},
-                    icon: Icon(Icons.cancel_outlined)),
+                    icon: const Icon(Icons.cancel_outlined)),
               )
             ],
           ),
@@ -60,9 +62,9 @@ class _PINCodeState extends State<PINCode> {
             children: [
               const SizedBox(width: 37),
               IconButton(
-                  color: Color(0xff3D3DD8),
+                  color: const Color(0xff3D3DD8),
                   onPressed: () {},
-                  icon: Icon(Icons.keyboard_arrow_left)),
+                  icon: const Icon(Icons.keyboard_arrow_left)),
               const Text(
                 'PIN-кодын қайта жазыңыз',
                 style: TextStyle(
@@ -74,10 +76,10 @@ class _PINCodeState extends State<PINCode> {
             ],
           ),
           const SizedBox(height: 8),
-          Container(
+          const SizedBox(
               width: 296,
               height: 40,
-              child: const Text(
+              child: Text(
                 'Жеке деректердің қауіпсіздігі үшін PIN-кодын қайта жазыңыз',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -96,15 +98,15 @@ class _PINCodeState extends State<PINCode> {
                 pinBoxWidth: 46,
                 maxLength: 4,
                 hasUnderline: true,
-                hasTextBorderColor:Color(0xff3D3DD8),
+                hasTextBorderColor:const Color(0xff3D3DD8),
                 wrapAlignment: WrapAlignment.spaceEvenly,
                 pinBoxBorderWidth: 0.0001,
-                highlightPinBoxColor: Color(0xffE0E0E0),
-                highlightColor: Color(0xffE0E0E0),
+                highlightPinBoxColor: const Color(0xffE0E0E0),
+                highlightColor: const Color(0xffE0E0E0),
                 highlight: true,
-                pinBoxOuterPadding: EdgeInsets.only(left: 8, right: 8),
-                defaultBorderColor: Color(0xffE0E0E0),
-                pinBoxColor: Color(0xffE0E0E0),
+                pinBoxOuterPadding: const EdgeInsets.only(left: 8, right: 8),
+                defaultBorderColor: const Color(0xffE0E0E0),
+                pinBoxColor: const Color(0xffE0E0E0),
                 pinBoxRadius: 4,
                 keyboardType: TextInputType.number,
                 pinTextStyle: const TextStyle(
@@ -115,7 +117,7 @@ class _PINCodeState extends State<PINCode> {
                     fontFamily: 'font/Cera Pro Black.ttf'),
                 onDone: (value) {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DoneCheckPin()));
+                      MaterialPageRoute(builder: (context) => const DoneCheckPin()));
                 }),
           )
         ],

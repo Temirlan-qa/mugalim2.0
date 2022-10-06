@@ -1,10 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/routes/routes.dart';
-import 'package:mugalim/logic/home/bloc/home_bloc.dart';
 import 'package:mugalim/logic/profile/bloc/profile_bloc.dart';
 import 'package:mugalim/presentation/development/screens/development_screen.dart';
 import 'package:mugalim/presentation/home/screens/home_screen.dart';
@@ -17,7 +18,8 @@ import '../../../core/injection_container.dart';
 import '../../../logic/book/bloc/book_bloc.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final int? currentIndex;
+  const MainScreen({Key? key, this.currentIndex} ) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -25,6 +27,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentView = 0;
+  @override
+  void initState() {
+    super.initState();
+    _currentView = ((widget.currentIndex == null) ? 0 : widget.currentIndex)!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,118 +39,115 @@ class _MainScreenState extends State<MainScreen> {
     return Stack(
       children: [
         Scaffold(
-            backgroundColor: brightness == Brightness.dark
-                ? ColorStyles.darkthemePageBackgroundColor
-                : Colors.white,
-            body: IndexedStack(
-              index: _currentView,
-              children: <Widget>[
-                CupertinoTabView(
-                  navigatorKey: Get.nestedKey(0),
-                  navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) =>
-                      InnLabRouter.generateRoute(settings),
-                  // builder: (_) => HomeScreen(),
-                  builder: (_) => const HomeScreen(),
+          backgroundColor: brightness == Brightness.dark
+              ? ColorStyles.darkthemePageBackgroundColor
+              : Colors.white,
+          body: IndexedStack(
+            index: _currentView,
+            children: <Widget>[
+              CupertinoTabView(
+                navigatorKey: Get.nestedKey(0),
+                navigatorObservers: [GetObserver((_) {}, Get.routing)],
+                onGenerateRoute: (settings) =>
+                    InnLabRouter.generateRoute(settings),
+                // builder: (_) => HomeScreen(),
+                builder: (_) => const HomeScreen(),
+              ),
+              CupertinoTabView(
+                navigatorKey: Get.nestedKey(1),
+                navigatorObservers: [GetObserver((_) {}, Get.routing)],
+                onGenerateRoute: (settings) =>
+                    InnLabRouter.generateRoute(settings),
+                builder: (_) => BlocProvider(
+                  create: (context) => sl<BookBloc>()..add(GetDeadline()),
+                  child: const DevelopmentScreen(),
                 ),
-                CupertinoTabView(
-                  navigatorKey: Get.nestedKey(1),
-                  navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) =>
-                      InnLabRouter.generateRoute(settings),
-                  builder: (_) => BlocProvider(
-                    create: (context) => sl<BookBloc>()..add(GetDeadline()),
-                    child: const DevelopmentScreen(),
-                  ),
+              ),
+              CupertinoTabView(
+                navigatorKey: Get.nestedKey(2),
+                navigatorObservers: [GetObserver((_) {}, Get.routing)],
+                onGenerateRoute: (settings) =>
+                    InnLabRouter.generateRoute(settings),
+                builder: (_) => const TimetableScreen(),
+              ),
+              CupertinoTabView(
+                navigatorKey: Get.nestedKey(3),
+                navigatorObservers: [GetObserver((_) {}, Get.routing)],
+                onGenerateRoute: (settings) =>
+                    InnLabRouter.generateRoute(settings),
+                builder: (_) => const RatingScreen(),
+              ),
+              CupertinoTabView(
+                navigatorKey: Get.nestedKey(4),
+                navigatorObservers: [GetObserver((_) {}, Get.routing)],
+                onGenerateRoute: (settings) =>
+                    InnLabRouter.generateRoute(settings),
+                builder: (_) => BlocProvider(
+                  create: (context) => sl<ProfileBloc>()..add(ProfileLoad()),
+                  child: const ProfileScreen(),
                 ),
-                CupertinoTabView(
-                  navigatorKey: Get.nestedKey(2),
-                  navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) =>
-                      InnLabRouter.generateRoute(settings),
-                  builder: (_) => const TimetableScreen(),
+              )
+            ],
+          ),
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: brightness == Brightness.dark
+                  ? ColorStyles.darkthemePageBackgroundColor
+                  : Colors.white,
+              border: const Border(
+                  top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
+              boxShadow: [
+                BoxShadow(
+                  color: brightness == Brightness.dark
+                      ? ColorStyles.darkthemePageBackgroundColor
+                      : Colors.white,
+                  spreadRadius: 0,
+                  blurRadius: 0,
+                  offset: const Offset(0, 0.5), // changes position of shadow
                 ),
-                CupertinoTabView(
-                  navigatorKey: Get.nestedKey(3),
-                  navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) =>
-                      InnLabRouter.generateRoute(settings),
-                  builder: (_) => const RatingScreen(),
-                ),
-                CupertinoTabView(
-                  navigatorKey: Get.nestedKey(4),
-                  navigatorObservers: [GetObserver((_) {}, Get.routing)],
-                  onGenerateRoute: (settings) =>
-                      InnLabRouter.generateRoute(settings),
-                  builder: (_) => BlocProvider(
-                    create: (context) => sl<ProfileBloc>()..add(ProfileLoad()),
-                    child: ProfileScreen(
-                    ),
-                  ),
-                )
               ],
             ),
-            bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                color: brightness == Brightness.dark
+            child: ClipRRect(
+              child: CupertinoTabBar(
+                backgroundColor: brightness == Brightness.dark
                     ? ColorStyles.darkthemePageBackgroundColor
                     : Colors.white,
-                border: Border(
-                    top: BorderSide(width: 0.5, color: Color(0xffE2E3E4))),
-                boxShadow: [
-                  BoxShadow(
-                    color: brightness == Brightness.dark
-                        ? ColorStyles.darkthemePageBackgroundColor
-                        : Colors.white,
-                    spreadRadius: 0,
-                    blurRadius: 0,
-                    offset: Offset(0, 0.5), // changes position of shadow
+                border:
+                    const Border(top: BorderSide(color: Colors.transparent)),
+                onTap: (int index) {
+                  setState(() {
+                    _currentView = index;
+                  });
+                },
+                items: [
+                  BottomNavigationBarItem(
+                    icon: NavBarItemWidget(
+                      'assets/icons/feed.svg',
+                      _currentView,
+                      'Главная',
+                    ),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: NavBarItemWidget(
+                        'assets/icons/zap.svg', _currentView, 'Развитие'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: NavBarItemWidget('assets/icons/mcalendar.svg',
+                        _currentView, 'Расписание'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: NavBarItemWidget('assets/icons/arrow-up-circle.svg',
+                        _currentView, 'Рейтинг'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: NavBarItemWidget(
+                        'assets/icons/user.svg', _currentView, 'Профиль'),
                   ),
                 ],
               ),
-              child: ClipRRect(
-
-                child: CupertinoTabBar(
-                  backgroundColor: brightness == Brightness.dark ? ColorStyles.darkthemePageBackgroundColor: Colors.white,
-                  border: Border(top: BorderSide(color: Colors.transparent)),
-                  onTap: (int index) {
-                    setState(() {
-                      _currentView = index;
-                    });
-                  },
-                  items: [
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                        'assets/icons/feed.svg', _currentView, 'Главная',
-                      ),
-                    ),
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                          'assets/icons/zap.svg', _currentView, 'Развитие'),
-
-                    ),
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget('assets/icons/mcalendar.svg',
-                          _currentView, 'Расписание'),
-
-                    ),
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                          'assets/icons/arrow-up-circle.svg',
-                          _currentView,
-                          'Рейтинг'),
-
-                    ),
-                    BottomNavigationBarItem(
-                      icon: NavBarItemWidget(
-                          'assets/icons/user.svg', _currentView, 'Профиль'),
-
-                    ),
-                  ],
-                ),
-              ),
-              ),
             ),
+          ),
+        ),
       ],
     );
   }

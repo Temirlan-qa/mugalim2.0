@@ -25,7 +25,6 @@ class _TextFieldForEditInfoWidgetState
         setState(() {
           onChanged = true;
         });
-        print(text);
       },
       style: TextStyles.mediumStyle
           .copyWith(fontSize: 16, color: ColorStyles.neutralsTextPrimaryColor),

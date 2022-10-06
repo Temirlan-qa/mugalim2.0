@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 const String MainRoute = '/main';
 const String JenreRoute = '/select_genre';
 const String CourseRoute = '/cources';
@@ -15,3 +16,5 @@ const String EditInfoUserRoute = '/EditInfoUserRoute';
 const String TimerRoute = '/timer';
 const String BookPageRoute = '/bookPage';
 const String MyChoiceRoute = '/myChoice';
+const String ReadBooksRoute = 'readBooks';
+const String MainRouteFromTimer = 'mainScreenFromTimer';

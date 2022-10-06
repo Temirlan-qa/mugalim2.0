@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mugalim/core/const/const_color.dart';
 import 'dart:async';
-import 'dart:math';
-
 
 class SuccessPage extends StatefulWidget {
   const SuccessPage({Key? key}) : super(key: key);
@@ -12,13 +9,12 @@ class SuccessPage extends StatefulWidget {
 }
 
 class _SuccessPageState extends State<SuccessPage> {
-
   int start = 0;
   bool wait = true;
   late Timer timer;
   void startTimer() {
     start = 1;
-    if(wait == true) wait = false;
+    if (wait == true) wait = false;
     const onsec = Duration(seconds: 1);
     timer = Timer.periodic(onsec, (timer) {
       if (start <= 0) {
@@ -55,7 +51,7 @@ class _SuccessPageState extends State<SuccessPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.cancel_outlined)),
+              icon: const Icon(Icons.cancel_outlined)),
         ],
         elevation: 0,
         backgroundColor: Colors.white,

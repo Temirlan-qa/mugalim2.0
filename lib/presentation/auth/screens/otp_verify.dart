@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:async';
 import 'dart:math';
 
@@ -287,8 +289,8 @@ class _OTPScreenState extends State<OTPScreen> {
                       const SizedBox(height: 20,),
                       TextButton(
                         style: TextButton.styleFrom(
-                          primary: loginEditingController.text == '' ?  Color(0xff1A1A1A) : Colors.white,
-                          backgroundColor: loginEditingController.text == '' ? Color(0xffE0E0E0) : Color(0xff3D3DD8),
+                          primary: loginEditingController.text == '' ?  const Color(0xff1A1A1A) : Colors.white,
+                          backgroundColor: loginEditingController.text == '' ? const Color(0xffE0E0E0) : const Color(0xff3D3DD8),
                           minimumSize: const Size(343, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -379,7 +381,6 @@ class _OTPScreenState extends State<OTPScreen> {
           ),
         ],
       ),
-),
     );
   }
 }
