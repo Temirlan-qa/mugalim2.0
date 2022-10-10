@@ -7,6 +7,7 @@ import 'package:mugalim/presentation/books/widgets/book_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/routes_const.dart';
 class ReadBooks extends StatefulWidget {
   const ReadBooks({Key? key}) : super(key: key);
 
@@ -66,57 +67,71 @@ class _ReadBooksState extends State<ReadBooks> {
                 itemBuilder: (context, index) {
                   String authors = '';
                   for(var i = 0; i < state.list[index].bookListModel!.authors.length; i++) {
-                    authors += '${state.list[i].bookListModel!.authors[i]?.initialName} ';
+                    authors += '${state.list[index].bookListModel!.authors[i]?.initialName} ';
                   }
                   var time = DateTime.parse('${state.list[index].startedAt}');
                   String month = getMonthName(time.month);
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(8,16,16,16),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, BookDescriptionRoute, arguments: {
+                        'img' : '${state.list[index].bookListModel?.avatarId}',
+                        'textMonth' : month,
+                        'name' : state.list[index].bookListModel?.name,
+                        'authors' : state.list[index].bookListModel?.authors,
+                        'haveDay' : false,
+                        'description' : state.list[index].bookListModel?.description,
+                        'id' : '',
+                        'haveReviewAndFinishedContainer' : false,
+                      });
+                    },
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: ColorStyles.neutralsPageBackgroundColor,
+                      padding: const EdgeInsets.fromLTRB(8,16,16,16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: ColorStyles.neutralsPageBackgroundColor,
+                              ),
+                              child: BookWidget(img: '${state.list[index].bookListModel?.avatarId}', textMonth: month,),
                             ),
-                            child: BookWidget(img: '${state.list[index].bookListModel?.avatarId}', textMonth: month,),
-                          ),
-                          const SizedBox(width: 8,),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment.start,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${state.list[index].bookListModel?.name}',
-                                  style: TextStyles.mediumStyle.copyWith(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                    height: 20/14,
+                            const SizedBox(width: 8,),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${state.list[index].bookListModel?.name}',
+                                    style: TextStyles.mediumStyle.copyWith(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      height: 20/14,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
-                                Text(
-                                  authors,
-                                  style: TextStyles.regularStyle.copyWith(
-                                    fontSize: 13,
-                                    color: ColorStyles.primarySurfaceHoverColor,
-                                    height: 16/13,
+                                  Text(
+                                    authors,
+                                    style: TextStyles.regularStyle.copyWith(
+                                      fontSize: 13,
+                                      color: ColorStyles.primarySurfaceHoverColor,
+                                      height: 16/13,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
-                                const SizedBox(height: 8,),
-                              ],
+                                  const SizedBox(height: 8,),
+                                ],
+                              ),
                             ),
-                          ),
 
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );

@@ -47,7 +47,7 @@ class _BookScreenState extends State<BookScreen> {
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
               builder: (_) => BlocProvider(
-                create: (context) => sl<BookBloc>()..add(GetReadBooks()),
+                create: (context) => sl<BookBloc>()..add(GetMyReadBookList()),
                 child: MyBookScreen(devScreenContext: context,),
               ),
             ),

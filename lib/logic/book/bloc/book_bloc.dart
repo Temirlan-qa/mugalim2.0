@@ -48,7 +48,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     on<PostReviewBook>((event, emit) async {
       try{
         emit(BookLoading());
-        final Response response = await bookRepository.reviewPost(event.bookId, event.review, event.rating);
+        final Response response = await bookRepository.reviewPost(event.id, event.review);
         emit(ReviewSuccess());
       } catch(e) {
         emit(BookFailure(e.toString()));

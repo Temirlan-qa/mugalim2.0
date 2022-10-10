@@ -162,7 +162,7 @@ class InnLabRouter {
         return CupertinoPageRoute(
           settings: routeSettings,
           builder: (_) => MyReviewScreen(
-            bookId : (routeSettings.arguments as Map)['bookId'],),
+            id : (routeSettings.arguments as Map)['id'],),
         );
       case BookDescriptionRoute:
         return CupertinoPageRoute(
@@ -176,6 +176,7 @@ class InnLabRouter {
                 haveDay: (routeSettings.arguments as Map)['haveDay'],
                 description: (routeSettings.arguments as Map)['description'],
                 id: (routeSettings.arguments as Map)['id'],
+                haveReviewAndFinishedContainer: (routeSettings.arguments as Map)['haveReviewAndFinishedContainer'],
               ),
         );
       default:

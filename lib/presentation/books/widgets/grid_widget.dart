@@ -10,7 +10,7 @@ class GridWidget extends StatefulWidget {
   const GridWidget({
     Key? key, required this.state,
   }) : super(key: key);
-   final ReadBookListSuccess state;
+   final MyReadBookListSuccess state;
   @override
   State<GridWidget> createState() => _GridWidgetState();
 }
@@ -19,7 +19,7 @@ class _GridWidgetState extends State<GridWidget> {
 
   List<String> list = ['assets/images/bookImage1.png','assets/images/bookImage2.png','assets/images/bookImage3.png','assets/images/bookImage4.png'];
   String title = 'Изменить других можно! Как помочь';
-  List textMonth = ['Сентябрь','Ноябрь','Октябрь','Декабрь'];
+  List textMonth = ['Сентябрь','Октябрь','Ноябрь','Декабрь'];
   String author = 'Натан Ф., Джефф Д., Клейтон К.';
 
   @override
@@ -36,7 +36,7 @@ class _GridWidgetState extends State<GridWidget> {
         // physics: NeverScrollableScrollPhysics(),
         childAspectRatio: (itemWidth / itemHeight),
         crossAxisCount: 2,
-        children: List.generate(4, (index) {
+        children: List.generate(widget.state.list.length, (index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8,left: 8),
             child: GestureDetector(
@@ -56,6 +56,7 @@ class _GridWidgetState extends State<GridWidget> {
                           haveDay: false,
                           description: '${widget.state.list[index].bookListModel?.description}',
                           id: '${widget.state.list[index].bookId}',
+                          haveReviewAndFinishedContainer: false,
                         ),
                   ),
                 );
@@ -74,7 +75,9 @@ class _GridWidgetState extends State<GridWidget> {
                             borderRadius: BorderRadius.circular(8),
                             color: ColorStyles.neutralsPageBackgroundColor,
                           ),
-                          child: BookWidget(img: widget.state.list[index].bookListModel?.avatarId, textMonth: textMonth[index],),
+                          child: BookWidget(img: widget.state.list[index].bookListModel?.avatarId, textMonth: getMonthName((DateTime.parse(
+                              '${widget.state.list[index].startedAt}')
+                              .month)),),
                         ),
                         const SizedBox(height: 8,),
                         Text(

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mugalim/logic/book/bloc/book_bloc.dart';
 import 'package:mugalim/presentation/books/widgets/book_widget.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
 import '../../../../core/routes/routes_const.dart';
@@ -16,16 +17,17 @@ class BookDescriptionScreen extends StatefulWidget {
   final bool haveDay;
   final String description;
   final String id;
+  final bool haveReviewAndFinishedContainer;
 
 
-  const BookDescriptionScreen({super.key, required this.img, required this.textMonth, required this.name, required this.authors, required this.haveDay, required this.description, required this.id});
+  const BookDescriptionScreen({super.key, required this.img, required this.textMonth, required this.name, required this.authors, required this.haveDay, required this.description, required this.id, required this.haveReviewAndFinishedContainer});
 
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
 }
 
 class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
-  String author = 'Питер Брегман и Хауи Джейкобсон';
+
   bool isPressed = false;
   int daysInMonth(DateTime date) =>  DateTimeRange(
       start:  DateTime.now(),
@@ -41,6 +43,10 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
   int? haveDays;
   @override
   Widget build(BuildContext context) {
+    String author = '';
+    for(var i = 0; i < widget.authors.length; i++) {
+      author += '${widget.authors[i]?.initialName} ';
+    }
     haveDays = daysInMonth(DateTime.now());
     return Scaffold(
       appBar: AppBar(
@@ -131,7 +137,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                           ),
                           const SizedBox(height: 16,),
 
-                          Row(
+                          (!widget.haveDay) ? const Offstage() :Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               // myContainer('312','СТРАНИЦ'),
@@ -177,7 +183,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                     ),
                   ),
                   const SizedBox(height: 16,),
-                  !isPressed ? Container(
+                  (!widget.haveReviewAndFinishedContainer) ? const Offstage() : !isPressed ? Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -198,7 +204,8 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         ),
                         const SizedBox(height: 8,),
                         Text(
-                          'Классная книга рекоменд!',
+
+                          'Классная книга рекомендую!',
                           style: TextStyles.regularStyle.copyWith(
                             fontSize: 14,
                             color: ColorStyles.neutralsTextPrimaryColor,
@@ -207,12 +214,12 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                       ],
                     ),
                   ) : const Offstage(),
-                  !isPressed ? const SizedBox(height: 122,) : const SizedBox(height: 64,),
+                  (!widget.haveReviewAndFinishedContainer) ? const Offstage() : !isPressed ? const SizedBox(height: 122,) : const SizedBox(height: 64,),
                 ],
               ),
             ),
           ),
-          !isPressed ? Positioned(
+          (!widget.haveReviewAndFinishedContainer) ? const Offstage() : !isPressed ? Positioned(
             bottom: -10,
             child: Container(
               padding: const EdgeInsets.fromLTRB(16,16,16,0),
@@ -271,7 +278,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               ),
             ),
           ) : const Offstage(),
-          isPressed ? Positioned(
+          (!widget.haveReviewAndFinishedContainer) ? const Offstage() : isPressed ? Positioned(
               bottom: 16,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -279,8 +286,8 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                     child: BookButtonWidget(
                         onPressed: (){
                           Navigator.of(context).pushNamed(MyBookReviewRoute, arguments: {
-                            'bookId' : widget.id
-                          });
+                            'id' : widget.id
+                          }).then((_) => setState((){}));
                           setState(() {
                             isPressed = !isPressed;
                           });

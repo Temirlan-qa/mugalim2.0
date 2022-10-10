@@ -15,9 +15,9 @@ class BookListWidget extends StatefulWidget {
   final String name;
   final List<AuthorsModel?> authors;
   final String description;
-  final String bookId;
+  final String id;
 
-  const BookListWidget({Key? key, required this.img, required this.haveDays, required this.textMonth, required this.name, required this.authors, required this.description, required this.bookId}) : super(key: key);
+  const BookListWidget({Key? key, required this.img, required this.haveDays, required this.textMonth, required this.name, required this.authors, required this.description, required this.id}) : super(key: key);
 
   @override
   State<BookListWidget> createState() => _BookListWidgetState();
@@ -147,16 +147,17 @@ class _BookListWidgetState extends State<BookListWidget> {
                   const SizedBox(height: 8,),
                   widget.haveDays ?
                   BookButtonWidget(
-                    onPressed: (){
-                      Navigator.of(context).pushNamed(BookDescriptionRoute, arguments: {
+                    onPressed: ()  {
+                       Navigator.of(context).pushNamed(BookDescriptionRoute, arguments: {
                         'img' : widget.img,
                         'textMonth' : widget.textMonth,
                         'name' : widget.name,
                         'authors' : widget.authors,
                         'haveDay' : widget.haveDays,
                         'description' : widget.description,
-                        'id' : widget.bookId,
-                      });
+                        'id' : widget.id,
+                        'haveReviewAndFinishedContainer' : true,
+                      }).then((_) => setState((){}));
                     },
                     title: 'Закончить', height: 32,)
                   : Align(

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/core/const/const_color.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/successReview.dart';
 import '../../../core/injection_container.dart';
+import '../../../logic/book/bloc/book_bloc.dart';
 import '../../../logic/book/data/datasources/book_datasources.dart';
 import '../../auth/screens/success.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MyReviewScreen extends StatefulWidget {
-  final String bookId;
-  const MyReviewScreen({Key? key, required this.bookId}) : super(key: key);
+  final String id;
+  const MyReviewScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   State<MyReviewScreen> createState() => _MyReviewScreenState();
@@ -131,13 +133,14 @@ class _MyReviewScreenState extends State<MyReviewScreen>
                           ),
                           onPressed: () async {
                             // Navigator.push(context, PageTransition(child: SucessReview(), type: PageTransitionType.fade));
-                            print(textEditingController.text);
-                            print(widget.bookId);
                             Navigator.of(context).push(
                                 PageTransition(
                                     child: const SuccessReview(),
                                     type: PageTransitionType.fade));
-                            await bookDatasource.reviewPost(widget.bookId, textEditingController.text, 0);
+                            await bookDatasource.reviewPost(widget.id, textEditingController.text).then((_) => setState(() {}));
+                            final BookBloc bookBloc = sl<BookBloc>()..add(GetMyReadBookList());
+                            bookBloc.add(GetMyReadBookList());
+                            context.read<BookBloc>().add(GetMyReadBookList());
                           },
                           child: Text("Закончить книгу",
                               style: TextStyles.mediumStyle

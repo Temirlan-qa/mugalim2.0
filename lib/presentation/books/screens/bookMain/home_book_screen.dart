@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mugalim/logic/book/bloc/book_bloc.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
+import '../../../../core/injection_container.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/data/models/readBookList_model.dart';
 import '../../widgets/bookList_widget.dart';
@@ -69,10 +70,6 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
             if (state is MyReadBookListSuccess) {
               List<ReadBookListModel> list = [];
               state.list.sort((a, b) => a.startedAt!.compareTo(b.startedAt!));
-              print('length state list ${state.list.length}');
-              for(var i = 0; i < state.list.length; i++) {
-                print(state.list[i].bookListModel?.name);
-              }
               var currentMonth = DateTime.now().month;
               for (var i = 0; i < state.list.length; i++) {
                 if (DateTime.parse('${state.list[i].startedAt}').month <=
@@ -80,6 +77,7 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
                   list.add(state.list[i]);
                 }
               }
+              print('completedAt : ${state.list[7].completedAt}');
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -115,6 +113,7 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
+                                  // print(list[list.length-1].completedAt);
                                   //BookDescriptionScreen
                                   Navigator.pushNamed(
                                     context, BookDescriptionRoute, arguments: {
@@ -126,25 +125,11 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
                                     'authors' :list[list.length - 1]
                                             .bookListModel!
                                             .authors,
-                                    'haveDay' : true,
-                                    'description' : '${list[list.length-1].bookListModel?.description}',
-                                    'id' : list[list.length-1].bookId,
+                                    'haveDay' : list[list.length - 1].completedAt == null ? true : false,
+                                    'description' : '${list[list.length - 1].bookListModel?.description}',
+                                    'id' : list[list.length - 1].id,
+                                    'haveReviewAndFinishedContainer' : list[list.length - 1].completedAt == null ? false : true,
                                   }
-                                    // MaterialPageRoute(
-                                    //   builder: (context) =>
-                                    //       BookDescriptionScreen(
-                                    //     img: '${list[list.length - 1].bookListModel!.avatarId}',
-                                    //     textMonth: getMonthName((DateTime.parse(
-                                    //         '${list[list.length - 1].startedAt}')
-                                    //         .month)),
-                                    //     name: '${list[list.length - 1].bookListModel?.name}',
-                                    //     authors: list[list.length - 1]
-                                    //         .bookListModel!
-                                    //         .authors,
-                                    //     haveDay: true,
-                                    //     description: '${list[list.length-1].bookListModel?.description}',
-                                    //   ),
-                                    // ),
                                   );
                                 },
                                 child: Stack(
@@ -152,7 +137,7 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
                                     BookListWidget(
                                       img:
                                           '${list[list.length - 1].bookListModel!.avatarId}',
-                                      haveDays: true,
+                                      haveDays: list[list.length - 1].completedAt == null ? true : false,
                                       textMonth: getMonthName((DateTime.parse(
                                               '${list[list.length - 1].startedAt}')
                                           .month)),
@@ -216,7 +201,8 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
                                           'authors' : list[index].bookListModel!.authors,
                                           'haveDay' : false,
                                           'description' : '${list[index].bookListModel?.description}',
-                                          'id' : list[index].bookId,
+                                          'id' : list[index].id,
+                                          'haveReviewAndFinishedContainer': true,
                                         }
                                           // MaterialPageRoute(
                                           //   builder: (context) =>
@@ -243,7 +229,7 @@ class _HomeBookScreenState extends State<HomeBookScreen> {
                                           name: '${list[index].bookListModel?.name}',
                                           authors: list[index].bookListModel!.authors,
                                           description: '${list[index].bookListModel?.description}',
-                                          bookId: '${list[index].bookId}',
+                                          id: '${list[index].id}',
                                         ) : const Offstage(),
                                       ),
                                     ),

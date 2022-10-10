@@ -37,10 +37,9 @@ class GetMyReadBookList extends BookEvent{}
 class GetReadBooks extends BookEvent{}
 
 class PostReviewBook extends BookEvent{
-  final String bookId;
+  final String id;
   final String review;
-  final int rating;
 
-  PostReviewBook(this.bookId, this.review, this.rating);
+  PostReviewBook(this.id, this.review);
 
 }
