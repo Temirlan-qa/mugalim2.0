@@ -35,3 +35,11 @@ class GetMyChoice extends BookEvent{}
 class GetMyReadBookList extends BookEvent{}
 
 class GetReadBooks extends BookEvent{}
+
+class PostReviewBook extends BookEvent{
+  final String id;
+  final String review;
+
+  PostReviewBook(this.id, this.review);
+
+}

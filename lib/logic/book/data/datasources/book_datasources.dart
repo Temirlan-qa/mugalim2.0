@@ -9,6 +9,7 @@ abstract class BookDatasource {
   Future<Response> getMyChoiceList();
   Future<Response> getMyReadBookList();
   Future<Response> getReadBooks();
+  Future<Response> reviewPost(String id, String review);
 }
 
 class BookDataSourceImpl implements BookDatasource {
@@ -55,6 +56,18 @@ class BookDataSourceImpl implements BookDatasource {
   @override
   Future<Response> getReadBooks() async {
     Response response = await dioWrapper!.get('/books/book-read/list/my');
+    return response;
+  }
+
+  @override
+  Future<Response> reviewPost(String id, String review) async {
+    Response response = await dioWrapper!.post('/books/book-read/complete',
+    data: {
+      'id' : id,
+      'review' : review,
+    });
+    print(response);
+
     return response;
   }
 }

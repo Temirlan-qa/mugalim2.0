@@ -36,7 +36,10 @@ class _BookScreenState extends State<BookScreen> {
               navigatorObservers: [GetObserver((_) {}, Get.routing)],
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
-              builder: (_) => HomeBookScreen(devScreenContext: context,),
+              builder: (_) => BlocProvider(
+                create: (context) => sl<BookBloc>()..add(GetMyReadBookList()),
+                child:  HomeBookScreen(devScreenContext: context,),
+              )
             ),
             CupertinoTabView(
               navigatorKey: Get.nestedKey(8),
@@ -44,7 +47,7 @@ class _BookScreenState extends State<BookScreen> {
               onGenerateRoute: (settings) =>
                   InnLabRouter.generateRoute(settings),
               builder: (_) => BlocProvider(
-                create: (context) => sl<BookBloc>()..add(GetReadBooks()),
+                create: (context) => sl<BookBloc>()..add(GetMyReadBookList()),
                 child: MyBookScreen(devScreenContext: context,),
               ),
             ),

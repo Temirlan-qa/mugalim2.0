@@ -6,20 +6,21 @@ import 'package:lottie/lottie.dart';
 import '../../../core/const/SizedBox.dart';
 import '../../../core/const/const_color.dart';
 import '../../../core/const/text_style_const.dart';
+import '../../../core/routes/routes_const.dart';
 
-class SucessReview extends StatefulWidget {
-  const SucessReview({Key? key}) : super(key: key);
+class SuccessReview extends StatefulWidget {
+  const SuccessReview({Key? key}) : super(key: key);
 
   @override
-  State<SucessReview> createState() => _SucessReviewState();
+  State<SuccessReview> createState() => _SuccessReviewState();
 }
 
-class _SucessReviewState extends State<SucessReview> {
+class _SuccessReviewState extends State<SuccessReview> {
   Timer? timer;
   @override
   void initState() {
     timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      Navigator.pop(context);
+      Navigator.popUntil(context, ModalRoute.withName(BookDescriptionRoute));
     });
 
     super.initState();

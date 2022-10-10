@@ -222,9 +222,9 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
                                                 Navigator.of(context, rootNavigator: true).pushNamed(TimerRoute);
                                               }
                                               else if(isNotVotedAndShowGenre) {
-                                                Navigator.of(context, rootNavigator: true).pushNamed(JenreRoute);
+                                                Navigator.of(context, rootNavigator: true).popAndPushNamed(JenreRoute);
                                               }
-                                              else if(isVotingNotStarted){
+                                              else if(isVotingNotStarted || isNotGroup){
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

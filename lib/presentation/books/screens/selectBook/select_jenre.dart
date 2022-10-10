@@ -1,9 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mugalim/core/const/sizedBox.dart';
 import 'package:mugalim/core/const/text_style_const.dart';
 import 'package:mugalim/presentation/books/screens/selectBook/done.dart';
 import '../../../../core/const/const_color.dart';
+import '../../../../core/routes/environment_config.dart';
 import '../../../../core/routes/routes_const.dart';
 import '../../../../logic/book/bloc/book_bloc.dart';
 import '../../widgets/selectJenre_shimmer.dart';
@@ -33,6 +38,7 @@ class _GenreScreenState extends State<GenreScreen> {
   List addList = [];
   int indexGrid = 0;
   int selectIndexGenre = 0;
+  Box tokensBox = Hive.box('tokens');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +128,7 @@ class _GenreScreenState extends State<GenreScreen> {
                                   builder: (context) => ChoosenPage(choiceList: widget.choiceList,)),
                             );
                           } else {
-                            Navigator.of(context).pushNamed(SelectBookRoute, arguments: {
+                            Navigator.of(context).popAndPushNamed(SelectBookRoute, arguments: {
                               "indexMonth": widget.indexMonth,
                               "id": state.votes[widget.addList[index]].id!,
                               "list": widget.list,
@@ -197,11 +203,12 @@ class _GenreScreenState extends State<GenreScreen> {
                     : ColorStyles.neutralsPageBackgroundColor,
                 width: 2,
               ),
-              image: const DecorationImage(
+              image: DecorationImage(
                   image:
-                  ExactAssetImage(''),
+                  NetworkImage('${EnvironmentConfig.url}/file/image/${state.votes[index].image}'),
                   fit: BoxFit.cover,
                   opacity: 0.5
+
               ),
               color: Colors.black,
             ),
@@ -214,7 +221,7 @@ class _GenreScreenState extends State<GenreScreen> {
                   width: MediaQuery
                       .of(context)
                       .size
-                      .width / 2 - 100,
+                      .width / 2 - 80,
                   height: 80,
                   child: Text(
                     state.votes[widget.addList[index]].name!,

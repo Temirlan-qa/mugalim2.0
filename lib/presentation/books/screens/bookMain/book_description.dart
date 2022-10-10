@@ -1,26 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mugalim/logic/book/bloc/book_bloc.dart';
 import 'package:mugalim/presentation/books/widgets/book_widget.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/const/const_color.dart';
 import '../../../../core/const/text_style_const.dart';
+import '../../../../core/routes/routes_const.dart';
+import '../../../../logic/book/data/models/authors_model.dart';
 import '../../widgets/buttonBook_widget.dart';
 
 class BookDescriptionScreen extends StatefulWidget {
-  final BuildContext devScreenContext;
-  const BookDescriptionScreen({Key? key,required this.devScreenContext}) : super(key: key);
+  final String img;
+  final String textMonth;
+  final String name;
+  final List<AuthorsModel?> authors;
+  final bool haveDay;
+  final String description;
+  final String id;
+  final bool haveReviewAndFinishedContainer;
+
+
+  const BookDescriptionScreen({super.key, required this.img, required this.textMonth, required this.name, required this.authors, required this.haveDay, required this.description, required this.id, required this.haveReviewAndFinishedContainer});
 
   @override
   State<BookDescriptionScreen> createState() => _BookDescriptionScreenState();
 }
 
 class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
-  String title = 'Изменить других можно! Как помочь сотрудникам, друзьям и любимым расти и развиваться';
-  String author = 'Питер Брегман и Хауи Джейкобсон';
-  String description = 'Изменить людей невозможно, изменить можно только себя. Это распространенное мнение, как показывают авторы книги, оказывается в корне неверным. Умение вдохновлять окружающих и помогать им меняться к лучшему — не просто полезный талант, а важнейший профессиональный навык для лидеров разного уровня, от руководителей крупных компаний до школьных учителей. Как побудить конфликтных сотрудников работать в команде? Как раскрыть потенциал неуверенного в себе человека во благо общего дела, поддержать партнера, помочь избавиться от ложных ';
+
   bool isPressed = false;
+  int daysInMonth(DateTime date) =>  DateTimeRange(
+      start:  DateTime.now(),
+      end: DateTime(DateTime.now().year, DateTime.now().month + 1, 1))
+      .duration
+      .inDays;
+  @override
+  void initState() {
+    super.initState();
+    isPressed = widget.haveDay;
+  }
+
+  int? haveDays;
   @override
   Widget build(BuildContext context) {
+    String author = '';
+    for(var i = 0; i < widget.authors.length; i++) {
+      author += '${widget.authors[i]?.initialName} ';
+    }
+    haveDays = daysInMonth(DateTime.now());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -37,7 +64,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.pop(widget.devScreenContext);
+              Navigator.pop(context);
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -86,13 +113,13 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Align(
+                          Align(
                             alignment: Alignment.center,
-                              child: BookWidget(textMonth: 'Сентябрь', img: 'assets/images/bookImage1.png')
+                              child: BookWidget(textMonth: widget.textMonth, img: widget.img)
                           ),
                           const SizedBox(height: 16,),
                           Text(
-                            title,
+                            widget.name,
                             style: TextStyles.mediumStyle.copyWith(
                               fontSize: 18,
                               color: ColorStyles.neutralsTextPrimaryColor,
@@ -110,13 +137,14 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                           ),
                           const SizedBox(height: 16,),
 
-                          Row(
+                          (!widget.haveDay) ? const Offstage() :Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              myContainer('312','СТРАНИЦ'),
-                              const SizedBox(width: 8,),
-                              myContainer('34','ЧИТАТЕЛЕЙ'),
-                              const SizedBox(width: 8,),
-                              !isPressed ? myContainer('21','ДНЕЙ') : const Offstage(),
+                              // myContainer('312','СТРАНИЦ'),
+                              // const SizedBox(width: 8,),
+                              // myContainer('34','ЧИТАТЕЛЕЙ'),
+                              // const SizedBox(width: 8,),
+                              myContainer(haveDays!,'ДНЕЙ'),
                             ],
                           ),
 
@@ -145,7 +173,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         ),
                         const SizedBox(height: 8,),
                         Text(
-                          description,
+                          widget.description,
                           style: TextStyles.regularStyle.copyWith(
                             fontSize: 14,
                             color: ColorStyles.neutralsTextPrimaryColor,
@@ -155,7 +183,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                     ),
                   ),
                   const SizedBox(height: 16,),
-                  isPressed ? Container(
+                  (!widget.haveReviewAndFinishedContainer) ? const Offstage() : !isPressed ? Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -176,7 +204,8 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                         ),
                         const SizedBox(height: 8,),
                         Text(
-                          'Классная книга рекоменд!',
+
+                          'Классная книга рекомендую!',
                           style: TextStyles.regularStyle.copyWith(
                             fontSize: 14,
                             color: ColorStyles.neutralsTextPrimaryColor,
@@ -185,12 +214,12 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
                       ],
                     ),
                   ) : const Offstage(),
-                  isPressed ? const SizedBox(height: 122,) : const SizedBox(height: 64,),
+                  (!widget.haveReviewAndFinishedContainer) ? const Offstage() : !isPressed ? const SizedBox(height: 122,) : const SizedBox(height: 64,),
                 ],
               ),
             ),
           ),
-          isPressed ? Positioned(
+          (!widget.haveReviewAndFinishedContainer) ? const Offstage() : !isPressed ? Positioned(
             bottom: -10,
             child: Container(
               padding: const EdgeInsets.fromLTRB(16,16,16,0),
@@ -249,13 +278,16 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
               ),
             ),
           ) : const Offstage(),
-          !isPressed ? Positioned(
+          (!widget.haveReviewAndFinishedContainer) ? const Offstage() : isPressed ? Positioned(
               bottom: 16,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Center(
                     child: BookButtonWidget(
                         onPressed: (){
+                          Navigator.of(context).pushNamed(MyBookReviewRoute, arguments: {
+                            'id' : widget.id
+                          }).then((_) => setState((){}));
                           setState(() {
                             isPressed = !isPressed;
                           });
@@ -271,10 +303,10 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
     );
   }
 
-  Widget myContainer(String num,String word){
+  Widget myContainer(int num,String word){
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      width: !isPressed ? (MediaQuery.of(context).size.width-48)/3 : (MediaQuery.of(context).size.width-48)/2,
+      width: isPressed ? (MediaQuery.of(context).size.width-48)/3 : (MediaQuery.of(context).size.width-48)/2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: ColorStyles.hue246SurfaceHoverColor,
@@ -283,7 +315,7 @@ class _BookDescriptionScreenState extends State<BookDescriptionScreen> {
       child : Column(
         children: [
           Text(
-            num,
+            '$num',
             style: TextStyles.boldStyle.copyWith(
               fontSize: 24,
               color: ColorStyles.neutralsTextPrimaryColor,

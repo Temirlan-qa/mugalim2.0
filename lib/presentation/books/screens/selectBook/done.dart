@@ -114,20 +114,7 @@ class _ChoosenPageState extends State<ChoosenPage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => GenreScreen(
-                                indexMonth: 0,
-                                list: const [
-                                  'Бизнес',
-                                  'Классика',
-                                  'Развитие',
-                                  'Фантастика'
-                                ],
-                                addList:  const [0,1,2,3], choiceList:  const [],
-                              )),
-                        );
+                        Navigator.of(context, rootNavigator: true).popAndPushNamed(JenreRoute);
                       },
                       child: const Text(
                         "Изменить",

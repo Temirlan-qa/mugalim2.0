@@ -53,6 +53,8 @@ class MyReadBookListSuccess extends BookState {
   MyReadBookListSuccess(this.list);
 }
 class ReadBookListSuccess extends BookState{
-  final List<ReadBooksModel> list;
+  final List<ReadBookListModel> list;
   ReadBookListSuccess(this.list);
 }
+
+class ReviewSuccess extends BookState {}

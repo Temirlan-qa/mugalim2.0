@@ -18,3 +18,5 @@ const String BookPageRoute = '/bookPage';
 const String MyChoiceRoute = '/myChoice';
 const String ReadBooksRoute = 'readBooks';
 const String MainRouteFromTimer = 'mainScreenFromTimer';
+const String MyBookReviewRoute = 'myReviewScreen';
+const String BookDescriptionRoute = 'bookDescription';

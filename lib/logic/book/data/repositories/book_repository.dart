@@ -16,6 +16,7 @@ abstract class BookRepository {
   Future<List<BookListModel>> getMyChoiceList();
   Future<List<ReadBookListModel>> getMyReadBookList();
   Future<List<ReadBooksModel>> getReadBooksList();
+  Future<Response> reviewPost(String id, String review);
 }
 
 class BookRepositoryImpl extends BookRepository {
@@ -60,5 +61,11 @@ class BookRepositoryImpl extends BookRepository {
   Future<List<ReadBooksModel>> getReadBooksList() async {
     Response response = await homeDatasource.getReadBooks();
     return (response.data as List).map((data) => ReadBooksModel.fromJson(data)).toList();
+  }
+
+  @override
+  Future<Response> reviewPost(String id, String review) async {
+    Response response = await homeDatasource.reviewPost(id, review);
+    return response;
   }
 }

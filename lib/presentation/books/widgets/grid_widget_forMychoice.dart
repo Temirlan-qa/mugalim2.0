@@ -30,7 +30,7 @@ class _GridWidgetMyChoiceState extends State<GridWidgetMyChoice> {
     var size = MediaQuery.of(context).size;
 
     /*24 is for notification bar on Android*/
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemHeight = (size.height) / 1.95;
     final double itemWidth = size.width - 175;
     return Scaffold(
       appBar:AppBar(

@@ -68,7 +68,7 @@ class _MyBookScreenState extends State<MyBookScreen> {
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
-          if(state is ReadBookListSuccess){
+          if(state is MyReadBookListSuccess){
             return GridWidget(
               state: state
             );

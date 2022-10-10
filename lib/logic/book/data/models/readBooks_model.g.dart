@@ -21,7 +21,7 @@ ReadBooksModel _$ReadBooksModelFromJson(Map<String, dynamic> json) =>
       json['description'] as String?,
       json['review'] as String?,
       json['rating'] as String?,
-      json['book'],
+      BookListModel.fromJson(json['book'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ReadBooksModelToJson(ReadBooksModel instance) =>

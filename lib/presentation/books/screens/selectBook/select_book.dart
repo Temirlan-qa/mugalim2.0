@@ -299,7 +299,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                             widget.addList.remove(widget.selectIndex);
                             widget.choiceList.add({
                               "voteId": widget.id,
-                              "resultOptionId": state.votes[0].id!,
+                              "resultOptionId": state.votes[list[0]].id!,
                             });
                             if (widget.indexMonth.toInt() >= 3) {
                               Navigator.push(
@@ -309,7 +309,7 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                               );
                             }
                             if (widget.indexMonth.toInt() < 3)  {
-
+                              Navigator.pop(context);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -353,7 +353,17 @@ class _SelectBookScreenState extends State<SelectBookScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GenreScreen(
+                                  indexMonth: widget.indexMonth.toInt(),
+                                  list: widget.list,
+                                  addList: widget.addList,
+                                  choiceList: widget.choiceList
+                              ),
+                            ),
+                          );
                         },
                         child: Text(
                           "Обратно к жанрам",

@@ -124,7 +124,7 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.popAndPushNamed(context, MainRouteFromTimer);
+              Navigator.pushNamedAndRemoveUntil(context, MainRouteFromTimer, ModalRoute.withName(DevelopmentRoute));
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 12,bottom: 12,right: 14),
@@ -267,6 +267,8 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                                 ),
                               ),
                               Text(
+                                (state.deadlineModel.studentCount == 1) ?
+                                'Голосует ${state.deadlineModel.studentCount} студент' :
                                 'Голосуют ${state.deadlineModel.studentCount} студента',
                                 style: TextStyles.regularStyle.copyWith(
                                   fontSize: 13,
@@ -310,7 +312,9 @@ class _TimerScreenState extends State<TimerScreen> with WidgetsBindingObserver{
                           ),
                           onPressed: () {
                             // Navigator.popUntil(context, ModalRoute.withName(DevelopmentRoute));
-                            Navigator.popAndPushNamed(context, MainRouteFromTimer);
+                            Navigator.pushNamedAndRemoveUntil(context, MainRouteFromTimer, ModalRoute.withName(DevelopmentRoute));
+                            // Navigator.pushNamed(context, MainRouteFromTimer);
+                            // Navigator.pop(context);
                           },
                           child: Text("На главную",
                               style: TextStyles.mediumStyle
